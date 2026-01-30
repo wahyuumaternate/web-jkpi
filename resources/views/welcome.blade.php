@@ -374,6 +374,7 @@
                     <li><a href="#rangkaian">Rangkaian Kegiatan</a></li>
                     <li><a href="#buku-panduan">Buku Panduan</a></li>
                     <li><a href="#sebaran-lokasi">Sebaran Lokasi</a></li>
+                    <li><a href="#">Daftar Hotel</a></li>
                     <li><a href="#galeri">Galeri</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
