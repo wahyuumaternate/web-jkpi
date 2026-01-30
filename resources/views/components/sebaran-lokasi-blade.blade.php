@@ -1,5 +1,297 @@
 {{-- Sebaran Lokasi Section dengan Leaflet GIS - Fokus Kota Ternate --}}
-<section id="sebaran-lokasi" style="padding: 80px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe21c 100%);">
+<section id="sebaran-lokasi" style="padding: 80px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe216 100%);">
+
+    {{-- Leaflet CSS --}}
+    @push('styles')
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+
+        <style>
+            .section-title-map {
+                text-align: center;
+                margin-bottom: 50px;
+            }
+
+            .section-title-map h2 {
+                font-size: 2.8rem;
+                font-weight: 800;
+                color: #099aa7;
+                margin-bottom: 15px;
+                position: relative;
+                display: inline-block;
+            }
+
+            .section-title-map h2::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80px;
+                height: 4px;
+                background: linear-gradient(90deg, #099aa7, #077b86);
+                border-radius: 2px;
+            }
+
+            .section-title-map p {
+                font-size: 1.1rem;
+                color: #666;
+                max-width: 800px;
+                margin: 20px auto 0;
+            }
+
+            #map-jkpi {
+                height: 700px;
+                width: 100%;
+                border-radius: 15px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+                border: 3px solid #099aa7;
+            }
+
+            .map-container-jkpi {
+                position: relative;
+                margin-bottom: 40px;
+            }
+
+            .location-legend-jkpi {
+                background: white;
+                padding: 25px;
+                border-radius: 12px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                margin-top: 30px;
+            }
+
+            .legend-title-jkpi {
+                font-size: 1.3rem;
+                font-weight: 700;
+                color: #099aa7;
+                margin-bottom: 20px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .legend-item-jkpi {
+                display: flex;
+                align-items: center;
+                padding: 12px;
+                margin-bottom: 10px;
+                border-radius: 8px;
+                transition: all 0.3s;
+                cursor: pointer;
+            }
+
+            .legend-item-jkpi:hover {
+                background: #f0f9fa;
+                transform: translateX(5px);
+            }
+
+            .legend-icon-jkpi {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+                font-size: 1.2rem;
+                color: white;
+            }
+
+            .legend-text-jkpi h5 {
+                margin: 0;
+                font-size: 1rem;
+                font-weight: 600;
+                color: #333;
+            }
+
+            .legend-text-jkpi p {
+                margin: 0;
+                font-size: 0.85rem;
+                color: #777;
+            }
+
+            .venue-main {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            }
+
+            .heritage-site {
+                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            }
+
+            .market-area {
+                background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            }
+
+            .workshop-room {
+                background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            }
+
+            .stage-culture {
+                background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            }
+
+            .map-controls-jkpi {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                z-index: 1000;
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .control-btn-jkpi {
+                display: block;
+                width: 100%;
+                padding: 8px 15px;
+                margin-bottom: 8px;
+                border: none;
+                background: #099aa7;
+                color: white;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.9rem;
+                transition: all 0.3s;
+            }
+
+            .control-btn-jkpi:hover {
+                background: #077b86;
+                transform: translateY(-2px);
+            }
+
+            .stats-overview-jkpi {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+                margin-top: 30px;
+            }
+
+            .stat-card-jkpi {
+                background: white;
+                padding: 25px;
+                border-radius: 12px;
+                text-align: center;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s;
+            }
+
+            .stat-card-jkpi:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            .stat-card-jkpi i {
+                font-size: 2.5rem;
+                color: #099aa7;
+                margin-bottom: 15px;
+            }
+
+            .stat-number-jkpi {
+                font-size: 2rem;
+                font-weight: 800;
+                color: #099aa7;
+                margin-bottom: 5px;
+            }
+
+            .stat-label-jkpi {
+                font-size: 0.95rem;
+                color: #666;
+                font-weight: 500;
+            }
+
+            .custom-marker-icon {
+                background: white;
+                border: 3px solid #099aa7;
+                border-radius: 50%;
+                width: 35px;
+                height: 35px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .popup-content-jkpi {
+                padding: 0;
+                min-width: 280px;
+            }
+
+            .popup-image-jkpi {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 12px;
+            }
+
+            .popup-body-jkpi {
+                padding: 0 12px 12px 12px;
+            }
+
+            .popup-content-jkpi h4 {
+                margin: 0 0 8px 0;
+                color: #099aa7;
+                font-weight: 700;
+                font-size: 1.1rem;
+            }
+
+            .popup-content-jkpi p {
+                margin: 5px 0;
+                font-size: 0.9rem;
+                color: #555;
+                line-height: 1.4;
+            }
+
+            .popup-content-jkpi .distance-info {
+                display: flex;
+                gap: 15px;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-top: 1px solid #eee;
+            }
+
+            .distance-info span {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-size: 0.85rem;
+                color: #099aa7;
+                font-weight: 600;
+            }
+
+            .leaflet-popup-content-wrapper {
+                padding: 0;
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .leaflet-popup-content {
+                margin: 0;
+                width: auto !important;
+            }
+
+            @media (max-width: 768px) {
+                #map-jkpi {
+                    height: 500px;
+                }
+
+                .section-title-map h2 {
+                    font-size: 2rem;
+                }
+
+                .map-controls-jkpi {
+                    top: 10px;
+                    right: 10px;
+                    padding: 10px;
+                }
+            }
+        </style>
+    @endpush
 
     <div class="container">
 
@@ -51,6 +343,65 @@
             </div>
         </div>
 
+        <!-- Legend -->
+        <div class="location-legend-jkpi">
+            <div class="legend-title-jkpi">
+                <i class="bi bi-list-ul"></i>
+                Kategori Lokasi di Kota Ternate
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('venue-main')">
+                        <div class="legend-icon-jkpi venue-main">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <div class="legend-text-jkpi">
+                            <h5>Venue Utama</h5>
+                            <p>Gedung sidang pleno dan seminar</p>
+                        </div>
+                    </div>
+                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('heritage-site')">
+                        <div class="legend-icon-jkpi heritage-site">
+                            <i class="bi bi-bank"></i>
+                        </div>
+                        <div class="legend-text-jkpi">
+                            <h5>Situs Heritage</h5>
+                            <p>Benteng, museum, dan keraton</p>
+                        </div>
+                    </div>
+                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('market-area')">
+                        <div class="legend-icon-jkpi market-area">
+                            <i class="bi bi-shop"></i>
+                        </div>
+                        <div class="legend-text-jkpi">
+                            <h5>Area Pasar Malam</h5>
+                            <p>Pameran UMKM dan festival kuliner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('workshop-room')">
+                        <div class="legend-icon-jkpi workshop-room">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="legend-text-jkpi">
+                            <h5>Ruang Workshop</h5>
+                            <p>Seminar dan diskusi kelompok</p>
+                        </div>
+                    </div>
+                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('stage-culture')">
+                        <div class="legend-icon-jkpi stage-culture">
+                            <i class="bi bi-music-note-beamed"></i>
+                        </div>
+                        <div class="legend-text-jkpi">
+                            <h5>Panggung Seni</h5>
+                            <p>Pertunjukan seni dan budaya</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     {{-- Leaflet JavaScript --}}
@@ -93,7 +444,8 @@
                     distance: "Pusat Kota",
                     time: "0 menit",
                     icon: "bi-building-fill",
-                    color: "#667eea"
+                    color: "#667eea",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
 
                 // Heritage Sites
@@ -106,7 +458,8 @@
                     distance: "1.2 km",
                     time: "5 menit",
                     icon: "bi-bank",
-                    color: "#f5576c"
+                    color: "#f5576c",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Museum Kesultanan Ternate",
@@ -117,7 +470,8 @@
                     distance: "1.5 km",
                     time: "7 menit",
                     icon: "bi-bank",
-                    color: "#f5576c"
+                    color: "#f5576c",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Benteng Kastela",
@@ -128,7 +482,8 @@
                     distance: "3.8 km",
                     time: "12 menit",
                     icon: "bi-bank",
-                    color: "#f5576c"
+                    color: "#f5576c",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Keraton Kesultanan Ternate",
@@ -139,7 +494,8 @@
                     distance: "1.4 km",
                     time: "6 menit",
                     icon: "bi-bank",
-                    color: "#f5576c"
+                    color: "#f5576c",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Benteng Tolukko",
@@ -150,7 +506,8 @@
                     distance: "4.2 km",
                     time: "15 menit",
                     icon: "bi-bank",
-                    color: "#f5576c"
+                    color: "#f5576c",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
 
                 // Pasar Malam & Exhibition Area
@@ -163,7 +520,8 @@
                     distance: "800 m",
                     time: "3 menit",
                     icon: "bi-shop",
-                    color: "#00f2fe"
+                    color: "#00f2fe",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Gamalama Mall",
@@ -174,7 +532,8 @@
                     distance: "1.1 km",
                     time: "5 menit",
                     icon: "bi-shop",
-                    color: "#00f2fe"
+                    color: "#00f2fe",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Pasar Bastiong",
@@ -185,7 +544,8 @@
                     distance: "2.0 km",
                     time: "8 menit",
                     icon: "bi-shop",
-                    color: "#00f2fe"
+                    color: "#00f2fe",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
 
                 // Workshop Rooms
@@ -198,7 +558,8 @@
                     distance: "1.0 km",
                     time: "4 menit",
                     icon: "bi-people-fill",
-                    color: "#38f9d7"
+                    color: "#38f9d7",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Kampus IAIN Ternate",
@@ -209,7 +570,8 @@
                     distance: "2.5 km",
                     time: "9 menit",
                     icon: "bi-people-fill",
-                    color: "#38f9d7"
+                    color: "#38f9d7",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Hotel Bela Internasional",
@@ -220,7 +582,8 @@
                     distance: "1.2 km",
                     time: "5 menit",
                     icon: "bi-people-fill",
-                    color: "#38f9d7"
+                    color: "#38f9d7",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
 
                 // Stage Culture
@@ -233,7 +596,8 @@
                     distance: "1.8 km",
                     time: "8 menit",
                     icon: "bi-music-note-beamed",
-                    color: "#fee140"
+                    color: "#fee140",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Taman Budaya Sultan Baabullah",
@@ -244,7 +608,8 @@
                     distance: "900 m",
                     time: "4 menit",
                     icon: "bi-music-note-beamed",
-                    color: "#fee140"
+                    color: "#fee140",
+                    image: "{{ asset('culture3.jpg') }}"
                 },
                 {
                     name: "Lapangan Ahmad Yani",
@@ -255,7 +620,8 @@
                     distance: "1.0 km",
                     time: "4 menit",
                     icon: "bi-music-note-beamed",
-                    color: "#fee140"
+                    color: "#fee140",
+                    image: "{{ asset('culture3.jpg') }}"
                 }
             ];
 
@@ -269,14 +635,20 @@
                     icon: createCustomIconJKPI(location.icon, location.color)
                 }).bindPopup(`
                 <div class="popup-content-jkpi">
-                    <h4>${location.name}</h4>
-                    <p>${location.description}</p>
-                    <div class="distance-info">
-                        <span><i class="bi bi-geo-alt-fill"></i> ${location.distance}</span>
-                        <span><i class="bi bi-clock-fill"></i> ${location.time}</span>
+                    <img src="${location.image}" alt="${location.name}" class="popup-image-jkpi" loading="lazy" onerror="this.src='{{ asset('culture3.jpg') }}'">
+                    <div class="popup-body-jkpi">
+                        <h4>${location.name}</h4>
+                        <p>${location.description}</p>
+                        <div class="distance-info">
+                            <span><i class="bi bi-geo-alt-fill"></i> ${location.distance}</span>
+                            <span><i class="bi bi-clock-fill"></i> ${location.time}</span>
+                        </div>
                     </div>
                 </div>
-            `);
+            `, {
+                    maxWidth: 300,
+                    className: 'custom-popup-jkpi'
+                });
 
                 marker.category = location.category;
                 markersJKPI.push(marker);

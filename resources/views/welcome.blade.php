@@ -268,11 +268,24 @@
         }
 
         .popup-content-jkpi {
-            padding: 10px;
+            padding: 0;
+            min-width: 280px;
+        }
+
+        .popup-image-jkpi {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 12px;
+        }
+
+        .popup-body-jkpi {
+            padding: 0 12px 12px 12px;
         }
 
         .popup-content-jkpi h4 {
-            margin: 0 0 10px 0;
+            margin: 0 0 8px 0;
             color: #099aa7;
             font-weight: 700;
             font-size: 1.1rem;
@@ -282,6 +295,7 @@
             margin: 5px 0;
             font-size: 0.9rem;
             color: #555;
+            line-height: 1.4;
         }
 
         .popup-content-jkpi .distance-info {
@@ -299,6 +313,17 @@
             font-size: 0.85rem;
             color: #099aa7;
             font-weight: 600;
+        }
+
+        .leaflet-popup-content-wrapper {
+            padding: 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .leaflet-popup-content {
+            margin: 0;
+            width: auto !important;
         }
 
         @media (max-width: 768px) {
@@ -335,9 +360,9 @@
                     <img src="{{ asset('logo_kota.png') }}" alt="Kota Ternate">
                 </a>
 
-                <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+                {{-- <a href="{{ url('/') }}" class="logo d-flex align-items-center">
                     <img src="{{ asset('assets/img/logo-partner.png') }}" alt="Partner Resmi">
-                </a>
+                </a> --}}
             </div>
 
             <!-- Navigation -->
