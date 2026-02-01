@@ -165,23 +165,23 @@
         }
 
         .venue-main {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #099aa7;
         }
 
         .heritage-site {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: #099aa7;
         }
 
         .market-area {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            background: #099aa7;
         }
 
         .workshop-room {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            background: #099aa7;
         }
 
         .stage-culture {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            background: #099aa7;
         }
 
         .map-controls-jkpi {
@@ -347,45 +347,7 @@
 
 <body class="index-page">
 
-    <header id="header" class="header d-flex align-items-center fixed-top ">
-        <div class="container position-relative d-flex align-items-center justify-content-between">
-
-            <!-- Logo Group -->
-            <div class="d-flex align-items-center gap-3">
-                <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                    <img src="{{ asset('logo-jkpi.png') }}" alt="JKPI 2026">
-                </a>
-
-                <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                    <img src="{{ asset('logo_kota.png') }}" alt="Kota Ternate">
-                </a>
-
-                {{-- <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                    <img src="{{ asset('assets/img/logo-partner.png') }}" alt="Partner Resmi">
-                </a> --}}
-            </div>
-
-            <!-- Navigation -->
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="#hero" class="active">Beranda</a></li>
-                    <li><a href="#tentang">Tentang</a></li>
-                    <li><a href="#tujuan">Tujuan</a></li>
-                    <li><a href="#rangkaian">Rangkaian Kegiatan</a></li>
-                    <li><a href="#buku-panduan">Buku Panduan</a></li>
-                    <li><a href="#sebaran-lokasi">Sebaran Lokasi</a></li>
-                    <li><a href="#">Daftar Hotel</a></li>
-                    <li><a href="#galeri">Galeri</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
-
-            <!-- CTA -->
-            <a class="btn-getstarted" href="{{ url('/registrasi') }}">Registrasi</a>
-
-        </div>
-    </header>
-
+    @include('partials.header')
 
 
     <main class="main">
@@ -415,7 +377,7 @@
                         <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
 
                             <!-- Badge -->
-                            <div class="badge-container mb-4" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="badge-container mb-4 mt-5" data-aos="zoom-in" data-aos-delay="300">
                                 <span
                                     style="background: rgba(255, 255, 255, 0.30); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; padding: 12px 30px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; letter-spacing: 1px; border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.3); display: inline-block;">
                                     <i class="bi bi-geo-alt-fill me-2"></i>RAKERNAS XII JARINGAN KOTA PUSAKA INDONESIA
@@ -445,13 +407,13 @@
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4), 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; border: none;">
                                     <i class="bi bi-pencil-square me-2"></i>DAFTAR SEKARANG
                                 </a>
-                                <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox"
+                                {{-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox"
                                     style="background: rgba(255,255,255,0.30); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: #fff; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(0,0,0,0.3), 0 5px 15px rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.5); transition: all 0.3s;">
                                     <i class="bi bi-play-circle me-2"></i>TONTON VIDEO
-                                </a>
+                                </a> --}}
                             </div>
 
-                            <!-- Quick Links -->
+                            {{-- <!-- Quick Links -->
                             <div data-aos="fade-up" data-aos-delay="800"
                                 style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
                                 <a href="#rangkaian"
@@ -466,13 +428,13 @@
                                     style="color: #fff; text-decoration: none; font-size: 1rem; font-weight: 600; transition: all 0.3s; text-shadow: 2px 2px 6px rgba(0,0,0,0.5);">
                                     <i class="bi bi-images me-2"></i>Galeri
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Scroll Down Indicator -->
+            {{-- <!-- Scroll Down Indicator -->
             <div data-aos="fade-up" data-aos-delay="900"
                 style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 3; text-align: center;">
                 <p
@@ -480,7 +442,7 @@
                     Scroll untuk melihat lebih banyak</p>
                 <i class="bi bi-chevron-down"
                     style="color: #FFFFFF; font-size: 2rem; animation: bounce 2s infinite; filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.5));"></i>
-            </div>
+            </div> --}}
 
             <style>
                 @keyframes slide {
@@ -541,10 +503,32 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Tentang JKPI</h2>
-                        <p class="lead-description">Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi yang
-                            menghimpun kota-kota di Indonesia yang memiliki warisan budaya dan sejarah untuk
-                            bersama-sama melestarikan, mengelola, dan mengembangkan potensi pusaka sebagai aset
-                            pembangunan berkelanjutan.</p>
+
+                        <p class="lead-description mb-4">
+                            Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang menghimpun
+                            kabupaten dan kota di Indonesia yang berkomitmen terhadap pelestarian pusaka, baik berwujud
+                            (tangible heritage) maupun tidak berwujud (intangible heritage), sebagai bagian dari
+                            pembangunan
+                            daerah yang berkelanjutan.
+                        </p>
+
+                        <p class="lead-description mb-4">
+                            JKPI didirikan pada 25 Oktober 2008 di Surakarta, bertepatan dengan penyelenggaraan
+                            Konferensi
+                            dan Pameran Organisasi Kota Pusaka Eropa–Asia (OWHC Euro-Asia) Tahun 2008, yang melahirkan
+                            Deklarasi Surakarta sebagai tonggak awal pembentukannya.
+                        </p>
+
+                        <p class="lead-description">
+                            Sejak berdiri, JKPI berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah
+                            daerah dalam pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI
+                            telah
+                            beranggotakan 79 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
+                            komitmen
+                            daerah dalam menjaga warisan pusaka sebagai identitas, sumber nilai, dan penggerak
+                            pembangunan
+                            berkelanjutan.
+                        </p>
                     </div>
                 </div>
 
@@ -552,16 +536,10 @@
                     <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
                         <div class="image-grid">
                             <div class="primary-image">
-                                <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="JKPI 2026"
-                                    class="img-fluid">
-                                {{-- <div class="certification-badge">
-                                    <i class="bi bi-award"></i>
-                                    <span>Warisan Kesultanan</span>
-                                </div> --}}
+                                <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="JKPI 2026" class="img-fluid">
                             </div>
                             <div class="secondary-images">
                                 <div class="small-image">
-                                    {{-- public/assets/img/JKPI-2025/1.JPG --}}
                                     <img src="{{ asset('assets/img/JKPI-2025/2.JPG') }}" alt="Diskusi Pelestarian"
                                         class="img-fluid">
                                 </div>
@@ -581,8 +559,10 @@
                                 </div>
                                 <div class="highlight-content">
                                     <h4>Ternate: Dari Kota Pusaka Menuju Kota Rempah</h4>
-                                    <p>Pemerintah Kota Ternate resmi menerima Pataka JKPI dari Wali Kota Yogyakarta
-                                        sebagai simbol pergantian tuan rumah Rakernas JKPI 2026.</p>
+                                    <p>
+                                        Pemerintah Kota Ternate resmi menerima Pataka JKPI dari Wali Kota Yogyakarta
+                                        sebagai simbol pergantian tuan rumah Rakernas JKPI 2026.
+                                    </p>
                                 </div>
                             </div>
 
@@ -591,21 +571,25 @@
                                     <div class="feature-icon">
                                         <i class="bi bi-check-circle-fill"></i>
                                     </div>
-                                    <div class="feature-text">Pelestarian warisan Kesultanan Ternate dan rempah-rempah
+                                    <div class="feature-text">
+                                        Pelestarian warisan Kesultanan Ternate dan rempah-rempah
                                     </div>
                                 </div>
                                 <div class="feature-item">
                                     <div class="feature-icon">
                                         <i class="bi bi-check-circle-fill"></i>
                                     </div>
-                                    <div class="feature-text">Simposium Pulau-Pulau Penghasil Rempah Internasional
+                                    <div class="feature-text">
+                                        Simposium Pulau-Pulau Penghasil Rempah Internasional
                                     </div>
                                 </div>
                                 <div class="feature-item">
                                     <div class="feature-icon">
                                         <i class="bi bi-check-circle-fill"></i>
                                     </div>
-                                    <div class="feature-text">Kolaborasi Ternate, Tidore, dan Halmahera Barat</div>
+                                    <div class="feature-text">
+                                        Kolaborasi Ternate, Tidore, dan Halmahera Barat
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -631,9 +615,9 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-card">
-                            <div class="service-icon">
+                            {{-- <div class="service-icon">
                                 <i class="fas fa-landmark"></i>
-                            </div>
+                            </div> --}}
                             <div class="service-content">
                                 <h3>Memperkuat Kolaborasi</h3>
                                 <p>Membangun sinergi antar kota pusaka dalam melestarikan situs sejarah, merevitalisasi
@@ -645,9 +629,9 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-card">
-                            <div class="service-icon">
+                            {{-- <div class="service-icon">
                                 <i class="fas fa-users"></i>
-                            </div>
+                            </div> --}}
                             <div class="service-content">
                                 <h3>Berbagi Pengalaman</h3>
                                 <p>Forum diskusi nasional yang mempertemukan kepala daerah dan pemangku kepentingan
@@ -659,9 +643,9 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-card">
-                            <div class="service-icon">
+                            {{-- <div class="service-icon">
                                 <i class="fas fa-store"></i>
-                            </div>
+                            </div> --}}
                             <div class="service-content">
                                 <h3>Mengembangkan Ekonomi Kreatif</h3>
                                 <p>Mendorong pertumbuhan UMKM dan ekonomi kreatif lokal melalui promosi produk unggulan
@@ -672,9 +656,9 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-card">
-                            <div class="service-icon">
+                            {{-- <div class="service-icon">
                                 <i class="fas fa-book-open"></i>
-                            </div>
+                            </div> --}}
                             <div class="service-content">
                                 <h3>Edukasi dan Pelatihan</h3>
                                 <p>Menyelenggarakan seminar dan workshop tentang konservasi pusaka, arsitektur heritage,
@@ -685,9 +669,9 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-card">
-                            <div class="service-icon">
+                            {{-- <div class="service-icon">
                                 <i class="fas fa-globe"></i>
-                            </div>
+                            </div> --}}
                             <div class="service-content">
                                 <h3>Kerjasama Internasional</h3>
                                 <p>Membangun jaringan kerjasama dengan organisasi internasional dan negara lain dalam
@@ -698,9 +682,9 @@
 
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-card">
-                            <div class="service-icon">
+                            {{-- <div class="service-icon">
                                 <i class="fas fa-chart-line"></i>
-                            </div>
+                            </div> --}}
                             <div class="service-content">
                                 <h3>Pariwisata Berkelanjutan</h3>
                                 <p>Mengembangkan destinasi wisata pusaka yang memberikan dampak ekonomi positif bagi
@@ -1401,82 +1385,7 @@
 
     </main>
 
-    <footer id="footer" class="footer position-relative">
-
-        <div class="container footer-top">
-            <div class="row gy-4">
-                <div class="col-lg-4 col-md-6 footer-about">
-                    <a href="{{ url('/') }}" class="logo d-flex align-items-center">
-                        <span class="sitename">JKPI 2026</span>
-                    </a>
-                    <div class="footer-contact pt-3">
-                        <p>Sekretariat Panitia Rakernas XII JKPI 2026</p>
-                        <p>Pemerintah Kota Ternate, Maluku Utara</p>
-                        <p class="mt-3"><strong>Telepon:</strong> <span>+62 921 123 456</span></p>
-                        <p><strong>Email:</strong> <span>info@jkpiternate2026.id</span></p>
-                    </div>
-                    <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
-                        <a href=""><i class="bi bi-facebook"></i></a>
-                        <a href=""><i class="bi bi-instagram"></i></a>
-                        <a href=""><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Menu Utama</h4>
-                    <ul>
-                        <li><a href="#hero">Beranda</a></li>
-                        <li><a href="#tentang">Tentang JKPI</a></li>
-                        <li><a href="#tujuan">Tujuan</a></li>
-                        <li><a href="#rangkaian">Rangkaian Kegiatan</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Program Unggulan</h4>
-                    <ul>
-                        <li><a href="#rangkaian">Simposium Rempah</a></li>
-                        <li><a href="#rangkaian">Heritage Tour</a></li>
-                        <li><a href="#rangkaian">Pasar Malam Indonesia</a></li>
-                        <li><a href="#rangkaian">Pentas Seni Budaya</a></li>
-                        <li><a href="#rangkaian">Festival Kuliner</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Informasi</h4>
-                    <ul>
-                        <li><a href="#buku-panduan">Buku Panduan</a></li>
-                        <li><a href="#sebaran-lokasi">Sebaran Lokasi</a></li>
-                        <li><a href="#galeri">Galeri</a></li>
-                        <li><a href="{{ url('/registrasi') }}">Registrasi</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Mitra Kerja</h4>
-                    <ul>
-                        <li><a href="#">Pemerintah Kota Ternate</a></li>
-                        <li><a href="#">Kota Tidore Kepulauan</a></li>
-                        <li><a href="#">Kabupaten Halmahera Barat</a></li>
-                        <li><a href="#">Kesultanan Ternate</a></li>
-                        <li><a href="#">JKPI Pusat</a></li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong>Rakernas XII JKPI 2026 Kota Ternate</strong>&nbsp;<span>All Rights
-                    Reserved</span></p>
-            <div class="credits">
-                Dikelola oleh Panitia Rakernas XII JKPI 2026 Kota Ternate
-            </div>
-        </div>
-
-    </footer>
+    @include('partials.footer')
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
