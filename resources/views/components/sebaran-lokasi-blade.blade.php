@@ -1,4 +1,4 @@
-{{-- Sebaran Lokasi Section dengan Leaflet GIS - Fokus Kota Ternate --}}
+{{-- Sebaran Lokasi Section dengan Leaflet GIS + Google Maps Button (Fixed Styling) --}}
 <section id="sebaran-lokasi" style="padding: 80px 0; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe216 100%);">
 
     {{-- Leaflet CSS --}}
@@ -298,29 +298,11 @@
         <!-- Section Title -->
         <div class="section-title-map">
             <h2>Sebaran Lokasi Kegiatan</h2>
-            <p>Peta interaktif menampilkan berbagai lokasi kegiatan Rakernas XII JKPI 2026 di Kota Ternate</p>
+            <p>Peta interaktif menampilkan berbagai lokasi kegiatan Rakernas XII JKPI 2026 di Kota Ternate. Klik marker
+                untuk detail dan dapatkan rute perjalanan</p>
         </div>
-
-        <!-- Map Container -->
-        <div class="map-container-jkpi">
-            <div id="map-jkpi"></div>
-
-            <!-- Map Controls -->
-            <div class="map-controls-jkpi">
-                <button class="control-btn-jkpi" onclick="resetMapJKPI()">
-                    <i class="bi bi-arrow-clockwise"></i> Reset View
-                </button>
-                <button class="control-btn-jkpi" onclick="showAllMarkersJKPI()">
-                    <i class="bi bi-geo-alt-fill"></i> Tampilkan Semua
-                </button>
-                <button class="control-btn-jkpi" onclick="toggleFullscreen()">
-                    <i class="bi bi-fullscreen"></i> Fullscreen
-                </button>
-            </div>
-        </div>
-
-        <!-- Statistics Overview -->
-        <div class="stats-overview-jkpi">
+        {{-- <!-- Statistics Overview -->
+        <div class="stats-overview-jkpi mb-5">
             <div class="stat-card-jkpi">
                 <i class="bi bi-geo-alt-fill"></i>
                 <div class="stat-number-jkpi" id="total-locations-jkpi">15</div>
@@ -341,10 +323,28 @@
                 <div class="stat-number-jkpi">5</div>
                 <div class="stat-label-jkpi">Hari Kegiatan</div>
             </div>
+        </div> --}}
+        <!-- Map Container -->
+        <div class="map-container-jkpi">
+            <div id="map-jkpi"></div>
+
+            <!-- Map Controls -->
+            <div class="map-controls-jkpi d-none d-md-block">
+                <button class="control-btn-jkpi" onclick="resetMapJKPI()">
+                    <i class="bi bi-arrow-clockwise"></i> Reset View
+                </button>
+                <button class="control-btn-jkpi" onclick="showAllMarkersJKPI()">
+                    <i class="bi bi-geo-alt-fill"></i> Tampilkan Semua
+                </button>
+                <button class="control-btn-jkpi" onclick="toggleFullscreen()">
+                    <i class="bi bi-fullscreen"></i> Fullscreen
+                </button>
+            </div>
         </div>
 
+
         <!-- Legend -->
-        <div class="location-legend-jkpi">
+        <div class="location-legend-jkpi ">
             <div class="legend-title-jkpi">
                 <i class="bi bi-list-ul"></i>
                 Kategori Lokasi di Kota Ternate
@@ -430,6 +430,19 @@
                     iconAnchor: [17.5, 35],
                     popupAnchor: [0, -35]
                 });
+            }
+
+            // Function to open Google Maps directions
+            function openGoogleMapsRoute(lat, lng, placeName) {
+                const googleMapsUrl =
+                    `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=${encodeURIComponent(placeName)}`;
+                window.open(googleMapsUrl, '_blank');
+            }
+
+            // Function to open Waze directions
+            function openWazeRoute(lat, lng) {
+                const wazeUrl = `https://waze.com/ul?ll=${lat},${lng}&navigate=yes`;
+                window.open(wazeUrl, '_blank');
             }
 
             // Location data - Fokus di Kota Ternate
@@ -629,7 +642,7 @@
             let markersJKPI = [];
             let markerClusterGroupJKPI = L.markerClusterGroup();
 
-            // Add markers
+            // Add markers with INLINE STYLED buttons
             locationsJKPI.forEach(location => {
                 const marker = L.marker([location.lat, location.lng], {
                     icon: createCustomIconJKPI(location.icon, location.color)
@@ -643,6 +656,18 @@
                             <span><i class="bi bi-geo-alt-fill"></i> ${location.distance}</span>
                             <span><i class="bi bi-clock-fill"></i> ${location.time}</span>
                         </div>
+                        
+                        <!-- Google Maps Button dengan FULL INLINE STYLE -->
+                        <a href="#" onclick="openGoogleMapsRoute(${location.lat}, ${location.lng}, '${location.name}'); return false;" 
+                           style="display: block; width: 100%; margin-top: 12px; padding: 10px 15px; background: linear-gradient(135deg, #099aa7 0%, #099aa7 100%); color: white !important; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(66, 133, 244, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">
+                            <i class="bi bi-map" style="margin-right: 6px;"></i>Dapatkan Rute (Google Maps)
+                        </a>
+                        
+                        <!-- Waze Button dengan FULL INLINE STYLE -->
+                        <a href="#" onclick="openWazeRoute(${location.lat}, ${location.lng}); return false;" 
+                           style="display: block; width: 100%; margin-top: 8px; padding: 10px 15px; background: linear-gradient(135deg, #099aa7 0%, #099aa7 100%); color: white !important; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(51, 204, 255, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">
+                            <i class="bi bi-navigation" style="margin-right: 6px;"></i>Buka di Waze
+                        </a>
                     </div>
                 </div>
             `, {
