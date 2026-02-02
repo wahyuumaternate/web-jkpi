@@ -500,10 +500,18 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
+                <!-- Judul Tengah -->
                 <div class="row">
-                    <div class="col-lg-8 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
+                    <div class="section-title col-lg-8 mx-auto text-center" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Tentang JKPI</h2>
+                    </div>
 
+                </div>
+
+                <!-- Konten Teks Kiri dan Gambar Kanan -->
+                <div class="row align-items-center mb-5 pb-2">
+                    <!-- Teks di Kiri -->
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                         <p class="lead-description mb-4">
                             Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang menghimpun
                             kabupaten dan kota di Indonesia yang berkomitmen terhadap pelestarian pusaka, baik berwujud
@@ -530,13 +538,20 @@
                             berkelanjutan.
                         </p>
                     </div>
+
+                    <!-- Gambar di Kanan -->
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-delay="250">
+                        <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Tentang JKPI"
+                            class="img-fluid rounded shadow">
+                    </div>
                 </div>
 
                 <div class="row align-items-center gy-5">
                     <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
                         <div class="image-grid">
                             <div class="primary-image">
-                                <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="JKPI 2026" class="img-fluid">
+                                <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="JKPI 2026"
+                                    class="img-fluid">
                             </div>
                             <div class="secondary-images">
                                 <div class="small-image">
@@ -707,7 +722,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Jaringan Kota Pusaka Indonesia</h2>
-                        <p class="lead-description">JKPI menghubungkan 58+ kabupaten dan kota di seluruh Indonesia yang
+                        <p class="lead-description">JKPI menghubungkan 79+ kabupaten dan kota di seluruh Indonesia yang
                             memiliki komitmen kuat dalam pelestarian warisan budaya dan pengembangan kota berbasis
                             pusaka.</p>
                     </div>
@@ -718,8 +733,8 @@
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
-                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="58"
-                                    data-purecounter-duration="1">58</span>+
+                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="79"
+                                    data-purecounter-duration="1">79</span>
                             </div>
                             <div class="stat-label" style="font-size: 1.1rem; color: #666;">Kota Anggota JKPI</div>
                         </div>
@@ -749,7 +764,7 @@
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
                                 <span class="purecounter" data-purecounter-start="0" data-purecounter-end="15"
-                                    data-purecounter-duration="1">15</span>+
+                                    data-purecounter-duration="1">17</span>+
                             </div>
                             <div class="stat-label" style="font-size: 1.1rem; color: #666;">Tahun Berdiri</div>
                         </div>
@@ -801,7 +816,7 @@
                             <div class="col-lg-6 order-lg-2">
                                 <div class="department-visual">
                                     <div class="image-wrapper">
-                                        <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Simposium Rempah"
+                                        <img src="{{ asset('assets/img/JKPI-2025/12.JPG') }}" alt="Simposium Rempah"
                                             class="img-fluid">
                                     </div>
                                 </div>
@@ -1360,7 +1375,7 @@
                                 style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
                                 <div class="stat-item">
                                     <div class="stat-number"
-                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">58+</div>
+                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">79+</div>
                                     <div class="stat-label" style="font-size: 1.1rem; opacity: 0.9;">Kota Anggota
                                     </div>
                                 </div>
