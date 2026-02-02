@@ -663,11 +663,7 @@
                             <i class="bi bi-map" style="margin-right: 6px;"></i>Dapatkan Rute (Google Maps)
                         </a>
                         
-                        <!-- Waze Button dengan FULL INLINE STYLE -->
-                        <a href="#" onclick="openWazeRoute(${location.lat}, ${location.lng}); return false;" 
-                           style="display: block; width: 100%; margin-top: 8px; padding: 10px 15px; background: linear-gradient(135deg, #099aa7 0%, #099aa7 100%); color: white !important; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(51, 204, 255, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">
-                            <i class="bi bi-navigation" style="margin-right: 6px;"></i>Buka di Waze
-                        </a>
+                       
                     </div>
                 </div>
             `, {

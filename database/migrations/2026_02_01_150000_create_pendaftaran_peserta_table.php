@@ -71,3 +71,14 @@ return new class extends Migration {
         Schema::dropIfExists('pendaftaran_peserta');
     }
 };
+
+// Nama lengkap
+// Jabatan
+// Instansi/Organisasi
+// Nomor telepon
+// Email
+// Kota/Kabupaten
+// Upload Foto Profil
+// Perjalanan dan Akomodasi
+// Tanggal Kedatangan dan Tanggal Kepulangan
+// Akomodasi Hotel

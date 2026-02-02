@@ -535,7 +535,7 @@
                             melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak berdiri, JKPI
                             berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah daerah dalam
                             pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI telah
-                            beranggotakan 79 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
+                            beranggotakan 75 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
                             komitmen daerah dalam menjaga warisan pusaka sebagai identitas, sumber nilai, dan penggerak
                             pembangunan berkelanjutan.
                         </p>
@@ -724,7 +724,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Jaringan Kota Pusaka Indonesia</h2>
-                        <p class="lead-description">JKPI menghubungkan 79+ kabupaten dan kota di seluruh Indonesia yang
+                        <p class="lead-description">JKPI menghubungkan 75+ kabupaten dan kota di seluruh Indonesia yang
                             memiliki komitmen kuat dalam pelestarian warisan budaya dan pengembangan kota berbasis
                             pusaka.</p>
                     </div>
@@ -735,8 +735,8 @@
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
-                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="79"
-                                    data-purecounter-duration="1">79</span>
+                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="75"
+                                    data-purecounter-duration="1">75</span>
                             </div>
                             <div class="stat-label" style="font-size: 1.1rem; color: #666;">Kab/Kota Anggota JKPI
                             </div>
@@ -1378,7 +1378,7 @@
                                 style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
                                 <div class="stat-item">
                                     <div class="stat-number"
-                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">79+</div>
+                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">75+</div>
                                     <div class="stat-label" style="font-size: 1.1rem; opacity: 0.9;">Kota Anggota
                                     </div>
                                 </div>
