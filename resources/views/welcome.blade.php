@@ -523,15 +523,15 @@
                     <!-- Teks di Kiri -->
                     <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                         <p class="lead-description mb-4">
-                            Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang menghimpun
+                            Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang
+                            menghimpun
                             kabupaten dan kota di Indonesia yang berkomitmen terhadap pelestarian pusaka, baik berwujud
-                            (tangible heritage) maupun tidak berwujud (intangible heritage), sebagai bagian dari
-                            pembangunan daerah yang berkelanjutan.
-                        </p>
-
-                        <p class="lead-description">
-                            JKPI didirikan pada 25 Oktober 2008 di Surakarta, bertepatan dengan penyelenggaraan
-                            Konferensi dan Pameran Organisasi Kota Pusaka Eropa–Asia (OWHC Euro-Asia) Tahun 2008, yang
+                            <em>(tangible heritage)</em> maupun tidak berwujud <em>(intangible heritage)</em>, sebagai
+                            bagian dari
+                            pembangunan daerah yang berkelanjutan. JKPI didirikan pada 25 Oktober 2008 di Surakarta,
+                            bertepatan dengan penyelenggaraan
+                            Konferensi dan Pameran Organisasi Kota Pusaka Eropa–Asia (OWHC Euro-Asia) Tahun
+                            2008, yang
                             melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak berdiri, JKPI
                             berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah daerah dalam
                             pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI telah
