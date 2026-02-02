@@ -341,6 +341,92 @@
                 padding: 10px;
             }
         }
+
+
+        @keyframes slide {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100px 100px;
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        #hero a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.6) !important;
+        }
+
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem !important;
+            }
+
+            #hero h1 span {
+                font-size: 3rem !important;
+            }
+
+            #hero p {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Image Hover Effect */
+        .image-hover-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .image-hover-wrapper img {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            display: block;
+            width: 100%;
+        }
+
+        .image-hover-wrapper:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Optional: Overlay effect on hover */
+        .image-hover-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .image-hover-wrapper:hover::before {
+            background: rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -434,65 +520,7 @@
                 </div>
             </div>
 
-            {{-- <!-- Scroll Down Indicator -->
-            <div data-aos="fade-up" data-aos-delay="900"
-                style="position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 3; text-align: center;">
-                <p
-                    style="color: rgba(255,255,255,0.98); font-size: 0.9rem; margin-bottom: 10px; font-weight: 600; text-shadow: 2px 2px 6px rgba(0,0,0,0.5);">
-                    Scroll untuk melihat lebih banyak</p>
-                <i class="bi bi-chevron-down"
-                    style="color: #FFFFFF; font-size: 2rem; animation: bounce 2s infinite; filter: drop-shadow(2px 2px 6px rgba(0,0,0,0.5));"></i>
-            </div> --}}
 
-            <style>
-                @keyframes slide {
-                    0% {
-                        background-position: 0 0;
-                    }
-
-                    100% {
-                        background-position: 100px 100px;
-                    }
-                }
-
-                @keyframes bounce {
-
-                    0%,
-                    20%,
-                    50%,
-                    80%,
-                    100% {
-                        transform: translateY(0);
-                    }
-
-                    40% {
-                        transform: translateY(-20px);
-                    }
-
-                    60% {
-                        transform: translateY(-10px);
-                    }
-                }
-
-                #hero a:hover {
-                    transform: translateY(-3px);
-                    box-shadow: 0 15px 50px rgba(255, 255, 255, 0.6) !important;
-                }
-
-                @media (max-width: 768px) {
-                    #hero h1 {
-                        font-size: 2.5rem !important;
-                    }
-
-                    #hero h1 span {
-                        font-size: 3rem !important;
-                    }
-
-                    #hero p {
-                        font-size: 1.1rem !important;
-                    }
-                }
-            </style>
         </section><!-- /Hero Section -->
 
         <!-- Tentang JKPI Section -->
@@ -541,8 +569,10 @@
 
                     <!-- Gambar di Kanan -->
                     <div class="col-lg-6" data-aos="fade-left" data-aos-delay="250">
-                        <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Tentang JKPI"
-                            class="img-fluid rounded shadow">
+                        <div class="image-hover-wrapper">
+                            <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Tentang JKPI"
+                                class="img-fluid rounded shadow">
+                        </div>
                     </div>
                 </div>
 
