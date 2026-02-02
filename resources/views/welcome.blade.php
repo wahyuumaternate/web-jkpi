@@ -550,7 +550,7 @@
                     </div>
                 </div>
 
-                <div class="row align-items-center gy-5">
+                {{-- <div class="row align-items-center gy-5">
                     <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
                         <div class="image-grid">
                             <div class="primary-image">
@@ -611,7 +611,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
 
