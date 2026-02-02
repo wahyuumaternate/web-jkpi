@@ -526,26 +526,18 @@
                             Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang menghimpun
                             kabupaten dan kota di Indonesia yang berkomitmen terhadap pelestarian pusaka, baik berwujud
                             (tangible heritage) maupun tidak berwujud (intangible heritage), sebagai bagian dari
-                            pembangunan
-                            daerah yang berkelanjutan.
-                        </p>
-
-                        <p class="lead-description mb-4">
-                            JKPI didirikan pada 25 Oktober 2008 di Surakarta, bertepatan dengan penyelenggaraan
-                            Konferensi
-                            dan Pameran Organisasi Kota Pusaka Eropa–Asia (OWHC Euro-Asia) Tahun 2008, yang melahirkan
-                            Deklarasi Surakarta sebagai tonggak awal pembentukannya.
+                            pembangunan daerah yang berkelanjutan.
                         </p>
 
                         <p class="lead-description">
-                            Sejak berdiri, JKPI berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah
-                            daerah dalam pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI
-                            telah
+                            JKPI didirikan pada 25 Oktober 2008 di Surakarta, bertepatan dengan penyelenggaraan
+                            Konferensi dan Pameran Organisasi Kota Pusaka Eropa–Asia (OWHC Euro-Asia) Tahun 2008, yang
+                            melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak berdiri, JKPI
+                            berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah daerah dalam
+                            pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI telah
                             beranggotakan 79 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
-                            komitmen
-                            daerah dalam menjaga warisan pusaka sebagai identitas, sumber nilai, dan penggerak
-                            pembangunan
-                            berkelanjutan.
+                            komitmen daerah dalam menjaga warisan pusaka sebagai identitas, sumber nilai, dan penggerak
+                            pembangunan berkelanjutan.
                         </p>
                     </div>
 
