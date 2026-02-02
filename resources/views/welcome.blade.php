@@ -766,7 +766,7 @@
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
-                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="15"
+                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="17"
                                     data-purecounter-duration="1">17</span>+
                             </div>
                             <div class="stat-label" style="font-size: 1.1rem; color: #666;">Tahun Berdiri</div>
