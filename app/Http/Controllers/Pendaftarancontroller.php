@@ -32,23 +32,24 @@ class PendaftaranController extends Controller
                 $data['foto'] = $request->file('foto')->store('peserta/foto', 'public');
             }
 
-            // Upload KTP jika ada
-            if ($request->hasFile('ktp')) {
-                $data['ktp'] = $request->file('ktp')->store('peserta/ktp', 'public');
-            }
-
             // Buat peserta baru
             $peserta = Peserta::create($data);
 
             // Kirim email verifikasi
             Mail::to($peserta->email)->send(new VerifikasiEmailPeserta($peserta));
 
-            return redirect()->route('pendaftaran.success')->with('success', 'Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.')->with('kode_registrasi', $peserta->kode_registrasi);
+            return redirect()
+                ->route('pendaftaran.success')
+                ->with('success', 'Pendaftaran berhasil! Silakan cek email Anda untuk verifikasi.')
+                ->with('kode_registrasi', $peserta->kode_registrasi);
         } catch (\Illuminate\Database\QueryException $e) {
             // Handle database errors (unique constraint, etc)
             \Log::error('Database error saat pendaftaran: ' . $e->getMessage());
 
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan database. Email atau NIK mungkin sudah terdaftar.');
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan database. Email mungkin sudah terdaftar.');
         } catch (\Exception $e) {
             // Handle other errors
             \Log::error('Error saat pendaftaran: ' . $e->getMessage());
@@ -78,18 +79,26 @@ class PendaftaranController extends Controller
     public function verify(Request $request, $token)
     {
         // Cari peserta berdasarkan token
-        $peserta = Peserta::where('email_verification_token', $token)->whereNull('email_verified_at')->first();
+        $peserta = Peserta::where('email_verification_token', $token)
+            ->whereNull('email_verified_at')
+            ->first();
 
         // Token tidak ditemukan atau sudah digunakan
         if (!$peserta) {
             // Cek apakah token ada tapi sudah terverifikasi
-            $verifiedPeserta = Peserta::where('email_verification_token', $token)->whereNotNull('email_verified_at')->first();
+            $verifiedPeserta = Peserta::where('email_verification_token', $token)
+                ->whereNotNull('email_verified_at')
+                ->first();
 
             if ($verifiedPeserta) {
-                return redirect()->route('pendaftaran.index')->with('info', 'Email Anda sudah terverifikasi sebelumnya.');
+                return redirect()
+                    ->route('pendaftaran.index')
+                    ->with('info', 'Email Anda sudah terverifikasi sebelumnya.');
             }
 
-            return redirect()->route('pendaftaran.index')->with('error', 'Token verifikasi tidak valid atau sudah kadaluarsa.');
+            return redirect()
+                ->route('pendaftaran.index')
+                ->with('error', 'Token verifikasi tidak valid atau sudah kadaluarsa.');
         }
 
         // Verifikasi email

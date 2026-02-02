@@ -147,6 +147,23 @@
             border-color: #099aa7;
         }
 
+        .badge-status {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 5px;
+        }
+
+        .badge-anggota {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .badge-peninjau {
+            background-color: #ffc107;
+            color: #333;
+        }
+
         @media (max-width: 768px) {
             .registration-card {
                 padding: 30px 20px;
@@ -203,6 +220,7 @@
                 <form action="{{ route('pendaftaran.store') }}" method="POST" enctype="multipart/form-data"
                     id="registrationForm">
                     @csrf
+
                     <!-- Data Pribadi -->
                     <h3 class="form-section-title"><i class="bi bi-person-fill me-2"></i>Data Pribadi</h3>
 
@@ -218,139 +236,274 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="nik" class="form-label">NIK <span class="required">*</span></label>
-                            <input type="text" class="form-control @error('nik') is-invalid @enderror" id="nik"
-                                name="nik" value="{{ old('nik') }}" maxlength="16" required>
-                            <div class="form-text">16 digit nomor NIK</div>
-                            @error('nik')
+                            <label for="jabatan" class="form-label">Jabatan <span class="required">*</span></label>
+                            <input type="text" class="form-control @error('jabatan') is-invalid @enderror" id="jabatan"
+                                name="jabatan" value="{{ old('jabatan') }}" required>
+                            @error('jabatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin <span
+                        <div class="col-md-6 mb-3">
+                            <label for="instansi_organisasi" class="form-label">Instansi/Organisasi <span
                                     class="required">*</span></label>
-                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin"
-                                name="jenis_kelamin" required>
-                                <option value="">Pilih Jenis Kelamin</option>
-                                <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
-                                    Laki-laki</option>
-                                <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
-                                    Perempuan</option>
+                            <input type="text" class="form-control @error('instansi_organisasi') is-invalid @enderror"
+                                id="instansi_organisasi" name="instansi_organisasi" value="{{ old('instansi_organisasi') }}"
+                                required>
+                            @error('instansi_organisasi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="kota_kabupaten" class="form-label">Kota/Kabupaten <span
+                                    class="required">*</span></label>
+                            <select class="form-select @error('kota_kabupaten') is-invalid @enderror" id="kota_kabupaten"
+                                name="kota_kabupaten" required>
+                                <option value="">Pilih Kota/Kabupaten</option>
+                                <optgroup label="Anggota JKPI">
+                                    <option value="Kota Ambon"
+                                        {{ old('kota_kabupaten') == 'Kota Ambon' ? 'selected' : '' }}>Kota Ambon</option>
+                                    <option value="Kota Banda Aceh"
+                                        {{ old('kota_kabupaten') == 'Kota Banda Aceh' ? 'selected' : '' }}>Kota Banda Aceh
+                                    </option>
+                                    <option value="Kota Bengkulu"
+                                        {{ old('kota_kabupaten') == 'Kota Bengkulu' ? 'selected' : '' }}>Kota Bengkulu
+                                    </option>
+                                    <option value="Kota Bukittinggi"
+                                        {{ old('kota_kabupaten') == 'Kota Bukittinggi' ? 'selected' : '' }}>Kota
+                                        Bukittinggi</option>
+                                    <option value="Kota Baubau"
+                                        {{ old('kota_kabupaten') == 'Kota Baubau' ? 'selected' : '' }}>Kota Baubau</option>
+                                    <option value="Kota Blitar"
+                                        {{ old('kota_kabupaten') == 'Kota Blitar' ? 'selected' : '' }}>Kota Blitar</option>
+                                    <option value="Kota Banjarmasin"
+                                        {{ old('kota_kabupaten') == 'Kota Banjarmasin' ? 'selected' : '' }}>Kota
+                                        Banjarmasin</option>
+                                    <option value="Kota Bontang"
+                                        {{ old('kota_kabupaten') == 'Kota Bontang' ? 'selected' : '' }}>Kota Bontang
+                                    </option>
+                                    <option value="Kota Bogor"
+                                        {{ old('kota_kabupaten') == 'Kota Bogor' ? 'selected' : '' }}>Kota Bogor</option>
+                                    <option value="Kab. Bangka Barat"
+                                        {{ old('kota_kabupaten') == 'Kab. Bangka Barat' ? 'selected' : '' }}>Kab. Bangka
+                                        Barat</option>
+                                    <option value="Kab. Bangli"
+                                        {{ old('kota_kabupaten') == 'Kab. Bangli' ? 'selected' : '' }}>Kab. Bangli</option>
+                                    <option value="Kab. Buleleng"
+                                        {{ old('kota_kabupaten') == 'Kab. Buleleng' ? 'selected' : '' }}>Kab. Buleleng
+                                    </option>
+                                    <option value="Kab. Brebes"
+                                        {{ old('kota_kabupaten') == 'Kab. Brebes' ? 'selected' : '' }}>Kab. Brebes</option>
+                                    <option value="Kab. Banjar Negara"
+                                        {{ old('kota_kabupaten') == 'Kab. Banjar Negara' ? 'selected' : '' }}>Kab. Banjar
+                                        Negara</option>
+                                    <option value="Kab. Banyumas"
+                                        {{ old('kota_kabupaten') == 'Kab. Banyumas' ? 'selected' : '' }}>Kab. Banyumas
+                                    </option>
+                                    <option value="Kab. Batang"
+                                        {{ old('kota_kabupaten') == 'Kab. Batang' ? 'selected' : '' }}>Kab. Batang</option>
+                                    <option value="Kota Cirebon"
+                                        {{ old('kota_kabupaten') == 'Kota Cirebon' ? 'selected' : '' }}>Kota Cirebon
+                                    </option>
+                                    <option value="Kab. Cilacap"
+                                        {{ old('kota_kabupaten') == 'Kab. Cilacap' ? 'selected' : '' }}>Kab. Cilacap
+                                    </option>
+                                    <option value="Kota Jakarta Pusat"
+                                        {{ old('kota_kabupaten') == 'Kota Jakarta Pusat' ? 'selected' : '' }}>Kota Jakarta
+                                        Pusat</option>
+                                    <option value="Kota Lubuk Linggau"
+                                        {{ old('kota_kabupaten') == 'Kota Lubuk Linggau' ? 'selected' : '' }}>Kota Lubuk
+                                        Linggau</option>
+                                    <option value="Kota Langsa"
+                                        {{ old('kota_kabupaten') == 'Kota Langsa' ? 'selected' : '' }}>Kota Langsa</option>
+                                    <option value="Kab. Kepulauan Seribu"
+                                        {{ old('kota_kabupaten') == 'Kab. Kepulauan Seribu' ? 'selected' : '' }}>Kab.
+                                        Kepulauan Seribu</option>
+                                    <option value="Kab. Karang Asem"
+                                        {{ old('kota_kabupaten') == 'Kab. Karang Asem' ? 'selected' : '' }}>Kab. Karang
+                                        Asem</option>
+                                    <option value="Kota Medan"
+                                        {{ old('kota_kabupaten') == 'Kota Medan' ? 'selected' : '' }}>Kota Medan</option>
+                                    <option value="Kota Madiun"
+                                        {{ old('kota_kabupaten') == 'Kota Madiun' ? 'selected' : '' }}>Kota Madiun</option>
+                                    <option value="Kota Malang"
+                                        {{ old('kota_kabupaten') == 'Kota Malang' ? 'selected' : '' }}>Kota Malang</option>
+                                    <option value="Kota Palembang"
+                                        {{ old('kota_kabupaten') == 'Kota Palembang' ? 'selected' : '' }}>Kota Palembang
+                                    </option>
+                                    <option value="Kota Pangkal Pinang"
+                                        {{ old('kota_kabupaten') == 'Kota Pangkal Pinang' ? 'selected' : '' }}>Kota Pangkal
+                                        Pinang</option>
+                                    <option value="Kota Pekalongan"
+                                        {{ old('kota_kabupaten') == 'Kota Pekalongan' ? 'selected' : '' }}>Kota Pekalongan
+                                    </option>
+                                    <option value="Kota Padang"
+                                        {{ old('kota_kabupaten') == 'Kota Padang' ? 'selected' : '' }}>Kota Padang</option>
+                                    <option value="Kota Palopo"
+                                        {{ old('kota_kabupaten') == 'Kota Palopo' ? 'selected' : '' }}>Kota Palopo</option>
+                                    <option value="Kota Pontianak"
+                                        {{ old('kota_kabupaten') == 'Kota Pontianak' ? 'selected' : '' }}>Kota Pontianak
+                                    </option>
+                                    <option value="Kab. Purbalingga"
+                                        {{ old('kota_kabupaten') == 'Kab. Purbalingga' ? 'selected' : '' }}>Kab.
+                                        Purbalingga</option>
+                                    <option value="Kota Sawahlunto"
+                                        {{ old('kota_kabupaten') == 'Kota Sawahlunto' ? 'selected' : '' }}>Kota Sawahlunto
+                                    </option>
+                                    <option value="Kota Semarang"
+                                        {{ old('kota_kabupaten') == 'Kota Semarang' ? 'selected' : '' }}>Kota Semarang
+                                    </option>
+                                    <option value="Kota Surakarta"
+                                        {{ old('kota_kabupaten') == 'Kota Surakarta' ? 'selected' : '' }}>Kota Surakarta
+                                    </option>
+                                    <option value="Kota Ternate"
+                                        {{ old('kota_kabupaten') == 'Kota Ternate' ? 'selected' : '' }}>Kota Ternate
+                                    </option>
+                                    <option value="Kota Tegal"
+                                        {{ old('kota_kabupaten') == 'Kota Tegal' ? 'selected' : '' }}>Kota Tegal</option>
+                                    <option value="Kab. Tegal"
+                                        {{ old('kota_kabupaten') == 'Kab. Tegal' ? 'selected' : '' }}>Kab. Tegal</option>
+                                    <option value="Kota Yogyakarta"
+                                        {{ old('kota_kabupaten') == 'Kota Yogyakarta' ? 'selected' : '' }}>Kota Yogyakarta
+                                    </option>
+                                    <option value="Kota Sungai Penuh"
+                                        {{ old('kota_kabupaten') == 'Kota Sungai Penuh' ? 'selected' : '' }}>Kota Sungai
+                                        Penuh</option>
+                                    <option value="Kab. Ngawi"
+                                        {{ old('kota_kabupaten') == 'Kab. Ngawi' ? 'selected' : '' }}>Kab. Ngawi</option>
+                                    <option value="Kota Tidore"
+                                        {{ old('kota_kabupaten') == 'Kota Tidore' ? 'selected' : '' }}>Kota Tidore</option>
+                                    <option value="Kota Tangerang"
+                                        {{ old('kota_kabupaten') == 'Kota Tangerang' ? 'selected' : '' }}>Kota Tangerang
+                                    </option>
+                                    <option value="Kota Kupang"
+                                        {{ old('kota_kabupaten') == 'Kota Kupang' ? 'selected' : '' }}>Kota Kupang</option>
+                                    <option value="Kab. Temanggung"
+                                        {{ old('kota_kabupaten') == 'Kab. Temanggung' ? 'selected' : '' }}>Kab. Temanggung
+                                    </option>
+                                    <option value="Kota Sabang"
+                                        {{ old('kota_kabupaten') == 'Kota Sabang' ? 'selected' : '' }}>Kota Sabang</option>
+                                    <option value="Kab. Halmahera Barat"
+                                        {{ old('kota_kabupaten') == 'Kab. Halmahera Barat' ? 'selected' : '' }}>Kab.
+                                        Halmahera Barat</option>
+                                    <option value="Kab. Siak"
+                                        {{ old('kota_kabupaten') == 'Kab. Siak' ? 'selected' : '' }}>Kab. Siak</option>
+                                    <option value="Kab. Pesawaran"
+                                        {{ old('kota_kabupaten') == 'Kab. Pesawaran' ? 'selected' : '' }}>Kab. Pesawaran
+                                    </option>
+                                    <option value="Kota Probolinggo"
+                                        {{ old('kota_kabupaten') == 'Kota Probolinggo' ? 'selected' : '' }}>Kota
+                                        Probolinggo</option>
+                                    <option value="Kab. Buton Utara"
+                                        {{ old('kota_kabupaten') == 'Kab. Buton Utara' ? 'selected' : '' }}>Kab. Buton
+                                        Utara</option>
+                                    <option value="Kab. Kutai Kartanegara"
+                                        {{ old('kota_kabupaten') == 'Kab. Kutai Kartanegara' ? 'selected' : '' }}>Kab.
+                                        Kutai Kartanegara</option>
+                                    <option value="Kab. Muna"
+                                        {{ old('kota_kabupaten') == 'Kab. Muna' ? 'selected' : '' }}>Kab. Muna</option>
+                                    <option value="Kota Denpasar"
+                                        {{ old('kota_kabupaten') == 'Kota Denpasar' ? 'selected' : '' }}>Kota Denpasar
+                                    </option>
+                                    <option value="Kota Sibolga"
+                                        {{ old('kota_kabupaten') == 'Kota Sibolga' ? 'selected' : '' }}>Kota Sibolga
+                                    </option>
+                                    <option value="Kab. Sambas"
+                                        {{ old('kota_kabupaten') == 'Kab. Sambas' ? 'selected' : '' }}>Kab. Sambas</option>
+                                    <option value="Kab. Gianyar"
+                                        {{ old('kota_kabupaten') == 'Kab. Gianyar' ? 'selected' : '' }}>Kab. Gianyar
+                                    </option>
+                                    <option value="Kota Jakarta Barat"
+                                        {{ old('kota_kabupaten') == 'Kota Jakarta Barat' ? 'selected' : '' }}>Kota Jakarta
+                                        Barat</option>
+                                    <option value="Kota Jakarta Utara"
+                                        {{ old('kota_kabupaten') == 'Kota Jakarta Utara' ? 'selected' : '' }}>Kota Jakarta
+                                        Utara</option>
+                                    <option value="Kota Salatiga"
+                                        {{ old('kota_kabupaten') == 'Kota Salatiga' ? 'selected' : '' }}>Kota Salatiga
+                                    </option>
+                                    <option value="Kota Surabaya"
+                                        {{ old('kota_kabupaten') == 'Kota Surabaya' ? 'selected' : '' }}>Kota Surabaya
+                                    </option>
+                                    <option value="Kota Singkawang"
+                                        {{ old('kota_kabupaten') == 'Kota Singkawang' ? 'selected' : '' }}>Kota Singkawang
+                                    </option>
+                                    <option value="Kab. Sumbawa"
+                                        {{ old('kota_kabupaten') == 'Kab. Sumbawa' ? 'selected' : '' }}>Kab. Sumbawa
+                                    </option>
+                                    <option value="Kab. Belitung Timur"
+                                        {{ old('kota_kabupaten') == 'Kab. Belitung Timur' ? 'selected' : '' }}>Kab.
+                                        Belitung Timur</option>
+                                    <option value="Kota Pasuruan"
+                                        {{ old('kota_kabupaten') == 'Kota Pasuruan' ? 'selected' : '' }}>Kota Pasuruan
+                                    </option>
+                                    <option value="Kab. Sumba Timur"
+                                        {{ old('kota_kabupaten') == 'Kab. Sumba Timur' ? 'selected' : '' }}>Kab. Sumba
+                                        Timur</option>
+                                    <option value="Kab. Flores Timur"
+                                        {{ old('kota_kabupaten') == 'Kab. Flores Timur' ? 'selected' : '' }}>Kab. Flores
+                                        Timur</option>
+                                    <option value="Kab. Sumenep"
+                                        {{ old('kota_kabupaten') == 'Kab. Sumenep' ? 'selected' : '' }}>Kab. Sumenep
+                                    </option>
+                                    <option value="Kab. Nias Selatan"
+                                        {{ old('kota_kabupaten') == 'Kab. Nias Selatan' ? 'selected' : '' }}>Kab. Nias
+                                        Selatan</option>
+                                    <option value="Kab. Jepara"
+                                        {{ old('kota_kabupaten') == 'Kab. Jepara' ? 'selected' : '' }}>Kab. Jepara</option>
+                                    <option value="Kab. Buton Selatan"
+                                        {{ old('kota_kabupaten') == 'Kab. Buton Selatan' ? 'selected' : '' }}>Kab. Buton
+                                        Selatan</option>
+                                    <option value="Kab. Ende"
+                                        {{ old('kota_kabupaten') == 'Kab. Ende' ? 'selected' : '' }}>Kab. Ende</option>
+                                    <option value="Kota Kediri"
+                                        {{ old('kota_kabupaten') == 'Kota Kediri' ? 'selected' : '' }}>Kota Kediri</option>
+                                    <option value="Kota Bandung"
+                                        {{ old('kota_kabupaten') == 'Kota Bandung' ? 'selected' : '' }}>Kota Bandung
+                                    </option>
+                                </optgroup>
+                                <optgroup label="Peninjau">
+                                    <option value="Kab. Tranggalek"
+                                        {{ old('kota_kabupaten') == 'Kab. Tranggalek' ? 'selected' : '' }}>Kab. Tranggalek
+                                    </option>
+                                    <option value="Kota Magelang"
+                                        {{ old('kota_kabupaten') == 'Kota Magelang' ? 'selected' : '' }}>Kota Magelang
+                                    </option>
+                                    <option value="Kab. Lombok Utara"
+                                        {{ old('kota_kabupaten') == 'Kab. Lombok Utara' ? 'selected' : '' }}>Kab. Lombok
+                                        Utara</option>
+                                    <option value="Kab. Sleman"
+                                        {{ old('kota_kabupaten') == 'Kab. Sleman' ? 'selected' : '' }}>Kab. Sleman</option>
+                                    <option value="Kab. Bojonegoro"
+                                        {{ old('kota_kabupaten') == 'Kab. Bojonegoro' ? 'selected' : '' }}>Kab. Bojonegoro
+                                    </option>
+                                </optgroup>
                             </select>
-                            @error('jenis_kelamin')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="tempat_lahir" class="form-label">Tempat Lahir <span
-                                    class="required">*</span></label>
-                            <input type="text" class="form-control @error('tempat_lahir') is-invalid @enderror"
-                                id="tempat_lahir" name="tempat_lahir" value="{{ old('tempat_lahir') }}" required>
-                            @error('tempat_lahir')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir <span
-                                    class="required">*</span></label>
-                            <input type="date" class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}" required>
-                            @error('tanggal_lahir')
+                            @error('kota_kabupaten')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat Lengkap <span class="required">*</span></label>
-                        <textarea class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" rows="3"
-                            required>{{ old('alamat') }}</textarea>
-                        @error('alamat')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="provinsi" class="form-label">Provinsi <span class="required">*</span></label>
-                            <input type="text" class="form-control @error('provinsi') is-invalid @enderror"
-                                id="provinsi" name="provinsi" value="{{ old('provinsi') }}" required>
-                            @error('provinsi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="kabupaten_kota" class="form-label">Kabupaten/Kota <span
-                                    class="required">*</span></label>
-                            <input type="text" class="form-control @error('kabupaten_kota') is-invalid @enderror"
-                                id="kabupaten_kota" name="kabupaten_kota" value="{{ old('kabupaten_kota') }}" required>
-                            @error('kabupaten_kota')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="kecamatan" class="form-label">Kecamatan</label>
-                            <input type="text" class="form-control @error('kecamatan') is-invalid @enderror"
-                                id="kecamatan" name="kecamatan" value="{{ old('kecamatan') }}">
-                            @error('kecamatan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="kelurahan" class="form-label">Kelurahan/Desa</label>
-                            <input type="text" class="form-control @error('kelurahan') is-invalid @enderror"
-                                id="kelurahan" name="kelurahan" value="{{ old('kelurahan') }}">
-                            @error('kelurahan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="kode_pos" class="form-label">Kode Pos</label>
-                            <input type="text" class="form-control @error('kode_pos') is-invalid @enderror"
-                                id="kode_pos" name="kode_pos" value="{{ old('kode_pos') }}" maxlength="5">
-                            @error('kode_pos')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <!-- Kontak -->
+                    <!-- Informasi Kontak -->
                     <h3 class="form-section-title"><i class="bi bi-telephone-fill me-2"></i>Informasi Kontak</h3>
 
                     <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="nomor_telepon" class="form-label">Nomor Telepon</label>
+                        <div class="col-md-6 mb-3">
+                            <label for="nomor_telepon" class="form-label">Nomor Telepon <span
+                                    class="required">*</span></label>
                             <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror"
                                 id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}"
-                                placeholder="08xxxxxxxxxx">
+                                placeholder="08xxxxxxxxxx" required>
                             @error('nomor_telepon')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label for="nomor_wa" class="form-label">Nomor WhatsApp <span
-                                    class="required">*</span></label>
-                            <input type="text" class="form-control @error('nomor_wa') is-invalid @enderror"
-                                id="nomor_wa" name="nomor_wa" value="{{ old('nomor_wa') }}" placeholder="08xxxxxxxxxx"
-                                required>
-                            @error('nomor_wa')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="email" class="form-label">Email <span class="required">*</span></label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror"
                                 id="email" name="email" value="{{ old('email') }}" required>
@@ -361,80 +514,13 @@
                         </div>
                     </div>
 
-                    <!-- Instansi/Pekerjaan -->
-                    <h3 class="form-section-title"><i class="bi bi-briefcase-fill me-2"></i>Informasi Pekerjaan</h3>
+                    <!-- Upload Foto Profil -->
+                    <h3 class="form-section-title"><i class="bi bi-camera-fill me-2"></i>Upload Foto Profil</h3>
 
                     <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="instansi" class="form-label">Instansi/Perusahaan</label>
-                            <input type="text" class="form-control @error('instansi') is-invalid @enderror"
-                                id="instansi" name="instansi" value="{{ old('instansi') }}">
-                            @error('instansi')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="jabatan" class="form-label">Jabatan</label>
-                            <input type="text" class="form-control @error('jabatan') is-invalid @enderror"
-                                id="jabatan" name="jabatan" value="{{ old('jabatan') }}">
-                            @error('jabatan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="col-md-4 mb-3">
-                            <label for="bidang_pekerjaan" class="form-label">Bidang Pekerjaan</label>
-                            <input type="text" class="form-control @error('bidang_pekerjaan') is-invalid @enderror"
-                                id="bidang_pekerjaan" name="bidang_pekerjaan" value="{{ old('bidang_pekerjaan') }}">
-                            @error('bidang_pekerjaan')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-                    <!-- Data Kepesertaan -->
-                    <h3 class="form-section-title"><i class="bi bi-people-fill me-2"></i>Data Kepesertaan</h3>
-
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="is_anggota_jkpi" name="is_anggota_jkpi"
-                                value="1" {{ old('is_anggota_jkpi') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="is_anggota_jkpi">
-                                Saya adalah anggota JKPI
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Kebutuhan Khusus -->
-                    <h3 class="form-section-title"><i class="bi bi-heart-fill me-2"></i>Kebutuhan Khusus</h3>
-
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="butuh_akomodasi" name="butuh_akomodasi"
-                                value="1" {{ old('butuh_akomodasi') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="butuh_akomodasi">
-                                Membutuhkan akomodasi
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="kebutuhan_khusus" class="form-label">Kebutuhan Khusus Lainnya</label>
-                        <textarea class="form-control @error('kebutuhan_khusus') is-invalid @enderror" id="kebutuhan_khusus"
-                            name="kebutuhan_khusus" rows="3" placeholder="Contoh: Diet vegetarian, kursi roda, dll">{{ old('kebutuhan_khusus') }}</textarea>
-                        <div class="form-text">Isi jika memiliki kebutuhan khusus seperti diet, disabilitas, dll</div>
-                        @error('kebutuhan_khusus')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Upload Dokumen -->
-                    <h3 class="form-section-title"><i class="bi bi-file-earmark-arrow-up-fill me-2"></i>Upload Dokumen
-                    </h3>
-
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="foto" class="form-label">Foto Diri</label>
+                        <div class="col-md-12 mb-3">
+                            <label for="foto" class="form-label">Foto Profil <span
+                                    class="text-muted">(Opsional)</span></label>
                             <div class="custom-file-upload" onclick="document.getElementById('foto').click()">
                                 <i class="bi bi-camera-fill"></i>
                                 <p class="mb-0">Klik untuk upload foto</p>
@@ -448,22 +534,54 @@
                                 <div class="invalid-feedback d-block">{{ $message }}</div>
                             @enderror
                         </div>
+                    </div>
 
+                    <!-- Perjalanan dan Akomodasi -->
+                    <h3 class="form-section-title"><i class="bi bi-airplane-fill me-2"></i>Perjalanan dan Akomodasi</h3>
+
+                    <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="ktp" class="form-label">Foto KTP</label>
-                            <div class="custom-file-upload" onclick="document.getElementById('ktp').click()">
-                                <i class="bi bi-card-image"></i>
-                                <p class="mb-0">Klik untuk upload KTP</p>
-                                <small class="text-muted">Format: JPG, PNG (Max: 2MB)</small>
-                            </div>
-                            <input type="file" class="d-none @error('ktp') is-invalid @enderror" id="ktp"
-                                name="ktp" accept="image/jpeg,image/jpg,image/png"
-                                onchange="previewImage(this, 'ktp-preview')">
-                            <img id="ktp-preview" class="file-preview" style="display: none;">
-                            @error('ktp')
-                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            <label for="tanggal_kedatangan" class="form-label">Tanggal Kedatangan <span
+                                    class="required">*</span></label>
+                            <input type="date" class="form-control @error('tanggal_kedatangan') is-invalid @enderror"
+                                id="tanggal_kedatangan" name="tanggal_kedatangan"
+                                value="{{ old('tanggal_kedatangan') }}" required>
+                            @error('tanggal_kedatangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="tanggal_kepulangan" class="form-label">Tanggal Kepulangan <span
+                                    class="required">*</span></label>
+                            <input type="date" class="form-control @error('tanggal_kepulangan') is-invalid @enderror"
+                                id="tanggal_kepulangan" name="tanggal_kepulangan"
+                                value="{{ old('tanggal_kepulangan') }}" required>
+                            @error('tanggal_kepulangan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Akomodasi Hotel</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="akomodasi_hotel" id="hotel_ya"
+                                value="Ya" {{ old('akomodasi_hotel') == 'Ya' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="hotel_ya">
+                                Ya, saya membutuhkan akomodasi hotel
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="akomodasi_hotel" id="hotel_tidak"
+                                value="Tidak" {{ old('akomodasi_hotel') == 'Tidak' ? 'checked' : '' }}>
+                            <label class="form-check-label" for="hotel_tidak">
+                                Tidak, saya akan mengatur akomodasi sendiri
+                            </label>
+                        </div>
+                        @error('akomodasi_hotel')
+                            <div class="text-danger small mt-1">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Persetujuan -->
@@ -512,19 +630,19 @@
             }
         }
 
-        // Validasi NIK hanya angka
-        document.getElementById('nik').addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^0-9]/g, '');
+        // Validasi nomor telepon
+        document.getElementById('nomor_telepon').addEventListener('input', function(e) {
+            this.value = this.value.replace(/[^0-9+]/g, '');
         });
 
-        // Validasi nomor telepon dan WA
-        ['nomor_telepon', 'nomor_wa'].forEach(function(fieldId) {
-            const field = document.getElementById(fieldId);
-            if (field) {
-                field.addEventListener('input', function(e) {
-                    this.value = this.value.replace(/[^0-9+]/g, '');
-                });
-            }
+        // Set minimum date untuk tanggal kedatangan (hari ini)
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('tanggal_kedatangan').setAttribute('min', today);
+
+        // Update minimum date untuk tanggal kepulangan berdasarkan tanggal kedatangan
+        document.getElementById('tanggal_kedatangan').addEventListener('change', function() {
+            const kedatangan = this.value;
+            document.getElementById('tanggal_kepulangan').setAttribute('min', kedatangan);
         });
 
         // Konfirmasi sebelum submit

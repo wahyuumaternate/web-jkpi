@@ -13,12 +13,11 @@ class Peserta extends Model
 
     protected $table = 'pendaftaran_peserta';
 
-    protected $fillable = ['nama_lengkap', 'nik', 'jenis_kelamin', 'tempat_lahir', 'tanggal_lahir', 'alamat', 'provinsi', 'kabupaten_kota', 'kecamatan', 'kelurahan', 'kode_pos', 'nomor_telepon', 'email', 'nomor_wa', 'instansi', 'jabatan', 'bidang_pekerjaan', 'is_anggota_jkpi', 'butuh_akomodasi', 'kebutuhan_khusus', 'foto', 'ktp', 'email_verification_token', 'email_verified_at', 'status', 'catatan', 'kode_registrasi'];
+    protected $fillable = ['nama_lengkap', 'jabatan', 'instansi_organisasi', 'nomor_telepon', 'email', 'kota_kabupaten', 'foto', 'tanggal_kedatangan', 'tanggal_kepulangan', 'akomodasi_hotel', 'email_verification_token', 'email_verified_at', 'status', 'catatan', 'kode_registrasi'];
 
     protected $casts = [
-        'tanggal_lahir' => 'date',
-        'is_anggota_jkpi' => 'boolean',
-        'butuh_akomodasi' => 'boolean',
+        'tanggal_kedatangan' => 'date',
+        'tanggal_kepulangan' => 'date',
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -99,14 +98,6 @@ class Peserta extends Model
     }
 
     /**
-     * Accessor untuk KTP URL
-     */
-    public function getKtpUrlAttribute()
-    {
-        return $this->ktp ? asset('storage/' . $this->ktp) : null;
-    }
-
-    /**
      * Accessor untuk nama lengkap terformat
      */
     public function getNamaLengkapFormattedAttribute()
@@ -115,10 +106,21 @@ class Peserta extends Model
     }
 
     /**
-     * Accessor untuk umur
+     * Accessor untuk durasi menginap
      */
-    public function getUmurAttribute()
+    public function getDurasiMenginapAttribute()
     {
-        return $this->tanggal_lahir ? $this->tanggal_lahir->age : null;
+        if ($this->tanggal_kedatangan && $this->tanggal_kepulangan) {
+            return $this->tanggal_kedatangan->diffInDays($this->tanggal_kepulangan);
+        }
+        return 0;
+    }
+
+    /**
+     * Accessor untuk butuh hotel
+     */
+    public function getButuhHotelAttribute()
+    {
+        return strtolower($this->akomodasi_hotel) === 'ya';
     }
 }

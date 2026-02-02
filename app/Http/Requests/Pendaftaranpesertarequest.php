@@ -22,37 +22,21 @@ class PendaftaranPesertaRequest extends FormRequest
         return [
             // Data Pribadi
             'nama_lengkap' => 'required|string|max:255',
-            'nik' => 'required|string|size:16|unique:pendaftaran_peserta,nik',
-            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
-            'tempat_lahir' => 'required|string|max:255',
-            'tanggal_lahir' => 'required|date|before:today',
-            'alamat' => 'required|string',
-            'provinsi' => 'required|string|max:255',
-            'kabupaten_kota' => 'required|string|max:255',
-            'kecamatan' => 'nullable|string|max:255',
-            'kelurahan' => 'nullable|string|max:255',
-            'kode_pos' => 'nullable|string|size:5',
+            'jabatan' => 'required|string|max:255',
+            'instansi_organisasi' => 'required|string|max:255',
+            'nomor_telepon' => 'required|string|max:15|regex:/^[0-9+\-\s()]*$/',
+            'email' => 'required|email|unique:pendaftaran_peserta,email|max:255',
 
-            // Kontak
-            'nomor_telepon' => 'nullable|string|max:15',
-            'email' => 'required|email|unique:pendaftaran_peserta,email',
-            'nomor_wa' => 'required|string|max:15',
+            // Perwakilan Daerah
+            'kota_kabupaten' => 'required|string|max:255',
 
-            // Instansi/Pekerjaan
-            'instansi' => 'nullable|string|max:255',
-            'jabatan' => 'nullable|string|max:255',
-            'bidang_pekerjaan' => 'nullable|string|max:255',
+            // Upload Foto
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
 
-            // Data Kepesertaan
-            'is_anggota_jkpi' => 'nullable|boolean',
-
-            // Kebutuhan Khusus
-            'butuh_akomodasi' => 'nullable|boolean',
-            'kebutuhan_khusus' => 'nullable|string',
-
-            // Upload Dokumen
-            'foto' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
-            'ktp' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            // Perjalanan dan Akomodasi
+            'tanggal_kedatangan' => 'required|date|after_or_equal:today',
+            'tanggal_kepulangan' => 'required|date|after:tanggal_kedatangan',
+            'akomodasi_hotel' => 'nullable|string|max:255',
         ];
     }
 
@@ -63,26 +47,21 @@ class PendaftaranPesertaRequest extends FormRequest
     {
         return [
             'nama_lengkap.required' => 'Nama lengkap wajib diisi.',
-            'nik.required' => 'NIK wajib diisi.',
-            'nik.size' => 'NIK harus terdiri dari 16 digit.',
-            'nik.unique' => 'NIK sudah terdaftar.',
-            'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih.',
-            'tempat_lahir.required' => 'Tempat lahir wajib diisi.',
-            'tanggal_lahir.required' => 'Tanggal lahir wajib diisi.',
-            'tanggal_lahir.before' => 'Tanggal lahir harus sebelum hari ini.',
-            'alamat.required' => 'Alamat wajib diisi.',
-            'provinsi.required' => 'Provinsi wajib dipilih.',
-            'kabupaten_kota.required' => 'Kabupaten/Kota wajib dipilih.',
+            'jabatan.required' => 'Jabatan wajib diisi.',
+            'instansi_organisasi.required' => 'Instansi/Organisasi wajib diisi.',
+            'nomor_telepon.required' => 'Nomor telepon wajib diisi.',
+            'nomor_telepon.regex' => 'Format nomor telepon tidak valid.',
             'email.required' => 'Email wajib diisi.',
             'email.email' => 'Format email tidak valid.',
             'email.unique' => 'Email sudah terdaftar.',
-            'nomor_wa.required' => 'Nomor WhatsApp wajib diisi.',
-            'foto.image' => 'File foto harus berupa gambar.',
-            'foto.mimes' => 'Foto harus berformat JPEG, JPG, atau PNG.',
+            'kota_kabupaten.required' => 'Kota/Kabupaten wajib diisi.',
+            'foto.image' => 'File harus berupa gambar.',
+            'foto.mimes' => 'Format foto harus jpeg, png, atau jpg.',
             'foto.max' => 'Ukuran foto maksimal 2MB.',
-            'ktp.image' => 'File KTP harus berupa gambar.',
-            'ktp.mimes' => 'KTP harus berformat JPEG, JPG, atau PNG.',
-            'ktp.max' => 'Ukuran KTP maksimal 2MB.',
+            'tanggal_kedatangan.required' => 'Tanggal kedatangan wajib diisi.',
+            'tanggal_kedatangan.after_or_equal' => 'Tanggal kedatangan tidak boleh kurang dari hari ini.',
+            'tanggal_kepulangan.required' => 'Tanggal kepulangan wajib diisi.',
+            'tanggal_kepulangan.after' => 'Tanggal kepulangan harus setelah tanggal kedatangan.',
         ];
     }
 }

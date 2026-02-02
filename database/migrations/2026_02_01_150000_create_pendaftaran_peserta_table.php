@@ -15,37 +15,21 @@ return new class extends Migration {
 
             // Data Pribadi
             $table->string('nama_lengkap');
-            $table->string('nik', 16)->unique();
-            $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
-            $table->string('tempat_lahir');
-            $table->date('tanggal_lahir');
-            $table->text('alamat');
-            $table->string('provinsi');
-            $table->string('kabupaten_kota');
-            $table->string('kecamatan')->nullable();
-            $table->string('kelurahan')->nullable();
-            $table->string('kode_pos', 5)->nullable();
-
-            // Kontak
-            $table->string('nomor_telepon', 15)->nullable();
+            $table->string('jabatan');
+            $table->string('instansi_organisasi');
+            $table->string('nomor_telepon', 15);
             $table->string('email')->unique();
-            $table->string('nomor_wa', 15); // wajib
 
-            // Instansi/Pekerjaan
-            $table->string('instansi')->nullable();
-            $table->string('jabatan')->nullable();
-            $table->string('bidang_pekerjaan')->nullable();
-
-            // Data Kepesertaan
-            $table->boolean('is_anggota_jkpi')->default(false);
-
-            // Kebutuhan Khusus
-            $table->boolean('butuh_akomodasi')->default(false);
-            $table->text('kebutuhan_khusus')->nullable(); // diet, disabilitas, dll
+            // Perwakilan Daerah
+            $table->string('kota_kabupaten');
 
             // Upload Dokumen
             $table->string('foto')->nullable();
-            $table->string('ktp')->nullable();
+
+            // Perjalanan dan Akomodasi
+            $table->date('tanggal_kedatangan');
+            $table->date('tanggal_kepulangan');
+            $table->string('akomodasi_hotel')->nullable();
 
             // Verifikasi Email
             $table->string('email_verification_token')->nullable();
@@ -71,14 +55,3 @@ return new class extends Migration {
         Schema::dropIfExists('pendaftaran_peserta');
     }
 };
-
-// Nama lengkap
-// Jabatan
-// Instansi/Organisasi
-// Nomor telepon
-// Email
-// Kota/Kabupaten
-// Upload Foto Profil
-// Perjalanan dan Akomodasi
-// Tanggal Kedatangan dan Tanggal Kepulangan
-// Akomodasi Hotel
