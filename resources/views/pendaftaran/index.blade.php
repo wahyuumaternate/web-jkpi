@@ -536,6 +536,7 @@
                         </div>
                     </div>
 
+
                     <!-- Perjalanan dan Akomodasi -->
                     <h3 class="form-section-title"><i class="bi bi-airplane-fill me-2"></i>Perjalanan dan Akomodasi</h3>
 
@@ -564,23 +565,14 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Akomodasi Hotel</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="akomodasi_hotel" id="hotel_ya"
-                                value="Ya" {{ old('akomodasi_hotel') == 'Ya' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="hotel_ya">
-                                Ya, saya membutuhkan akomodasi hotel
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="akomodasi_hotel" id="hotel_tidak"
-                                value="Tidak" {{ old('akomodasi_hotel') == 'Tidak' ? 'checked' : '' }}>
-                            <label class="form-check-label" for="hotel_tidak">
-                                Tidak, saya akan mengatur akomodasi sendiri
-                            </label>
-                        </div>
+                        <label for="akomodasi_hotel" class="form-label">Hotel Pilihan / Detail Akomodasi</label>
+                        <textarea class="form-control @error('akomodasi_hotel') is-invalid @enderror" id="akomodasi_hotel"
+                            name="akomodasi_hotel" rows="3"
+                            placeholder="Contoh: Hotel Grand Ternate, atau sebutkan jika tidak membutuhkan akomodasi">{{ old('akomodasi_hotel') }}</textarea>
+                        <div class="form-text">Sebutkan nama hotel pilihan Anda atau detail akomodasi lainnya. Jika tidak
+                            membutuhkan akomodasi, silakan tulis "Tidak membutuhkan akomodasi"</div>
                         @error('akomodasi_hotel')
-                            <div class="text-danger small mt-1">{{ $message }}</div>
+                            <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
 
