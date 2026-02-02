@@ -493,28 +493,10 @@
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4), 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; border: none;">
                                     <i class="bi bi-pencil-square me-2"></i>DAFTAR SEKARANG
                                 </a>
-                                {{-- <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox"
-                                    style="background: rgba(255,255,255,0.30); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: #fff; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(0,0,0,0.3), 0 5px 15px rgba(255,255,255,0.1); border: 2px solid rgba(255,255,255,0.5); transition: all 0.3s;">
-                                    <i class="bi bi-play-circle me-2"></i>TONTON VIDEO
-                                </a> --}}
+
                             </div>
 
-                            {{-- <!-- Quick Links -->
-                            <div data-aos="fade-up" data-aos-delay="800"
-                                style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
-                                <a href="#rangkaian"
-                                    style="color: #fff; text-decoration: none; font-size: 1rem; font-weight: 600; transition: all 0.3s; text-shadow: 2px 2px 6px rgba(0,0,0,0.5);">
-                                    <i class="bi bi-calendar-check me-2"></i>Rangkaian Kegiatan
-                                </a>
-                                <a href="#buku-panduan"
-                                    style="color: #fff; text-decoration: none; font-size: 1rem; font-weight: 600; transition: all 0.3s; text-shadow: 2px 2px 6px rgba(0,0,0,0.5);">
-                                    <i class="bi bi-download me-2"></i>Buku Panduan
-                                </a>
-                                <a href="#galeri"
-                                    style="color: #fff; text-decoration: none; font-size: 1rem; font-weight: 600; transition: all 0.3s; text-shadow: 2px 2px 6px rgba(0,0,0,0.5);">
-                                    <i class="bi bi-images me-2"></i>Galeri
-                                </a>
-                            </div> --}}
+
                         </div>
                     </div>
                 </div>
@@ -599,9 +581,7 @@
                     <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
                         <div class="content-wrapper">
                             <div class="highlight-box">
-                                <div class="highlight-icon">
-                                    <i class="bi bi-heart-pulse-fill"></i>
-                                </div>
+
                                 <div class="highlight-content">
                                     <h4>Ternate: Dari Kota Pusaka Menuju Kota Rempah</h4>
                                     <p>
