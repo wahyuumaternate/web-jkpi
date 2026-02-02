@@ -738,7 +738,8 @@
                                 <span class="purecounter" data-purecounter-start="0" data-purecounter-end="79"
                                     data-purecounter-duration="1">79</span>
                             </div>
-                            <div class="stat-label" style="font-size: 1.1rem; color: #666;">Kota Anggota JKPI</div>
+                            <div class="stat-label" style="font-size: 1.1rem; color: #666;">Kab/Kota Anggota JKPI
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
