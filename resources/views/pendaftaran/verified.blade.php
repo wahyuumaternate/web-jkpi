@@ -185,7 +185,7 @@
                     <i class="bi bi-info-circle me-2"></i>
                     <strong>Informasi Penting:</strong><br>
                     Kami akan mengirimkan informasi lebih lanjut mengenai jadwal, lokasi, dan persiapan acara melalui email
-                    Anda.
+                    atau WA Anda.
                     Mohon pantau email secara berkala.
                 </div>
 
