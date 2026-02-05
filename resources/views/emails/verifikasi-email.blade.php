@@ -151,7 +151,7 @@
 <body>
     <div class="email-container">
         <div class="email-header">
-            <h1>🏛️ RAKERNAS XII JKPI 2026</h1>
+            <h1>RAKERNAS XII JKPI 2026</h1>
             <p>Pusaka Ternate, Pusaka Dunia</p>
         </div>
 
@@ -195,7 +195,7 @@
         <div class="email-footer">
             <p><strong>Sekretariat Rakernas XII JKPI 2026</strong></p>
             <p>Pemerintah Kota Ternate, Maluku Utara</p>
-            <p>Email: info@jkpiternate2026.id | Telp: +62 921 123 456</p>
+            <p>Email: info@jkpi.ternatetourism.com</p>
 
             <div class="social-links">
                 <a href="#">Facebook</a> |
