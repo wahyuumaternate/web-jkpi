@@ -670,7 +670,7 @@
                 </div>
 
                 <div class="row gy-4">
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
@@ -681,7 +681,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
@@ -693,7 +693,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
@@ -703,7 +703,7 @@
                             <div class="stat-label" style="font-size: 1.1rem; color: #666;">Peserta Rakernas</div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
