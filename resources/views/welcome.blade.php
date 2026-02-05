@@ -50,7 +50,7 @@
     <meta name="twitter:creator" content="@jkpi_indonesia">
 
     {{-- Additional Meta Tags --}}
-    <meta name="theme-color" content="#1a56db">
+    <meta name="theme-color" content="#099aa7">
     <meta name="format-detection" content="telephone=no">
 
     {{-- Geo Meta Tags --}}
@@ -1326,8 +1326,11 @@
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/1.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="Galeri 1"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1336,8 +1339,11 @@
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/2.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/2.JPG') }}" alt="Galeri 2"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1346,8 +1352,11 @@
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/10.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/10.JPG') }}" alt="Galeri 3"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1356,8 +1365,11 @@
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/3.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/3.JPG') }}" alt="Galeri 4"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1366,8 +1378,11 @@
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/4.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Galeri 5"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1376,17 +1391,24 @@
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/5.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/5.JPG') }}" alt="Galeri 6"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
+
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/6.JPG') }}" class="glightbox">
-                                <img src="{{ asset('assets/img/JKPI-2025/6.JPG') }}" alt="Galeri 4"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('assets/img/JKPI-2025/6.JPG') }}" alt="Galeri 7"
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1394,9 +1416,12 @@
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/7.JPG') }}" class="glightbox">
-                                <img src="{{ asset('assets/img/JKPI-2025/7.JPG') }}" alt="Galeri 5"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('assets/img/JKPI-2025/7.JPG') }}" alt="Galeri 8"
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1404,9 +1429,12 @@
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/9.JPG') }}" class="glightbox">
-                                <img src="{{ asset('assets/img/JKPI-2025/9.JPG') }}" alt="Galeri 6"
-                                    class="img-fluid"
-                                    style="border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                                <img src="{{ asset('assets/img/JKPI-2025/9.JPG') }}" alt="Galeri 9"
+                                    class="img-fluid">
+                                <div class="gallery-overlay">
+                                    <i class="bi bi-zoom-in"></i>
+                                    <span>Lihat Foto</span>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -1416,6 +1444,145 @@
             </div>
 
         </section><!-- /Galeri Section -->
+
+        <style>
+            /* =================================
+   GALLERY STYLES
+================================= */
+            .gallery-item {
+                position: relative;
+                overflow: hidden;
+                border-radius: 10px;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .gallery-item:hover {
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                transform: translateY(-5px);
+            }
+
+            .gallery-item a {
+                display: block;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .gallery-item img {
+                width: 100%;
+                height: 300px;
+                object-fit: cover;
+                border-radius: 10px;
+                transition: transform 0.5s ease;
+            }
+
+            /* Zoom Effect on Hover */
+            .gallery-item:hover img {
+                transform: scale(1.15);
+            }
+
+            /* Overlay Effect */
+            .gallery-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg,
+                        #099aa73c 0%,
+                        #099aa73d 5%);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transition: opacity 0.4s ease;
+                border-radius: 10px;
+            }
+
+            .gallery-item:hover .gallery-overlay {
+                opacity: 1;
+            }
+
+            .gallery-overlay i {
+                font-size: 48px;
+                color: #ffffff;
+                margin-bottom: 10px;
+                animation: zoomPulse 1.5s ease-in-out infinite;
+            }
+
+            .gallery-overlay span {
+                font-size: 16px;
+                font-weight: 600;
+                color: #ffffff;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.3s ease 0.2s;
+            }
+
+            .gallery-item:hover .gallery-overlay span {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            /* Icon Animation */
+            @keyframes zoomPulse {
+
+                0%,
+                100% {
+                    transform: scale(1);
+                }
+
+                50% {
+                    transform: scale(1.1);
+                }
+            }
+
+            /* Responsive */
+            @media (max-width: 768px) {
+                .gallery-item img {
+                    height: 250px;
+                }
+
+                .gallery-overlay i {
+                    font-size: 36px;
+                }
+
+                .gallery-overlay span {
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 576px) {
+                .gallery-item img {
+                    height: 200px;
+                }
+            }
+
+            /* Additional Hover Effects - Border Animation */
+            .gallery-item::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 3px solid #099aa7;
+                border-radius: 10px;
+                opacity: 0;
+                transform: scale(0.95);
+                transition: all 0.3s ease;
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            .gallery-item:hover::before {
+                opacity: 1;
+                transform: scale(1);
+            }
+        </style>
 
         <!-- CTA Final Section -->
         <section id="cta-final" class="call-to-action section"
