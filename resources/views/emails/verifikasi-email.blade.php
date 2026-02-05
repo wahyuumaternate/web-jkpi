@@ -175,7 +175,7 @@
                 <p><strong>Nama:</strong> {{ $peserta->nama_lengkap }}</p>
                 <p><strong>Email:</strong> {{ $peserta->email }}</p>
                 <p><strong>Kode Registrasi:</strong> {{ $peserta->kode_registrasi }}</p>
-                <p><strong>Nomor WhatsApp:</strong> {{ $peserta->nomor_wa }}</p>
+                <p><strong>Nomor WhatsApp:</strong> {{ $peserta->nomor_telepon }}</p>
             </div>
 
             <div class="divider"></div>

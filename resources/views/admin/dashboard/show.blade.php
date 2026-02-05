@@ -505,29 +505,16 @@
                                 <div class="info-value">{{ $peserta->nama_lengkap }}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label">NIK</div>
-                                <div class="info-value"><code>{{ $peserta->nik }}</code></div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Jenis Kelamin</div>
-                                <div class="info-value">{{ $peserta->jenis_kelamin }}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Tempat, Tanggal Lahir</div>
-                                <div class="info-value">{{ $peserta->tempat_lahir }},
-                                    {{ $peserta->tanggal_lahir->format('d M Y') }}</div>
+                                <div class="info-label">Jabatan</div>
+                                <div class="info-value">{{ $peserta->jabatan }}</div>
                             </div>
                             <div class="info-item" style="grid-column: 1 / -1;">
-                                <div class="info-label">Alamat Lengkap</div>
-                                <div class="info-value">{{ $peserta->alamat }}</div>
+                                <div class="info-label">Instansi/Organisasi</div>
+                                <div class="info-value">{{ $peserta->instansi_organisasi }}</div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label">Provinsi</div>
-                                <div class="info-value">{{ $peserta->provinsi }}</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Kabupaten/Kota</div>
-                                <div class="info-value">{{ $peserta->kabupaten_kota }}</div>
+                                <div class="info-label">Kota/Kabupaten</div>
+                                <div class="info-value">{{ $peserta->kota_kabupaten }}</div>
                             </div>
                         </div>
                     </div>
@@ -557,43 +544,41 @@
                                 </div>
                             </div>
                             <div class="info-item">
-                                <div class="info-label">No. WhatsApp</div>
-                                <div class="info-value"><code>{{ $peserta->nomor_wa }}</code></div>
+                                <div class="info-label">No. Telepon</div>
+                                <div class="info-value"><code>{{ $peserta->nomor_telepon }}</code></div>
                             </div>
-                            @if ($peserta->nomor_telepon)
-                                <div class="info-item">
-                                    <div class="info-label">No. Telepon</div>
-                                    <div class="info-value"><code>{{ $peserta->nomor_telepon }}</code></div>
+                        </div>
+                    </div>
+
+                    <!-- Perjalanan & Akomodasi -->
+                    <div class="card-ultra yellow">
+                        <div class="card-header-ultra">
+                            <h3 class="card-title-ultra">
+                                <i class="bi bi-airplane-fill"></i>
+                                Perjalanan & Akomodasi
+                            </h3>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <div class="info-label">Tanggal Kedatangan</div>
+                                <div class="info-value">
+                                    {{ $peserta->tanggal_kedatangan ? $peserta->tanggal_kedatangan->format('d M Y') : '-' }}
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-label">Tanggal Kepulangan</div>
+                                <div class="info-value">
+                                    {{ $peserta->tanggal_kepulangan ? $peserta->tanggal_kepulangan->format('d M Y') : '-' }}
+                                </div>
+                            </div>
+                            @if ($peserta->akomodasi_hotel)
+                                <div class="info-item" style="grid-column: 1 / -1;">
+                                    <div class="info-label">Akomodasi Hotel / Detail</div>
+                                    <div class="info-value">{{ $peserta->akomodasi_hotel }}</div>
                                 </div>
                             @endif
                         </div>
                     </div>
-
-                    <!-- Pekerjaan -->
-                    @if ($peserta->instansi || $peserta->jabatan)
-                        <div class="card-ultra yellow">
-                            <div class="card-header-ultra">
-                                <h3 class="card-title-ultra">
-                                    <i class="bi bi-briefcase-fill"></i>
-                                    Informasi Pekerjaan
-                                </h3>
-                            </div>
-                            <div class="info-row">
-                                @if ($peserta->instansi)
-                                    <div class="info-item">
-                                        <div class="info-label">Instansi</div>
-                                        <div class="info-value">{{ $peserta->instansi }}</div>
-                                    </div>
-                                @endif
-                                @if ($peserta->jabatan)
-                                    <div class="info-item">
-                                        <div class="info-label">Jabatan</div>
-                                        <div class="info-value">{{ $peserta->jabatan }}</div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    @endif
                 </div>
 
                 <!-- Sidebar -->
@@ -614,18 +599,7 @@
                                         <img src="{{ Storage::url($peserta->foto) }}" alt="Foto">
                                     </div>
                                 </div>
-                            @endif
-
-                            @if ($peserta->ktp)
-                                <div>
-                                    <div class="label-dark mb-2">Foto KTP</div>
-                                    <div class="image-preview">
-                                        <img src="{{ Storage::url($peserta->ktp) }}" alt="KTP">
-                                    </div>
-                                </div>
-                            @endif
-
-                            @if (!$peserta->foto && !$peserta->ktp)
+                            @else
                                 <div class="empty-state">
                                     <i class="bi bi-file-earmark-x"></i>
                                     <p class="mb-0">Tidak ada dokumen</p>
@@ -643,20 +617,6 @@
                             </h3>
                         </div>
                         <div class="p-4">
-                            <div class="info-item mb-3">
-                                <div class="info-label">Anggota JKPI</div>
-                                <div class="info-value">
-                                    @if ($peserta->is_anggota_jkpi)
-                                        <span class="badge-ultra badge-success">
-                                            <i class="bi bi-check-circle-fill"></i>Ya
-                                        </span>
-                                    @else
-                                        <span class="badge-ultra badge-gray">
-                                            <i class="bi bi-x-circle-fill"></i>Tidak
-                                        </span>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="info-item mb-3">
                                 <div class="info-label">Tanggal Daftar</div>
                                 <div class="info-value">{{ $peserta->created_at->format('d M Y, H:i') }}</div>

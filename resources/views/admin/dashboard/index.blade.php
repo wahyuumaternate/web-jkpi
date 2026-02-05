@@ -610,10 +610,10 @@
 
                 <div class="stat-card-ultra purple">
                     <div class="stat-icon-ultra">
-                        <i class="bi bi-person-badge-fill"></i>
+                        <i class="bi bi-building-fill"></i>
                     </div>
-                    <div class="stat-value-ultra">{{ $stats['anggota_jkpi'] }}</div>
-                    <div class="stat-label-ultra">Anggota JKPI</div>
+                    <div class="stat-value-ultra">{{ $stats['butuh_hotel'] }}</div>
+                    <div class="stat-label-ultra">Butuh Hotel</div>
                 </div>
             </div>
 
@@ -673,9 +673,9 @@
                             </a>
                         </div>
                         <div class="col-6 col-md-3">
-                            <a href="{{ url('/admin/dashboard/export/by-provinsi') }}"
+                            <a href="{{ url('/admin/dashboard/export/by-kabupaten-kota') }}"
                                 class="btn-ultra btn-cyan w-100">
-                                <span><i class="bi bi-map-fill me-2"></i>By Provinsi</span>
+                                <span><i class="bi bi-map-fill me-2"></i>By Kab/Kota</span>
                             </a>
                         </div>
                     </div>
@@ -699,7 +699,7 @@
                                 </label>
                                 <input type="text" class="input-dark" name="search"
                                     value="{{ request('search') }}"
-                                    placeholder="Nama, Email, NIK, atau Kode Registrasi">
+                                    placeholder="Nama, Email, Kode Registrasi, atau Kota/Kabupaten">
                             </div>
                             <div class="col-md-4">
                                 <label class="label-dark">
@@ -743,8 +743,8 @@
                                 <th style="width: 60px; text-align: center;">No</th>
                                 <th style="width: 130px;">Kode</th>
                                 <th>Nama / Email</th>
-                                <th style="width: 130px;">No. WA</th>
-                                <th style="width: 160px;">Asal</th>
+                                <th style="width: 130px;">No. Telepon</th>
+                                <th style="width: 160px;">Kota/Kabupaten</th>
                                 <th style="width: 120px; text-align: center;">Status</th>
                                 <th style="width: 100px; text-align: center;">Tanggal</th>
                                 <th style="width: 140px; text-align: center;">Aksi</th>
@@ -765,10 +765,10 @@
                                             </span>
                                         @endif
                                     </td>
-                                    <td>{{ $p->nomor_wa }}</td>
+                                    <td>{{ $p->nomor_telepon }}</td>
                                     <td>
-                                        <div style="font-weight: 600;">{{ $p->kabupaten_kota }}</div>
-                                        <small style="color: rgba(255, 255, 255, 0.5);">{{ $p->provinsi }}</small>
+                                        <div style="font-weight: 600;">{{ $p->kota_kabupaten }}</div>
+                                        <small style="color: rgba(255, 255, 255, 0.5);">{{ $p->jabatan }}</small>
                                     </td>
                                     <td style="text-align: center;">
                                         @if ($p->status === 'verified')

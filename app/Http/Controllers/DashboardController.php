@@ -26,8 +26,8 @@ class DashboardController extends Controller
             $query->where(function ($q) use ($search) {
                 $q->where('nama_lengkap', 'like', "%{$search}%")
                     ->orWhere('email', 'like', "%{$search}%")
-                    ->orWhere('nik', 'like', "%{$search}%")
-                    ->orWhere('kode_registrasi', 'like', "%{$search}%");
+                    ->orWhere('kode_registrasi', 'like', "%{$search}%")
+                    ->orWhere('kota_kabupaten', 'like', "%{$search}%");
             });
         }
 
@@ -45,7 +45,7 @@ class DashboardController extends Controller
             'unverified' => Peserta::where('status', 'unverified')->count(),
             'cancelled' => Peserta::where('status', 'cancelled')->count(),
             'email_verified' => Peserta::whereNotNull('email_verified_at')->count(),
-            'anggota_jkpi' => Peserta::where('is_anggota_jkpi', true)->count(),
+            'butuh_hotel' => Peserta::where('akomodasi_hotel', '!=', '')->whereNotNull('akomodasi_hotel')->count(),
         ];
 
         return view('admin.dashboard.index', compact('peserta', 'stats'));
@@ -81,9 +81,6 @@ class DashboardController extends Controller
             // Delete files
             if ($peserta->foto) {
                 Storage::disk('public')->delete($peserta->foto);
-            }
-            if ($peserta->ktp) {
-                Storage::disk('public')->delete($peserta->ktp);
             }
 
             $peserta->delete();
@@ -157,31 +154,24 @@ class DashboardController extends Controller
                 'B' => 'Status',
                 'C' => 'Kode Registrasi',
                 'D' => 'Nama Lengkap',
-                'E' => 'NIK',
-                'F' => 'Jenis Kelamin',
+                'E' => 'Jabatan',
+                'F' => 'Instansi/Organisasi',
                 'G' => 'Email',
                 'H' => 'Email Verified',
-                'I' => 'No. WhatsApp',
-                'J' => 'No. Telepon',
-                'K' => 'Provinsi',
-                'L' => 'Kabupaten/Kota',
-                'M' => 'Kecamatan',
-                'N' => 'Kelurahan',
-                'O' => 'Instansi',
-                'P' => 'Jabatan',
-                'Q' => 'Bidang',
-                'R' => 'Anggota JKPI',
-                'S' => 'Akomodasi',
-                'T' => 'Kebutuhan Khusus',
-                'U' => 'Tanggal Daftar',
-                'V' => 'Tanggal Update',
+                'I' => 'No. Telepon',
+                'J' => 'Kota/Kabupaten',
+                'K' => 'Tanggal Kedatangan',
+                'L' => 'Tanggal Kepulangan',
+                'M' => 'Akomodasi Hotel',
+                'N' => 'Tanggal Daftar',
+                'O' => 'Tanggal Update',
             ];
 
             $row = 1;
             foreach ($headers as $col => $header) {
                 $sheet->setCellValue("{$col}{$row}", $header);
             }
-            $sheet->getStyle("A{$row}:V{$row}")->applyFromArray($headerStyle);
+            $sheet->getStyle("A{$row}:O{$row}")->applyFromArray($headerStyle);
 
             // Data
             $row = 2;
@@ -190,30 +180,23 @@ class DashboardController extends Controller
                 $sheet->setCellValue("B{$row}", strtoupper($item->status));
                 $sheet->setCellValue("C{$row}", $item->kode_registrasi);
                 $sheet->setCellValue("D{$row}", $item->nama_lengkap);
-                $sheet->setCellValueExplicit("E{$row}", $item->nik, DataType::TYPE_STRING);
-                $sheet->setCellValue("F{$row}", $item->jenis_kelamin);
+                $sheet->setCellValue("E{$row}", $item->jabatan);
+                $sheet->setCellValue("F{$row}", $item->instansi_organisasi);
                 $sheet->setCellValue("G{$row}", $item->email);
                 $sheet->setCellValue("H{$row}", $item->email_verified_at ? 'Ya' : 'Tidak');
-                $sheet->setCellValue("I{$row}", $item->nomor_wa);
-                $sheet->setCellValue("J{$row}", $item->nomor_telepon ?? '-');
-                $sheet->setCellValue("K{$row}", $item->provinsi);
-                $sheet->setCellValue("L{$row}", $item->kabupaten_kota);
-                $sheet->setCellValue("M{$row}", $item->kecamatan ?? '-');
-                $sheet->setCellValue("N{$row}", $item->kelurahan ?? '-');
-                $sheet->setCellValue("O{$row}", $item->instansi ?? '-');
-                $sheet->setCellValue("P{$row}", $item->jabatan ?? '-');
-                $sheet->setCellValue("Q{$row}", $item->bidang ?? '-');
-                $sheet->setCellValue("R{$row}", $item->is_anggota_jkpi ? 'Ya' : 'Tidak');
-                $sheet->setCellValue("S{$row}", $item->akomodasi ?? '-');
-                $sheet->setCellValue("T{$row}", $item->kebutuhan_khusus ?? '-');
-                $sheet->setCellValue("U{$row}", $item->created_at->format('d/m/Y H:i'));
-                $sheet->setCellValue("V{$row}", $item->updated_at->format('d/m/Y H:i'));
+                $sheet->setCellValue("I{$row}", $item->nomor_telepon);
+                $sheet->setCellValue("J{$row}", $item->kota_kabupaten);
+                $sheet->setCellValue("K{$row}", $item->tanggal_kedatangan ? $item->tanggal_kedatangan->format('d/m/Y') : '-');
+                $sheet->setCellValue("L{$row}", $item->tanggal_kepulangan ? $item->tanggal_kepulangan->format('d/m/Y') : '-');
+                $sheet->setCellValue("M{$row}", $item->akomodasi_hotel ?? '-');
+                $sheet->setCellValue("N{$row}", $item->created_at->format('d/m/Y H:i'));
+                $sheet->setCellValue("O{$row}", $item->updated_at->format('d/m/Y H:i'));
                 $row++;
             }
 
-            // Footer Recap - FIXED: Gunakan nilai langsung, bukan formula
+            // Footer Recap
             if ($data->count() > 0) {
-                $row += 2; // Skip 2 rows
+                $row += 2;
 
                 $sheet->setCellValue("A{$row}", 'REKAP DATA');
                 $sheet->mergeCells("A{$row}:B{$row}");
@@ -227,14 +210,10 @@ class DashboardController extends Controller
 
                 $row++;
 
-                // Hitung semua nilai SEBELUM memasukkan ke Excel
                 $totalPeserta = $data->count();
-                $lakiCount = $data->where('jenis_kelamin', 'Laki-laki')->count();
-                $perempuanCount = $data->where('jenis_kelamin', 'Perempuan')->count();
-                $anggotaCount = $data->where('is_anggota_jkpi', true)->count();
-                $akomodasiCount = $data
+                $butuhHotelCount = $data
                     ->filter(function ($item) {
-                        return !empty($item->akomodasi) && $item->akomodasi !== '-';
+                        return !empty($item->akomodasi_hotel) && $item->akomodasi_hotel !== '-';
                     })
                     ->count();
 
@@ -243,27 +222,12 @@ class DashboardController extends Controller
                 $sheet->setCellValue("B{$row}", $totalPeserta);
                 $row++;
 
-                // Laki-laki
-                $sheet->setCellValue("A{$row}", 'Laki-laki');
-                $sheet->setCellValue("B{$row}", $lakiCount);
-                $row++;
-
-                // Perempuan
-                $sheet->setCellValue("A{$row}", 'Perempuan');
-                $sheet->setCellValue("B{$row}", $perempuanCount);
-                $row++;
-
-                // Anggota JKPI
-                $sheet->setCellValue("A{$row}", 'Anggota JKPI');
-                $sheet->setCellValue("B{$row}", $anggotaCount);
-                $row++;
-
-                // Butuh Akomodasi
-                $sheet->setCellValue("A{$row}", 'Butuh Akomodasi');
-                $sheet->setCellValue("B{$row}", $akomodasiCount);
+                // Butuh Akomodasi Hotel
+                $sheet->setCellValue("A{$row}", 'Butuh Akomodasi Hotel');
+                $sheet->setCellValue("B{$row}", $butuhHotelCount);
 
                 // Style untuk recap
-                $recapStartRow = $row - 5;
+                $recapStartRow = $row - 1;
                 $sheet->getStyle("A{$recapStartRow}:B{$row}")->applyFromArray([
                     'font' => ['bold' => true],
                     'borders' => [
@@ -276,7 +240,7 @@ class DashboardController extends Controller
             }
 
             // Auto size columns
-            foreach (range('A', 'V') as $col) {
+            foreach (range('A', 'O') as $col) {
                 $sheet->getColumnDimension($col)->setAutoSize(true);
             }
 
@@ -286,7 +250,7 @@ class DashboardController extends Controller
             // Border all data cells
             if ($data->count() > 0) {
                 $lastDataRow = 1 + $data->count();
-                $sheet->getStyle("A1:V{$lastDataRow}")->applyFromArray([
+                $sheet->getStyle("A1:O{$lastDataRow}")->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
@@ -347,23 +311,14 @@ class DashboardController extends Controller
             $sheet->setCellValue("B{$row}", Peserta::where('status', 'cancelled')->count());
             $row += 2;
 
-            // By Gender
-            $sheet->setCellValue("A{$row}", 'Laki-laki');
-            $sheet->setCellValue("B{$row}", Peserta::where('jenis_kelamin', 'Laki-laki')->count());
-            $row++;
-
-            $sheet->setCellValue("A{$row}", 'Perempuan');
-            $sheet->setCellValue("B{$row}", Peserta::where('jenis_kelamin', 'Perempuan')->count());
-            $row += 2;
-
             // Email Verified
             $sheet->setCellValue("A{$row}", 'Email Verified');
             $sheet->setCellValue("B{$row}", Peserta::whereNotNull('email_verified_at')->count());
             $row++;
 
-            // Anggota JKPI
-            $sheet->setCellValue("A{$row}", 'Anggota JKPI');
-            $sheet->setCellValue("B{$row}", Peserta::where('is_anggota_jkpi', true)->count());
+            // Butuh Akomodasi Hotel
+            $sheet->setCellValue("A{$row}", 'Butuh Akomodasi Hotel');
+            $sheet->setCellValue("B{$row}", Peserta::where('akomodasi_hotel', '!=', '')->whereNotNull('akomodasi_hotel')->count());
 
             // Auto size
             $sheet->getColumnDimension('A')->setAutoSize(true);
@@ -384,21 +339,21 @@ class DashboardController extends Controller
         }
     }
 
-    public function exportByProvinsi()
+    public function exportByKabupatenKota()
     {
         try {
             $spreadsheet = new Spreadsheet();
 
-            // Get all provinces
-            $provinces = Peserta::select('provinsi')->distinct()->orderBy('provinsi')->pluck('provinsi');
+            // Get all kabupaten/kota
+            $kabupatenKota = Peserta::select('kota_kabupaten')->distinct()->orderBy('kota_kabupaten')->pluck('kota_kabupaten');
 
-            foreach ($provinces as $index => $provinsi) {
+            foreach ($kabupatenKota as $index => $kota) {
                 if ($index > 0) {
                     $spreadsheet->createSheet();
                 }
 
                 $sheet = $spreadsheet->setActiveSheetIndex($index);
-                $sheetTitle = substr($provinsi, 0, 31); // Max 31 chars for sheet name
+                $sheetTitle = substr($kota, 0, 31); // Max 31 chars for sheet name
                 $sheet->setTitle($sheetTitle);
 
                 // Header
@@ -413,25 +368,26 @@ class DashboardController extends Controller
                     ],
                 ];
 
-                $headers = ['No', 'Nama', 'Email', 'No. WA', 'Kabupaten/Kota', 'Status'];
+                $headers = ['No', 'Nama', 'Jabatan', 'Instansi', 'Email', 'No. Telepon', 'Status'];
                 $sheet->fromArray($headers, null, 'A1');
-                $sheet->getStyle('A1:F1')->applyFromArray($headerStyle);
+                $sheet->getStyle('A1:G1')->applyFromArray($headerStyle);
 
                 // Data
-                $data = Peserta::where('provinsi', $provinsi)->get();
+                $data = Peserta::where('kota_kabupaten', $kota)->get();
                 $row = 2;
                 foreach ($data as $no => $item) {
                     $sheet->setCellValue("A{$row}", $no + 1);
                     $sheet->setCellValue("B{$row}", $item->nama_lengkap);
-                    $sheet->setCellValue("C{$row}", $item->email);
-                    $sheet->setCellValue("D{$row}", $item->nomor_wa);
-                    $sheet->setCellValue("E{$row}", $item->kabupaten_kota);
-                    $sheet->setCellValue("F{$row}", strtoupper($item->status));
+                    $sheet->setCellValue("C{$row}", $item->jabatan);
+                    $sheet->setCellValue("D{$row}", $item->instansi_organisasi);
+                    $sheet->setCellValue("E{$row}", $item->email);
+                    $sheet->setCellValue("F{$row}", $item->nomor_telepon);
+                    $sheet->setCellValue("G{$row}", strtoupper($item->status));
                     $row++;
                 }
 
                 // Auto size
-                foreach (range('A', 'F') as $col) {
+                foreach (range('A', 'G') as $col) {
                     $sheet->getColumnDimension($col)->setAutoSize(true);
                 }
             }
@@ -440,16 +396,16 @@ class DashboardController extends Controller
 
             // Generate file
             $writer = new Xlsx($spreadsheet);
-            $fileName = 'Peserta_By_Provinsi_' . date('Ymd_His') . '.xlsx';
+            $fileName = 'Peserta_By_Kabupaten_Kota_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
 
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
-            Log::error('Export By Provinsi Error: ' . $e->getMessage());
+            Log::error('Export By Kabupaten/Kota Error: ' . $e->getMessage());
             return redirect()
                 ->route('admin.dashboard')
-                ->with('error', 'Error export by provinsi: ' . $e->getMessage());
+                ->with('error', 'Error export by kabupaten/kota: ' . $e->getMessage());
         }
     }
 }

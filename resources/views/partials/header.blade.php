@@ -10,6 +10,12 @@
             <a href="{{ url('/') }}" class="logo d-flex align-items-center">
                 <img src="{{ asset('logo_kota.png') }}" alt="Kota Ternate">
             </a>
+            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+                <img src="{{ asset('logo_jkpi_2026.png') }}" alt="Kota Ternate">
+            </a>
+            <a href="{{ url('/') }}" class="logo d-flex align-items-center">
+                <img src="{{ asset('/assets/img/LogoKotaRempah.png') }}" alt="Kota Ternate">
+            </a>
         </div>
 
         <!-- Navigation -->
@@ -19,7 +25,7 @@
                 <li><a href="{{ url('/') }}#tentang">Tentang</a></li>
                 <li><a href="{{ url('/') }}#tujuan">Tujuan</a></li>
                 <li><a href="{{ url('/') }}#rangkaian">Rangkaian Kegiatan</a></li>
-                <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li>
+                {{-- <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li> --}}
                 <li><a href="{{ url('/') }}#sebaran-lokasi">Sebaran Lokasi</a></li>
                 <li><a href="{{ url('/') }}#daftar-hotel">Daftar Hotel</a></li>
                 <li><a href="{{ url('/') }}#galeri">Galeri</a></li>

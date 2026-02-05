@@ -535,7 +535,7 @@
                             melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak berdiri, JKPI
                             berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah daerah dalam
                             pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI telah
-                            beranggotakan 75 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
+                            beranggotakan 79 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
                             komitmen daerah dalam menjaga warisan pusaka sebagai identitas, sumber nilai, dan penggerak
                             pembangunan berkelanjutan.
                         </p>
@@ -550,68 +550,7 @@
                     </div>
                 </div>
 
-                {{-- <div class="row align-items-center gy-5">
-                    <div class="col-lg-7" data-aos="fade-right" data-aos-delay="200">
-                        <div class="image-grid">
-                            <div class="primary-image">
-                                <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="JKPI 2026"
-                                    class="img-fluid">
-                            </div>
-                            <div class="secondary-images">
-                                <div class="small-image">
-                                    <img src="{{ asset('assets/img/JKPI-2025/2.JPG') }}" alt="Diskusi Pelestarian"
-                                        class="img-fluid">
-                                </div>
-                                <div class="small-image">
-                                    <img src="{{ asset('assets/img/JKPI-2025/3.JPG') }}" alt="Workshop Budaya"
-                                        class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-5" data-aos="fade-left" data-aos-delay="300">
-                        <div class="content-wrapper">
-                            <div class="highlight-box">
-
-                                <div class="highlight-content">
-                                    <h4>Ternate: Dari Kota Pusaka Menuju Kota Rempah</h4>
-                                    <p>
-                                        Pemerintah Kota Ternate resmi menerima Pataka JKPI dari Wali Kota Yogyakarta
-                                        sebagai simbol pergantian tuan rumah Rakernas JKPI 2026.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="feature-list">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="bi bi-check-circle-fill"></i>
-                                    </div>
-                                    <div class="feature-text">
-                                        Pelestarian warisan Kesultanan Ternate dan rempah-rempah
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="bi bi-check-circle-fill"></i>
-                                    </div>
-                                    <div class="feature-text">
-                                        Simposium Pulau-Pulau Penghasil Rempah Internasional
-                                    </div>
-                                </div>
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <i class="bi bi-check-circle-fill"></i>
-                                    </div>
-                                    <div class="feature-text">
-                                        Kolaborasi Ternate, Tidore, dan Halmahera Barat
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
 
             </div>
 
@@ -724,7 +663,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Jaringan Kota Pusaka Indonesia</h2>
-                        <p class="lead-description">JKPI menghubungkan 75+ kabupaten dan kota di seluruh Indonesia yang
+                        <p class="lead-description">JKPI menghubungkan 79+ kabupaten dan kota di seluruh Indonesia yang
                             memiliki komitmen kuat dalam pelestarian warisan budaya dan pengembangan kota berbasis
                             pusaka.</p>
                     </div>
@@ -735,10 +674,21 @@
                         <div class="stat-item text-center">
                             <div class="stat-number"
                                 style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
-                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="75"
-                                    data-purecounter-duration="1">75</span>
+                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="79"
+                                    data-purecounter-duration="1">79</span>
                             </div>
                             <div class="stat-label" style="font-size: 1.1rem; color: #666;">Kab/Kota Anggota JKPI
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-item text-center">
+                            <div class="stat-number"
+                                style="font-size: 3rem; font-weight: 800; color: #099aa7; margin-bottom: 10px;">
+                                <span class="purecounter" data-purecounter-start="0" data-purecounter-end="38"
+                                    data-purecounter-duration="1">38</span>
+                            </div>
+                            <div class="stat-label" style="font-size: 1.1rem; color: #666;">Provinsi
                             </div>
                         </div>
                     </div>
@@ -1369,8 +1319,8 @@
                                 style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
                                 <div class="stat-item">
                                     <div class="stat-number"
-                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">75+</div>
-                                    <div class="stat-label" style="font-size: 1.1rem; opacity: 0.9;">Kota Anggota
+                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">79+</div>
+                                    <div class="stat-label" style="font-size: 1.1rem; opacity: 0.9;">Kab/Kota Anggota
                                     </div>
                                 </div>
                                 <div class="stat-item">
