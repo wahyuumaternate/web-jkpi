@@ -34,7 +34,7 @@
         </nav>
 
         <!-- CTA -->
-        <a class="btn-getstarted" href="{{ url('/registrasi') }}">Registrasi</a>
+        <a class="btn-getstarted d-none d-md-block" href="{{ url('/registrasi') }}">Registrasi</a>
 
     </div>
 </header>

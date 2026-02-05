@@ -337,6 +337,9 @@
                                     <option value="Kota Pangkal Pinang"
                                         {{ old('kota_kabupaten') == 'Kota Pangkal Pinang' ? 'selected' : '' }}>Kota Pangkal
                                         Pinang</option>
+                                    <option value="Kab. Pulang Pisau"
+                                        {{ old('kota_kabupaten') == 'Kab. Pulang Pisau' ? 'selected' : '' }}>Kab. Pulang
+                                        Pisau</option>
                                     <option value="Kota Pekalongan"
                                         {{ old('kota_kabupaten') == 'Kota Pekalongan' ? 'selected' : '' }}>Kota Pekalongan
                                     </option>
@@ -464,11 +467,6 @@
                                     <option value="Kota Bandung"
                                         {{ old('kota_kabupaten') == 'Kota Bandung' ? 'selected' : '' }}>Kota Bandung
                                     </option>
-                                </optgroup>
-                                <optgroup label="Peninjau">
-                                    <option value="Kab. Tranggalek"
-                                        {{ old('kota_kabupaten') == 'Kab. Tranggalek' ? 'selected' : '' }}>Kab. Tranggalek
-                                    </option>
                                     <option value="Kota Magelang"
                                         {{ old('kota_kabupaten') == 'Kota Magelang' ? 'selected' : '' }}>Kota Magelang
                                     </option>
@@ -477,6 +475,12 @@
                                         Utara</option>
                                     <option value="Kab. Sleman"
                                         {{ old('kota_kabupaten') == 'Kab. Sleman' ? 'selected' : '' }}>Kab. Sleman</option>
+                                </optgroup>
+                                <optgroup label="Peninjau">
+                                    <option value="Kab. Tranggalek"
+                                        {{ old('kota_kabupaten') == 'Kab. Tranggalek' ? 'selected' : '' }}>Kab. Tranggalek
+                                    </option>
+
                                     <option value="Kab. Bojonegoro"
                                         {{ old('kota_kabupaten') == 'Kab. Bojonegoro' ? 'selected' : '' }}>Kab. Bojonegoro
                                     </option>
