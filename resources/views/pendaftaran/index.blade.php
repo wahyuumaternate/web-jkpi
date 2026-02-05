@@ -497,8 +497,11 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="nomor_telepon" class="form-label">Nomor Telepon <span
-                                    class="required">*</span></label>
+                            <label for="nomor_telepon" class="form-label">
+                                Nomor Telepon <span class="required">*</span>
+                                <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="Gunakan nomor WhatsApp yang aktif untuk menerima pemberitahuan"></i>
+                            </label>
                             <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror"
                                 id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}"
                                 placeholder="08xxxxxxxxxx" required>
@@ -508,7 +511,11 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="email" class="form-label">Email <span class="required">*</span></label>
+                            <label for="email" class="form-label">
+                                Email <span class="required">*</span>
+                                <i class="bi bi-info-circle" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    title="Gunakan email yang aktif untuk verifikasi dan notifikasi"></i>
+                            </label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror"
                                 id="email" name="email" value="{{ old('email') }}" required>
                             <div class="form-text">Email akan digunakan untuk verifikasi</div>
@@ -517,6 +524,7 @@
                             @enderror
                         </div>
                     </div>
+
 
                     <!-- Upload Foto Profil -->
                     <h3 class="form-section-title"><i class="bi bi-camera-fill me-2"></i>Upload Foto Profil</h3>
@@ -657,6 +665,14 @@
                     block: 'center'
                 });
             }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
         });
     </script>
 @endpush
