@@ -691,7 +691,7 @@
 
             <div class="container section-title" data-aos="fade-up">
                 <h2>Tujuan Penyelenggaraan JKPI</h2>
-                <p>Rakernas XII JKPI 2026 diselenggarakan dengan berbagai tujuan strategis untuk kemajuan pelestarian
+                <p>Rakernas JKPI XII 2026 diselenggarakan dengan berbagai tujuan strategis untuk kemajuan pelestarian
                     pusaka Indonesia</p>
             </div>
 
