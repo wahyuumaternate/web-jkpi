@@ -953,10 +953,10 @@
                                 aria-labelledby="pre-event-tab">
                                 <div class="event-list">
                                     <div class="event-item">
-                                        <h4 class="event-name">Festival Sastra Yogyakarta</h4>
-                                        <p class="event-datetime">2 - 4 Agustus 2025 | 09:00-17:00 WIT</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Gedung Kesenian
-                                            Yogyakarta</p>
+                                        <h4 class="event-name">Pemeran Lukisan dan Surat Wallace</h4>
+                                        <p class="event-datetime">23 - 28 Agustus 2026 | 09:00-17:00 WIT</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
+                                            Ternate</p>
                                     </div>
                                 </div>
                             </div>
