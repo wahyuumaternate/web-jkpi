@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ID Card JKPI 2026</title>
+    <style>
+        @page {
+            margin: 0;
+            size: 85.6mm 136mm portrait;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .card {
+            width: 85.6mm;
+            height: 136mm;
+            background: white;
+            position: relative;
+            page-break-after: always;
+        }
+
+        /* ========== HALAMAN DEPAN ========== */
+        .front {
+            background: linear-gradient(to bottom, #8B1518 0%, #8B1518 35mm, white 35mm);
+        }
+
+        .header {
+            text-align: center;
+            padding: 8mm 0;
+            color: white;
+        }
+
+        .event-title {
+            font-size: 11pt;
+            font-weight: bold;
+            margin-bottom: 2mm;
+            letter-spacing: 2pt;
+        }
+
+        .event-name {
+            font-size: 8pt;
+            line-height: 1.4;
+            margin-bottom: 1mm;
+        }
+
+        .year {
+            font-size: 14pt;
+            font-weight: bold;
+        }
+
+        .photo-section {
+            text-align: center;
+            margin-top: -15mm;
+            position: relative;
+            z-index: 10;
+        }
+
+        .photo-frame {
+            width: 40mm;
+            height: 40mm;
+            border-radius: 50%;
+            border: 4mm solid white;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #f0f0f0;
+            box-shadow: 0 2mm 8mm rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .initial {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48pt;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #DC2626, #8B1518);
+        }
+
+        .info {
+            text-align: center;
+            padding: 6mm 8mm;
+        }
+
+        .name {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #1a1a1a;
+            margin-bottom: 2mm;
+        }
+
+        .role {
+            font-size: 10pt;
+            color: #8B1518;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1pt;
+            margin-bottom: 4mm;
+        }
+
+        .reg-code {
+            font-size: 9pt;
+            color: #666;
+            margin-bottom: 1mm;
+        }
+
+        .reg-number {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #8B1518;
+            font-family: 'Courier New', monospace;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 6mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 7pt;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .footer-divider {
+            width: 30mm;
+            height: 1px;
+            background: #ddd;
+            margin: 2mm auto;
+        }
+
+        /* ========== HALAMAN BELAKANG ========== */
+        .back {
+            background: #f9f9f9;
+        }
+
+        .back-header {
+            background: #8B1518;
+            text-align: center;
+            padding: 8mm 0;
+            color: white;
+        }
+
+        .qr-section {
+            text-align: center;
+            padding: 12mm 0;
+        }
+
+        .qr-label {
+            font-size: 9pt;
+            color: #666;
+            margin-bottom: 4mm;
+        }
+
+        .qr-frame {
+            background: white;
+            padding: 6mm;
+            border-radius: 4mm;
+            display: inline-block;
+            box-shadow: 0 2mm 6mm rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-frame img {
+            width: 50mm;
+            height: 50mm;
+            display: block;
+        }
+
+        .instructions {
+            padding: 6mm 10mm;
+            text-align: center;
+        }
+
+        .instructions-title {
+            font-size: 9pt;
+            font-weight: bold;
+            color: #8B1518;
+            margin-bottom: 3mm;
+        }
+
+        .instructions-text {
+            font-size: 7pt;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            position: absolute;
+            bottom: 6mm;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 7pt;
+            color: #666;
+        }
+
+        .contact-item {
+            margin: 1mm 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- HALAMAN DEPAN -->
+    <div class="card front">
+        <div class="header">
+            <div class="event-title">JKPI</div>
+            <div class="event-name">
+                Rakernas Jaringan<br>
+                Kota Pusaka Indonesia
+            </div>
+            <div class="year">2026</div>
+        </div>
+
+        <div class="photo-section">
+            <div class="photo-frame">
+                <!-- Jika ada foto akan tampil di sini, jika tidak akan tampil inisial -->
+                <div class="initial">W</div>
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="name">WAHYU ANGGOTA</div>
+            <div class="role">Peserta</div>
+            <div class="reg-code">Kode Registrasi</div>
+            <div class="reg-number">JKPI-2026-0001</div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-divider"></div>
+            jkpi.ternatetourism.com<br>
+            +123 456 7890
+        </div>
+    </div>
+
+    <!-- HALAMAN BELAKANG -->
+    <div class="card back">
+        <div class="back-header">
+            <div class="event-title">JKPI</div>
+            <div class="event-name">
+                Rakernas Jaringan<br>
+                Kota Pusaka Indonesia
+            </div>
+            <div class="year">2026</div>
+        </div>
+
+        <div class="qr-section">
+            <div class="qr-label">Scan untuk Verifikasi</div>
+            <div class="qr-frame">
+                <!-- QR Code akan tampil di sini -->
+                <svg width="50mm" height="50mm" viewBox="0 0 200 200">
+                    <rect width="200" height="200" fill="white" />
+                    <rect x="20" y="20" width="60" height="60" fill="black" />
+                    <rect x="30" y="30" width="40" height="40" fill="white" />
+                    <rect x="120" y="20" width="60" height="60" fill="black" />
+                    <rect x="130" y="30" width="40" height="40" fill="white" />
+                    <rect x="20" y="120" width="60" height="60" fill="black" />
+                    <rect x="30" y="130" width="40" height="40" fill="white" />
+                    <rect x="100" y="100" width="20" height="20" fill="black" />
+                    <rect x="140" y="100" width="20" height="20" fill="black" />
+                    <rect x="100" y="140" width="20" height="20" fill="black" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <div class="instructions-title">Petunjuk Penggunaan</div>
+            <div class="instructions-text">
+                Tunjukkan ID Card ini saat registrasi ulang.<br>
+                Scan QR Code untuk verifikasi identitas.<br>
+                Harap dibawa selama acara berlangsung.
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-item">Email: info@jkpi.ternatetourism.com</div>
+            <div class="contact-item">Website: jkpi.ternatetourism.com</div>
+            <div class="contact-item">Telepon: +123 456 7890</div>
+        </div>
+    </div>
+</body>
+
+</html>

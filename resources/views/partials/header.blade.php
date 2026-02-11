@@ -31,7 +31,7 @@
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
                         <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li>
-                        <li><a href="{{ url('/') }}#daftar-hotel">Daftar Hotel</a></li>
+                        <li><a href="{{ url('/hotel') }}">Daftar Hotel</a></li>
                         <li><a href="{{ url('/') }}#appointment">Kontak</a></li>
                     </ul>
                 </li>
