@@ -799,7 +799,7 @@
                 <div class="row">
                     <div class="col-lg-10 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Jaringan Kota Pusaka Indonesia</h2>
-                        <p class="lead-description">JKPI menghubungkan 79+ kabupaten dan kota di seluruh Indonesia yang
+                        <p class="lead-description">JKPI menghubungkan 79 kabupaten dan kota di seluruh Indonesia yang
                             memiliki komitmen kuat dalam pelestarian warisan budaya dan pengembangan kota berbasis
                             pusaka.</p>
                     </div>
@@ -1622,7 +1622,7 @@
                                 style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
                                 <div class="stat-item">
                                     <div class="stat-number"
-                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">79+</div>
+                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">79</div>
                                     <div class="stat-label" style="font-size: 1.1rem; opacity: 0.9;">Kab/Kota Anggota
                                     </div>
                                 </div>
