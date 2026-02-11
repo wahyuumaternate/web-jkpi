@@ -188,7 +188,7 @@
             <div class="registration-card" data-aos="fade-up">
                 <div class="registration-header">
                     <h1><i class="bi bi-pencil-square me-2"></i>Formulir Pendaftaran</h1>
-                    <p>Rakernas XII JKPI 2026 - Kota Ternate</p>
+                    <p>Rakernas JKPI XII 2026 - Kota Ternate</p>
                 </div>
 
                 @if (session('success'))

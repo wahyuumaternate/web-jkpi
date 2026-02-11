@@ -792,7 +792,7 @@
             <h1 class="hero-title text-white">Data Akomodasi<br>Kota Ternate</h1>
             <p class="hero-subtitle">
                 Daftar lengkap hotel, wisma, villa, dan pondok wisata di Kota Ternate
-                untuk peserta Rakernas XII JKPI 2026.
+                untuk peserta Rakernas JKPI XII 2026.
             </p>
             <div class="hero-stats">
                 <div class="hero-stat">
