@@ -109,23 +109,20 @@
         /* ===== PHOTO ===== */
         .photo-wrapper {
             position: absolute;
-            top: 18mm;
+            top: 19mm;
             left: 0;
             width: 54mm;
-            text-align: center;
+            z-index: 20;
         }
-
 
         .photo-wrapper td {
             text-align: center;
             vertical-align: middle;
-            padding: 0;
         }
 
-
         .photo-ring {
-            width: 24mm;
-            height: 24mm;
+            width: 22mm;
+            height: 22mm;
             border-radius: 50%;
             border: 1mm solid #ffffff;
             overflow: hidden;
@@ -134,11 +131,9 @@
         }
 
         .photo-ring img {
-            width: 24mm;
-            height: 24mm;
-            display: block;
+            width: 20mm;
+            height: 20mm;
         }
-
 
         .initial-circle {
             width: 20mm;
@@ -155,11 +150,9 @@
         /* ===== INFO ===== */
         .info-wrapper {
             position: absolute;
-            top: 44mm;
+            top: 43mm;
             left: 0;
             width: 54mm;
-
-
             z-index: 10;
         }
 
@@ -199,14 +192,11 @@
         /* ===== QR CODE ===== */
         .qr-wrapper {
             position: absolute;
-            top: 67mm;
-            /* posisi ideal untuk kartu 85.6mm */
+            bottom: 2.5mm;
             left: 0;
             width: 54mm;
-            text-align: center;
+            z-index: 10;
         }
-
-
 
         .qr-wrapper td {
             text-align: center;
@@ -217,22 +207,22 @@
             display: inline-block;
             padding: 1mm;
             border: 0.3mm solid #e0e0e0;
+            border-radius: 1.5mm;
             background-color: #ffffff;
         }
 
         .qr-border img {
-            width: 17mm;
-            height: 17mm;
+            width: 16mm;
+            height: 16mm;
             display: block;
         }
 
         .qr-label {
             font-size: 4.5pt;
             color: #aaaaaa;
-            margin-top: 0.8mm;
+            padding-top: 1mm;
+            letter-spacing: 0.3pt;
         }
-
-
 
         /* ===== BOTTOM LINE ===== */
         .bottom-line {

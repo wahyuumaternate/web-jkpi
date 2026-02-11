@@ -612,7 +612,7 @@
                             <!-- Subtitle -->
                             <p data-aos="fade-up" data-aos-delay="500"
                                 style="color: rgba(255,255,255,0.98); font-size: 1.4rem; max-width: 900px; margin: 0 auto 50px; line-height: 1.8; text-shadow: 2px 2px 12px rgba(0,0,0,0.5), 1px 1px 4px rgba(0,0,0,0.7); font-weight: 400;">
-                                Kota Ternate dengan bangga menjadi tuan rumah Rakernas XII JKPI 2026<br>
+                                Kota Ternate Dengan Bangga Menjadi Tuan Rumah Rakernas XII JKPI 2026<br>
                                 <strong style="font-weight: 700;">Memperkenalkan Warisan Kesultanan & Kekayaan Rempah
                                     Nusantara</strong>
                             </p>

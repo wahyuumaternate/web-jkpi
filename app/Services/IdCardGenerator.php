@@ -15,29 +15,34 @@ class IdCardGenerator
     public function generate(Peserta $peserta): string
     {
         try {
-            // Generate QR Code dengan ukuran yang lebih besar
+            // Generate QR Code
             $qrCode = base64_encode(QrCode::format('png')->size(400)->errorCorrection('H')->margin(0)->generate($peserta->kode_registrasi));
 
             // Persiapkan data untuk view
             $data = [
                 'nama' => $this->formatNama($peserta->nama_lengkap),
-                'status' => 'ANGGOTA',
+                'status' => $peserta->jabatan,
                 'foto' => $this->getFotoBase64($peserta),
                 'logo' => $this->getLogoBase64(),
                 'qrCode' => $qrCode,
-                'website' => 'jkpi.ternatetourism.com',
-                'phone' => '+123 456 7890',
+                'nomor_id' => $peserta->kode_registrasi,
                 'kode_registrasi' => $peserta->kode_registrasi,
             ];
 
-            // Generate PDF dengan konfigurasi yang lebih baik
+            // =============================================
+            // PENTING: Ukuran kertas HARUS sama dengan CSS
+            // CSS  : 54mm x 85.6mm portrait
+            // Point: 1mm = 2.8346pt
+            //   54mm   = 153.07pt (width)
+            //   85.6mm = 242.64pt (height)
+            // =============================================
             $pdf = Pdf::loadView('pdf.id-card', $data)
-                ->setPaper([0, 0, 243, 387], 'portrait') // 85.6mm x 136mm in points
+                ->setPaper([0, 0, 153.07, 242.64], 'portrait')
                 ->setOptions([
                     'isHtml5ParserEnabled' => true,
                     'isRemoteEnabled' => false,
-                    'defaultFont' => 'Arial',
-                    'dpi' => 300,
+                    'defaultFont' => 'Helvetica',
+                    'dpi' => 150,
                     'enable_php' => false,
                     'chroot' => public_path(),
                 ]);
@@ -101,13 +106,11 @@ class IdCardGenerator
 
         // Jika nama terlalu panjang, potong
         if (strlen($nama) > 20) {
-            // Coba ambil hanya nama depan dan belakang
             $parts = explode(' ', $nama);
             if (count($parts) > 2) {
                 $nama = $parts[0] . ' ' . end($parts);
             }
 
-            // Jika masih terlalu panjang
             if (strlen($nama) > 20) {
                 $nama = substr($nama, 0, 18) . '..';
             }
@@ -133,11 +136,8 @@ class IdCardGenerator
                 return null;
             }
 
-            // Resize image untuk menghemat ukuran file
             $imageData = file_get_contents($path);
             $mimeType = mime_content_type($path);
-
-            // Encode ke base64
             $base64 = base64_encode($imageData);
 
             return "data:$mimeType;base64,$base64";
