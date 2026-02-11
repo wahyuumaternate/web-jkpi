@@ -1742,7 +1742,7 @@
                         <span>${h.address}</span>
                     </div>
                     <div class="hotel-contact-box">
-                        <i class="bi bi-whatsapp"></i>
+                       
                         ${formatContacts(h.contact)}
                     </div>
                 </div>
