@@ -7,7 +7,7 @@
                      <span class="sitename">JKPI 2026</span>
                  </a>
                  <div class="footer-contact pt-3">
-                     <p>Sekretariat Panitia Rakernas XII JKPI 2026</p>
+                     <p>Sekretariat Panitia Rakernas JKPI XII 2026</p>
                      <p>Pemerintah Kota Ternate, Maluku Utara</p>
                      <p class="mt-3"><strong>Telepon:</strong> <span>+62 822-9005-6150</span></p>
                      <p><strong>Email:</strong> <span>info@jkpi.ternatetourism.com</span></p>
@@ -51,10 +51,10 @@
      </div>
 
      <div class="container copyright text-center mt-4">
-         <p>© <span>Copyright</span> <strong>Rakernas XII JKPI 2026 Kota Ternate</strong>&nbsp;<span>All Rights
+         <p>© <span>Copyright</span> <strong>Rakernas JKPI XII 2026 Kota Ternate</strong>&nbsp;<span>All Rights
                  Reserved</span></p>
          <div class="credits">
-             Dikelola oleh Panitia Rakernas XII JKPI 2026 Kota Ternate
+             Dikelola oleh Panitia Rakernas JKPI XII 2026 Kota Ternate
          </div>
      </div>
 
