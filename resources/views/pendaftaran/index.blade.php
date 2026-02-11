@@ -476,7 +476,7 @@
                                     <option value="Kab. Sleman"
                                         {{ old('kota_kabupaten') == 'Kab. Sleman' ? 'selected' : '' }}>Kab. Sleman</option>
                                 </optgroup>
-                                <optgroup label="Peninjau">
+                                {{-- <optgroup label="Peninjau">
                                     <option value="Kab. Tranggalek"
                                         {{ old('kota_kabupaten') == 'Kab. Tranggalek' ? 'selected' : '' }}>Kab. Tranggalek
                                     </option>
@@ -484,7 +484,7 @@
                                     <option value="Kab. Bojonegoro"
                                         {{ old('kota_kabupaten') == 'Kab. Bojonegoro' ? 'selected' : '' }}>Kab. Bojonegoro
                                     </option>
-                                </optgroup>
+                                </optgroup> --}}
                             </select>
                             @error('kota_kabupaten')
                                 <div class="invalid-feedback">{{ $message }}</div>
