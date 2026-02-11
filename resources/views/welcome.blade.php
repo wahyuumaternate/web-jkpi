@@ -557,6 +557,12 @@
         .image-hover-wrapper:hover::before {
             background: rgba(0, 0, 0, 0.1);
         }
+
+        .service-card {
+            background: linear-gradient(135deg, #099aa715, #099aa715) !important;
+            color: #ffffff !important;
+
+        }
     </style>
 </head>
 
