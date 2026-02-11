@@ -596,7 +596,7 @@
                             <div class="badge-container mb-4 mt-5" data-aos="zoom-in" data-aos-delay="300">
                                 <span
                                     style="background: rgba(255, 255, 255, 0.30); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; padding: 12px 30px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; letter-spacing: 1px; border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.3); display: inline-block;">
-                                    <i class="bi bi-geo-alt-fill me-2"></i>RAKERNAS XII JARINGAN KOTA PUSAKA INDONESIA
+                                    <i class="bi bi-geo-alt-fill me-2"></i>RAKERNAS JARINGAN KOTA PUSAKA INDONESIA XII
                                 </span>
                             </div>
 
