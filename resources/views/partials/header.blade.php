@@ -26,12 +26,15 @@
                 <li><a href="{{ url('/') }}#tujuan">Tujuan</a></li>
                 <li><a href="{{ url('/') }}#rangkaian">Rangkaian Kegiatan</a></li>
                 {{-- <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li> --}}
-                <li><a href="{{ url('/') }}#sebaran-lokasi">Sebaran Lokasi</a></li>
-                <li class="dropdown"><a href="#"><span>Informasi</span> <i
+
+                <li class="dropdown"><a href="#"><span>Informasi Akomodasi</span> <i
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
-                        <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li>
                         <li><a href="{{ url('/hotel') }}">Daftar Hotel</a></li>
+                        <li><a href="{{ url('/') }}#sebaran-lokasi">Sebaran Lokasi</a></li>
+                        <li><a href="{{ url('/cafe-resto') }}">Daftar Resto & Cafe</a></li>
+                        <li><a href="{{ url('/') }}#oleh-oleh">Toko Oleh-Oleh</a></li>
+                        <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li>
                         <li><a href="{{ url('/') }}#appointment">Kontak</a></li>
                     </ul>
                 </li>

@@ -11,6 +11,9 @@ Route::get('/', function () {
 Route::get('/hotel', function () {
     return view('hotel');
 });
+Route::get('/cafe-resto', function () {
+    return view('cafe_resto');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
