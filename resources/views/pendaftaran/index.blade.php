@@ -229,7 +229,9 @@
                             <label for="nama_lengkap" class="form-label">Nama Lengkap <span
                                     class="required">*</span></label>
                             <input type="text" class="form-control @error('nama_lengkap') is-invalid @enderror"
-                                id="nama_lengkap" name="nama_lengkap" value="{{ old('nama_lengkap') }}" required>
+                                id="nama_lengkap" name="nama_lengkap"
+                                value="{{ old('nama_lengkap', app()->environment('local') ? 'Dr. Ahmad Hidayat, M.Si' : '') }}"
+                                required>
                             @error('nama_lengkap')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -238,7 +240,9 @@
                         <div class="col-md-6 mb-3">
                             <label for="jabatan" class="form-label">Jabatan <span class="required">*</span></label>
                             <input type="text" class="form-control @error('jabatan') is-invalid @enderror" id="jabatan"
-                                name="jabatan" value="{{ old('jabatan') }}" required>
+                                name="jabatan"
+                                value="{{ old('jabatan', app()->environment('local') ? 'Kepala Dinas Kebudayaan' : '') }}"
+                                required>
                             @error('jabatan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -250,7 +254,8 @@
                             <label for="instansi_organisasi" class="form-label">Instansi/Organisasi <span
                                     class="required">*</span></label>
                             <input type="text" class="form-control @error('instansi_organisasi') is-invalid @enderror"
-                                id="instansi_organisasi" name="instansi_organisasi" value="{{ old('instansi_organisasi') }}"
+                                id="instansi_organisasi" name="instansi_organisasi"
+                                value="{{ old('instansi_organisasi', app()->environment('local') ? 'Pemerintah Kota Ternate' : '') }}"
                                 required>
                             @error('instansi_organisasi')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -264,227 +269,193 @@
                                 name="kota_kabupaten" required>
                                 <option value="">Pilih Kota/Kabupaten</option>
                                 <optgroup label="Anggota JKPI">
-                                    <option value="Kota Ambon"
-                                        {{ old('kota_kabupaten') == 'Kota Ambon' ? 'selected' : '' }}>Kota Ambon</option>
+                                    @php
+                                        $kotaDefault = app()->environment('local') ? 'Kota Ternate' : '';
+                                        $kotaSelected = old('kota_kabupaten', $kotaDefault);
+                                    @endphp
+                                    <option value="Kota Ambon" {{ $kotaSelected == 'Kota Ambon' ? 'selected' : '' }}>Kota
+                                        Ambon</option>
                                     <option value="Kota Banda Aceh"
-                                        {{ old('kota_kabupaten') == 'Kota Banda Aceh' ? 'selected' : '' }}>Kota Banda Aceh
-                                    </option>
-                                    <option value="Kota Bengkulu"
-                                        {{ old('kota_kabupaten') == 'Kota Bengkulu' ? 'selected' : '' }}>Kota Bengkulu
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Banda Aceh' ? 'selected' : '' }}>Kota Banda Aceh</option>
+                                    <option value="Kota Bengkulu" {{ $kotaSelected == 'Kota Bengkulu' ? 'selected' : '' }}>
+                                        Kota Bengkulu</option>
                                     <option value="Kota Bukittinggi"
-                                        {{ old('kota_kabupaten') == 'Kota Bukittinggi' ? 'selected' : '' }}>Kota
-                                        Bukittinggi</option>
-                                    <option value="Kota Baubau"
-                                        {{ old('kota_kabupaten') == 'Kota Baubau' ? 'selected' : '' }}>Kota Baubau</option>
-                                    <option value="Kota Blitar"
-                                        {{ old('kota_kabupaten') == 'Kota Blitar' ? 'selected' : '' }}>Kota Blitar</option>
+                                        {{ $kotaSelected == 'Kota Bukittinggi' ? 'selected' : '' }}>Kota Bukittinggi
+                                    </option>
+                                    <option value="Kota Baubau" {{ $kotaSelected == 'Kota Baubau' ? 'selected' : '' }}>Kota
+                                        Baubau</option>
+                                    <option value="Kota Blitar" {{ $kotaSelected == 'Kota Blitar' ? 'selected' : '' }}>Kota
+                                        Blitar</option>
                                     <option value="Kota Banjarmasin"
-                                        {{ old('kota_kabupaten') == 'Kota Banjarmasin' ? 'selected' : '' }}>Kota
-                                        Banjarmasin</option>
-                                    <option value="Kota Bontang"
-                                        {{ old('kota_kabupaten') == 'Kota Bontang' ? 'selected' : '' }}>Kota Bontang
+                                        {{ $kotaSelected == 'Kota Banjarmasin' ? 'selected' : '' }}>Kota Banjarmasin
                                     </option>
-                                    <option value="Kota Bogor"
-                                        {{ old('kota_kabupaten') == 'Kota Bogor' ? 'selected' : '' }}>Kota Bogor</option>
+                                    <option value="Kota Bontang" {{ $kotaSelected == 'Kota Bontang' ? 'selected' : '' }}>
+                                        Kota Bontang</option>
+                                    <option value="Kota Bogor" {{ $kotaSelected == 'Kota Bogor' ? 'selected' : '' }}>Kota
+                                        Bogor</option>
                                     <option value="Kab. Bangka Barat"
-                                        {{ old('kota_kabupaten') == 'Kab. Bangka Barat' ? 'selected' : '' }}>Kab. Bangka
-                                        Barat</option>
-                                    <option value="Kab. Bangli"
-                                        {{ old('kota_kabupaten') == 'Kab. Bangli' ? 'selected' : '' }}>Kab. Bangli</option>
-                                    <option value="Kab. Buleleng"
-                                        {{ old('kota_kabupaten') == 'Kab. Buleleng' ? 'selected' : '' }}>Kab. Buleleng
+                                        {{ $kotaSelected == 'Kab. Bangka Barat' ? 'selected' : '' }}>Kab. Bangka Barat
                                     </option>
-                                    <option value="Kab. Brebes"
-                                        {{ old('kota_kabupaten') == 'Kab. Brebes' ? 'selected' : '' }}>Kab. Brebes</option>
+                                    <option value="Kab. Bangli" {{ $kotaSelected == 'Kab. Bangli' ? 'selected' : '' }}>Kab.
+                                        Bangli</option>
+                                    <option value="Kab. Buleleng" {{ $kotaSelected == 'Kab. Buleleng' ? 'selected' : '' }}>
+                                        Kab. Buleleng</option>
+                                    <option value="Kab. Brebes" {{ $kotaSelected == 'Kab. Brebes' ? 'selected' : '' }}>Kab.
+                                        Brebes</option>
                                     <option value="Kab. Banjar Negara"
-                                        {{ old('kota_kabupaten') == 'Kab. Banjar Negara' ? 'selected' : '' }}>Kab. Banjar
-                                        Negara</option>
-                                    <option value="Kab. Banyumas"
-                                        {{ old('kota_kabupaten') == 'Kab. Banyumas' ? 'selected' : '' }}>Kab. Banyumas
+                                        {{ $kotaSelected == 'Kab. Banjar Negara' ? 'selected' : '' }}>Kab. Banjar Negara
                                     </option>
-                                    <option value="Kab. Batang"
-                                        {{ old('kota_kabupaten') == 'Kab. Batang' ? 'selected' : '' }}>Kab. Batang</option>
-                                    <option value="Kota Cirebon"
-                                        {{ old('kota_kabupaten') == 'Kota Cirebon' ? 'selected' : '' }}>Kota Cirebon
-                                    </option>
-                                    <option value="Kab. Cilacap"
-                                        {{ old('kota_kabupaten') == 'Kab. Cilacap' ? 'selected' : '' }}>Kab. Cilacap
-                                    </option>
+                                    <option value="Kab. Banyumas" {{ $kotaSelected == 'Kab. Banyumas' ? 'selected' : '' }}>
+                                        Kab. Banyumas</option>
+                                    <option value="Kab. Batang" {{ $kotaSelected == 'Kab. Batang' ? 'selected' : '' }}>Kab.
+                                        Batang</option>
+                                    <option value="Kota Cirebon" {{ $kotaSelected == 'Kota Cirebon' ? 'selected' : '' }}>
+                                        Kota Cirebon</option>
+                                    <option value="Kab. Cilacap" {{ $kotaSelected == 'Kab. Cilacap' ? 'selected' : '' }}>
+                                        Kab. Cilacap</option>
                                     <option value="Kota Jakarta Pusat"
-                                        {{ old('kota_kabupaten') == 'Kota Jakarta Pusat' ? 'selected' : '' }}>Kota Jakarta
-                                        Pusat</option>
+                                        {{ $kotaSelected == 'Kota Jakarta Pusat' ? 'selected' : '' }}>Kota Jakarta Pusat
+                                    </option>
                                     <option value="Kota Lubuk Linggau"
-                                        {{ old('kota_kabupaten') == 'Kota Lubuk Linggau' ? 'selected' : '' }}>Kota Lubuk
-                                        Linggau</option>
-                                    <option value="Kota Langsa"
-                                        {{ old('kota_kabupaten') == 'Kota Langsa' ? 'selected' : '' }}>Kota Langsa</option>
+                                        {{ $kotaSelected == 'Kota Lubuk Linggau' ? 'selected' : '' }}>Kota Lubuk Linggau
+                                    </option>
+                                    <option value="Kota Langsa" {{ $kotaSelected == 'Kota Langsa' ? 'selected' : '' }}>Kota
+                                        Langsa</option>
                                     <option value="Kab. Kepulauan Seribu"
-                                        {{ old('kota_kabupaten') == 'Kab. Kepulauan Seribu' ? 'selected' : '' }}>Kab.
-                                        Kepulauan Seribu</option>
+                                        {{ $kotaSelected == 'Kab. Kepulauan Seribu' ? 'selected' : '' }}>Kab. Kepulauan
+                                        Seribu</option>
                                     <option value="Kab. Karang Asem"
-                                        {{ old('kota_kabupaten') == 'Kab. Karang Asem' ? 'selected' : '' }}>Kab. Karang
-                                        Asem</option>
-                                    <option value="Kota Medan"
-                                        {{ old('kota_kabupaten') == 'Kota Medan' ? 'selected' : '' }}>Kota Medan</option>
-                                    <option value="Kota Madiun"
-                                        {{ old('kota_kabupaten') == 'Kota Madiun' ? 'selected' : '' }}>Kota Madiun</option>
-                                    <option value="Kota Malang"
-                                        {{ old('kota_kabupaten') == 'Kota Malang' ? 'selected' : '' }}>Kota Malang</option>
+                                        {{ $kotaSelected == 'Kab. Karang Asem' ? 'selected' : '' }}>Kab. Karang Asem
+                                    </option>
+                                    <option value="Kota Medan" {{ $kotaSelected == 'Kota Medan' ? 'selected' : '' }}>Kota
+                                        Medan</option>
+                                    <option value="Kota Madiun" {{ $kotaSelected == 'Kota Madiun' ? 'selected' : '' }}>Kota
+                                        Madiun</option>
+                                    <option value="Kota Malang" {{ $kotaSelected == 'Kota Malang' ? 'selected' : '' }}>Kota
+                                        Malang</option>
                                     <option value="Kota Palembang"
-                                        {{ old('kota_kabupaten') == 'Kota Palembang' ? 'selected' : '' }}>Kota Palembang
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Palembang' ? 'selected' : '' }}>Kota Palembang</option>
                                     <option value="Kota Pangkal Pinang"
-                                        {{ old('kota_kabupaten') == 'Kota Pangkal Pinang' ? 'selected' : '' }}>Kota Pangkal
-                                        Pinang</option>
+                                        {{ $kotaSelected == 'Kota Pangkal Pinang' ? 'selected' : '' }}>Kota Pangkal Pinang
+                                    </option>
                                     <option value="Kab. Pulang Pisau"
-                                        {{ old('kota_kabupaten') == 'Kab. Pulang Pisau' ? 'selected' : '' }}>Kab. Pulang
-                                        Pisau</option>
+                                        {{ $kotaSelected == 'Kab. Pulang Pisau' ? 'selected' : '' }}>Kab. Pulang Pisau
+                                    </option>
                                     <option value="Kota Pekalongan"
-                                        {{ old('kota_kabupaten') == 'Kota Pekalongan' ? 'selected' : '' }}>Kota Pekalongan
-                                    </option>
-                                    <option value="Kota Padang"
-                                        {{ old('kota_kabupaten') == 'Kota Padang' ? 'selected' : '' }}>Kota Padang</option>
-                                    <option value="Kota Palopo"
-                                        {{ old('kota_kabupaten') == 'Kota Palopo' ? 'selected' : '' }}>Kota Palopo</option>
+                                        {{ $kotaSelected == 'Kota Pekalongan' ? 'selected' : '' }}>Kota Pekalongan</option>
+                                    <option value="Kota Padang" {{ $kotaSelected == 'Kota Padang' ? 'selected' : '' }}>
+                                        Kota Padang</option>
+                                    <option value="Kota Palopo" {{ $kotaSelected == 'Kota Palopo' ? 'selected' : '' }}>
+                                        Kota Palopo</option>
                                     <option value="Kota Pontianak"
-                                        {{ old('kota_kabupaten') == 'Kota Pontianak' ? 'selected' : '' }}>Kota Pontianak
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Pontianak' ? 'selected' : '' }}>Kota Pontianak</option>
                                     <option value="Kab. Purbalingga"
-                                        {{ old('kota_kabupaten') == 'Kab. Purbalingga' ? 'selected' : '' }}>Kab.
-                                        Purbalingga</option>
+                                        {{ $kotaSelected == 'Kab. Purbalingga' ? 'selected' : '' }}>Kab. Purbalingga
+                                    </option>
                                     <option value="Kota Sawahlunto"
-                                        {{ old('kota_kabupaten') == 'Kota Sawahlunto' ? 'selected' : '' }}>Kota Sawahlunto
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Sawahlunto' ? 'selected' : '' }}>Kota Sawahlunto</option>
                                     <option value="Kota Semarang"
-                                        {{ old('kota_kabupaten') == 'Kota Semarang' ? 'selected' : '' }}>Kota Semarang
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Semarang' ? 'selected' : '' }}>Kota Semarang</option>
                                     <option value="Kota Surakarta"
-                                        {{ old('kota_kabupaten') == 'Kota Surakarta' ? 'selected' : '' }}>Kota Surakarta
-                                    </option>
-                                    <option value="Kota Ternate"
-                                        {{ old('kota_kabupaten') == 'Kota Ternate' ? 'selected' : '' }}>Kota Ternate
-                                    </option>
-                                    <option value="Kota Tegal"
-                                        {{ old('kota_kabupaten') == 'Kota Tegal' ? 'selected' : '' }}>Kota Tegal</option>
-                                    <option value="Kab. Tegal"
-                                        {{ old('kota_kabupaten') == 'Kab. Tegal' ? 'selected' : '' }}>Kab. Tegal</option>
+                                        {{ $kotaSelected == 'Kota Surakarta' ? 'selected' : '' }}>Kota Surakarta</option>
+                                    <option value="Kota Ternate" {{ $kotaSelected == 'Kota Ternate' ? 'selected' : '' }}>
+                                        Kota Ternate</option>
+                                    <option value="Kota Tegal" {{ $kotaSelected == 'Kota Tegal' ? 'selected' : '' }}>Kota
+                                        Tegal</option>
+                                    <option value="Kab. Tegal" {{ $kotaSelected == 'Kab. Tegal' ? 'selected' : '' }}>Kab.
+                                        Tegal</option>
                                     <option value="Kota Yogyakarta"
-                                        {{ old('kota_kabupaten') == 'Kota Yogyakarta' ? 'selected' : '' }}>Kota Yogyakarta
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Yogyakarta' ? 'selected' : '' }}>Kota Yogyakarta</option>
                                     <option value="Kota Sungai Penuh"
-                                        {{ old('kota_kabupaten') == 'Kota Sungai Penuh' ? 'selected' : '' }}>Kota Sungai
-                                        Penuh</option>
-                                    <option value="Kab. Ngawi"
-                                        {{ old('kota_kabupaten') == 'Kab. Ngawi' ? 'selected' : '' }}>Kab. Ngawi</option>
-                                    <option value="Kota Tidore"
-                                        {{ old('kota_kabupaten') == 'Kota Tidore' ? 'selected' : '' }}>Kota Tidore</option>
+                                        {{ $kotaSelected == 'Kota Sungai Penuh' ? 'selected' : '' }}>Kota Sungai Penuh
+                                    </option>
+                                    <option value="Kab. Ngawi" {{ $kotaSelected == 'Kab. Ngawi' ? 'selected' : '' }}>Kab.
+                                        Ngawi</option>
+                                    <option value="Kota Tidore" {{ $kotaSelected == 'Kota Tidore' ? 'selected' : '' }}>
+                                        Kota Tidore</option>
                                     <option value="Kota Tangerang"
-                                        {{ old('kota_kabupaten') == 'Kota Tangerang' ? 'selected' : '' }}>Kota Tangerang
-                                    </option>
-                                    <option value="Kota Kupang"
-                                        {{ old('kota_kabupaten') == 'Kota Kupang' ? 'selected' : '' }}>Kota Kupang</option>
+                                        {{ $kotaSelected == 'Kota Tangerang' ? 'selected' : '' }}>Kota Tangerang</option>
+                                    <option value="Kota Kupang" {{ $kotaSelected == 'Kota Kupang' ? 'selected' : '' }}>
+                                        Kota Kupang</option>
                                     <option value="Kab. Temanggung"
-                                        {{ old('kota_kabupaten') == 'Kab. Temanggung' ? 'selected' : '' }}>Kab. Temanggung
-                                    </option>
-                                    <option value="Kota Sabang"
-                                        {{ old('kota_kabupaten') == 'Kota Sabang' ? 'selected' : '' }}>Kota Sabang</option>
+                                        {{ $kotaSelected == 'Kab. Temanggung' ? 'selected' : '' }}>Kab. Temanggung</option>
+                                    <option value="Kota Sabang" {{ $kotaSelected == 'Kota Sabang' ? 'selected' : '' }}>
+                                        Kota Sabang</option>
                                     <option value="Kab. Halmahera Barat"
-                                        {{ old('kota_kabupaten') == 'Kab. Halmahera Barat' ? 'selected' : '' }}>Kab.
-                                        Halmahera Barat</option>
-                                    <option value="Kab. Siak"
-                                        {{ old('kota_kabupaten') == 'Kab. Siak' ? 'selected' : '' }}>Kab. Siak</option>
-                                    <option value="Kab. Pesawaran"
-                                        {{ old('kota_kabupaten') == 'Kab. Pesawaran' ? 'selected' : '' }}>Kab. Pesawaran
-                                    </option>
-                                    <option value="Kota Probolinggo"
-                                        {{ old('kota_kabupaten') == 'Kota Probolinggo' ? 'selected' : '' }}>Kota
-                                        Probolinggo</option>
-                                    <option value="Kab. Buton Utara"
-                                        {{ old('kota_kabupaten') == 'Kab. Buton Utara' ? 'selected' : '' }}>Kab. Buton
-                                        Utara</option>
-                                    <option value="Kab. Kutai Kartanegara"
-                                        {{ old('kota_kabupaten') == 'Kab. Kutai Kartanegara' ? 'selected' : '' }}>Kab.
-                                        Kutai Kartanegara</option>
-                                    <option value="Kab. Muna"
-                                        {{ old('kota_kabupaten') == 'Kab. Muna' ? 'selected' : '' }}>Kab. Muna</option>
-                                    <option value="Kota Denpasar"
-                                        {{ old('kota_kabupaten') == 'Kota Denpasar' ? 'selected' : '' }}>Kota Denpasar
-                                    </option>
-                                    <option value="Kota Sibolga"
-                                        {{ old('kota_kabupaten') == 'Kota Sibolga' ? 'selected' : '' }}>Kota Sibolga
-                                    </option>
-                                    <option value="Kab. Sambas"
-                                        {{ old('kota_kabupaten') == 'Kab. Sambas' ? 'selected' : '' }}>Kab. Sambas</option>
-                                    <option value="Kab. Gianyar"
-                                        {{ old('kota_kabupaten') == 'Kab. Gianyar' ? 'selected' : '' }}>Kab. Gianyar
-                                    </option>
-                                    <option value="Kota Jakarta Barat"
-                                        {{ old('kota_kabupaten') == 'Kota Jakarta Barat' ? 'selected' : '' }}>Kota Jakarta
+                                        {{ $kotaSelected == 'Kab. Halmahera Barat' ? 'selected' : '' }}>Kab. Halmahera
                                         Barat</option>
+                                    <option value="Kab. Siak" {{ $kotaSelected == 'Kab. Siak' ? 'selected' : '' }}>Kab.
+                                        Siak</option>
+                                    <option value="Kab. Pesawaran"
+                                        {{ $kotaSelected == 'Kab. Pesawaran' ? 'selected' : '' }}>Kab. Pesawaran</option>
+                                    <option value="Kota Probolinggo"
+                                        {{ $kotaSelected == 'Kota Probolinggo' ? 'selected' : '' }}>Kota Probolinggo
+                                    </option>
+                                    <option value="Kab. Buton Utara"
+                                        {{ $kotaSelected == 'Kab. Buton Utara' ? 'selected' : '' }}>Kab. Buton Utara
+                                    </option>
+                                    <option value="Kab. Kutai Kartanegara"
+                                        {{ $kotaSelected == 'Kab. Kutai Kartanegara' ? 'selected' : '' }}>Kab. Kutai
+                                        Kartanegara</option>
+                                    <option value="Kab. Muna" {{ $kotaSelected == 'Kab. Muna' ? 'selected' : '' }}>Kab.
+                                        Muna</option>
+                                    <option value="Kota Denpasar"
+                                        {{ $kotaSelected == 'Kota Denpasar' ? 'selected' : '' }}>Kota Denpasar</option>
+                                    <option value="Kota Sibolga" {{ $kotaSelected == 'Kota Sibolga' ? 'selected' : '' }}>
+                                        Kota Sibolga</option>
+                                    <option value="Kab. Sambas" {{ $kotaSelected == 'Kab. Sambas' ? 'selected' : '' }}>
+                                        Kab. Sambas</option>
+                                    <option value="Kab. Gianyar" {{ $kotaSelected == 'Kab. Gianyar' ? 'selected' : '' }}>
+                                        Kab. Gianyar</option>
+                                    <option value="Kota Jakarta Barat"
+                                        {{ $kotaSelected == 'Kota Jakarta Barat' ? 'selected' : '' }}>Kota Jakarta Barat
+                                    </option>
                                     <option value="Kota Jakarta Utara"
-                                        {{ old('kota_kabupaten') == 'Kota Jakarta Utara' ? 'selected' : '' }}>Kota Jakarta
-                                        Utara</option>
+                                        {{ $kotaSelected == 'Kota Jakarta Utara' ? 'selected' : '' }}>Kota Jakarta Utara
+                                    </option>
                                     <option value="Kota Salatiga"
-                                        {{ old('kota_kabupaten') == 'Kota Salatiga' ? 'selected' : '' }}>Kota Salatiga
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Salatiga' ? 'selected' : '' }}>Kota Salatiga</option>
                                     <option value="Kota Surabaya"
-                                        {{ old('kota_kabupaten') == 'Kota Surabaya' ? 'selected' : '' }}>Kota Surabaya
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Surabaya' ? 'selected' : '' }}>Kota Surabaya</option>
                                     <option value="Kota Singkawang"
-                                        {{ old('kota_kabupaten') == 'Kota Singkawang' ? 'selected' : '' }}>Kota Singkawang
-                                    </option>
-                                    <option value="Kab. Sumbawa"
-                                        {{ old('kota_kabupaten') == 'Kab. Sumbawa' ? 'selected' : '' }}>Kab. Sumbawa
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Singkawang' ? 'selected' : '' }}>Kota Singkawang</option>
+                                    <option value="Kab. Sumbawa" {{ $kotaSelected == 'Kab. Sumbawa' ? 'selected' : '' }}>
+                                        Kab. Sumbawa</option>
                                     <option value="Kab. Belitung Timur"
-                                        {{ old('kota_kabupaten') == 'Kab. Belitung Timur' ? 'selected' : '' }}>Kab.
-                                        Belitung Timur</option>
+                                        {{ $kotaSelected == 'Kab. Belitung Timur' ? 'selected' : '' }}>Kab. Belitung Timur
+                                    </option>
                                     <option value="Kota Pasuruan"
-                                        {{ old('kota_kabupaten') == 'Kota Pasuruan' ? 'selected' : '' }}>Kota Pasuruan
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Pasuruan' ? 'selected' : '' }}>Kota Pasuruan</option>
                                     <option value="Kab. Sumba Timur"
-                                        {{ old('kota_kabupaten') == 'Kab. Sumba Timur' ? 'selected' : '' }}>Kab. Sumba
-                                        Timur</option>
+                                        {{ $kotaSelected == 'Kab. Sumba Timur' ? 'selected' : '' }}>Kab. Sumba Timur
+                                    </option>
                                     <option value="Kab. Flores Timur"
-                                        {{ old('kota_kabupaten') == 'Kab. Flores Timur' ? 'selected' : '' }}>Kab. Flores
-                                        Timur</option>
-                                    <option value="Kab. Sumenep"
-                                        {{ old('kota_kabupaten') == 'Kab. Sumenep' ? 'selected' : '' }}>Kab. Sumenep
+                                        {{ $kotaSelected == 'Kab. Flores Timur' ? 'selected' : '' }}>Kab. Flores Timur
                                     </option>
+                                    <option value="Kab. Sumenep" {{ $kotaSelected == 'Kab. Sumenep' ? 'selected' : '' }}>
+                                        Kab. Sumenep</option>
                                     <option value="Kab. Nias Selatan"
-                                        {{ old('kota_kabupaten') == 'Kab. Nias Selatan' ? 'selected' : '' }}>Kab. Nias
-                                        Selatan</option>
-                                    <option value="Kab. Jepara"
-                                        {{ old('kota_kabupaten') == 'Kab. Jepara' ? 'selected' : '' }}>Kab. Jepara</option>
+                                        {{ $kotaSelected == 'Kab. Nias Selatan' ? 'selected' : '' }}>Kab. Nias Selatan
+                                    </option>
+                                    <option value="Kab. Jepara" {{ $kotaSelected == 'Kab. Jepara' ? 'selected' : '' }}>
+                                        Kab. Jepara</option>
                                     <option value="Kab. Buton Selatan"
-                                        {{ old('kota_kabupaten') == 'Kab. Buton Selatan' ? 'selected' : '' }}>Kab. Buton
-                                        Selatan</option>
-                                    <option value="Kab. Ende"
-                                        {{ old('kota_kabupaten') == 'Kab. Ende' ? 'selected' : '' }}>Kab. Ende</option>
-                                    <option value="Kota Kediri"
-                                        {{ old('kota_kabupaten') == 'Kota Kediri' ? 'selected' : '' }}>Kota Kediri</option>
-                                    <option value="Kota Bandung"
-                                        {{ old('kota_kabupaten') == 'Kota Bandung' ? 'selected' : '' }}>Kota Bandung
+                                        {{ $kotaSelected == 'Kab. Buton Selatan' ? 'selected' : '' }}>Kab. Buton Selatan
                                     </option>
+                                    <option value="Kab. Ende" {{ $kotaSelected == 'Kab. Ende' ? 'selected' : '' }}>Kab.
+                                        Ende</option>
+                                    <option value="Kota Kediri" {{ $kotaSelected == 'Kota Kediri' ? 'selected' : '' }}>
+                                        Kota Kediri</option>
+                                    <option value="Kota Bandung" {{ $kotaSelected == 'Kota Bandung' ? 'selected' : '' }}>
+                                        Kota Bandung</option>
                                     <option value="Kota Magelang"
-                                        {{ old('kota_kabupaten') == 'Kota Magelang' ? 'selected' : '' }}>Kota Magelang
-                                    </option>
+                                        {{ $kotaSelected == 'Kota Magelang' ? 'selected' : '' }}>Kota Magelang</option>
                                     <option value="Kab. Lombok Utara"
-                                        {{ old('kota_kabupaten') == 'Kab. Lombok Utara' ? 'selected' : '' }}>Kab. Lombok
-                                        Utara</option>
-                                    <option value="Kab. Sleman"
-                                        {{ old('kota_kabupaten') == 'Kab. Sleman' ? 'selected' : '' }}>Kab. Sleman</option>
+                                        {{ $kotaSelected == 'Kab. Lombok Utara' ? 'selected' : '' }}>Kab. Lombok Utara
+                                    </option>
+                                    <option value="Kab. Sleman" {{ $kotaSelected == 'Kab. Sleman' ? 'selected' : '' }}>
+                                        Kab. Sleman</option>
                                 </optgroup>
-                                {{-- <optgroup label="Peninjau">
-                                    <option value="Kab. Tranggalek"
-                                        {{ old('kota_kabupaten') == 'Kab. Tranggalek' ? 'selected' : '' }}>Kab. Tranggalek
-                                    </option>
-
-                                    <option value="Kab. Bojonegoro"
-                                        {{ old('kota_kabupaten') == 'Kab. Bojonegoro' ? 'selected' : '' }}>Kab. Bojonegoro
-                                    </option>
-                                </optgroup> --}}
                             </select>
                             @error('kota_kabupaten')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -503,7 +474,8 @@
                                     title="Gunakan nomor WhatsApp yang aktif untuk menerima pemberitahuan"></i>
                             </label>
                             <input type="text" class="form-control @error('nomor_telepon') is-invalid @enderror"
-                                id="nomor_telepon" name="nomor_telepon" value="{{ old('nomor_telepon') }}"
+                                id="nomor_telepon" name="nomor_telepon"
+                                value="{{ old('nomor_telepon', app()->environment('local') ? '081234567890' : '') }}"
                                 placeholder="08xxxxxxxxxx" required>
                             @error('nomor_telepon')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -517,14 +489,15 @@
                                     title="Gunakan email yang aktif untuk verifikasi dan notifikasi"></i>
                             </label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                id="email" name="email" value="{{ old('email') }}" required>
+                                id="email" name="email"
+                                value="{{ old('email', app()->environment('local') ? 'retmujago@gmail.com' : '') }}"
+                                required>
                             <div class="form-text">Email akan digunakan untuk verifikasi</div>
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
-
 
                     <!-- Upload Foto Profil -->
                     <h3 class="form-section-title"><i class="bi bi-camera-fill me-2"></i>Upload Foto Profil</h3>
@@ -548,7 +521,6 @@
                         </div>
                     </div>
 
-
                     <!-- Perjalanan dan Akomodasi -->
                     <h3 class="form-section-title"><i class="bi bi-airplane-fill me-2"></i>Perjalanan dan Akomodasi</h3>
 
@@ -558,7 +530,8 @@
                                     class="required">*</span></label>
                             <input type="date" class="form-control @error('tanggal_kedatangan') is-invalid @enderror"
                                 id="tanggal_kedatangan" name="tanggal_kedatangan"
-                                value="{{ old('tanggal_kedatangan') }}" required>
+                                value="{{ old('tanggal_kedatangan', app()->environment('local') ? now()->addDays(7)->format('Y-m-d') : '') }}"
+                                required>
                             @error('tanggal_kedatangan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -569,7 +542,8 @@
                                     class="required">*</span></label>
                             <input type="date" class="form-control @error('tanggal_kepulangan') is-invalid @enderror"
                                 id="tanggal_kepulangan" name="tanggal_kepulangan"
-                                value="{{ old('tanggal_kepulangan') }}" required>
+                                value="{{ old('tanggal_kepulangan', app()->environment('local') ? now()->addDays(10)->format('Y-m-d') : '') }}"
+                                required>
                             @error('tanggal_kepulangan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -580,7 +554,7 @@
                         <label for="akomodasi_hotel" class="form-label">Hotel Pilihan / Detail Akomodasi</label>
                         <textarea class="form-control @error('akomodasi_hotel') is-invalid @enderror" id="akomodasi_hotel"
                             name="akomodasi_hotel" rows="3"
-                            placeholder="Contoh: Hotel Grand Ternate, atau sebutkan jika tidak membutuhkan akomodasi">{{ old('akomodasi_hotel') }}</textarea>
+                            placeholder="Contoh: Hotel Grand Ternate, atau sebutkan jika tidak membutuhkan akomodasi">{{ old('akomodasi_hotel', app()->environment('local') ? 'Hotel Grand Ternate' : '') }}</textarea>
                         <div class="form-text">Sebutkan nama hotel pilihan Anda atau detail akomodasi lainnya. Jika tidak
                             membutuhkan akomodasi, silakan tulis "Tidak membutuhkan akomodasi"</div>
                         @error('akomodasi_hotel')
@@ -591,7 +565,8 @@
                     <!-- Persetujuan -->
                     <div class="mb-4">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="agree" required>
+                            <input class="form-check-input" type="checkbox" id="agree"
+                                {{ app()->environment('local') ? 'checked' : '' }} required>
                             <label class="form-check-label" for="agree">
                                 Saya menyetujui bahwa data yang saya berikan adalah benar dan dapat dipertanggungjawabkan.
                                 Saya bersedia mengikuti seluruh rangkaian kegiatan Rakernas XII JKPI 2026.

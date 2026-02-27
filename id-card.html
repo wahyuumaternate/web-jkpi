@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ID Card Preview - Rakernas XII JKPI 2026 Kota Ternate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .preview-container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1400px;
+            width: 100%;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .preview-header h1 {
+            font-size: 32px;
+            color: #0F2A4A;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .preview-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .preview-header .size-info {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #0F2A4A;
+            font-weight: 600;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            justify-items: center;
+        }
+
+        .card-container {
+            perspective: 1000px;
+        }
+
+        .card {
+            width: 359px;
+            /* 95mm @ 96dpi */
+            height: 476px;
+            /* 126mm @ 96dpi */
+            position: relative;
+            overflow: hidden;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== DARK TOP SECTION ===== */
+        .top-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, #0F2A4A 0%, #1B4D85 100%);
+        }
+
+        /* Geometric shapes */
+        .geo-1 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 110px 130px 0;
+            border-color: transparent rgba(22, 61, 107, 0.6) transparent transparent;
+        }
+
+        .geo-2 {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 70px 90px 0;
+            border-color: transparent rgba(27, 77, 133, 0.4) transparent transparent;
+        }
+
+        .geo-3 {
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 100px 0 0 85px;
+            border-color: transparent transparent transparent rgba(22, 61, 107, 0.5);
+        }
+
+        /* Decorative circles */
+        .circle-1 {
+            position: absolute;
+            top: -25px;
+            left: -25px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .circle-2 {
+            position: absolute;
+            bottom: 60px;
+            right: -30px;
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* ===== LOGO ===== */
+        .logo-wrapper {
+            position: absolute;
+            top: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .logo-img {
+            height: 45px;
+            margin-bottom: 4px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ffffff;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo-sub {
+            font-size: 8px;
+            color: #8BAFD0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .event-name {
+            font-size: 7.5px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 3px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+        }
+
+        /* ===== PHOTO ===== */
+        .photo-wrapper {
+            position: absolute;
+            top: 85px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 15;
+        }
+
+        .photo-ring {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            display: inline-block;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-ring img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .initial-circle {
+            width: 102px;
+            height: 102px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1B4D85 0%, #0F2A4A 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 44px;
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ===== INFO ===== */
+        .info-wrapper {
+            position: absolute;
+            top: 215px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            padding: 0 22px;
+            z-index: 10;
+        }
+
+        .person-name {
+            font-size: 17px;
+            font-weight: bold;
+            color: #1a1a1a;
+            line-height: 1.25;
+            margin-bottom: 5px;
+        }
+
+        .person-institution {
+            font-size: 11px;
+            color: #0F2A4A;
+            margin-bottom: 3px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .person-role {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1.1px;
+            margin-top: 5px;
+            font-weight: 600;
+        }
+
+        .id-badge {
+            margin-top: 9px;
+        }
+
+        .id-badge-inner {
+            display: inline-block;
+            background: linear-gradient(135deg, #0F2A4A 0%, #1B4D85 100%);
+            color: #ffffff;
+            font-size: 9px;
+            font-weight: bold;
+            letter-spacing: 0.6px;
+            padding: 5px 13px;
+            border-radius: 11px;
+            box-shadow: 0 3px 12px rgba(15, 42, 74, 0.3);
+        }
+
+        /* ===== QR CODE ===== */
+        .qr-wrapper {
+            position: absolute;
+            bottom: 28px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 20;
+        }
+
+        .qr-border {
+            display: inline-block;
+            padding: 4px;
+            border: 2px solid #e0e0e0;
+            background-color: #ffffff;
+            border-radius: 7px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-border img {
+            width: 70px;
+            height: 70px;
+            display: block;
+        }
+
+        .qr-placeholder {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0),
+                linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+            background-size: 8px 8px;
+            background-position: 0 0, 4px 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 7px;
+            color: #999;
+            font-weight: 600;
+        }
+
+        .qr-label {
+            font-size: 7.5px;
+            color: #aaaaaa;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* ===== BOTTOM LINE ===== */
+        .bottom-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #0F2A4A 0%, #1B4D85 50%, #0F2A4A 100%);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .preview-container {
+                padding: 30px 20px;
+            }
+
+            .preview-header h1 {
+                font-size: 24px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .card {
+                transform: scale(0.85);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .preview-container {
+                padding: 20px 15px;
+            }
+
+            .card {
+                transform: scale(0.7);
+            }
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            @page {
+                size: 95mm 126mm portrait;
+                margin: 0;
+            }
+
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .preview-container {
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .preview-header {
+                display: none;
+            }
+
+            .cards-grid {
+                display: block;
+            }
+
+            .card {
+                page-break-after: always;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="preview-container">
+        <!-- Header -->
+        <div class="preview-header">
+            <h1>🎫 ID Card Preview</h1>
+            <p>Rakernas XII JKPI 2026 - Kota Ternate</p>
+            <span class="size-info">Ukuran: B3 (95mm × 126mm) - Portrait</span>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <!-- Card 1: Peserta dengan Foto -->
+            <div class="card-container">
+                <div class="card">
+                    <!-- Background -->
+                    <div class="top-bg"></div>
+                    <div class="geo-1"></div>
+                    <div class="geo-2"></div>
+                    <div class="geo-3"></div>
+                    <div class="circle-1"></div>
+                    <div class="circle-2"></div>
+
+                    <!-- Logo -->
+                    <div class="logo-wrapper">
+                        <div class="logo-text">JKPI</div>
+                        <div class="logo-sub">Jaringan Kota Pusaka Indonesia</div>
+                        <div class="event-name">RAKERNAS XII 2026 • TERNATE</div>
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="photo-wrapper">
+                        <div class="photo-ring">
+                            <img src="https://i.pravatar.cc/300?img=12" alt="Foto Peserta">
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="info-wrapper">
+                        <div class="person-name">Dr. Ahmad Hidayat, M.Si</div>
+                        <div class="person-institution">Pemerintah Kota Ternate</div>
+                        <div class="person-role">Peserta</div>
+                        <div class="id-badge">
+                            <span class="id-badge-inner">ID: JKPI-2026-001</span>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="qr-wrapper">
+                        <div class="qr-border">
+                            <div class="qr-placeholder">QR CODE</div>
+                        </div>
+                        <div class="qr-label">Scan untuk verifikasi</div>
+                    </div>
+
+                    <!-- Bottom Line -->
+                    <div class="bottom-line"></div>
+                </div>
+            </div>
+
+            <!-- Card 2: Panitia tanpa Foto (Initial) -->
+            <div class="card-container">
+                <div class="card">
+                    <!-- Background -->
+                    <div class="top-bg"></div>
+                    <div class="geo-1"></div>
+                    <div class="geo-2"></div>
+                    <div class="geo-3"></div>
+                    <div class="circle-1"></div>
+                    <div class="circle-2"></div>
+
+                    <!-- Logo -->
+                    <div class="logo-wrapper">
+                        <div class="logo-text">JKPI</div>
+                        <div class="logo-sub">Jaringan Kota Pusaka Indonesia</div>
+                        <div class="event-name">RAKERNAS XII 2026 • TERNATE</div>
+                    </div>
+
+                    <!-- Photo (Initial) -->
+                    <div class="photo-wrapper">
+                        <div class="photo-ring">
+                            <div class="initial-circle">S</div>
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="info-wrapper">
+                        <div class="person-name">Siti Nurhaliza, S.Sos</div>
+                        <div class="person-institution">Sekretariat JKPI</div>
+                        <div class="person-role">Panitia Pelaksana</div>
+                        <div class="id-badge">
+                            <span class="id-badge-inner">ID: JKPI-2026-P-042</span>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="qr-wrapper">
+                        <div class="qr-border">
+                            <div class="qr-placeholder">QR CODE</div>
+                        </div>
+                        <div class="qr-label">Scan untuk verifikasi</div>
+                    </div>
+
+                    <!-- Bottom Line -->
+                    <div class="bottom-line"></div>
+                </div>
+            </div>
+
+            <!-- Card 3: Narasumber -->
+            <div class="card-container">
+                <div class="card">
+                    <!-- Background -->
+                    <div class="top-bg"></div>
+                    <div class="geo-1"></div>
+                    <div class="geo-2"></div>
+                    <div class="geo-3"></div>
+                    <div class="circle-1"></div>
+                    <div class="circle-2"></div>
+
+                    <!-- Logo -->
+                    <div class="logo-wrapper">
+                        <div class="logo-text">JKPI</div>
+                        <div class="logo-sub">Jaringan Kota Pusaka Indonesia</div>
+                        <div class="event-name">RAKERNAS XII 2026 • TERNATE</div>
+                    </div>
+
+                    <!-- Photo -->
+                    <div class="photo-wrapper">
+                        <div class="photo-ring">
+                            <img src="https://i.pravatar.cc/300?img=33" alt="Foto Narasumber">
+                        </div>
+                    </div>
+
+                    <!-- Info -->
+                    <div class="info-wrapper">
+                        <div class="person-name">Prof. Dr. Bambang Susanto</div>
+                        <div class="person-institution">Universitas Indonesia</div>
+                        <div class="person-role">Narasumber</div>
+                        <div class="id-badge">
+                            <span class="id-badge-inner">ID: JKPI-2026-N-003</span>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="qr-wrapper">
+                        <div class="qr-border">
+                            <div class="qr-placeholder">QR CODE</div>
+                        </div>
+                        <div class="qr-label">Scan untuk verifikasi</div>
+                    </div>
+
+                    <!-- Bottom Line -->
+                    <div class="bottom-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
