@@ -301,29 +301,7 @@
             <p>Peta interaktif menampilkan berbagai lokasi kegiatan Rakernas XII JKPI 2026 di Kota Ternate. Klik marker
                 untuk detail dan dapatkan rute perjalanan</p>
         </div>
-        {{-- <!-- Statistics Overview -->
-        <div class="stats-overview-jkpi mb-5">
-            <div class="stat-card-jkpi">
-                <i class="bi bi-geo-alt-fill"></i>
-                <div class="stat-number-jkpi" id="total-locations-jkpi">15</div>
-                <div class="stat-label-jkpi">Total Lokasi</div>
-            </div>
-            <div class="stat-card-jkpi">
-                <i class="bi bi-building"></i>
-                <div class="stat-number-jkpi">5</div>
-                <div class="stat-label-jkpi">Situs Heritage</div>
-            </div>
-            <div class="stat-card-jkpi">
-                <i class="bi bi-shop"></i>
-                <div class="stat-number-jkpi">3</div>
-                <div class="stat-label-jkpi">Area Pameran</div>
-            </div>
-            <div class="stat-card-jkpi">
-                <i class="bi bi-clock"></i>
-                <div class="stat-number-jkpi">5</div>
-                <div class="stat-label-jkpi">Hari Kegiatan</div>
-            </div>
-        </div> --}}
+
         <!-- Map Container -->
         <div class="map-container-jkpi">
             <div id="map-jkpi"></div>
@@ -410,8 +388,8 @@
         <script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 
         <script>
-            // Initialize map - centered on Ternate
-            const mapJKPI = L.map('map-jkpi').setView([0.7893, 127.3614], 13);
+            // Initialize map - centered on Ternate (koordinat real pusat kota Ternate)
+            const mapJKPI = L.map('map-jkpi').setView([0.7893, 127.3814], 13);
 
             // Add tile layer
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -445,196 +423,150 @@
                 window.open(wazeUrl, '_blank');
             }
 
-            // Location data - Fokus di Kota Ternate
+            // =====================================================================
+            // DATA LOKASI REAL – Kota Ternate, Maluku Utara
+            // Sumber koordinat: GPS / OpenStreetMap / Google Maps
+            // =====================================================================
             const locationsJKPI = [
-                // Venue Utama
+
+                // ── VENUE UTAMA ──────────────────────────────────────────────────
                 {
-                    name: "Hotel Ternate Kota",
+                    name: "Hotel Bela Internasional Ternate",
                     category: "venue-main",
-                    lat: 0.7893,
-                    lng: 127.3614,
-                    description: "Venue utama penyelenggaraan sidang pleno dan seminar JKPI 2026",
-                    distance: "Pusat Kota",
-                    time: "0 menit",
+                    lat: 0.7785883580265973,
+                    lng: 127.37645357753993,
+                    address: "Jl. Boulvard, Kel. Kalumata, Ternate Selatan",
+                    description: "Venue utama Simposium Internasional Pulau-Pulau Penghasil Rempah dan Rapat Kerja Nasional JKPI 2026 (24 Agustus 2026)",
+                    distance: "±1.0 km dari pusat kota",
+                    time: "±5 menit",
                     icon: "bi-building-fill",
                     color: "#667eea",
-                    image: "{{ asset('culture3.jpg') }}"
+                    image: "{{ asset('assets/img/hotel-bela.jpg') }}"
                 },
 
-                // Heritage Sites
+                // ── SITUS HERITAGE ───────────────────────────────────────────────
                 {
                     name: "Benteng Oranje",
                     category: "heritage-site",
-                    lat: 0.7825,
-                    lng: 127.3580,
-                    description: "Benteng peninggalan Belanda untuk heritage tour",
-                    distance: "1.2 km",
-                    time: "5 menit",
+                    lat: 0.792790,
+                    lng: 127.386930,
+                    address: "Jl. Hasan Esa (Ahmad Yani), Gamalama, Ternate Tengah",
+                    description: "Pameran Budaya 'Surat-Surat Dari Ternate' (23–27 Agustus 2026). Benteng peninggalan VOC Belanda abad ke-17, salah satu ikon heritage Ternate.",
+                    distance: "±1.8 km dari Hotel Bela",
+                    time: "±7 menit",
                     icon: "bi-bank",
                     color: "#f5576c",
-                    image: "{{ asset('culture3.jpg') }}"
-                },
-                {
-                    name: "Museum Kesultanan Ternate",
-                    category: "heritage-site",
-                    lat: 0.7910,
-                    lng: 127.3700,
-                    description: "Museum sejarah Kesultanan Ternate dan koleksi pusaka",
-                    distance: "1.5 km",
-                    time: "7 menit",
-                    icon: "bi-bank",
-                    color: "#f5576c",
-                    image: "{{ asset('culture3.jpg') }}"
+                    image: "{{ asset('assets/img/Benteng-Oranje.jpg') }}"
                 },
                 {
                     name: "Benteng Kastela",
                     category: "heritage-site",
-                    lat: 0.7650,
-                    lng: 127.3450,
-                    description: "Benteng bersejarah di pesisir Ternate",
-                    distance: "3.8 km",
-                    time: "12 menit",
+                    lat: 0.760991,
+                    lng: 127.312197,
+                    address: "Kel. Kastela, Kec. Ternate Selatan",
+                    description: "Master Class: Culture Activation – Benteng Kastela Geopark (25 Agustus 2026). Benteng Portugis tertua di Ternate, dibangun tahun 1522.",
+                    distance: "±7.5 km dari pusat kota",
+                    time: "±20 menit",
                     icon: "bi-bank",
                     color: "#f5576c",
-                    image: "{{ asset('culture3.jpg') }}"
+                    image: "{{ asset('assets/img/benteng-kastela.webp') }}"
                 },
                 {
-                    name: "Keraton Kesultanan Ternate",
+                    name: "Batu Angus – Geopark Ternate",
                     category: "heritage-site",
-                    lat: 0.7905,
-                    lng: 127.3695,
-                    description: "Istana Kesultanan Ternate yang masih aktif hingga kini",
-                    distance: "1.4 km",
-                    time: "6 menit",
+                    lat: 0.845295,
+                    lng: 127.364747,
+                    address: "Kel. Akehuda, Kec. Ternate Utara",
+                    description: "Master Class: Culture Activation – Geopark Batu Angus (25 Agustus 2026). Hamparan lava beku hitam sisa letusan Gunung Gamalama tahun 1673.",
+                    distance: "±9.0 km dari pusat kota",
+                    time: "±25 menit",
                     icon: "bi-bank",
                     color: "#f5576c",
-                    image: "{{ asset('culture3.jpg') }}"
-                },
-                {
-                    name: "Benteng Tolukko",
-                    category: "heritage-site",
-                    lat: 0.8125,
-                    lng: 127.3525,
-                    description: "Benteng bersejarah dengan pemandangan Gunung Gamalama",
-                    distance: "4.2 km",
-                    time: "15 menit",
-                    icon: "bi-bank",
-                    color: "#f5576c",
-                    image: "{{ asset('culture3.jpg') }}"
+                    image: "{{ asset('assets/img/batu-angus.jpeg') }}"
                 },
 
-                // Pasar Malam & Exhibition Area
+                // ── AREA PASAR MALAM & PAMERAN ────────────────────────────────────
                 {
-                    name: "Taman Merdeka",
-                    category: "market-area",
-                    lat: 0.7860,
-                    lng: 127.3640,
-                    description: "Lokasi Pasar Malam Indonesia dan pameran UMKM",
-                    distance: "800 m",
-                    time: "3 menit",
+                    name: "Salero",
+                    category: "Pameran-area",
+                    lat: 0.800323,
+                    lng: 127.385542,
+                    address: "Jl. Salero, Kel. Salero, Ternate Tengah",
+                    description: "Pentas Budaya & Expo Pameran Delegasi JKPI – Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta JKPI (24–27 Agustus 2026).",
+                    distance: "±0.5 km dari pusat kota",
+                    time: "±3 menit",
                     icon: "bi-shop",
-                    color: "#00f2fe",
-                    image: "{{ asset('culture3.jpg') }}"
+                    color: "#00b4d8",
+                    image: "{{ asset('assets/img/kadaton.jpg') }}"
                 },
                 {
-                    name: "Gamalama Mall",
+                    name: "Tongle ",
                     category: "market-area",
-                    lat: 0.7820,
-                    lng: 127.3590,
-                    description: "Area pameran produk unggulan daerah",
-                    distance: "1.1 km",
-                    time: "5 menit",
+                    lat: 0.786909,
+                    lng: 127.377228,
+                    address: "Kec. Ternate Tengah, Kota Ternate, Maluku Utara",
+                    description: "Festival Gastronomi – Cerminan Identitas Budaya Lokal dan Sarana Pelestarian Tradisi (25–26 Agustus 2026).",
+                    distance: "±2.0 km dari Hotel Bela",
+                    time: "±8 menit",
                     icon: "bi-shop",
-                    color: "#00f2fe",
-                    image: "{{ asset('culture3.jpg') }}"
-                },
-                {
-                    name: "Pasar Bastiong",
-                    category: "market-area",
-                    lat: 0.7755,
-                    lng: 127.3615,
-                    description: "Pasar tradisional untuk pameran kuliner nusantara",
-                    distance: "2.0 km",
-                    time: "8 menit",
-                    icon: "bi-shop",
-                    color: "#00f2fe",
-                    image: "{{ asset('culture3.jpg') }}"
+                    color: "#00b4d8",
+                    image: "{{ asset('assets/img/tongole.jpg') }}"
                 },
 
-                // Workshop Rooms
+                // ── RUANG WORKSHOP / MASTER CLASS ─────────────────────────────────
                 {
-                    name: "Gedung DPRD Kota Ternate",
+                    name: "Kedaton Sultan Ternate",
                     category: "workshop-room",
-                    lat: 0.7870,
-                    lng: 127.3680,
-                    description: "Ruang workshop dan seminar pelestarian pusaka",
-                    distance: "1.0 km",
-                    time: "4 menit",
+                    lat: 0.800478,
+                    lng: 127.384327,
+                    address: "Jl. Sultan Khairun, Soa Sio, Ternate Tengah",
+                    description: "Gala Dinner – Jamuan Makan Malam Kebudayaan (23 Agustus 2026) & Master Class: Economic Culture – Pendopo Kesultanan Ternate (25 Agustus 2026).",
+                    distance: "±0.3 km dari pusat kota",
+                    time: "±2 menit",
                     icon: "bi-people-fill",
                     color: "#38f9d7",
-                    image: "{{ asset('culture3.jpg') }}"
+                    image: "{{ asset('assets/img/kadaton.jpg') }}"
                 },
                 {
-                    name: "Kampus IAIN Ternate",
+                    name: "CAGS (Cultural & Art Gathering Space)",
                     category: "workshop-room",
-                    lat: 0.7720,
-                    lng: 127.3520,
-                    description: "Lokasi diskusi kelompok dan pelatihan konservasi",
-                    distance: "2.5 km",
-                    time: "9 menit",
+                    lat: 0.786909,
+                    lng: 127.377228,
+                    address: "Kec. Ternate Tengah, Kota Ternate, Maluku Utara",
+                    description: "Festival Gastronomi – Cerminan Identitas Budaya Lokal dan Sarana Pelestarian Tradisi (25–26 Agustus 2026).",
+                    distance: "±2.0 km dari Hotel Bela",
+                    time: "±10 menit",
                     icon: "bi-people-fill",
                     color: "#38f9d7",
-                    image: "{{ asset('culture3.jpg') }}"
-                },
-                {
-                    name: "Hotel Bela Internasional",
-                    category: "workshop-room",
-                    lat: 0.7880,
-                    lng: 127.3625,
-                    description: "Ruang seminar dan workshop ekonomi kreatif",
-                    distance: "1.2 km",
-                    time: "5 menit",
-                    icon: "bi-people-fill",
-                    color: "#38f9d7",
-                    image: "{{ asset('culture3.jpg') }}"
+                    image: "{{ asset('assets/img/tongole.jpg') }}"
                 },
 
-                // Stage Culture
+                // ── PANGGUNG SENI / STAGE ─────────────────────────────────────────
                 {
-                    name: "Stadion Gelora Kie Raha",
+                    name: "Salero – Panggung Utama Karnaval",
                     category: "stage-culture",
-                    lat: 0.7950,
-                    lng: 127.3750,
-                    description: "Panggung utama pertunjukan seni budaya nusantara",
-                    distance: "1.8 km",
-                    time: "8 menit",
+                    lat: 0.800323,
+                    lng: 127.385542,
+                    address: "Jl. Salero, Kel. Salero, Ternate Tengah",
+                    description: "Pawai Budaya dan Karnaval Delegasi JKPI (27 Agustus 2026) & Gelar Budaya serta Penyerahan Pataka ke Kota Bandung (28 Agustus 2026).",
+                    distance: "±0.5 km dari pusat kota",
+                    time: "±3 menit",
                     icon: "bi-music-note-beamed",
-                    color: "#fee140",
-                    image: "{{ asset('culture3.jpg') }}"
+                    color: "#f77f00",
+                    image: "{{ asset('assets/img/kadaton.jpg') }}"
                 },
                 {
-                    name: "Taman Budaya Sultan Baabullah",
+                    name: "Nusantara Raya Run – Start/Finish",
                     category: "stage-culture",
-                    lat: 0.7840,
-                    lng: 127.3620,
-                    description: "Venue pertunjukan tari tradisional dan seni budaya",
-                    distance: "900 m",
-                    time: "4 menit",
-                    icon: "bi-music-note-beamed",
-                    color: "#fee140",
-                    image: "{{ asset('culture3.jpg') }}"
-                },
-                {
-                    name: "Lapangan Ahmad Yani",
-                    category: "stage-culture",
-                    lat: 0.7885,
-                    lng: 127.3605,
-                    description: "Area pertunjukan seni jalanan dan festival kuliner",
-                    distance: "1.0 km",
-                    time: "4 menit",
-                    icon: "bi-music-note-beamed",
-                    color: "#fee140",
-                    image: "{{ asset('culture3.jpg') }}"
+                    lat: 0.800323,
+                    lng: 127.385542,
+                    address: "Kawasan Benteng Oranje – Jl. Ahmad Yani, Ternate Tengah",
+                    description: "Ajang Lari Nasional – Memadukan Olahraga, Semangat Persatuan, dan Promosi Budaya & Pariwisata Daerah (28 Agustus 2026).",
+                    distance: "±1.5 km dari Hotel Bela",
+                    time: "±6 menit",
+                    icon: "bi-flag-fill",
+                    color: "#f77f00",
+                    image: "{{ asset('assets/img/Benteng-Oranje.jpg') }}"
                 }
             ];
 
@@ -642,28 +574,27 @@
             let markersJKPI = [];
             let markerClusterGroupJKPI = L.markerClusterGroup();
 
-            // Add markers with INLINE STYLED buttons
+            // Add markers
             locationsJKPI.forEach(location => {
                 const marker = L.marker([location.lat, location.lng], {
                     icon: createCustomIconJKPI(location.icon, location.color)
                 }).bindPopup(`
                 <div class="popup-content-jkpi">
-                    <img src="${location.image}" alt="${location.name}" class="popup-image-jkpi" loading="lazy" onerror="this.src='{{ asset('culture3.jpg') }}'">
+                    <img src="${location.image}" alt="${location.name}" class="popup-image-jkpi" loading="lazy" onerror="this.src='{{ asset('assets/img/JKPI-2025/12.JPG') }}'">
                     <div class="popup-body-jkpi">
                         <h4>${location.name}</h4>
+                        <p><i class="bi bi-pin-map-fill" style="color:#099aa7;"></i> <small>${location.address}</small></p>
                         <p>${location.description}</p>
                         <div class="distance-info">
                             <span><i class="bi bi-geo-alt-fill"></i> ${location.distance}</span>
                             <span><i class="bi bi-clock-fill"></i> ${location.time}</span>
                         </div>
-                        
-                        <!-- Google Maps Button dengan FULL INLINE STYLE -->
-                        <a href="#" onclick="openGoogleMapsRoute(${location.lat}, ${location.lng}, '${location.name}'); return false;" 
-                           style="display: block; width: 100%; margin-top: 12px; padding: 10px 15px; background: linear-gradient(135deg, #099aa7 0%, #099aa7 100%); color: white !important; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(66, 133, 244, 0.3); border: none; cursor: pointer; transition: all 0.3s ease;">
+
+                        <!-- Google Maps Button -->
+                        <a href="#" onclick="openGoogleMapsRoute(${location.lat}, ${location.lng}, '${location.name}'); return false;"
+                           style="display: block; width: 100%; margin-top: 12px; padding: 10px 15px; background: linear-gradient(135deg, #099aa7 0%, #077b86 100%); color: white !important; text-align: center; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; box-shadow: 0 3px 10px rgba(9,154,167,0.3); border: none; cursor: pointer;">
                             <i class="bi bi-map" style="margin-right: 6px;"></i>Dapatkan Rute
                         </a>
-                        
-                       
                     </div>
                 </div>
             `, {
@@ -680,7 +611,8 @@
 
             // Functions
             function resetMapJKPI() {
-                mapJKPI.setView([0.7893, 127.3614], 13);
+                // Reset ke pusat kota Ternate (koordinat real)
+                mapJKPI.setView([0.7893, 127.3814], 13);
                 markerClusterGroupJKPI.clearLayers();
                 markersJKPI.forEach(marker => markerClusterGroupJKPI.addLayer(marker));
             }
@@ -716,9 +648,6 @@
                 imperial: false,
                 position: 'bottomleft'
             }).addTo(mapJKPI);
-
-            // Update counter
-            document.getElementById('total-locations-jkpi').textContent = locationsJKPI.length;
         </script>
     @endpush
 
