@@ -915,13 +915,13 @@
                                         Pre Event
                                     </button>
                                 </li>
-                                <li class="nav-item" role="presentation">
+                                {{-- <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="hari1-tab" data-bs-toggle="pill"
                                         data-bs-target="#hari1" type="button" role="tab" aria-controls="hari1"
                                         aria-selected="false">
                                         23 Agustus
                                     </button>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="hari2-tab" data-bs-toggle="pill"
                                         data-bs-target="#hari2" type="button" role="tab" aria-controls="hari2"
@@ -974,17 +974,24 @@
                                         </p>
                                     </div>
                                     <div class="event-item">
+                                        <h4 class="event-name">Gala Dinner</h4>
+                                        <p class="event-datetime">23 Agustus 2026</p>
+                                        <p class="event-description">Jamuan Makan Malam Kebudayaan</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Kadaton Sultan
+                                        </p>
+                                    </div>
+                                    {{-- <div class="event-item">
                                         <h4 class="event-name">Pentas Budaya dan Expo Pameran</h4>
                                         <p class="event-datetime">24 – 27 Agustus 2026</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
                                             Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
                                             JKPI</p>
                                         <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Salero</p>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
-                            <!-- 23 Agustus -->
+                            {{-- <!-- 23 Agustus -->
                             <div class="tab-pane fade" id="hari1" role="tabpanel" aria-labelledby="hari1-tab">
                                 <div class="event-list">
                                     <div class="event-item">
@@ -994,15 +1001,9 @@
                                         <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
                                         </p>
                                     </div>
-                                    <div class="event-item">
-                                        <h4 class="event-name">Gala Dinner</h4>
-                                        <p class="event-datetime">23 Agustus 2026</p>
-                                        <p class="event-description">Jamuan Makan Malam Kebudayaan</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Kadaton Sultan
-                                        </p>
-                                    </div>
+                                   
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <!-- 24 Agustus -->
                             <div class="tab-pane fade" id="hari2" role="tabpanel" aria-labelledby="hari2-tab">
