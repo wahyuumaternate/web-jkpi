@@ -46,5 +46,16 @@
                 <span class="menu-title">Daftar Hadir</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <i class="mdi mdi-logout menu-icon"></i>
+                <span class="menu-title">Logout</span>
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
+        </li>
     </ul>
 </nav>
