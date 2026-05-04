@@ -45,7 +45,7 @@ class DashboardController extends Controller
             'unverified' => Peserta::where('status', 'unverified')->count(),
             'cancelled' => Peserta::where('status', 'cancelled')->count(),
             'email_verified' => Peserta::whereNotNull('email_verified_at')->count(),
-            'butuh_hotel' => Peserta::where('akomodasi_hotel', '!=', '')->whereNotNull('akomodasi_hotel')->count(),
+            // 'butuh_hotel' => Peserta::where('akomodasi_hotel', '!=', '')->whereNotNull('akomodasi_hotel')->count(),
         ];
 
         return view('admin.dashboard.index', compact('peserta', 'stats'));

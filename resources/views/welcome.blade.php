@@ -9,8 +9,6 @@
     {{-- Basic Meta Tags --}}
     <title>Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia | Jaringan Kota Pusaka Indonesia</title>
 
-
-
     <meta name="description"
         content="Website Resmi Rakernas XII JKPI 2026 di Ternate. Rapat Kerja Nasional Jaringan Kota Pusaka Indonesia membahas pelestarian warisan budaya dengan tema Pusaka Ternate, Pusaka Dunia. Daftar sekarang!">
 
@@ -67,8 +65,8 @@
   "name": "Rakernas XII JKPI 2026",
   "description": "Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia dengan tema Pusaka Ternate, Pusaka Dunia",
   "image": "{{ asset('assets/img/JKPI-2025/4.JPG') }}",
-  "startDate": "2026-03-15",
-  "endDate": "2026-03-18",
+  "startDate": "2026-08-26",
+  "endDate": "2026-08-30",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   "location": {
@@ -472,7 +470,6 @@
             }
         }
 
-
         @keyframes slide {
             0% {
                 background-position: 0 0;
@@ -521,7 +518,6 @@
             }
         }
 
-        /* Image Hover Effect */
         .image-hover-wrapper {
             position: relative;
             overflow: hidden;
@@ -540,7 +536,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* Optional: Overlay effect on hover */
         .image-hover-wrapper::before {
             content: '';
             position: absolute;
@@ -561,7 +556,6 @@
         .service-card {
             background: linear-gradient(135deg, #099aa715, #099aa715) !important;
             color: #ffffff !important;
-
         }
     </style>
 </head>
@@ -571,24 +565,18 @@
 
     @include('partials.header')
 
-
     <main class="main">
 
         <!-- Hero Section -->
         <section id="hero" class="hero section"
             style="background: linear-gradient(135deg, rgba(9, 154, 167, 0.302) 0%, rgba(7, 123, 134, 0.92) 100%), url('{{ asset('culture3.jpg') }}') center/cover no-repeat; min-height: 100vh; position: relative; overflow: hidden; background-blend-mode: multiply;">
 
-            <!-- Sketch Overlay - Subtle Background -->
             <div
                 style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('{{ asset('culture3.jpg') }}') center/cover no-repeat; opacity: 0.12; mix-blend-mode: overlay; filter: contrast(1.05) brightness(1.0);">
             </div>
-
-            <!-- Subtle Pattern -->
             <div
                 style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.02) 35px, rgba(255,255,255,.02) 70px); animation: slide 20s linear infinite;">
             </div>
-
-            <!-- Vignette Effect for Focus -->
             <div
                 style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.2) 100%);">
             </div>
@@ -597,16 +585,12 @@
                 <div class="row align-items-center" style="min-height: 90vh;">
                     <div class="col-lg-12 text-center">
                         <div class="hero-content" data-aos="fade-up" data-aos-delay="200">
-
-                            <!-- Badge -->
                             <div class="badge-container mb-4 mt-5" data-aos="zoom-in" data-aos-delay="300">
                                 <span
                                     style="background: rgba(255, 255, 255, 0.30); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; padding: 12px 30px; border-radius: 50px; font-weight: 600; font-size: 0.95rem; letter-spacing: 1px; border: 2px solid rgba(255,255,255,0.5); box-shadow: 0 8px 32px rgba(0,0,0,0.3); display: inline-block;">
                                     <i class="bi bi-geo-alt-fill me-2"></i>RAKERNAS JARINGAN KOTA PUSAKA INDONESIA XII
                                 </span>
                             </div>
-
-                            <!-- Main Title -->
                             <h1 data-aos="fade-up" data-aos-delay="400"
                                 style="color: #fff; font-size: 4.5rem; font-weight: 900; text-shadow: 3px 3px 20px rgba(0,0,0,0.5), 1px 1px 8px rgba(0,0,0,0.7); margin-bottom: 30px; line-height: 1.2; letter-spacing: -1px;">
                                 PUSAKA TERNATE<br>
@@ -614,61 +598,43 @@
                                     style="color: #FFFFFF; font-size: 5rem; text-shadow: 3px 3px 20px rgba(0,0,0,0.5), 1px 1px 8px rgba(0,0,0,0.7), 0 0 20px rgba(255,255,255,0.3);">PUSAKA
                                     DUNIA</span>
                             </h1>
-
-                            <!-- Subtitle -->
                             <p data-aos="fade-up" data-aos-delay="500"
                                 style="color: rgba(255,255,255,0.98); font-size: 1.4rem; max-width: 900px; margin: 0 auto 50px; line-height: 1.8; text-shadow: 2px 2px 12px rgba(0,0,0,0.5), 1px 1px 4px rgba(0,0,0,0.7); font-weight: 400;">
-                                Kota Ternate Dengan Bangga Menjadi Tuan Rumah Rakernas JKPI Ke-XII Tahun
-                                2026<br>
+                                Kota Ternate Dengan Bangga Menjadi Tuan Rumah Rakernas JKPI Ke-XII Tahun 2026<br>
                                 <strong style="font-weight: 700;">TERNATE: EPISENTRUM REMPAH DUNIA</strong>
                             </p>
-
-                            <!-- CTA Buttons -->
                             <div data-aos="fade-up" data-aos-delay="700" style="margin-bottom: 40px;">
                                 <a href="{{ url('/registrasi') }}"
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4), 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; border: none;">
                                     <i class="bi bi-pencil-square me-2"></i>DAFTAR SEKARANG
                                 </a>
-
                             </div>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </section><!-- /Hero Section -->
 
         <!-- Tentang JKPI Section -->
         <section id="tentang" class="home-about section">
-
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-                <!-- Judul Tengah -->
                 <div class="row">
                     <div class="section-title col-lg-8 mx-auto text-center" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Tentang JKPI</h2>
                     </div>
-
                 </div>
-
-                <!-- Konten Teks Kiri dan Gambar Kanan -->
                 <div class="row align-items-center mb-5 pb-2">
-                    <!-- Teks di Kiri -->
                     <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                         <p class="lead-description mb-4">
-                            Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang
-                            menghimpun
+                            Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang menghimpun
                             kabupaten dan kota di Indonesia yang berkomitmen terhadap pelestarian pusaka, baik berwujud
                             <em>(tangible heritage)</em> maupun tidak berwujud <em>(intangible heritage)</em>, sebagai
                             bagian dari
                             pembangunan daerah yang berkelanjutan. JKPI didirikan pada 25 Oktober 2008 di Surakarta,
-                            bertepatan dengan penyelenggaraan
-                            Konferensi dan Pameran Organisasi Kota Pusaka Eropa–Asia (OWHC Euro-Asia) Tahun
-                            2008, yang
-                            melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak berdiri, JKPI
+                            bertepatan dengan penyelenggaraan Konferensi dan Pameran Organisasi Kota Pusaka Eropa–Asia
+                            (OWHC Euro-Asia) Tahun
+                            2008, yang melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak
+                            berdiri, JKPI
                             berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah daerah dalam
                             pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI telah
                             beranggotakan 79 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
@@ -676,8 +642,6 @@
                             pembangunan berkelanjutan.
                         </p>
                     </div>
-
-                    <!-- Gambar di Kanan -->
                     <div class="col-lg-6" data-aos="fade-left" data-aos-delay="250">
                         <div class="image-hover-wrapper">
                             <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Tentang JKPI"
@@ -685,31 +649,20 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
         </section><!-- /Tentang JKPI Section -->
 
         <!-- Tujuan Penyelenggaraan Section -->
         <section id="tujuan" class="featured-services section light-background">
-
             <div class="container section-title" data-aos="fade-up">
                 <h2>Tujuan Penyelenggaraan JKPI</h2>
                 <p>Rakernas JKPI XII 2026 diselenggarakan dengan berbagai tujuan strategis untuk kemajuan pelestarian
                     pusaka Indonesia</p>
             </div>
-
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="row gy-4">
-
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-card">
-                            {{-- <div class="service-icon">
-                                <i class="fas fa-landmark"></i>
-                            </div> --}}
                             <div class="service-content">
                                 <h3>Memperkuat Kolaborasi</h3>
                                 <p>Membangun sinergi antar kota pusaka dalam melestarikan situs sejarah, merevitalisasi
@@ -718,12 +671,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-card">
-                            {{-- <div class="service-icon">
-                                <i class="fas fa-users"></i>
-                            </div> --}}
                             <div class="service-content">
                                 <h3>Berbagi Pengalaman</h3>
                                 <p>Forum diskusi nasional yang mempertemukan kepala daerah dan pemangku kepentingan
@@ -732,12 +681,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-card">
-                            {{-- <div class="service-icon">
-                                <i class="fas fa-store"></i>
-                            </div> --}}
                             <div class="service-content">
                                 <h3>Mengembangkan Ekonomi Kreatif</h3>
                                 <p>Mendorong pertumbuhan UMKM dan ekonomi kreatif lokal melalui promosi produk unggulan
@@ -745,12 +690,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="service-card">
-                            {{-- <div class="service-icon">
-                                <i class="fas fa-book-open"></i>
-                            </div> --}}
                             <div class="service-content">
                                 <h3>Edukasi dan Pelatihan</h3>
                                 <p>Menyelenggarakan seminar dan workshop tentang konservasi pusaka, arsitektur heritage,
@@ -758,12 +699,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="service-card">
-                            {{-- <div class="service-icon">
-                                <i class="fas fa-globe"></i>
-                            </div> --}}
                             <div class="service-content">
                                 <h3>Kerjasama Internasional</h3>
                                 <p>Membangun jaringan kerjasama dengan organisasi internasional dan negara lain dalam
@@ -771,12 +708,8 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="service-card">
-                            {{-- <div class="service-icon">
-                                <i class="fas fa-chart-line"></i>
-                            </div> --}}
                             <div class="service-content">
                                 <h3>Pariwisata Berkelanjutan</h3>
                                 <p>Mengembangkan destinasi wisata pusaka yang memberikan dampak ekonomi positif bagi
@@ -784,18 +717,13 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </section><!-- /Tujuan Section -->
 
         <!-- Jaringan Kota Pusaka Section -->
         <section id="jaringan" class="home-about section">
-
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="row">
                     <div class="col-lg-10 mx-auto text-center mb-5" data-aos="fade-up" data-aos-delay="150">
                         <h2 class="section-heading">Jaringan Kota Pusaka Indonesia</h2>
@@ -804,7 +732,6 @@
                             pusaka.</p>
                     </div>
                 </div>
-
                 <div class="row gy-4">
                     <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
                         <div class="stat-item text-center">
@@ -824,11 +751,9 @@
                                 <span class="purecounter" data-purecounter-start="0" data-purecounter-end="38"
                                     data-purecounter-duration="1">38</span>
                             </div>
-                            <div class="stat-label" style="font-size: 1.1rem; color: #666;">Provinsi
-                            </div>
+                            <div class="stat-label" style="font-size: 1.1rem; color: #666;">Provinsi</div>
                         </div>
                     </div>
-
                     <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="stat-item text-center">
                             <div class="stat-number"
@@ -850,9 +775,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </section><!-- /Jaringan Kota Pusaka Section -->
 
         <!-- Rangkaian Kegiatan Section -->
@@ -860,11 +783,10 @@
 
             <div class="container section-title" data-aos="fade-up">
                 <h2>Rangkaian Kegiatan JKPI 2026</h2>
-                <p>Sepekan penuh dengan kegiatan menarik dan kesempatan belajar</p>
+                <p>26 – 30 Agustus 2026 &bull; Kota Ternate, Maluku Utara</p>
             </div>
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="departments-showcase">
 
                     <div class="featured-department" data-aos="fade-up" data-aos-delay="200">
@@ -875,8 +797,8 @@
                                     <h2 class="department-title">Simposium Pulau-Pulau Penghasil Rempah</h2>
                                     <p class="department-description">Untuk pertama kalinya, Ternate akan menjadi tuan
                                         rumah Simposium Pulau-Pulau Penghasil Rempah berskala internasional. Momentum
-                                        strategis memperkenalkan kualitas cengkeh dan rempah Ternate yang
-                                        tak tertandingi.</p>
+                                        strategis memperkenalkan kualitas cengkeh dan rempah Ternate yang tak
+                                        tertandingi.</p>
                                     <div class="department-features">
                                         <div class="feature-item">
                                             <i class="fas fa-check-circle"></i>
@@ -904,10 +826,14 @@
                         </div>
                     </div>
 
-                    <!-- Tab Navigation -->
+                    <!-- =============================================
+                         TAB NAVIGATION — diperbarui sesuai PDF PIC
+                         Tanggal resmi: 26 - 30 Agustus 2026
+                    ============================================== -->
                     <div class="event-tabs-container" data-aos="fade-up" data-aos-delay="300">
                         <div class="d-flex justify-content-center">
                             <ul class="nav nav-pills event-tabs mb-5" id="eventTabs" role="tablist">
+
                                 <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pre-event-tab" data-bs-toggle="pill"
                                         data-bs-target="#pre-event" type="button" role="tab"
@@ -915,48 +841,47 @@
                                         Pre Event
                                     </button>
                                 </li>
-                                {{-- <li class="nav-item" role="presentation">
+
+                                <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="hari1-tab" data-bs-toggle="pill"
                                         data-bs-target="#hari1" type="button" role="tab" aria-controls="hari1"
-                                        aria-selected="false">
-                                        23 Agustus
-                                    </button>
-                                </li> --}}
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="hari2-tab" data-bs-toggle="pill"
-                                        data-bs-target="#hari2" type="button" role="tab" aria-controls="hari2"
-                                        aria-selected="false">
-                                        24 Agustus
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="hari3-tab" data-bs-toggle="pill"
-                                        data-bs-target="#hari3" type="button" role="tab" aria-controls="hari3"
-                                        aria-selected="false">
-                                        25 Agustus
-                                    </button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="hari4-tab" data-bs-toggle="pill"
-                                        data-bs-target="#hari4" type="button" role="tab" aria-controls="hari4"
                                         aria-selected="false">
                                         26 Agustus
                                     </button>
                                 </li>
+
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="hari5-tab" data-bs-toggle="pill"
-                                        data-bs-target="#hari5" type="button" role="tab" aria-controls="hari5"
+                                    <button class="nav-link" id="hari2-tab" data-bs-toggle="pill"
+                                        data-bs-target="#hari2" type="button" role="tab" aria-controls="hari2"
                                         aria-selected="false">
                                         27 Agustus
                                     </button>
                                 </li>
+
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="hari6-tab" data-bs-toggle="pill"
-                                        data-bs-target="#hari6" type="button" role="tab" aria-controls="hari6"
+                                    <button class="nav-link" id="hari3-tab" data-bs-toggle="pill"
+                                        data-bs-target="#hari3" type="button" role="tab" aria-controls="hari3"
                                         aria-selected="false">
                                         28 Agustus
                                     </button>
                                 </li>
+
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="hari4-tab" data-bs-toggle="pill"
+                                        data-bs-target="#hari4" type="button" role="tab" aria-controls="hari4"
+                                        aria-selected="false">
+                                        29 Agustus
+                                    </button>
+                                </li>
+
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="hari5-tab" data-bs-toggle="pill"
+                                        data-bs-target="#hari5" type="button" role="tab" aria-controls="hari5"
+                                        aria-selected="false">
+                                        30 Agustus
+                                    </button>
+                                </li>
+
                             </ul>
                         </div>
 
@@ -967,201 +892,200 @@
                                 aria-labelledby="pre-event-tab">
                                 <div class="event-list">
                                     <div class="event-item">
-                                        <h4 class="event-name">Pameran Budaya</h4>
-                                        <p class="event-datetime">23 – 27 Agustus 2026</p>
-                                        <p class="event-description">Surat-Surat Dari Ternate</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
-                                        </p>
+                                        <h4 class="event-name">Welcome Dinner</h4>
+                                        <p class="event-datetime">25 Agustus 2026</p>
+                                        <p class="event-description">Jamuan Makan Malam Kebudayaan</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Pendopo Kediaman
+                                            Wali Kota Ternate</p>
                                     </div>
                                     <div class="event-item">
-                                        <h4 class="event-name">Gala Dinner</h4>
-                                        <p class="event-datetime">23 Agustus 2026</p>
-                                        <p class="event-description">Jamuan Makan Malam Kebudayaan</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Kadaton Sultan
+                                        <h4 class="event-name">Pameran Budaya</h4>
+                                        <p class="event-datetime">25 – 30 Agustus 2026</p>
+                                        <p class="event-description">Pameran "Surat-Surat Dari Ternate"</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                         </p>
                                     </div>
-                                    {{-- <div class="event-item">
-                                        <h4 class="event-name">Pentas Budaya dan Expo Pameran</h4>
-                                        <p class="event-datetime">24 – 27 Agustus 2026</p>
-                                        <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
-                                            Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
-                                            JKPI</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Salero</p>
-                                    </div> --}}
                                 </div>
                             </div>
 
-                            {{-- <!-- 23 Agustus -->
+                            <!-- 26 Agustus: Pembukaan, Simposium, Rakernas, Pentas Budaya & Expo -->
                             <div class="tab-pane fade" id="hari1" role="tabpanel" aria-labelledby="hari1-tab">
                                 <div class="event-list">
                                     <div class="event-item">
-                                        <h4 class="event-name">Pameran Budaya</h4>
-                                        <p class="event-datetime">23 – 27 Agustus 2026</p>
-                                        <p class="event-description">Surat-Surat Dari Ternate</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
-                                        </p>
+                                        <h4 class="event-name">Pembukaan Rakernas JKPI ke-XII</h4>
+                                        <p class="event-datetime">26 Agustus 2026</p>
+                                        <p class="event-description">Pembukaan resmi rangkaian kegiatan Rakernas JKPI
+                                            ke-XII</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Bela Hotel</p>
                                     </div>
-                                   
-                                </div>
-                            </div> --}}
-
-                            <!-- 24 Agustus -->
-                            <div class="tab-pane fade" id="hari2" role="tabpanel" aria-labelledby="hari2-tab">
-                                <div class="event-list">
                                     <div class="event-item">
                                         <h4 class="event-name">Simposium Internasional</h4>
-                                        <p class="event-datetime">24 Agustus 2026</p>
+                                        <p class="event-datetime">26 Agustus 2026</p>
                                         <p class="event-description">Tema Simposium: "Pulau-Pulau Penghasil Rempah"</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Hotel Bela</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Bela Hotel</p>
                                     </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Rapat Kerja Nasional</h4>
-                                        <p class="event-datetime">24 Agustus 2026</p>
+                                        <p class="event-datetime">26 Agustus 2026</p>
                                         <p class="event-description">Penyusunan Kebijakan dan Memperkuat Kolaborasi
                                             Dalam Pelestarian Kota Pusaka Secara Berkelanjutan</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Hotel Bela</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Bela Hotel</p>
                                     </div>
                                     <div class="event-item">
-                                        <h4 class="event-name">Pentas Budaya dan Expo Pameran</h4>
-                                        <p class="event-datetime">24 – 27 Agustus 2026</p>
+                                        <h4 class="event-name">Pentas Budaya, Expo dan Pameran Booth Kota JKPI</h4>
+                                        <p class="event-datetime">26 – 29 Agustus 2026</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
                                             Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
                                             JKPI</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Salero</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Lapangan
+                                            Ngaralamo Salero</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 25 Agustus -->
-                            <div class="tab-pane fade" id="hari3" role="tabpanel" aria-labelledby="hari3-tab">
+                            <!-- 27 Agustus: Master Class, Festival Gastronomi, Ladies Program -->
+                            <div class="tab-pane fade" id="hari2" role="tabpanel" aria-labelledby="hari2-tab">
                                 <div class="event-list">
                                     <div class="event-item">
                                         <h4 class="event-name">Master Class</h4>
-                                        <p class="event-datetime">25 Agustus 2026</p>
+                                        <p class="event-datetime">27 Agustus 2026</p>
                                         <p class="event-description">
-                                            Economic Culture &amp; Pengelolaan Museum – Benteng Orange<br>
-                                            Living Museum – Benteng Kastela<br>
-                                            Gastronomi &amp; Bambu – Tongole<br>
-                                            Geopark – Batu Angus<br>
-                                            Grafis – Benteng Tulokko
+                                            <strong>Economic Culture &amp; Pengelolaan Museum</strong> – Benteng
+                                            Oranje<br>
+                                            <strong>Living Museum</strong> – Benteng Kastela<br>
+                                            <strong>Gastronomi Rempah</strong> – Kel. Tongole<br>
+                                            <strong>Pengolahan Bambu</strong> – Buku Bendera<br>
+                                            <strong>Residensi Grafis</strong> – Benteng Tolukko
                                         </p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Tongole</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Berbagai Titik
+                                            Cagar Budaya</p>
                                     </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Festival Gastronomi</h4>
-                                        <p class="event-datetime">25 – 26 Agustus 2026</p>
+                                        <p class="event-datetime">27 – 28 Agustus 2026</p>
                                         <p class="event-description">Cerminan Identitas Budaya Lokal dan Sebagai Sarana
                                             Pelestarian Tradisi</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Tongle</p>
-                                    </div>
-                                    <div class="event-item">
-                                        <h4 class="event-name">Ladies Program</h4>
-                                        <p class="event-datetime">25 – 26 Agustus 2026</p>
-                                        <p class="event-description">Pengenalan Keanekaragaman Warisan Budaya Baik
-                                            Kuliner, Kerajinan, dan Seni Budaya</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                         </p>
                                     </div>
                                     <div class="event-item">
-                                        <h4 class="event-name">Pentas Budaya dan Expo Pameran</h4>
-                                        <p class="event-datetime">24 – 27 Agustus 2026</p>
+                                        <h4 class="event-name">Ladies Program</h4>
+                                        <p class="event-datetime">27 – 28 Agustus 2026</p>
+                                        <p class="event-description">Pengenalan Keanekaragaman Warisan Budaya Baik
+                                            Kuliner, Kerajinan, dan Seni Budaya</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                            dan Beberapa Titik Pusat Kreatif</p>
+                                    </div>
+                                    <div class="event-item">
+                                        <h4 class="event-name">Pentas Budaya, Expo dan Pameran Booth Kota JKPI</h4>
+                                        <p class="event-datetime">26 – 29 Agustus 2026</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
                                             Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
                                             JKPI</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Salero</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Lapangan
+                                            Ngaralamo Salero</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 26 Agustus -->
+                            <!-- 28 Agustus: Festival Gastronomi (lanjutan), Ladies Program (lanjutan), Pentas Budaya -->
+                            <div class="tab-pane fade" id="hari3" role="tabpanel" aria-labelledby="hari3-tab">
+                                <div class="event-list">
+                                    <div class="event-item">
+                                        <h4 class="event-name">Festival Gastronomi</h4>
+                                        <p class="event-datetime">27 – 28 Agustus 2026</p>
+                                        <p class="event-description">Cerminan Identitas Budaya Lokal dan Sebagai Sarana
+                                            Pelestarian Tradisi</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                        </p>
+                                    </div>
+                                    <div class="event-item">
+                                        <h4 class="event-name">Ladies Program</h4>
+                                        <p class="event-datetime">27 – 28 Agustus 2026</p>
+                                        <p class="event-description">Pengenalan Keanekaragaman Warisan Budaya Baik
+                                            Kuliner, Kerajinan, dan Seni Budaya</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                            dan Beberapa Titik Pusat Kreatif</p>
+                                    </div>
+                                    <div class="event-item">
+                                        <h4 class="event-name">Pentas Budaya, Expo dan Pameran Booth Kota JKPI</h4>
+                                        <p class="event-datetime">26 – 29 Agustus 2026</p>
+                                        <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
+                                            Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
+                                            JKPI</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Lapangan
+                                            Ngaralamo Salero</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 29 Agustus: Heritage City Tour, Pawai Budaya & Karnaval, Pentas Budaya -->
                             <div class="tab-pane fade" id="hari4" role="tabpanel" aria-labelledby="hari4-tab">
                                 <div class="event-list">
                                     <div class="event-item">
-                                        <h4 class="event-name">Festival Gastronomi</h4>
-                                        <p class="event-datetime">25 – 26 Agustus 2026</p>
-                                        <p class="event-description">Cerminan Identitas Budaya Lokal dan Sebagai Sarana
-                                            Pelestarian Tradisi</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Tongle</p>
-                                    </div>
-                                    <div class="event-item">
-                                        <h4 class="event-name">Ladies Program</h4>
-                                        <p class="event-datetime">25 – 26 Agustus 2026</p>
-                                        <p class="event-description">Pengenalan Keanekaragaman Warisan Budaya Baik
-                                            Kuliner, Kerajinan, dan Seni Budaya</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
-                                        </p>
-                                    </div>
-                                    <div class="event-item">
-                                        <h4 class="event-name">Pentas Budaya dan Expo Pameran</h4>
-                                        <p class="event-datetime">24 – 27 Agustus 2026</p>
-                                        <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
-                                            Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
-                                            JKPI</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Salero</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 27 Agustus -->
-                            <div class="tab-pane fade" id="hari5" role="tabpanel" aria-labelledby="hari5-tab">
-                                <div class="event-list">
-                                    <div class="event-item">
                                         <h4 class="event-name">Heritage City Tour</h4>
-                                        <p class="event-datetime">27 Agustus 2026</p>
-                                        <p class="event-description">Kunjungan Kepala Daerah Peserta JKPI di Kawasan
-                                            Cagar Budaya</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange
-                                        </p>
+                                        <p class="event-datetime">29 Agustus 2026</p>
+                                        <p class="event-description">Kunjungan Kepala Daerah Peserta JKPI ke Kawasan
+                                            Cagar Budaya dan Kadaton Kesultanan Ternate</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Kadaton
+                                            Kesultanan Ternate dan Kawasan Cagar Budaya</p>
                                     </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Pawai Budaya dan Karnaval</h4>
-                                        <p class="event-datetime">27 Agustus 2026</p>
+                                        <p class="event-datetime">29 Agustus 2026</p>
                                         <p class="event-description">Pawai Budaya Delegasi JKPI untuk Menampilkan Karya
                                             Budaya Khas Daerah</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange –
-                                            Salero</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje –
+                                            Lapangan Ngaralamo Salero</p>
                                     </div>
                                     <div class="event-item">
-                                        <h4 class="event-name">Pentas Budaya dan Expo Pameran</h4>
-                                        <p class="event-datetime">24 – 27 Agustus 2026</p>
+                                        <h4 class="event-name">Pentas Budaya, Expo dan Pameran Booth Kota JKPI</h4>
+                                        <p class="event-datetime">26 – 29 Agustus 2026</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan
                                             Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh Peserta
                                             JKPI</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Salero</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Lapangan
+                                            Ngaralamo Salero</p>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- 28 Agustus -->
-                            <div class="tab-pane fade" id="hari6" role="tabpanel" aria-labelledby="hari6-tab">
+                            <!-- 30 Agustus: Nusantara Raya Run, Gelar Budaya & Penyerahan Pataka, Penutupan -->
+                            <div class="tab-pane fade" id="hari5" role="tabpanel" aria-labelledby="hari5-tab">
                                 <div class="event-list">
                                     <div class="event-item">
                                         <h4 class="event-name">Nusantara Raya Run</h4>
-                                        <p class="event-datetime">28 Agustus 2026</p>
+                                        <p class="event-datetime">30 Agustus 2026</p>
                                         <p class="event-description">Ajang Lari Nasional yang Memadukan Olahraga,
                                             Semangat Persatuan, dan Promosi Potensi Budaya serta Pariwisata Daerah</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Benteng Orange –
-                                            Salero</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Fort to Fort</p>
                                     </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Gelar Budaya dan Penyerahan Pataka</h4>
-                                        <p class="event-datetime">28 Agustus 2026</p>
+                                        <p class="event-datetime">30 Agustus 2026</p>
                                         <p class="event-description">Ramah Tamah, Pagelaran Budaya dan Penyerahan
                                             Tanggung Jawab Penyelenggaraan dan Tuan Rumah Rakernas JKPI ke-XIII ke Kota
                                             Bandung</p>
-                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Landmark Kota
-                                            Ternate</p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Landmark Ternate
+                                        </p>
+                                    </div>
+                                    <div class="event-item">
+                                        <h4 class="event-name">Penutupan</h4>
+                                        <p class="event-datetime">30 Agustus 2026</p>
+                                        <p class="event-description">Penutupan resmi Rakernas JKPI ke-XII Ternate 2026
+                                        </p>
+                                        <p class="event-location"><i class="bi bi-geo-alt-fill"></i> Landmark Ternate
+                                        </p>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    <!-- /Tab Navigation -->
 
                 </div>
-
             </div>
-
         </section><!-- /Rangkaian Kegiatan Section -->
 
         <style>
@@ -1306,149 +1230,111 @@
             }
         </style>
 
-
-
         @include('components.sebaran-lokasi-blade')
 
         <!-- Galeri Section -->
         <section id="galeri" class="home-about section light-background">
-
             <div class="container section-title" data-aos="fade-up">
                 <h2>Galeri</h2>
                 <p>Dokumentasi visual dari persiapan dan kegiatan Rakernas XII JKPI 2026</p>
             </div>
-
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="row gy-4">
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/1.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="Galeri 1"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/2.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/2.JPG') }}" alt="Galeri 2"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/10.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/10.JPG') }}" alt="Galeri 3"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/3.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/3.JPG') }}" alt="Galeri 4"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/4.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Galeri 5"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/5.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/5.JPG') }}" alt="Galeri 6"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/6.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/6.JPG') }}" alt="Galeri 7"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/7.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/7.JPG') }}" alt="Galeri 8"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                         <div class="gallery-item">
                             <a href="{{ asset('assets/img/JKPI-2025/9.JPG') }}" class="glightbox">
                                 <img src="{{ asset('assets/img/JKPI-2025/9.JPG') }}" alt="Galeri 9"
                                     class="img-fluid">
-                                <div class="gallery-overlay">
-                                    <i class="bi bi-zoom-in"></i>
-                                    <span>Lihat Foto</span>
+                                <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
                                 </div>
                             </a>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </section><!-- /Galeri Section -->
 
         <style>
-            /* =================================
-   GALLERY STYLES
-================================= */
             .gallery-item {
                 position: relative;
                 overflow: hidden;
@@ -1476,21 +1362,17 @@
                 transition: transform 0.5s ease;
             }
 
-            /* Zoom Effect on Hover */
             .gallery-item:hover img {
                 transform: scale(1.15);
             }
 
-            /* Overlay Effect */
             .gallery-overlay {
                 position: absolute;
                 top: 0;
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background: linear-gradient(135deg,
-                        #099aa73c 0%,
-                        #099aa73d 5%);
+                background: linear-gradient(135deg, #099aa73c 0%, #099aa73d 5%);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -1527,7 +1409,6 @@
                 transform: translateY(0);
             }
 
-            /* Icon Animation */
             @keyframes zoomPulse {
 
                 0%,
@@ -1540,7 +1421,6 @@
                 }
             }
 
-            /* Responsive */
             @media (max-width: 768px) {
                 .gallery-item img {
                     height: 250px;
@@ -1561,7 +1441,6 @@
                 }
             }
 
-            /* Additional Hover Effects - Border Animation */
             .gallery-item::before {
                 content: '';
                 position: absolute;
@@ -1587,9 +1466,7 @@
         <!-- CTA Final Section -->
         <section id="cta-final" class="call-to-action section"
             style="background: linear-gradient(135deg, rgba(9, 154, 167, 0.95) 0%, rgba(7, 123, 134, 0.95) 100%); position: relative;">
-
             <div class="container" data-aos="fade-up" data-aos-delay="100">
-
                 <div class="row align-items-center text-center">
                     <div class="col-lg-12">
                         <div class="content-wrapper" style="color: #fff;">
@@ -1599,8 +1476,8 @@
                                 style="font-size: 1.3rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
                                 Mari bersama-sama memperkuat komitmen pelestarian warisan budaya Indonesia. Daftarkan
                                 diri Anda sekarang dan jadilah bagian dari gerakan pelestarian pusaka nasional di Kota
-                                Rempah Ternate.</p>
-
+                                Rempah Ternate.
+                            </p>
                             <div class="action-buttons">
                                 <a href="{{ url('/registrasi') }}"
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 20px 60px; border-radius: 50px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4); transition: all 0.3s; border: none;">
@@ -1611,7 +1488,6 @@
                                     <i class="bi bi-download me-2"></i>UNDUH BUKU PANDUAN
                                 </a>
                             </div>
-
                             <div class="stats-row mt-5"
                                 style="display: flex; justify-content: center; gap: 60px; flex-wrap: wrap;">
                                 <div class="stat-item">
@@ -1627,27 +1503,23 @@
                                 </div>
                                 <div class="stat-item">
                                     <div class="stat-number"
-                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">Agustus</div>
+                                        style="font-size: 3rem; font-weight: 900; margin-bottom: 5px;">26–30 Agt</div>
                                     <div class="stat-label" style="font-size: 1.1rem; opacity: 0.9;">2026</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </section><!-- /CTA Final Section -->
 
     </main>
 
     @include('partials.footer')
 
-    <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
-    <!-- Preloader -->
     <div id="preloader"></div>
 
     <!-- Vendor JS Files -->
@@ -1659,8 +1531,6 @@
     <script src="{{ asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
-
-    <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
     @stack('scripts')

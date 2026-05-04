@@ -65,12 +65,12 @@
                     'icon' => 'mdi-email-check',
                     'color' => 'info',
                 ],
-                [
-                    'label' => 'Butuh Hotel',
-                    'value' => $stats['butuh_hotel'],
-                    'icon' => 'mdi-office-building',
-                    'color' => 'dark',
-                ],
+                // [
+                //     'label' => 'Butuh Hotel',
+                //     'value' => $stats['butuh_hotel'],
+                //     'icon' => 'mdi-office-building',
+                //     'color' => 'dark',
+                // ],
             ];
         @endphp
 
@@ -224,43 +224,80 @@
                         <table class="table table-hover mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="text-center" style="width:60px;">No</th>
-                                    <th style="width:130px;">Kode</th>
-                                    <th>Nama / Email</th>
-                                    <th style="width:130px;">No. Telepon</th>
-                                    <th style="width:160px;">Kota/Kabupaten</th>
-                                    <th class="text-center" style="width:120px;">Status</th>
-                                    <th class="text-center" style="width:100px;">Tanggal</th>
-                                    <th class="text-center" style="width:140px;">Aksi</th>
+                                    <th>No</th>
+                                    <th>Kode</th>
+                                    <th>Peserta</th>
+                                    <th>Kontak</th>
+                                    <th>Instansi</th>
+                                    <th>Daerah</th>
+                                    <th>Kegiatan</th>
+                                    <th>Tanggal</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse ($peserta as $index => $p)
                                     <tr>
-                                        <td class="text-center fw-bold">
-                                            {{ $peserta->firstItem() + $index }}
-                                        </td>
+                                        <td>{{ $peserta->firstItem() + $index }}</td>
+
                                         <td>
-                                            <span class="badge bg-secondary font-13 fw-normal">
+                                            <span class="badge bg-secondary">
                                                 {{ $p->kode_registrasi }}
                                             </span>
                                         </td>
+
+                                        {{-- DATA PESERTA --}}
                                         <td>
-                                            <div class="fw-semibold">{{ $p->nama_lengkap }}</div>
-                                            <small class="text-muted">{{ $p->email }}</small>
-                                            @if ($p->email_verified_at)
-                                                <br>
-                                                <span class="badge bg-success mt-1">
-                                                    <i class="mdi mdi-check me-1"></i>Email Verified
-                                                </span>
+                                            <div class="fw-bold">{{ $p->nama_lengkap }}</div>
+                                            <small class="text-muted">{{ $p->jabatan }}</small><br>
+
+                                            @if ($p->foto)
+                                                <img src="{{ asset('storage/' . $p->foto) }}" width="40"
+                                                    class="mt-1 rounded">
                                             @endif
                                         </td>
-                                        <td>{{ $p->nomor_telepon }}</td>
+
+                                        {{-- KONTAK --}}
                                         <td>
-                                            <div class="fw-semibold">{{ $p->kota_kabupaten }}</div>
-                                            <small class="text-muted">{{ $p->jabatan }}</small>
+                                            <div>{{ $p->nomor_telepon }}</div>
+                                            <small class="text-muted">{{ $p->email }}</small>
+
+                                            @if ($p->email_verified_at)
+                                                <br><span class="badge bg-success mt-1">Verified</span>
+                                            @endif
                                         </td>
+
+                                        {{-- INSTANSI --}}
+                                        <td>{{ $p->instansi_organisasi }}</td>
+
+                                        {{-- DAERAH --}}
+                                        <td>{{ $p->kota_kabupaten }}</td>
+
+                                        {{-- KEGIATAN --}}
                                         <td class="text-center">
+                                            @if ($p->kegiatan && count($p->kegiatan))
+                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal"
+                                                    data-bs-target="#modalKegiatan{{ $p->id }}">
+                                                    Lihat ({{ count($p->kegiatan) }})
+                                                </button>
+                                            @else
+                                                <small class="text-muted">-</small>
+                                            @endif
+                                        </td>
+
+                                        {{-- TANGGAL --}}
+                                        <td>
+                                            <small>
+                                                Datang:
+                                                {{ \Carbon\Carbon::parse($p->tanggal_kedatangan)->format('d/m/Y') }}<br>
+                                                Pulang:
+                                                {{ \Carbon\Carbon::parse($p->tanggal_kepulangan)->format('d/m/Y') }}
+                                            </small>
+                                        </td>
+
+                                        {{-- STATUS --}}
+                                        <td>
                                             @if ($p->status === 'verified')
                                                 <span class="badge bg-success">Verified</span>
                                             @elseif ($p->status === 'unverified')
@@ -269,38 +306,61 @@
                                                 <span class="badge bg-danger">Cancelled</span>
                                             @endif
                                         </td>
-                                        <td class="text-center">
-                                            <small class="text-muted">
-                                                {{ $p->created_at->format('d/m/Y') }}
-                                            </small>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="d-flex gap-1 justify-content-center">
-                                                <a href="{{ route('admin.dashboard.show', $p->id) }}"
-                                                    class="btn btn-sm btn-primary" title="Lihat Detail">
-                                                    <i class="mdi mdi-eye"></i>
-                                                </a>
-                                                <button onclick="confirmDelete({{ $p->id }})"
-                                                    class="btn btn-sm btn-danger" title="Hapus">
-                                                    <i class="mdi mdi-trash-can"></i>
-                                                </button>
-                                            </div>
-                                            <form id="delete-form-{{ $p->id }}"
-                                                action="{{ route('admin.dashboard.destroy', $p->id) }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
+
+                                        {{-- AKSI --}}
+                                        <td>
+                                            <a href="{{ route('admin.dashboard.show', $p->id) }}"
+                                                class="btn btn-sm btn-primary">
+                                                <i class="mdi mdi-eye"></i>
+                                            </a>
+
+                                            <button onclick="confirmDelete({{ $p->id }})"
+                                                class="btn btn-sm btn-danger">
+                                                <i class="mdi mdi-trash-can"></i>
+                                            </button>
                                         </td>
                                     </tr>
+                                    {{-- ✅ MODAL TARUH DI SINI --}}
+                                    @if ($p->kegiatan && count($p->kegiatan))
+                                        <div class="modal fade" id="modalKegiatan{{ $p->id }}" tabindex="-1">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">
+                                                            Kegiatan - {{ $p->nama_lengkap }}
+                                                        </h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal"></button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        @foreach ($p->kegiatan as $k)
+                                                            <div class="mb-2">
+                                                                <span class="badge bg-info w-100 text-start p-2">
+                                                                    {{ $k }}
+                                                                </span>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" data-bs-dismiss="modal">
+                                                            Tutup
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center py-5">
-                                            <i class="mdi mdi-inbox-outline text-muted" style="font-size:3rem;"></i>
-                                            <p class="text-muted mt-2 mb-0">Tidak ada data peserta</p>
-                                        </td>
+                                        <td colspan="10" class="text-center">Tidak ada data</td>
                                     </tr>
                                 @endforelse
+
                             </tbody>
                         </table>
                     </div>

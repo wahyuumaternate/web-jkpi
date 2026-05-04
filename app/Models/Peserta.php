@@ -13,9 +13,10 @@ class Peserta extends Model
 
     protected $table = 'pendaftaran_peserta';
 
-    protected $fillable = ['nama_lengkap', 'jabatan', 'instansi_organisasi', 'nomor_telepon', 'email', 'kota_kabupaten', 'foto', 'tanggal_kedatangan', 'tanggal_kepulangan', 'akomodasi_hotel', 'email_verification_token', 'email_verified_at', 'status', 'catatan', 'kode_registrasi'];
+    protected $fillable = ['nama_lengkap', 'jabatan', 'instansi_organisasi', 'nomor_telepon', 'email', 'kota_kabupaten', 'foto', 'kegiatan', 'tanggal_kedatangan', 'tanggal_kepulangan', 'email_verification_token', 'email_verified_at', 'status', 'catatan', 'kode_registrasi'];
 
     protected $casts = [
+        'kegiatan' => 'array',
         'tanggal_kedatangan' => 'date',
         'tanggal_kepulangan' => 'date',
         'email_verified_at' => 'datetime',
@@ -117,10 +118,18 @@ class Peserta extends Model
     }
 
     /**
-     * Accessor untuk butuh hotel
+     * Accessor untuk jumlah kegiatan yang dipilih
      */
-    public function getButuhHotelAttribute()
+    public function getJumlahKegiatanAttribute()
     {
-        return strtolower($this->akomodasi_hotel) === 'ya';
+        return count($this->kegiatan ?? []);
+    }
+
+    /**
+     * Cek apakah peserta mengikuti kegiatan tertentu
+     */
+    public function mengikutiKegiatan(string $namaKegiatan): bool
+    {
+        return in_array($namaKegiatan, $this->kegiatan ?? []);
     }
 }

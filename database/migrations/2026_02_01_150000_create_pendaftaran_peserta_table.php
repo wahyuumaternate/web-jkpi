@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('jabatan');
             $table->string('instansi_organisasi');
             $table->string('nomor_telepon', 15);
-            $table->string('email')->unique();
+            $table->string('email');
 
             // Perwakilan Daerah
             $table->string('kota_kabupaten');
@@ -26,10 +26,14 @@ return new class extends Migration {
             // Upload Dokumen
             $table->string('foto')->nullable();
 
+            // Pilihan Kegiatan
+            // Menyimpan array kegiatan yang dipilih, contoh:
+            // ["Pembukaan Rakernas JKPI ke-XII", "Master Class", ...]
+            $table->json('kegiatan')->nullable();
+
             // Perjalanan dan Akomodasi
             $table->date('tanggal_kedatangan');
             $table->date('tanggal_kepulangan');
-            $table->string('akomodasi_hotel')->nullable();
 
             // Verifikasi Email
             $table->string('email_verification_token')->nullable();
