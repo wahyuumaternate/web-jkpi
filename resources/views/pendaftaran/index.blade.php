@@ -802,29 +802,51 @@
                             </h3>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Nomor Telepon <span class="required">*</span></label>
+                                    <label class="form-label">
+                                        Nomor Telepon <span class="required">*</span>
+                                        <i class="bi bi-info-circle ms-1 text-primary" data-bs-toggle="tooltip"
+                                            title="Digunakan untuk verifikasi dan konfirmasi pendaftaran"></i>
+                                    </label>
                                     <input type="text" class="form-control" id="nomor_telepon" name="nomor_telepon"
                                         placeholder="08xxxxxxxxxx">
+                                    <small class="text-muted">
+                                        Pastikan nomor WhatsApp aktif untuk menerima konfirmasi.
+                                    </small>
                                 </div>
+
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Email <span class="required">*</span></label>
+                                    <label class="form-label">
+                                        Email <span class="required">*</span>
+                                        <i class="bi bi-info-circle ms-1 text-primary" data-bs-toggle="tooltip"
+                                            title="Digunakan untuk verifikasi akun dan pengiriman informasi pendaftaran"></i>
+                                    </label>
                                     <input type="email" class="form-control" id="email" name="email"
                                         placeholder="email@domain.com">
+                                    <small class="text-muted">
+                                        Gunakan email aktif untuk proses verifikasi.
+                                    </small>
                                 </div>
                             </div>
 
                             <!-- Foto -->
-                            <h3 class="form-section-title"><i class="bi bi-camera-fill me-2"></i>Upload Foto Profil</h3>
+                            <h3 class="form-section-title"><i class="bi bi-camera-fill me-2"></i>Upload Foto Profil
+                            </h3>
                             <div class="mb-3">
-                                <label class="form-label">Foto Profil <span
-                                        class="text-muted">(Opsional)</span></label>
+                                <label class="form-label">
+                                    Foto Profil <span class="text-muted">(Opsional)</span>
+                                </label>
+
                                 <div class="custom-file-upload" onclick="document.getElementById('foto').click()">
                                     <i class="bi bi-camera-fill"></i>
                                     <p class="mb-0 small">Klik untuk upload foto</p>
                                     <small class="text-muted">Format: JPG, PNG (Max: 2MB)</small>
                                 </div>
+
                                 <input type="file" class="d-none" id="foto" name="foto"
                                     accept="image/jpeg,image/jpg,image/png" onchange="handlePhotoUpload(this)">
+
+                                <!-- pesan error -->
+                                <small class="text-danger d-none" id="fotoError"></small>
                             </div>
 
                             <!-- ===== PILIHAN KEGIATAN (flat per-activity) ===== -->
@@ -1107,7 +1129,12 @@
             </div>
         </div>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+            tooltipTriggerList.forEach(el => new bootstrap.Tooltip(el));
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let photoDataUrl = null;
@@ -1246,6 +1273,52 @@
         // Init
         updateCard();
         onEventChange();
+    </script>
+    <script>
+        function handlePhotoUpload(input) {
+            const file = input.files[0];
+            const errorEl = document.getElementById('fotoError');
+
+            if (!file) return;
+
+            const maxSize = 2 * 1024 * 1024; // 2MB
+
+            // Reset error
+            errorEl.classList.add('d-none');
+            errorEl.textContent = '';
+
+            // Validasi ukuran
+            if (file.size > maxSize) {
+                errorEl.textContent = 'Ukuran foto maksimal 2MB!';
+                errorEl.classList.remove('d-none');
+
+                input.value = ''; // reset file
+                return;
+            }
+
+            // Validasi tipe (opsional tambahan)
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedTypes.includes(file.type)) {
+                errorEl.textContent = 'Format harus JPG atau PNG!';
+                errorEl.classList.remove('d-none');
+
+                input.value = '';
+                return;
+            }
+
+            // Kalau lolos → lanjut preview (kode kamu sebelumnya)
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const box = input.previousElementSibling;
+                box.innerHTML = `
+            <img src="${e.target.result}" style="height:60px;border-radius:8px;margin-bottom:4px;">
+            <p class="mb-0 small text-success">
+                <i class="bi bi-check-circle me-1"></i>Foto siap diupload
+            </p>
+        `;
+            };
+            reader.readAsDataURL(file);
+        }
     </script>
 </body>
 
