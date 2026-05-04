@@ -1283,40 +1283,44 @@
 
             const maxSize = 2 * 1024 * 1024; // 2MB
 
-            // Reset error
+            // reset error
             errorEl.classList.add('d-none');
             errorEl.textContent = '';
 
-            // Validasi ukuran
+            // validasi ukuran
             if (file.size > maxSize) {
                 errorEl.textContent = 'Gambar yang anda masukan lebih dari 2MB!';
                 errorEl.classList.remove('d-none');
-
-                input.value = ''; // reset file
-                return;
-            }
-
-            // Validasi tipe (opsional tambahan)
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-            if (!allowedTypes.includes(file.type)) {
-                errorEl.textContent = 'Format harus JPG atau PNG!';
-                errorEl.classList.remove('d-none');
-
                 input.value = '';
                 return;
             }
 
-            // Kalau lolos → lanjut preview (kode kamu sebelumnya)
+            // validasi tipe
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+            if (!allowedTypes.includes(file.type)) {
+                errorEl.textContent = 'Format harus JPG atau PNG!';
+                errorEl.classList.remove('d-none');
+                input.value = '';
+                return;
+            }
+
+            // preview + masuk ke ID card
             const reader = new FileReader();
             reader.onload = function(e) {
+                photoDataUrl = e.target.result; // ← INI YANG PENTING
+
+                // preview kecil di form
                 const box = input.previousElementSibling;
                 box.innerHTML = `
-            <img src="${e.target.result}" style="height:60px;border-radius:8px;margin-bottom:4px;">
+            <img src="${photoDataUrl}" style="height:60px;border-radius:8px;margin-bottom:4px;">
             <p class="mb-0 small text-success">
                 <i class="bi bi-check-circle me-1"></i>Foto siap diupload
             </p>
         `;
+
+                updateCard(); // ← INI JUGA PENTING
             };
+
             reader.readAsDataURL(file);
         }
     </script>
