@@ -338,6 +338,40 @@
             overflow: hidden;
         }
 
+        .id-card {
+            width: 256px;
+            height: 340px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+
+            background-image: url('{{ asset('culture3.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .id-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            /* bikin isi tetap kebaca */
+            z-index: 0;
+        }
+
+        .id-card>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .id-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
         .id-card:hover {
             transform: scale(1.02) rotate(0.5deg);
         }
@@ -501,7 +535,7 @@
         .card-name {
             font-size: 12.5px;
             font-weight: 800;
-            color: #1a1a1a;
+            color: #ffffff;
             line-height: 1.25;
             margin-bottom: 3px;
             transition: all 0.2s;
@@ -509,7 +543,7 @@
 
         .card-institution {
             font-size: 8.5px;
-            color: var(--card-dark-blue);
+            color: #ffffff;
             font-weight: 700;
             line-height: 1.3;
             margin-bottom: 2px;
@@ -518,7 +552,7 @@
 
         .card-jabatan {
             font-size: 6.5px;
-            color: #777;
+            color: #ffffff;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             font-weight: 600;
@@ -572,7 +606,7 @@
         }
 
         .placeholder-text {
-            color: #ccc !important;
+            color: #ffffff !important;
             font-style: italic;
         }
 
@@ -704,12 +738,12 @@
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nama Lengkap <span class="required">*</span></label>
                                     <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap"
-                                        placeholder="Dr. Ahmad Hidayat, M.Si">
+                                        placeholder="Nama Lengkap">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Jabatan <span class="required">*</span></label>
                                     <input type="text" class="form-control" id="jabatan" name="jabatan"
-                                        placeholder="Kepala Dinas Kebudayaan">
+                                        placeholder="Contoh : Kepala Dinas Kebudayaan">
                                 </div>
                             </div>
 
@@ -718,7 +752,7 @@
                                     <label class="form-label">Instansi/Organisasi <span
                                             class="required">*</span></label>
                                     <input type="text" class="form-control" id="instansi_organisasi"
-                                        name="instansi_organisasi" placeholder="Pemerintah Kota Ternate">
+                                        name="instansi_organisasi" placeholder="Contoh : Pemerintah Kota Ternate">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Kota/Kabupaten <span class="required">*</span></label>

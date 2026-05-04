@@ -199,16 +199,19 @@
         .person-name {
             font-size: 13pt;
             font-weight: bold;
-            color: #1a1a1a;
+            color: #ffffff;
+            z-index: 2;
             line-height: 1.2;
             margin-bottom: 1.5mm;
             text-align: center;
             display: block;
+
         }
 
         .person-institution {
             font-size: 9pt;
-            color: #0F2A4A;
+            color: #ffffff;
+            z-index: 2;
             margin-bottom: 1mm;
             font-weight: 600;
             line-height: 1.2;
@@ -218,7 +221,8 @@
 
         .person-role {
             font-size: 7pt;
-            color: #666666;
+            color: #ffffff;
+            z-index: 2;
             text-transform: uppercase;
             letter-spacing: 0.5pt;
             margin-top: 1.5mm;
@@ -292,6 +296,42 @@
             width: 95mm;
             height: 1mm;
             background: #0F2A4A;
+        }
+
+        .card {
+            width: 95mm;
+            height: 126mm;
+            position: relative;
+            overflow: hidden;
+
+            background-image: url('{{ public_path('culture3.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40mm;
+            background: linear-gradient(135deg, #0F2A4A, #1B4D85);
+            opacity: 0.1;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            /* atur 0.2 - 0.5 sesuai kebutuhan */
+            z-index: 1;
+        }
+
+        .card>* {
+            z-index: 2;
         }
     </style>
 </head>
