@@ -5,7 +5,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\VerifikasiController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('welcome');
@@ -110,27 +109,3 @@ Route::get('/test-pdf-preview', function () {
     return $pdf->stream('preview-idcard.pdf');
 });
 
-Route::get('/dev/setup', function () {
-    if (!app()->environment('local')) {
-        abort(403, 'Akses ditolak');
-    }
-
-    Artisan::call('migrate:fresh', [
-        '--seed' => true,
-    ]);
-
-    return 'Migrate fresh + seed berhasil!';
-});
-
-Route::get('/dev/composer-install', function () {
-    if (!app()->environment('local')) {
-        abort(403, 'Akses ditolak');
-    }
-
-    $output = [];
-    $return = null;
-
-    exec('composer install 2>&1', $output, $return);
-
-    return response('<pre>' . implode("\n", $output) . '</pre>');
-});
