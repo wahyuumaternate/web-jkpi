@@ -1289,7 +1289,7 @@
 
             // Validasi ukuran
             if (file.size > maxSize) {
-                errorEl.textContent = 'Ukuran foto maksimal 2MB!';
+                errorEl.textContent = 'Foto yang anda masukan lebih dari 2MB!';
                 errorEl.classList.remove('d-none');
 
                 input.value = ''; // reset file
