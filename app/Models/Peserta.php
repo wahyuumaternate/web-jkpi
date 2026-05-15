@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -13,13 +14,9 @@ class Peserta extends Model
 
     protected $table = 'pendaftaran_peserta';
 
-    protected $fillable = ['nama_lengkap', 'jabatan', 'instansi_organisasi', 'nomor_telepon', 'email', 'kota_kabupaten', 'foto', 'kegiatan', 'tanggal_kedatangan', 'tanggal_kepulangan', 'email_verification_token', 'email_verified_at', 'status', 'catatan', 'kode_registrasi'];
+    protected $fillable = ['nama_daerah', 'nama_kepala_daerah', 'nama_pasangan_kepala_daerah', 'nomor_plat', 'info_kedatangan', 'info_kepulangan', 'nama_ajudan', 'telepon_ajudan', 'status', 'catatan', 'kode_registrasi'];
 
     protected $casts = [
-        'kegiatan' => 'array',
-        'tanggal_kedatangan' => 'date',
-        'tanggal_kepulangan' => 'date',
-        'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -35,17 +32,13 @@ class Peserta extends Model
             if (empty($peserta->kode_registrasi)) {
                 $peserta->kode_registrasi = self::generateKodeRegistrasi();
             }
-
-            if (empty($peserta->email_verification_token)) {
-                $peserta->email_verification_token = Str::random(64);
-            }
         });
     }
 
     /**
      * Generate kode registrasi unik
      */
-    public static function generateKodeRegistrasi()
+    public static function generateKodeRegistrasi(): string
     {
         do {
             $kode = 'JKPI2026-' . strtoupper(Str::random(8));
@@ -55,81 +48,42 @@ class Peserta extends Model
     }
 
     /**
-     * Cek apakah email sudah diverifikasi
+     * Relasi: satu peserta punya banyak narahubung
      */
-    public function hasVerifiedEmail()
+    public function narahubung(): HasMany
     {
-        return !is_null($this->email_verified_at);
+        return $this->hasMany(Narahubung::class, 'peserta_id');
     }
 
     /**
-     * Tandai email sebagai terverifikasi
+     * Scope: peserta confirmed
      */
-    public function markEmailAsVerified()
+    public function scopeConfirmed($query)
     {
-        return $this->forceFill([
-            'email_verified_at' => now(),
-            'email_verification_token' => null,
-            'status' => 'verified',
-        ])->save();
+        return $query->where('status', 'confirmed');
     }
 
     /**
-     * Scope untuk peserta yang sudah terverifikasi
+     * Scope: peserta pending
      */
-    public function scopeVerified($query)
+    public function scopePending($query)
     {
-        return $query->where('status', 'verified');
+        return $query->where('status', 'pending');
     }
 
     /**
-     * Scope untuk peserta yang belum terverifikasi
+     * Accessor: nama kepala daerah terformat
      */
-    public function scopeUnverified($query)
+    public function getNamaKepalaDaerahFormattedAttribute(): string
     {
-        return $query->where('status', 'unverified');
+        return ucwords(strtolower($this->nama_kepala_daerah));
     }
 
     /**
-     * Accessor untuk foto URL
+     * Accessor: jumlah narahubung
      */
-    public function getFotoUrlAttribute()
+    public function getJumlahNarahubungAttribute(): int
     {
-        return $this->foto ? asset('storage/' . $this->foto) : asset('assets/img/default-avatar.png');
-    }
-
-    /**
-     * Accessor untuk nama lengkap terformat
-     */
-    public function getNamaLengkapFormattedAttribute()
-    {
-        return ucwords(strtolower($this->nama_lengkap));
-    }
-
-    /**
-     * Accessor untuk durasi menginap
-     */
-    public function getDurasiMenginapAttribute()
-    {
-        if ($this->tanggal_kedatangan && $this->tanggal_kepulangan) {
-            return $this->tanggal_kedatangan->diffInDays($this->tanggal_kepulangan);
-        }
-        return 0;
-    }
-
-    /**
-     * Accessor untuk jumlah kegiatan yang dipilih
-     */
-    public function getJumlahKegiatanAttribute()
-    {
-        return count($this->kegiatan ?? []);
-    }
-
-    /**
-     * Cek apakah peserta mengikuti kegiatan tertentu
-     */
-    public function mengikutiKegiatan(string $namaKegiatan): bool
-    {
-        return in_array($namaKegiatan, $this->kegiatan ?? []);
+        return $this->narahubung()->count();
     }
 }

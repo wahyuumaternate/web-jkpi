@@ -6,75 +6,49 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class PendaftaranPesertaRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     */
     public function rules(): array
     {
         return [
-            // Data Pribadi
-            'nama_lengkap' => 'required|string|max:255',
-            'jabatan' => 'required|string|max:255',
-            'instansi_organisasi' => 'required|string|max:255',
-            'nomor_telepon' => 'required|string|max:15|regex:/^[0-9+\-\s()]*$/',
-            'email' => 'required|email|max:255',
+            // Data Daerah & Kepala Daerah
+            'nama_daerah'                  => ['required', 'string', 'max:100'],
+            'nama_kepala_daerah'           => ['required', 'string', 'max:150'],
+            'nama_pasangan_kepala_daerah'  => ['nullable', 'string', 'max:150'],
 
-            // Perwakilan Daerah
-            'kota_kabupaten' => 'required|string|max:255',
+            // Informasi Perjalanan
+            'nomor_plat'        => ['nullable', 'string', 'max:20'],
+            'info_kedatangan'   => ['required', 'string', 'max:255'],
+            'info_kepulangan'   => ['required', 'string', 'max:255'],
 
-            // Upload Foto
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            // Data Ajudan
+            'nama_ajudan'       => ['nullable', 'string', 'max:150'],
+            'telepon_ajudan'    => ['nullable', 'string', 'max:20'],
 
-            // Pilihan Kegiatan
-            'kegiatan' => 'required|array|min:1',
-            'kegiatan.*' => ['string', 'max:255'],
-
-            // Perjalanan dan Akomodasi
-            'tanggal_kedatangan' => 'required|date|after_or_equal:today',
-            'tanggal_kepulangan' => 'required|date|after:tanggal_kedatangan',
+            // Data Narahubung (array)
+            'narahubung'                => ['required', 'array', 'min:1'],
+            'narahubung.*.nama'         => ['required', 'string', 'max:150'],
+            'narahubung.*.telepon'      => ['required', 'string', 'max:20'],
+            'narahubung.*.email'        => ['required', 'email', 'max:150'],
         ];
     }
 
-    /**
-     * Get custom messages for validator errors.
-     */
     public function messages(): array
     {
         return [
-            // Data Pribadi
-            'nama_lengkap.required' => 'Nama lengkap wajib diisi.',
-            'jabatan.required' => 'Jabatan wajib diisi.',
-            'instansi_organisasi.required' => 'Instansi/Organisasi wajib diisi.',
-            'nomor_telepon.required' => 'Nomor telepon wajib diisi.',
-            'nomor_telepon.regex' => 'Format nomor telepon tidak valid.',
-            'email.required' => 'Email wajib diisi.',
-            'email.email' => 'Format email tidak valid.',
-            'kota_kabupaten.required' => 'Kota/Kabupaten wajib diisi.',
-
-            // Foto
-            'foto.image' => 'File harus berupa gambar.',
-            'foto.mimes' => 'Format foto harus jpeg, png, atau jpg.',
-            'foto.max' => 'Ukuran foto maksimal 2MB.',
-
-            // Kegiatan
-            'kegiatan.required' => 'Pilih minimal satu kegiatan yang akan diikuti.',
-            'kegiatan.array' => 'Format pilihan kegiatan tidak valid.',
-            'kegiatan.min' => 'Pilih minimal satu kegiatan yang akan diikuti.',
-            'kegiatan.*.in' => 'Terdapat pilihan kegiatan yang tidak valid.',
-
-            // Perjalanan
-            'tanggal_kedatangan.required' => 'Tanggal kedatangan wajib diisi.',
-            'tanggal_kedatangan.after_or_equal' => 'Tanggal kedatangan tidak boleh kurang dari hari ini.',
-            'tanggal_kepulangan.required' => 'Tanggal kepulangan wajib diisi.',
-            'tanggal_kepulangan.after' => 'Tanggal kepulangan harus setelah tanggal kedatangan.',
+            'nama_daerah.required'              => 'Nama daerah wajib dipilih.',
+            'nama_kepala_daerah.required'       => 'Nama lengkap kepala daerah wajib diisi.',
+            'info_kedatangan.required'          => 'Info kedatangan kepala daerah wajib diisi.',
+            'info_kepulangan.required'          => 'Info kepulangan kepala daerah wajib diisi.',
+            'narahubung.required'               => 'Minimal harus ada satu narahubung.',
+            'narahubung.min'                    => 'Minimal harus ada satu narahubung.',
+            'narahubung.*.nama.required'        => 'Nama narahubung wajib diisi.',
+            'narahubung.*.telepon.required'     => 'Nomor telepon narahubung wajib diisi.',
+            'narahubung.*.email.required'       => 'Email narahubung wajib diisi.',
+            'narahubung.*.email.email'          => 'Format email narahubung tidak valid.',
         ];
     }
 }

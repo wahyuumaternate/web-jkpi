@@ -1,3 +1,4 @@
+{{-- dashboard.blade.php (disesuaikan dengan DB) --}}
 @extends('admin.layouts.app')
 
 @section('title', 'Dashboard Admin - JKPI 2026')
@@ -12,12 +13,8 @@
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
-                <a href="#">
-                    <p class="m-0 pe-3">Dashboard</p>
-                </a>
-                <a class="ps-3 me-4" href="#">
-                    <p class="m-0">JKPI 2026</p>
-                </a>
+                <a href="#"><p class="m-0 pe-3">Dashboard</p></a>
+                <a class="ps-3 me-4" href="#"><p class="m-0">JKPI 2026</p></a>
             </div>
         </div>
     </div>
@@ -38,44 +35,32 @@
                 [
                     'label' => 'Total Peserta',
                     'value' => $stats['total'],
-                    'icon' => 'mdi-account-group',
+                    'icon'  => 'mdi-account-group',
                     'color' => 'primary',
                 ],
                 [
-                    'label' => 'Verified',
-                    'value' => $stats['verified'],
-                    'icon' => 'mdi-check-circle',
+                    'label' => 'Confirmed',
+                    'value' => $stats['confirmed'],
+                    'icon'  => 'mdi-check-circle',
                     'color' => 'success',
                 ],
                 [
-                    'label' => 'Unverified',
-                    'value' => $stats['unverified'],
-                    'icon' => 'mdi-clock-outline',
+                    'label' => 'Pending',
+                    'value' => $stats['pending'],
+                    'icon'  => 'mdi-clock-outline',
                     'color' => 'warning',
                 ],
                 [
                     'label' => 'Cancelled',
                     'value' => $stats['cancelled'],
-                    'icon' => 'mdi-close-circle',
+                    'icon'  => 'mdi-close-circle',
                     'color' => 'danger',
                 ],
-                [
-                    'label' => 'Email Verified',
-                    'value' => $stats['email_verified'],
-                    'icon' => 'mdi-email-check',
-                    'color' => 'info',
-                ],
-                // [
-                //     'label' => 'Butuh Hotel',
-                //     'value' => $stats['butuh_hotel'],
-                //     'icon' => 'mdi-office-building',
-                //     'color' => 'dark',
-                // ],
             ];
         @endphp
 
         @foreach ($statCards as $card)
-            <div class="col-xl-2 col-sm-4 col-6 stretch-card grid-margin">
+            <div class="col-xl-3 col-sm-6 col-6 stretch-card grid-margin">
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex align-items-center">
@@ -114,17 +99,17 @@
                                 </a>
                             </div>
                         @endif
-                        @if ($stats['verified'] != 0)
+                        @if ($stats['confirmed'] != 0)
                             <div class="col-6 col-md-3">
-                                <a href="{{ url('/admin/dashboard/export/verified') }}" class="btn btn-success w-100">
-                                    <i class="mdi mdi-check-circle me-1"></i> Verified ({{ $stats['verified'] }})
+                                <a href="{{ url('/admin/dashboard/export/confirmed') }}" class="btn btn-success w-100">
+                                    <i class="mdi mdi-check-circle me-1"></i> Confirmed ({{ $stats['confirmed'] }})
                                 </a>
                             </div>
                         @endif
-                        @if ($stats['unverified'] != 0)
+                        @if ($stats['pending'] != 0)
                             <div class="col-6 col-md-3">
-                                <a href="{{ url('/admin/dashboard/export/unverified') }}" class="btn btn-warning w-100">
-                                    <i class="mdi mdi-clock-outline me-1"></i> Unverified ({{ $stats['unverified'] }})
+                                <a href="{{ url('/admin/dashboard/export/pending') }}" class="btn btn-warning w-100">
+                                    <i class="mdi mdi-clock-outline me-1"></i> Pending ({{ $stats['pending'] }})
                                 </a>
                             </div>
                         @endif
@@ -145,9 +130,8 @@
                             </a>
                         </div>
                         <div class="col-6 col-md-3">
-                            <a href="{{ url('/admin/dashboard/export/by-kabupaten-kota') }}"
-                                class="btn btn-secondary w-100">
-                                <i class="mdi mdi-map me-1"></i> By Kab/Kota
+                            <a href="{{ url('/admin/dashboard/export/by-daerah') }}" class="btn btn-secondary w-100">
+                                <i class="mdi mdi-map me-1"></i> By Daerah
                             </a>
                         </div>
                     </div>
@@ -171,8 +155,9 @@
                                 <label class="form-label fw-semibold">
                                     <i class="mdi mdi-magnify me-1"></i>Cari Peserta
                                 </label>
-                                <input type="text" class="form-control" name="search" value="{{ request('search') }}"
-                                    placeholder="Nama, Email, Kode Registrasi, atau Kota/Kabupaten">
+                                <input type="text" class="form-control" name="search"
+                                    value="{{ request('search') }}"
+                                    placeholder="Nama Daerah, Nama Kepala Daerah, Kode Registrasi, atau Ajudan">
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label fw-semibold">
@@ -180,12 +165,12 @@
                                 </label>
                                 <select class="form-select" name="status">
                                     <option value="">Semua Status</option>
-                                    <option value="verified" {{ request('status') == 'verified' ? 'selected' : '' }}>
-                                        Verified</option>
-                                    <option value="unverified" {{ request('status') == 'unverified' ? 'selected' : '' }}>
-                                        Unverified</option>
-                                    <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>
-                                        Cancelled</option>
+                                    <option value="confirmed"
+                                        {{ request('status') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                                    <option value="pending"
+                                        {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="cancelled"
+                                        {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                                 </select>
                             </div>
                         </div>
@@ -226,12 +211,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode</th>
-                                    <th>Peserta</th>
-                                    <th>Kontak</th>
-                                    <th>Instansi</th>
-                                    <th>Daerah</th>
-                                    <th>Kegiatan</th>
-                                    <th>Tanggal</th>
+                                    <th>Daerah & Kepala Daerah</th>
+                                    <th>Pasangan</th>
+                                    <th>Ajudan / ADC</th>
+                                    <th>Narahubung</th>
+                                    <th>Perjalanan</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -241,69 +225,84 @@
                                     <tr>
                                         <td>{{ $peserta->firstItem() + $index }}</td>
 
+                                        {{-- KODE REGISTRASI --}}
                                         <td>
                                             <span class="badge bg-secondary">
                                                 {{ $p->kode_registrasi }}
                                             </span>
                                         </td>
 
-                                        {{-- DATA PESERTA --}}
+                                        {{-- DAERAH & KEPALA DAERAH --}}
                                         <td>
-                                            <div class="fw-bold">{{ $p->nama_lengkap }}</div>
-                                            <small class="text-muted">{{ $p->jabatan }}</small><br>
-
-                                            @if ($p->foto)
-                                                <img src="{{ asset('storage/' . $p->foto) }}" width="40"
-                                                    class="mt-1 rounded">
-                                            @endif
+                                            <div class="fw-bold">{{ $p->nama_kepala_daerah }}</div>
+                                            <small class="text-muted">{{ $p->nama_daerah }}</small>
                                         </td>
 
-                                        {{-- KONTAK --}}
+                                        {{-- PASANGAN --}}
                                         <td>
-                                            <div>{{ $p->nomor_telepon }}</div>
-                                            <small class="text-muted">{{ $p->email }}</small>
-
-                                            @if ($p->email_verified_at)
-                                                <br><span class="badge bg-success mt-1">Verified</span>
-                                            @endif
-                                        </td>
-
-                                        {{-- INSTANSI --}}
-                                        <td>{{ $p->instansi_organisasi }}</td>
-
-                                        {{-- DAERAH --}}
-                                        <td>{{ $p->kota_kabupaten }}</td>
-
-                                        {{-- KEGIATAN --}}
-                                        <td class="text-center">
-                                            @if ($p->kegiatan && count($p->kegiatan))
-                                                <button class="btn btn-sm btn-info" data-bs-toggle="modal"
-                                                    data-bs-target="#modalKegiatan{{ $p->id }}">
-                                                    Lihat ({{ count($p->kegiatan) }})
-                                                </button>
+                                            @if ($p->nama_pasangan_kepala_daerah)
+                                                {{ $p->nama_pasangan_kepala_daerah }}
                                             @else
                                                 <small class="text-muted">-</small>
                                             @endif
                                         </td>
 
-                                        {{-- TANGGAL --}}
+                                        {{-- AJUDAN / ADC --}}
+                                        <td>
+                                            @if ($p->nama_ajudan)
+                                                <div>{{ $p->nama_ajudan }}</div>
+                                                @if ($p->telepon_ajudan)
+                                                    <small class="text-muted">{{ $p->telepon_ajudan }}</small>
+                                                @endif
+                                            @else
+                                                <small class="text-muted">-</small>
+                                            @endif
+                                        </td>
+
+                                        {{-- NARAHUBUNG (relasi) --}}
+                                        <td>
+                                            @if ($p->narahubung && $p->narahubung->count())
+                                                @foreach ($p->narahubung as $nh)
+                                                    <div>{{ $nh->nama }}</div>
+                                                    <small class="text-muted">
+                                                        {{ $nh->telepon }} · {{ $nh->email }}
+                                                    </small>
+                                                @endforeach
+                                            @else
+                                                <small class="text-muted">-</small>
+                                            @endif
+                                        </td>
+
+                                        {{-- PERJALANAN --}}
                                         <td>
                                             <small>
-                                                Datang:
-                                                {{ \Carbon\Carbon::parse($p->tanggal_kedatangan)->format('d/m/Y') }}<br>
-                                                Pulang:
-                                                {{ \Carbon\Carbon::parse($p->tanggal_kepulangan)->format('d/m/Y') }}
+                                                <i class="mdi mdi-airplane-landing me-1"></i>
+                                                {{ $p->info_kedatangan }}<br>
+                                                <i class="mdi mdi-airplane-takeoff me-1"></i>
+                                                {{ $p->info_kepulangan }}
                                             </small>
+                                            @if ($p->nomor_plat)
+                                                <br><small class="text-muted">
+                                                    <i class="mdi mdi-car me-1"></i>{{ $p->nomor_plat }}
+                                                </small>
+                                            @endif
                                         </td>
 
                                         {{-- STATUS --}}
                                         <td>
-                                            @if ($p->status === 'verified')
-                                                <span class="badge bg-success">Verified</span>
-                                            @elseif ($p->status === 'unverified')
-                                                <span class="badge bg-warning text-dark">Unverified</span>
+                                            @if ($p->status === 'confirmed')
+                                                <span class="badge bg-success">Confirmed</span>
+                                            @elseif ($p->status === 'pending')
+                                                <span class="badge bg-warning text-dark">Pending</span>
                                             @else
                                                 <span class="badge bg-danger">Cancelled</span>
+                                            @endif
+
+                                            @if ($p->catatan)
+                                                <br>
+                                                <small class="text-muted" title="{{ $p->catatan }}">
+                                                    <i class="mdi mdi-note-text me-1"></i>Ada catatan
+                                                </small>
                                             @endif
                                         </td>
 
@@ -318,49 +317,24 @@
                                                 class="btn btn-sm btn-danger">
                                                 <i class="mdi mdi-trash-can"></i>
                                             </button>
+
+                                            {{-- Hidden delete form --}}
+                                            <form id="delete-form-{{ $p->id }}"
+                                                action="{{ route('admin.dashboard.destroy', $p->id) }}"
+                                                method="POST" class="d-none">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
-                                    {{-- ✅ MODAL TARUH DI SINI --}}
-                                    @if ($p->kegiatan && count($p->kegiatan))
-                                        <div class="modal fade" id="modalKegiatan{{ $p->id }}" tabindex="-1">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">
-                                                            Kegiatan - {{ $p->nama_lengkap }}
-                                                        </h5>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
-                                                    </div>
-
-                                                    <div class="modal-body">
-                                                        @foreach ($p->kegiatan as $k)
-                                                            <div class="mb-2">
-                                                                <span class="badge bg-info w-100 text-start p-2">
-                                                                    {{ $k }}
-                                                                </span>
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-secondary" data-bs-dismiss="modal">
-                                                            Tutup
-                                                        </button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endif
-
                                 @empty
                                     <tr>
-                                        <td colspan="10" class="text-center">Tidak ada data</td>
+                                        <td colspan="9" class="text-center py-4 text-muted">
+                                            <i class="mdi mdi-inbox-outline" style="font-size:2rem;"></i>
+                                            <p class="mb-0 mt-1">Tidak ada data peserta</p>
+                                        </td>
                                     </tr>
                                 @endforelse
-
                             </tbody>
                         </table>
                     </div>

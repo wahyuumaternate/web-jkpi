@@ -1,6 +1,7 @@
+{{-- resources/views/admin/dashboard/show.blade.php --}}
 @extends('admin.layouts.app')
 
-@section('title', 'Detail Peserta - JKPI 2026')
+@section('title', 'Detail Peserta - ' . $peserta->kode_registrasi)
 
 @section('content')
 
@@ -8,7 +9,7 @@
     <div class="page-header flex-wrap">
         <div class="header-left">
             <h3 class="fw-bold mb-0">Detail Peserta</h3>
-            <p class="text-muted mb-0">{{ $peserta->nama_lengkap }}</p>
+            <p class="text-muted mb-0">{{ $peserta->nama_kepala_daerah }} — {{ $peserta->nama_daerah }}</p>
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
@@ -36,130 +37,163 @@
         {{-- Kolom Kiri --}}
         <div class="col-lg-8">
 
-            {{-- Data Pribadi --}}
+            {{-- Data Daerah & Kepala Daerah --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
-                    <i class="mdi mdi-account me-2 text-primary" style="font-size:1.25rem;"></i>
-                    <h4 class="card-title mb-0">Data Pribadi</h4>
+                    <i class="mdi mdi-map-marker me-2 text-primary" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0">Data Daerah & Kepala Daerah</h4>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-md-6">
                             <p class="text-muted fw-semibold mb-1 font-13">Kode Registrasi</p>
-                            <span class="badge bg-secondary fw-normal font-13">{{ $peserta->kode_registrasi }}</span>
+                            <span class="badge bg-secondary fw-normal font-13">
+                                {{ $peserta->kode_registrasi }}
+                            </span>
                         </div>
                         <div class="col-md-6">
                             <p class="text-muted fw-semibold mb-1 font-13">Status</p>
-                            @if ($peserta->status === 'verified')
-                                <span class="badge bg-success"><i class="mdi mdi-check-circle me-1"></i>Verified</span>
-                            @elseif ($peserta->status === 'unverified')
-                                <span class="badge bg-warning text-dark"><i
-                                        class="mdi mdi-clock-outline me-1"></i>Unverified</span>
+                            @if ($peserta->status === 'confirmed')
+                                <span class="badge bg-success">
+                                    <i class="mdi mdi-check-circle me-1"></i>Confirmed
+                                </span>
+                            @elseif ($peserta->status === 'pending')
+                                <span class="badge bg-warning text-dark">
+                                    <i class="mdi mdi-clock-outline me-1"></i>Pending
+                                </span>
                             @else
-                                <span class="badge bg-danger"><i class="mdi mdi-close-circle me-1"></i>Cancelled</span>
+                                <span class="badge bg-danger">
+                                    <i class="mdi mdi-close-circle me-1"></i>Cancelled
+                                </span>
                             @endif
                         </div>
                         <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">Nama Lengkap</p>
-                            <p class="fw-bold mb-0">{{ $peserta->nama_lengkap }}</p>
+                            <p class="text-muted fw-semibold mb-1 font-13">Nama Daerah</p>
+                            <p class="fw-bold mb-0">{{ $peserta->nama_daerah }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">Jabatan</p>
-                            <p class="fw-bold mb-0">{{ $peserta->jabatan }}</p>
-                        </div>
-                        <div class="col-12">
-                            <p class="text-muted fw-semibold mb-1 font-13">Instansi/Organisasi</p>
-                            <p class="fw-bold mb-0">{{ $peserta->instansi_organisasi }}</p>
+                            <p class="text-muted fw-semibold mb-1 font-13">Nama Kepala Daerah</p>
+                            <p class="fw-bold mb-0">{{ $peserta->nama_kepala_daerah }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">Kota/Kabupaten</p>
-                            <p class="fw-bold mb-0">{{ $peserta->kota_kabupaten }}</p>
+                            <p class="text-muted fw-semibold mb-1 font-13">Nama Pasangan Kepala Daerah</p>
+                            <p class="fw-bold mb-0">
+                                {{ $peserta->nama_pasangan_kepala_daerah ?? '-' }}
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- Informasi Kontak --}}
+            {{-- Ajudan / ADC --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
-                    <i class="mdi mdi-phone me-2 text-success" style="font-size:1.25rem;"></i>
-                    <h4 class="card-title mb-0">Informasi Kontak</h4>
+                    <i class="mdi mdi-account-tie me-2 text-info" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0">Ajudan / ADC</h4>
                 </div>
                 <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">Email</p>
-                            <p class="fw-bold mb-1">{{ $peserta->email }}</p>
-                            @if ($peserta->email_verified_at)
-                                <span class="badge bg-success">
-                                    <i class="mdi mdi-check me-1"></i>Email Verified
-                                </span>
-                            @else
-                                <span class="badge bg-warning text-dark">
-                                    <i class="mdi mdi-alert me-1"></i>Belum Verified
-                                </span>
-                            @endif
+                    @if ($peserta->nama_ajudan)
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <p class="text-muted fw-semibold mb-1 font-13">Nama Ajudan</p>
+                                <p class="fw-bold mb-0">{{ $peserta->nama_ajudan }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted fw-semibold mb-1 font-13">Telepon Ajudan</p>
+                                <p class="fw-bold mb-0">{{ $peserta->telepon_ajudan ?? '-' }}</p>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">No. Telepon</p>
-                            <p class="fw-bold mb-0">{{ $peserta->nomor_telepon }}</p>
-                        </div>
-                    </div>
+                    @else
+                        <p class="text-muted mb-0">
+                            <i class="mdi mdi-minus-circle-outline me-1"></i>Tidak ada data ajudan
+                        </p>
+                    @endif
                 </div>
             </div>
 
-            {{-- Perjalanan & Akomodasi --}}
+            {{-- Informasi Perjalanan --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
                     <i class="mdi mdi-airplane me-2 text-warning" style="font-size:1.25rem;"></i>
-                    <h4 class="card-title mb-0">Perjalanan & Akomodasi</h4>
+                    <h4 class="card-title mb-0">Informasi Perjalanan</h4>
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">Tanggal Kedatangan</p>
-                            <p class="fw-bold mb-0">
-                                {{ $peserta->tanggal_kedatangan ? $peserta->tanggal_kedatangan->format('d M Y') : '-' }}
+                            <p class="text-muted fw-semibold mb-1 font-13">
+                                <i class="mdi mdi-airplane-landing me-1"></i>Info Kedatangan
                             </p>
+                            <p class="fw-bold mb-0">{{ $peserta->info_kedatangan }}</p>
                         </div>
                         <div class="col-md-6">
-                            <p class="text-muted fw-semibold mb-1 font-13">Tanggal Kepulangan</p>
-                            <p class="fw-bold mb-0">
-                                {{ $peserta->tanggal_kepulangan ? $peserta->tanggal_kepulangan->format('d M Y') : '-' }}
+                            <p class="text-muted fw-semibold mb-1 font-13">
+                                <i class="mdi mdi-airplane-takeoff me-1"></i>Info Kepulangan
                             </p>
+                            <p class="fw-bold mb-0">{{ $peserta->info_kepulangan }}</p>
                         </div>
-                        @if ($peserta->akomodasi_hotel)
-                            <div class="col-12">
-                                <p class="text-muted fw-semibold mb-1 font-13">Akomodasi Hotel / Detail</p>
-                                <p class="fw-bold mb-0">{{ $peserta->akomodasi_hotel }}</p>
+                        @if ($peserta->nomor_plat)
+                            <div class="col-md-6">
+                                <p class="text-muted fw-semibold mb-1 font-13">
+                                    <i class="mdi mdi-car me-1"></i>Nomor Plat
+                                </p>
+                                <p class="fw-bold mb-0">{{ $peserta->nomor_plat }}</p>
                             </div>
                         @endif
                     </div>
                 </div>
             </div>
 
+            {{-- Narahubung --}}
+            <div class="card grid-margin">
+                <div class="card-header d-flex align-items-center">
+                    <i class="mdi mdi-phone me-2 text-success" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0">Narahubung</h4>
+                </div>
+                <div class="card-body">
+                    @if ($peserta->narahubung && $peserta->narahubung->count())
+                        @foreach ($peserta->narahubung as $nh)
+                            <div class="{{ !$loop->last ? 'mb-4 pb-4 border-bottom' : '' }}">
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <p class="text-muted fw-semibold mb-1 font-13">Nama</p>
+                                        <p class="fw-bold mb-0">{{ $nh->nama }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="text-muted fw-semibold mb-1 font-13">Telepon</p>
+                                        <p class="fw-bold mb-0">{{ $nh->telepon }}</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <p class="text-muted fw-semibold mb-1 font-13">Email</p>
+                                        <p class="fw-bold mb-0">{{ $nh->email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        <p class="text-muted mb-0">
+                            <i class="mdi mdi-minus-circle-outline me-1"></i>Tidak ada data narahubung
+                        </p>
+                    @endif
+                </div>
+            </div>
+
+            {{-- Catatan --}}
+            @if ($peserta->catatan)
+                <div class="card grid-margin">
+                    <div class="card-header d-flex align-items-center">
+                        <i class="mdi mdi-note-text me-2 text-secondary" style="font-size:1.25rem;"></i>
+                        <h4 class="card-title mb-0">Catatan</h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="mb-0">{{ $peserta->catatan }}</p>
+                    </div>
+                </div>
+            @endif
+
         </div>
 
         {{-- Kolom Kanan (Sidebar) --}}
         <div class="col-lg-4">
-
-            {{-- Dokumen --}}
-            <div class="card grid-margin">
-                <div class="card-header d-flex align-items-center">
-                    <i class="mdi mdi-file-image me-2 text-danger" style="font-size:1.25rem;"></i>
-                    <h4 class="card-title mb-0">Dokumen</h4>
-                </div>
-                <div class="card-body text-center">
-                    @if ($peserta->foto)
-                        <p class="text-muted fw-semibold mb-2 font-13 text-start">Foto Peserta</p>
-                        <img src="{{ Storage::url($peserta->foto) }}" alt="Foto Peserta" class="img-fluid rounded"
-                            style="max-height: 250px; object-fit: cover;">
-                    @else
-                        <i class="mdi mdi-file-remove-outline text-muted" style="font-size:3rem;"></i>
-                        <p class="text-muted mt-2 mb-0">Tidak ada dokumen</p>
-                    @endif
-                </div>
-            </div>
 
             {{-- Info Tambahan --}}
             <div class="card grid-margin">
@@ -172,10 +206,16 @@
                         <p class="text-muted fw-semibold mb-1 font-13">Tanggal Daftar</p>
                         <p class="fw-bold mb-0">{{ $peserta->created_at->format('d M Y, H:i') }}</p>
                     </div>
-                    <div>
+                    <div class="mb-3">
                         <p class="text-muted fw-semibold mb-1 font-13">Terakhir Update</p>
                         <p class="fw-bold mb-0">{{ $peserta->updated_at->format('d M Y, H:i') }}</p>
                     </div>
+                    @if ($peserta->deleted_at)
+                        <div>
+                            <p class="text-muted fw-semibold mb-1 font-13">Dihapus Pada</p>
+                            <p class="fw-bold mb-0 text-danger">{{ $peserta->deleted_at->format('d M Y, H:i') }}</p>
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -192,20 +232,48 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Status</label>
                             <select name="status" class="form-select" required>
-                                <option value="verified" {{ $peserta->status == 'verified' ? 'selected' : '' }}>Verified
+                                <option value="pending"
+                                    {{ $peserta->status == 'pending' ? 'selected' : '' }}>
+                                    Pending
                                 </option>
-                                <option value="unverified" {{ $peserta->status == 'unverified' ? 'selected' : '' }}>
-                                    Unverified</option>
-                                <option value="cancelled" {{ $peserta->status == 'cancelled' ? 'selected' : '' }}>
-                                    Cancelled</option>
+                                <option value="confirmed"
+                                    {{ $peserta->status == 'confirmed' ? 'selected' : '' }}>
+                                    Confirmed
+                                </option>
+                                <option value="cancelled"
+                                    {{ $peserta->status == 'cancelled' ? 'selected' : '' }}>
+                                    Cancelled
+                                </option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Catatan</label>
-                            <textarea name="catatan" rows="3" class="form-control" placeholder="Catatan...">{{ $peserta->catatan }}</textarea>
+                            <textarea name="catatan" rows="3" class="form-control"
+                                placeholder="Catatan admin...">{{ $peserta->catatan }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
                             <i class="mdi mdi-check-circle me-1"></i>Update Status
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            {{-- Aksi Berbahaya --}}
+            <div class="card grid-margin border-danger">
+                <div class="card-header d-flex align-items-center bg-danger bg-opacity-10">
+                    <i class="mdi mdi-alert me-2 text-danger" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0 text-danger">Zona Berbahaya</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted font-13 mb-3">
+                        Menghapus data akan menghapus seluruh data peserta beserta narahubung secara permanen.
+                    </p>
+                    <form action="{{ route('admin.dashboard.destroy', $peserta->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger w-100"
+                            onclick="return confirm('Yakin ingin menghapus data {{ addslashes($peserta->nama_kepala_daerah) }}? Tindakan ini tidak dapat dibatalkan.')">
+                            <i class="mdi mdi-trash-can me-1"></i>Hapus Data Peserta
                         </button>
                     </form>
                 </div>
