@@ -317,6 +317,50 @@
                 font-size: 1.4rem;
             }
         }
+
+        .events-list-wrap {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .event-check-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 1px solid #e8ecf0;
+            background: #fafbfc;
+            transition: .2s;
+        }
+
+        .event-check-item:hover {
+            background: #f0fafb;
+        }
+
+        .event-check-item.selected {
+            background: #e6f7f8;
+            border-color: #099aa7;
+        }
+
+        .event-summary-bar {
+            background: #f0fafb;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-count-badge {
+            background: #099aa7;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -391,7 +435,6 @@
                                 <optgroup label="Anggota JKPI">
                                     @php
                                         $daerahList = [
-                                            // 1–25
                                             'Kota Ambon',
                                             'Kota Banda Aceh',
                                             'Kota Bengkulu',
@@ -417,7 +460,6 @@
                                             'Kab. Karang Asem',
                                             'Kota Medan',
                                             'Kota Madiun',
-                                            // 26–50
                                             'Kota Malang',
                                             'Kota Palembang',
                                             'Kota Pangkal Pinang',
@@ -443,7 +485,6 @@
                                             'Kab. Halmahera Barat',
                                             'Kab. Siak',
                                             'Kab. Pesawaran',
-                                            // 51–75
                                             'Kota Probolinggo',
                                             'Kab. Buton Utara',
                                             'Kab. Kutai Kartanegara',
@@ -469,7 +510,12 @@
                                             'Kab. Ende',
                                             'Kota Kediri',
                                             'Kota Bandung',
+                                            'Kab. Sleman',
+                                            'Kab. Pulang Pisau',
+                                            'Kota Magelang',
+                                            'Kab. Lombok Utara',
                                         ];
+
                                         sort($daerahList);
                                     @endphp
                                     @foreach ($daerahList as $daerah)
@@ -479,24 +525,7 @@
                                         </option>
                                     @endforeach
                                 </optgroup>
-                                <optgroup label="Peninjau">
-                                    @php
-                                        $peninjauList = [
-                                            'Kab. Tranggalek',
-                                            'Kota Magelang',
-                                            'Kab. Lombok Utara',
-                                            'Kab. Sleman',
-                                            'Kab. Bojonegoro',
-                                        ];
-                                        sort($peninjauList);
-                                    @endphp
-                                    @foreach ($peninjauList as $daerah)
-                                        <option value="{{ $daerah }}"
-                                            {{ old('nama_daerah') == $daerah ? 'selected' : '' }}>
-                                            {{ $daerah }}
-                                        </option>
-                                    @endforeach
-                                </optgroup>
+
                             </select>
                         </div>
                     </div>
@@ -519,7 +548,169 @@
                         </div>
                     </div>
 
+                    <h3 class="form-section-title">
+                        <i class="bi bi-card-checklist"></i>Informasi Tambahan
+                    </h3>
 
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">
+                                Ukuran Baju Kepala Daerah
+                                <span class="required">*</span>
+                            </label>
+
+                            <select class="form-select" name="ukuran_baju" required>
+
+                                <option value="">Pilih Ukuran</option>
+
+                                @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $ukuran)
+                                    <option value="{{ $ukuran }}"
+                                        {{ old('ukuran_baju') == $ukuran ? 'selected' : '' }}>
+                                        {{ $ukuran }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">
+                                Jumlah Rombongan
+                                <span class="required">*</span>
+                            </label>
+
+                            <input type="number" min="1" class="form-control" name="jumlah_rombongan"
+                                value="{{ old('jumlah_rombongan', 1) }}" required>
+                        </div>
+
+                        <h3 class="form-section-title">
+                            <i class="bi bi-calendar2-check-fill"></i>
+                            Kegiatan Yang Akan Diikuti
+                            <span class="required">*</span>
+                        </h3>
+
+                        <div class="event-summary-bar">
+                            <div class="event-count-label">
+                                Dipilih:
+                                <span class="event-count-badge" id="eventCountBadge">0</span>
+                            </div>
+
+                            <div class="d-flex gap-2">
+                                <button type="button" class="select-all-btn" onclick="selectAllEvents()">
+                                    Pilih Semua
+                                </button>
+
+                                <button type="button" class="select-all-btn"
+                                    style="border-color:#dc3545;color:#dc3545" onclick="clearAllEvents()">
+                                    Bersihkan
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="events-list-wrap">
+
+                            <label class="event-check-item">
+                                <input type="checkbox" name="kegiatan[]" value="Welcome Dinner"
+                                    onchange="onEventChange()">
+
+                                <div class="event-check-content">
+                                    <span class="event-date-chip chip-d1">
+                                        25 Agustus
+                                    </span>
+
+                                    <div class="event-check-title">
+                                        Welcome Dinner
+                                    </div>
+
+                                    <div class="event-check-meta">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        Pendopo Kediaman Wali Kota Ternate
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="event-check-item">
+                                <input type="checkbox" name="kegiatan[]" value="Simposium Internasional"
+                                    onchange="onEventChange()">
+
+                                <div class="event-check-content">
+                                    <span class="event-date-chip chip-d1">
+                                        26 Agustus
+                                    </span>
+
+                                    <div class="event-check-title">
+                                        Simposium Internasional
+                                    </div>
+
+                                    <div class="event-check-meta">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        Bela Hotel
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="event-check-item">
+                                <input type="checkbox" name="kegiatan[]" value="Rapat Kerja Nasional"
+                                    onchange="onEventChange()">
+
+                                <div class="event-check-content">
+                                    <span class="event-date-chip chip-d1">
+                                        26 Agustus
+                                    </span>
+
+                                    <div class="event-check-title">
+                                        Rapat Kerja Nasional
+                                    </div>
+
+                                    <div class="event-check-meta">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        Bela Hotel
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="event-check-item">
+                                <input type="checkbox" name="kegiatan[]" value="Festival Gastronomi"
+                                    onchange="onEventChange()">
+
+                                <div class="event-check-content">
+                                    <span class="event-date-chip chip-d24">
+                                        27–28 Agustus
+                                    </span>
+
+                                    <div class="event-check-title">
+                                        Festival Gastronomi
+                                    </div>
+
+                                    <div class="event-check-meta">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        Benteng Oranje
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="event-check-item">
+                                <input type="checkbox" name="kegiatan[]" value="Ladies Program"
+                                    onchange="onEventChange()">
+
+                                <div class="event-check-content">
+                                    <span class="event-date-chip chip-d24">
+                                        27–28 Agustus
+                                    </span>
+
+                                    <div class="event-check-title">
+                                        Ladies Program
+                                    </div>
+
+                                    <div class="event-check-meta">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        Benteng Oranje
+                                    </div>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
 
                     {{-- ===== PERJALANAN ===== --}}
                     <h3 class="form-section-title">
@@ -795,6 +986,51 @@
         attachPhoneFilter();
 
         renumberNarahubung();
+
+        function onEventChange() {
+
+            let total = 0;
+
+            document
+                .querySelectorAll('input[name="kegiatan[]"]')
+                .forEach(cb => {
+
+                    const item = cb.closest('.event-check-item');
+
+                    if (cb.checked) {
+                        total++;
+                        item.classList.add('selected');
+                    } else {
+                        item.classList.remove('selected');
+                    }
+
+                });
+
+            document.getElementById(
+                'eventCountBadge'
+            ).innerText = total;
+
+        }
+
+        function selectAllEvents() {
+
+            document
+                .querySelectorAll('input[name="kegiatan[]"]')
+                .forEach(cb => cb.checked = true);
+
+            onEventChange();
+
+        }
+
+        function clearAllEvents() {
+
+            document
+                .querySelectorAll('input[name="kegiatan[]"]')
+                .forEach(cb => cb.checked = false);
+
+            onEventChange();
+
+        }
     </script>
 </body>
 
