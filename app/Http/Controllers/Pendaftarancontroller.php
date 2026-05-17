@@ -23,6 +23,7 @@ class PendaftaranController extends Controller
      */
     public function store(PendaftaranPesertaRequest $request)
     {
+        dd($request->all());
         try {
             $data = $request->validated();
 
