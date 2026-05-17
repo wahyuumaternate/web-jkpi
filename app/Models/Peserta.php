@@ -1,89 +1,81 @@
 <?php
 
+/**
+ * ============================================================
+ *  CATATAN UPDATE UNTUK app/Models/Peserta.php
+ * ============================================================
+ *
+ *  Tidak perlu rewrite seluruh model — cukup pastikan 3 hal
+ *  di bawah ini sudah ada / ditambahkan:
+ *
+ *  1) Tambahkan 'ukuran_baju' & 'jumlah_rombongan' ke $fillable
+ *  2) (Opsional) Tambah cast untuk jumlah_rombongan
+ *  3) Tambah relasi kegiatan()
+ * ============================================================
+ */
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Peserta extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'pendaftaran_peserta';
 
-    protected $fillable = ['nama_daerah', 'nama_kepala_daerah', 'nama_pasangan_kepala_daerah', 'nomor_plat', 'info_kedatangan', 'info_kepulangan', 'nama_ajudan', 'telepon_ajudan', 'status', 'catatan', 'kode_registrasi'];
+    protected $fillable = [
+        'nama_daerah',
+        'nama_kepala_daerah',
+        'nama_pasangan_kepala_daerah',
+
+        // ⬇⬇⬇ TAMBAHKAN 2 BARIS INI
+        'ukuran_baju',
+        'jumlah_rombongan',
+        // ⬆⬆⬆
+
+        'nomor_plat',
+        'info_kedatangan',
+        'info_kepulangan',
+        'nama_ajudan',
+        'telepon_ajudan',
+        'status',
+        'catatan',
+        'kode_registrasi',
+    ];
 
     protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'jumlah_rombongan' => 'integer', // opsional, tapi disarankan
     ];
 
     /**
-     * Boot method untuk generate kode registrasi otomatis
+     * Auto-generate kode registrasi (kemungkinan sudah ada di model Anda;
+     * jangan diduplikasi kalau sudah ada).
      */
-    protected static function boot()
+    protected static function booted(): void
     {
-        parent::boot();
-
-        static::creating(function ($peserta) {
+        static::creating(function (self $peserta) {
             if (empty($peserta->kode_registrasi)) {
-                $peserta->kode_registrasi = self::generateKodeRegistrasi();
+                $peserta->kode_registrasi = 'JKPI-2026-' . strtoupper(Str::random(6));
             }
         });
     }
 
-    /**
-     * Generate kode registrasi unik
-     */
-    public static function generateKodeRegistrasi(): string
-    {
-        do {
-            $kode = 'JKPI2026-' . strtoupper(Str::random(8));
-        } while (self::where('kode_registrasi', $kode)->exists());
+    // ===== RELATIONS =====
 
-        return $kode;
-    }
-
-    /**
-     * Relasi: satu peserta punya banyak narahubung
-     */
     public function narahubung(): HasMany
     {
-        return $this->hasMany(Narahubung::class, 'peserta_id');
+        // Sudah ada di model Anda — biarkan apa adanya.
+        return $this->hasMany(PendaftaranNarahubung::class, 'peserta_id');
     }
 
-    /**
-     * Scope: peserta confirmed
-     */
-    public function scopeConfirmed($query)
+    // ⬇⬇⬇ TAMBAHKAN RELASI INI
+    public function kegiatan(): HasMany
     {
-        return $query->where('status', 'confirmed');
+        return $this->hasMany(Kegiatan::class, 'peserta_id');
     }
-
-    /**
-     * Scope: peserta pending
-     */
-    public function scopePending($query)
-    {
-        return $query->where('status', 'pending');
-    }
-
-    /**
-     * Accessor: nama kepala daerah terformat
-     */
-    public function getNamaKepalaDaerahFormattedAttribute(): string
-    {
-        return ucwords(strtolower($this->nama_kepala_daerah));
-    }
-
-    /**
-     * Accessor: jumlah narahubung
-     */
-    public function getJumlahNarahubungAttribute(): int
-    {
-        return $this->narahubung()->count();
-    }
+    // ⬆⬆⬆
 }

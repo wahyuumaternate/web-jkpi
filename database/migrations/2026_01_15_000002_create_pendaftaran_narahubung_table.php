@@ -22,6 +22,9 @@ return new class extends Migration {
             $table->string('email');
 
             $table->timestamps();
+
+            // Index untuk lookup cepat per peserta
+            $table->index('peserta_id');
         });
     }
 

@@ -85,6 +85,32 @@
                 </div>
             </div>
 
+            {{-- Informasi Tambahan (BARU) --}}
+            <div class="card grid-margin">
+                <div class="card-header d-flex align-items-center">
+                    <i class="mdi mdi-details me-2 text-info" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0">Informasi Tambahan</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p class="text-muted fw-semibold mb-1 font-13">
+                                <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju Kepala Daerah
+                            </p>
+                            <p class="fw-bold mb-0">
+                                <span class="badge bg-primary">{{ $peserta->ukuran_baju }}</span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted fw-semibold mb-1 font-13">
+                                <i class="mdi mdi-account-multiple me-1"></i>Jumlah Rombongan
+                            </p>
+                            <p class="fw-bold mb-0 text-dark">{{ $peserta->jumlah_rombongan }} orang</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- Ajudan / ADC --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
@@ -177,6 +203,37 @@
                 </div>
             </div>
 
+            {{-- Kegiatan Yang Akan Diikuti (BARU) --}}
+            <div class="card grid-margin">
+                <div class="card-header d-flex align-items-center">
+                    <i class="mdi mdi-calendar-check me-2 text-success" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0">Kegiatan Yang Akan Diikuti</h4>
+                </div>
+                <div class="card-body">
+                    @if ($peserta->kegiatan && $peserta->kegiatan->count())
+                        <div class="list-group list-group-flush">
+                            @foreach ($peserta->kegiatan as $kegiatan)
+                                <div class="list-group-item px-0 py-3 border-bottom">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-shrink-0">
+                                            <i class="mdi mdi-checkbox-marked-circle text-success"
+                                                style="font-size:1.4rem;"></i>
+                                        </div>
+                                        <div class="flex-grow-1 ms-3">
+                                            <p class="fw-semibold mb-0">{{ $kegiatan->nama_kegiatan }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-muted mb-0">
+                            <i class="mdi mdi-minus-circle-outline me-1"></i>Tidak ada kegiatan yang dipilih
+                        </p>
+                    @endif
+                </div>
+            </div>
+
             {{-- Catatan --}}
             @if ($peserta->catatan)
                 <div class="card grid-margin">
@@ -219,6 +276,41 @@
                 </div>
             </div>
 
+            {{-- Ringkasan Rombongan --}}
+            <div class="card grid-margin">
+                <div class="card-header d-flex align-items-center">
+                    <i class="mdi mdi-account-multiple me-2 text-primary" style="font-size:1.25rem;"></i>
+                    <h4 class="card-title mb-0">Ringkasan Rombongan</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="bg-light rounded p-3 text-center">
+                                <p class="text-muted font-13 mb-1">Total Rombongan</p>
+                                <p class="fw-bold text-primary" style="font-size:1.8rem;">
+                                    {{ $peserta->jumlah_rombongan }} <span style="font-size:0.9rem;">orang</span></p>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted font-13 mb-2">Terdiri dari:</p>
+                            <ul class="mb-0 ps-3">
+                                <li class="mb-1">1 Kepala Daerah (Ukuran: <strong>{{ $peserta->ukuran_baju }}</strong>)
+                                </li>
+                                @if ($peserta->nama_pasangan_kepala_daerah)
+                                    <li class="mb-1">1 Pasangan Kepala Daerah</li>
+                                @endif
+                                @if ($peserta->nama_ajudan)
+                                    <li class="mb-1">1 Ajudan/ADC</li>
+                                @endif
+                                @if ($peserta->narahubung->count())
+                                    <li class="mb-1">{{ $peserta->narahubung->count() }} Narahubung</li>
+                                @endif
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- Update Status --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
@@ -232,24 +324,20 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Status</label>
                             <select name="status" class="form-select" required>
-                                <option value="pending"
-                                    {{ $peserta->status == 'pending' ? 'selected' : '' }}>
+                                <option value="pending" {{ $peserta->status == 'pending' ? 'selected' : '' }}>
                                     Pending
                                 </option>
-                                <option value="confirmed"
-                                    {{ $peserta->status == 'confirmed' ? 'selected' : '' }}>
+                                <option value="confirmed" {{ $peserta->status == 'confirmed' ? 'selected' : '' }}>
                                     Confirmed
                                 </option>
-                                <option value="cancelled"
-                                    {{ $peserta->status == 'cancelled' ? 'selected' : '' }}>
+                                <option value="cancelled" {{ $peserta->status == 'cancelled' ? 'selected' : '' }}>
                                     Cancelled
                                 </option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Catatan</label>
-                            <textarea name="catatan" rows="3" class="form-control"
-                                placeholder="Catatan admin...">{{ $peserta->catatan }}</textarea>
+                            <textarea name="catatan" rows="3" class="form-control" placeholder="Catatan admin...">{{ $peserta->catatan }}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">
                             <i class="mdi mdi-check-circle me-1"></i>Update Status
@@ -266,7 +354,7 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted font-13 mb-3">
-                        Menghapus data akan menghapus seluruh data peserta beserta narahubung secara permanen.
+                        Menghapus data akan menghapus seluruh data peserta beserta narahubung dan kegiatan secara permanen.
                     </p>
                     <form action="{{ route('admin.dashboard.destroy', $peserta->id) }}" method="POST">
                         @csrf

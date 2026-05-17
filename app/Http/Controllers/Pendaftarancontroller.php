@@ -19,28 +19,38 @@ class PendaftaranController extends Controller
     }
 
     /**
-     * Proses pendaftaran peserta + narahubung (dalam satu transaction)
+     * Proses pendaftaran peserta + narahubung + kegiatan (dalam satu transaction)
      */
     public function store(PendaftaranPesertaRequest $request)
     {
         try {
             $data = $request->validated();
+
+            // Pisahkan relasi dari data peserta
             $narahubungData = $data['narahubung'] ?? [];
-            unset($data['narahubung']);
+            $kegiatanData = $data['kegiatan'] ?? [];
+            unset($data['narahubung'], $data['kegiatan']);
 
             // Default status
             $data['status'] = 'pending';
 
-            $peserta = DB::transaction(function () use ($data, $narahubungData) {
-                // Buat peserta
+            $peserta = DB::transaction(function () use ($data, $narahubungData, $kegiatanData) {
+                // 1. Buat peserta
                 $peserta = Peserta::create($data);
 
-                // Simpan semua narahubung
+                // 2. Simpan semua narahubung
                 foreach ($narahubungData as $nh) {
                     $peserta->narahubung()->create([
                         'nama' => $nh['nama'],
                         'telepon' => $nh['telepon'],
                         'email' => $nh['email'],
+                    ]);
+                }
+
+                // 3. Simpan kegiatan yang dipilih (deduplicate untuk jaga-jaga)
+                foreach (array_unique($kegiatanData) as $namaKegiatan) {
+                    $peserta->kegiatan()->create([
+                        'nama_kegiatan' => $namaKegiatan,
                     ]);
                 }
 
@@ -83,7 +93,9 @@ class PendaftaranController extends Controller
             'kode_registrasi' => 'required|string',
         ]);
 
-        $peserta = Peserta::with('narahubung')->where('kode_registrasi', $request->kode_registrasi)->first();
+        $peserta = Peserta::with(['narahubung', 'kegiatan'])
+            ->where('kode_registrasi', $request->kode_registrasi)
+            ->first();
 
         if (!$peserta) {
             return back()->with('error', 'Kode registrasi tidak ditemukan.');
