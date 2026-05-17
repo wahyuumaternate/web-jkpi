@@ -15,15 +15,20 @@ class Kegiatan extends Model
     ];
 
     /**
-     * Daftar kegiatan yang valid (sesuai pilihan di form registrasi).
-     * Dipakai juga untuk validasi di PendaftaranPesertaRequest.
+     * Harus sama persis dengan value checkbox di form
      */
     public const KEGIATAN_VALID = [
         'Welcome Dinner',
-        'Simposium Internasional',
-        'Rapat Kerja Nasional',
-        'Festival Gastronomi',
+        'Master Class',
+        'Heritage City Tour',
         'Ladies Program',
+        'Expo dan Pentas Budaya',
+        'Simposium Internasional – Pulau-Pulau Penghasil Rempah',
+        'Festival Gastronomi',
+        'Rapat Kerja Nasional',
+        'Gelar Budaya dan Penyerahan Pataka',
+        'Pawai Budaya dan Karnaval',
+        'Nusantara Raya Run',
     ];
 
     public function peserta(): BelongsTo
