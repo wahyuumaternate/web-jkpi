@@ -15,7 +15,6 @@ class PendaftaranController extends Controller
      */
     public function index()
     {
-        dd('index');
         return view('pendaftaran.index');
     }
 
@@ -24,7 +23,6 @@ class PendaftaranController extends Controller
      */
     public function store(PendaftaranPesertaRequest $request)
     {
-        dd($request->all());
         try {
             $data = $request->validated();
 
