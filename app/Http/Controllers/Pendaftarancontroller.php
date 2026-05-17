@@ -15,6 +15,7 @@ class PendaftaranController extends Controller
      */
     public function index()
     {
+        dd('index');
         return view('pendaftaran.index');
     }
 
