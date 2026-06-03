@@ -12,8 +12,14 @@ Route::get('/', function () {
 Route::get('/hotel', function () {
     return view('hotel');
 });
+
 Route::get('/cafe-resto', function () {
     return view('cafe_resto');
+});
+
+
+Route::get('/buku-panduan', function () {
+    return view('buku_panduan');
 });
 
 Route::middleware('auth')->group(function () {

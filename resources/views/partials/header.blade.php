@@ -22,10 +22,10 @@
         <nav id="navmenu" class="navmenu">
             <ul>
                 <li><a href="{{ url('/') }}#hero" class="{{ request()->is('/') ? 'active' : '' }}">Beranda</a></li>
-                <li><a href="{{ url('/') }}#tentang">Tentang</a></li>
+                {{-- <li><a href="{{ url('/') }}#tentang">Tentang</a></li> --}}
                 <li><a href="{{ url('/') }}#tujuan">Tujuan</a></li>
                 <li><a href="{{ url('/') }}#rangkaian">Rangkaian Kegiatan</a></li>
-                {{-- <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li> --}}
+                <li><a href="{{ url('/buku-panduan') }}">Buku Panduan</a></li>
 
 
                 <li class="dropdown"><a href="#"><span>Informasi Akomodasi</span> <i
@@ -35,12 +35,11 @@
                         <li><a href="{{ url('/') }}#sebaran-lokasi">Sebaran Lokasi</a></li>
                         <li><a href="{{ url('/cafe-resto') }}">Daftar Resto & Cafe</a></li>
                         {{-- <li><a href="{{ url('/') }}#oleh-oleh">Toko Oleh-Oleh</a></li> --}}
-                        <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li>
                         <li><a href="{{ url('/') }}#appointment">Kontak</a></li>
                     </ul>
                 </li>
 
-                <li><a href="{{ url('/') }}#galeri">Galeri</a></li>
+                {{-- <li><a href="{{ url('/') }}#galeri">Galeri</a></li> --}}
                 <li class="dropdown "><a href="#"><span>Pendaftaran</span> <i
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
