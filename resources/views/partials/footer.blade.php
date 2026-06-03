@@ -35,9 +35,9 @@
                  <ul>
                      <li><a href="#rangkaian">Rakernas</a></li>
                      <li><a href="#rangkaian">Simposium</a></li>
-                     <li><a href="#rangkaian">Heritage Tour</a></li>
-                     <li><a href="#rangkaian">Pentas Seni Budaya</a></li>
-                     <li><a href="#rangkaian">Festival Kuliner</a></li>
+                     <li><a href="#rangkaian">Heritage City Tour</a></li>
+                     <li><a href="#rangkaian">Expo dan Pentas Budaya</a></li>
+                     <li><a href="#rangkaian">Pawai Budaya dan Karnaval</a></li>
                  </ul>
              </div>
 
