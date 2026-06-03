@@ -1509,7 +1509,7 @@
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 20px 60px; border-radius: 50px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4); transition: all 0.3s; border: none;">
                                     <i class="bi bi-pencil-square me-2"></i>DAFTAR SEKARANG
                                 </a>
-                                <a href="#buku-panduan"
+                                <a href="{{ url('/buku-panduan') }}"
                                     style="background: rgba(255,255,255,0.25); backdrop-filter: blur(10px); color: #fff; padding: 20px 60px; border-radius: 50px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); border: 2px solid rgba(255,255,255,0.4); transition: all 0.3s;">
                                     <i class="bi bi-download me-2"></i>UNDUH BUKU PANDUAN
                                 </a>
