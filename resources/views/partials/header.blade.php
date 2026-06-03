@@ -27,6 +27,7 @@
                 <li><a href="{{ url('/') }}#rangkaian">Rangkaian Kegiatan</a></li>
                 {{-- <li><a href="{{ url('/') }}#buku-panduan">Buku Panduan</a></li> --}}
 
+
                 <li class="dropdown"><a href="#"><span>Informasi Akomodasi</span> <i
                             class="bi bi-chevron-down toggle-dropdown"></i></a>
                     <ul>
@@ -40,12 +41,21 @@
                 </li>
 
                 <li><a href="{{ url('/') }}#galeri">Galeri</a></li>
+                <li class="dropdown "><a href="#"><span>Pendaftaran</span> <i
+                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                    <ul>
+                        <li><a href="{{ url('/registrasi') }}">Rakernas JKPI XII 2026</a></li>
+                        <li><a href="#!">Nusantara Raya Run</a></li>
+                        <li><a href="#!">Expo dan Pentas Budaya</a></li>
+
+                    </ul>
+                </li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <!-- CTA -->
-        <a class="btn-getstarted d-none d-md-block" href="{{ url('/registrasi') }}">Registrasi</a>
+        {{-- <a class="btn-getstarted d-none d-md-block" href="{{ url('/registrasi') }}">Registrasi</a> --}}
 
     </div>
 </header>

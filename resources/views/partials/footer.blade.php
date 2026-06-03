@@ -33,9 +33,9 @@
              <div class="col-lg-2 col-md-3 footer-links">
                  <h4>Program Unggulan</h4>
                  <ul>
-                     <li><a href="#rangkaian">Simposium Rempah</a></li>
+                     <li><a href="#rangkaian">Rakernas</a></li>
+                     <li><a href="#rangkaian">Simposium</a></li>
                      <li><a href="#rangkaian">Heritage Tour</a></li>
-                     <li><a href="#rangkaian">Pasar Malam Indonesia</a></li>
                      <li><a href="#rangkaian">Pentas Seni Budaya</a></li>
                      <li><a href="#rangkaian">Festival Kuliner</a></li>
                  </ul>
