@@ -4,8 +4,9 @@
 
 @push('styles')
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
+
     <style>
         :root {
             --primary: #099aa7;
@@ -19,6 +20,7 @@
         * {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            box-sizing: border-box;
         }
 
         html,
@@ -26,13 +28,19 @@
             background: #f4f1ec;
             color: var(--dark);
             font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* ========== HEADER ========== */
+        /* ================= HEADER ================= */
+
         .panduan-header {
-            background: linear-gradient(135deg, #0a2a3c 0%, #0d4f5e 40%, #099aa7 100%);
+            background:
+                linear-gradient(135deg,
+                    #0a2a3c 0%,
+                    #0d4f5e 40%,
+                    #099aa7 100%);
             color: white;
-            padding: 50px 0;
+            padding: 60px 0;
             position: relative;
             overflow: hidden;
         }
@@ -40,13 +48,12 @@
         .panduan-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            opacity: 0.05;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+            inset: 0;
+            opacity: .08;
+            background-image:
+                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
+            background-size: 40px 40px;
         }
 
         .panduan-header-content {
@@ -55,45 +62,48 @@
         }
 
         .header-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .12);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, .2);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 20px;
-            backdrop-filter: blur(10px);
         }
 
         .header-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1;
             margin-bottom: 10px;
-            letter-spacing: -1px;
+            color: white;
         }
 
         .header-subtitle {
             font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 0;
+            opacity: .9;
         }
 
-        /* ========== MAIN CONTENT ========== */
+        /* ================= CONTAINER ================= */
+
         .panduan-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            max-width: 1400px;
+            margin: auto;
             padding: 40px 20px;
         }
 
-        /* ========== VIEWER TOOLBAR ========== */
+        /* ================= TOOLBAR ================= */
+
         .pdf-toolbar {
             background: white;
-            border-radius: 12px 12px 0 0;
+            border-radius: 18px 18px 0 0;
             border: 1px solid var(--border);
             border-bottom: none;
             padding: 18px 24px;
@@ -101,182 +111,150 @@
             align-items: center;
             gap: 16px;
             flex-wrap: wrap;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
         }
 
         .toolbar-group {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding-right: 12px;
-            border-right: 1px solid var(--border);
-        }
-
-        .toolbar-group:last-child {
-            border-right: none;
-            padding-right: 0;
-        }
-
-        .toolbar-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-
-        .toolbar-input {
-            padding: 8px 12px;
-            border: 1.5px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            width: 60px;
-            text-align: center;
-            transition: border-color 0.2s;
-        }
-
-        .toolbar-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(9, 154, 167, 0.1);
-        }
-
-        .toolbar-btn {
-            padding: 10px 16px;
-            border: 1.5px solid var(--border);
-            background: white;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--dark);
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-        }
-
-        .toolbar-btn:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-            color: var(--primary-dark);
-        }
-
-        .toolbar-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .toolbar-btn.primary {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-        }
-
-        .toolbar-btn.primary:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
         }
 
         .toolbar-spacer {
             flex: 1;
         }
 
-        .zoom-controls {
-            display: flex;
+        .toolbar-btn {
+            border: none;
+            background: #f8fafc;
+            color: var(--dark);
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .25s;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        .zoom-slider {
-            width: 120px;
-            height: 4px;
-            border-radius: 2px;
-            background: var(--border);
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
+        .toolbar-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
         }
 
-        .zoom-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
+        .toolbar-btn.primary {
             background: var(--primary);
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(9, 154, 167, 0.3);
+            color: white;
         }
 
-        .zoom-slider::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 2px 6px rgba(9, 154, 167, 0.3);
+        .toolbar-btn.primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .toolbar-input {
+            width: 70px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .toolbar-label {
+            font-weight: 600;
+            color: var(--gray);
         }
 
         .zoom-percent {
-            font-size: 0.85rem;
-            font-weight: 600;
+            min-width: 55px;
+            font-weight: 700;
             color: var(--gray);
-            min-width: 45px;
-            text-align: right;
         }
 
-        /* ========== PDF VIEWER ========== */
+        /* ================= VIEWER ================= */
+
         .pdf-viewer-wrapper {
             background: white;
             border: 1px solid var(--border);
-            border-radius: 0 0 12px 12px;
+            border-radius: 0 0 20px 20px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
         }
 
+        /* Container scales with flipbook height + padding */
         .pdf-viewer-container {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
-            background: #f8f9fa;
-            min-height: 500px;
-            padding: 20px;
-            overflow-y: auto;
-            max-height: 85vh;
+            align-items: center;
+            padding: 40px;
+            overflow: auto;
+            position: relative;
+            background:
+                radial-gradient(circle at center,
+                    #34495e 0%,
+                    #1e293b 100%);
+            /* min-height ditentukan JS setelah tahu dimensi PDF */
+            min-height: 60vh;
         }
 
-        #pdfViewer {
-            max-width: 100%;
-            height: auto;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-            border-radius: 4px;
+        /* ================= FLIPBOOK ================= */
+
+        /* Ukuran di-set oleh JS, bukan CSS */
+        #flipbook {
+            margin: auto;
+            flex-shrink: 0;
+            transition: transform .3s ease;
+            transform-origin: center center;
         }
+
+        .page {
+            background: white;
+            overflow: hidden;
+        }
+
+        .page canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stf__parent {
+            margin: auto;
+        }
+
+        .stf__block {
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .35);
+        }
+
+        /* ================= LOADING ================= */
 
         .pdf-loading {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 23, 42, .7);
+            z-index: 50;
             display: none;
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--gray);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            backdrop-filter: blur(4px);
         }
 
         .pdf-loading.active {
-            display: block;
+            display: flex;
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--border);
-            border-top-color: var(--primary);
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, .2);
+            border-top-color: white;
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto 16px;
+            animation: spin .7s linear infinite;
+            margin-bottom: 16px;
         }
 
         @keyframes spin {
@@ -285,72 +263,11 @@
             }
         }
 
-        .pdf-error {
-            display: none;
-            background: #fdecec;
-            border: 1px solid #f5c6c6;
-            color: #9b2a2a;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
+        /* ================= RESPONSIVE ================= */
 
-        .pdf-error.active {
-            display: block;
-        }
-
-        /* ========== INFO PANEL ========== */
-        .panduan-info {
-            background: white;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 30px;
-        }
-
-        .info-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 16px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
-
-        .info-item {
-            padding: 16px;
-            background: linear-gradient(135deg, var(--primary-light) 0%, #f0fafb 100%);
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .info-item-label {
-            font-size: 0.8rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .info-item-value {
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        /* ========== RESPONSIVE ========== */
         @media (max-width: 768px) {
             .header-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .pdf-toolbar {
@@ -359,324 +276,386 @@
             }
 
             .toolbar-group {
-                width: 100%;
-                border-right: none;
-                border-bottom: 1px solid var(--border);
-                padding-right: 0;
-                padding-bottom: 12px;
-            }
-
-            .toolbar-group:last-child {
-                border-bottom: none;
-                padding-bottom: 0;
-            }
-
-            .toolbar-spacer {
-                display: none;
-            }
-
-            .zoom-controls {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .zoom-slider {
-                flex: 1;
-                margin: 0 12px;
+                justify-content: center;
+                flex-wrap: wrap;
             }
 
             .pdf-viewer-container {
-                min-height: 400px;
-                max-height: 70vh;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .panduan-container {
-                padding: 20px 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .header-title {
-                font-size: 1.5rem;
-            }
-
-            .toolbar-btn {
-                padding: 8px 12px;
-                font-size: 0.85rem;
-            }
-
-            .toolbar-label {
-                font-size: 0.75rem;
-            }
-
-            .toolbar-input {
-                width: 50px;
-                font-size: 0.85rem;
-            }
-
-            .zoom-percent {
-                font-size: 0.8rem;
-                min-width: 40px;
-            }
-
-            .pdf-viewer-container {
-                min-height: 300px;
-                max-height: 60vh;
-                padding: 16px;
-            }
-
-            .info-title {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* ========== PRINT STYLES ========== */
-        @media print {
-
-            .panduan-header,
-            .pdf-toolbar,
-            .panduan-info {
-                display: none !important;
-            }
-
-            .pdf-viewer-container {
-                background: white;
-                box-shadow: none;
-                padding: 0;
-                max-height: none;
-            }
-
-            #pdfViewer {
-                box-shadow: none;
-                max-width: 100%;
+                padding: 12px;
+                min-height: 55vh;
             }
         }
     </style>
 @endpush
 
 @section('content')
+
     {{-- HEADER --}}
     <section class="panduan-header mt-5">
         <div class="container panduan-header-content mt-5">
+
             <div class="header-badge">
-                <i class="bi bi-book-fill me-2"></i>Buku Panduan Lengkap
+                <i class="bi bi-book-fill"></i>
+                Buku Panduan Lengkap
             </div>
-            <h1 class="header-title text-white">Rakernas XII JKPI 2026</h1>
-            <p class="header-subtitle">Jaringan Kota Pusaka Indonesia • Kota Ternate, Maluku Utara</p>
+
+            <h1 class="header-title">
+                Rakernas XII JKPI 2026
+            </h1>
+
+            <p class="header-subtitle">
+                Jaringan Kota Pusaka Indonesia • Kota Ternate
+            </p>
+
         </div>
     </section>
 
-    {{-- MAIN CONTENT --}}
+    {{-- CONTENT --}}
     <div class="panduan-container">
-
-        {{-- ERROR ALERT --}}
-        <div class="pdf-error" id="pdfError">
-            <i class="bi bi-exclamation-triangle-fill me-2"></i>
-            <strong>Error:</strong> <span id="errorMessage"></span>
-        </div>
 
         {{-- TOOLBAR --}}
         <div class="pdf-toolbar">
+
             <div class="toolbar-group">
-                <button class="toolbar-btn" id="prevBtn" onclick="prevPage()" title="Halaman Sebelumnya">
-                    <i class="bi bi-chevron-left"></i> Sebelumnya
+
+                <button class="toolbar-btn" onclick="prevPage()">
+                    <i class="bi bi-chevron-left"></i>
+                    Prev
                 </button>
+
                 <input type="number" class="toolbar-input" id="pageNum" value="1" min="1"
-                    onchange="gotoPage()" title="Nomor Halaman">
+                    onchange="gotoPage()">
+
                 <span class="toolbar-label" id="pageCount">/ 0</span>
-                <button class="toolbar-btn" id="nextBtn" onclick="nextPage()" title="Halaman Berikutnya">
-                    Berikutnya <i class="bi bi-chevron-right"></i>
+
+                <button class="toolbar-btn" onclick="nextPage()">
+                    Next
+                    <i class="bi bi-chevron-right"></i>
                 </button>
+
             </div>
 
             <div class="toolbar-spacer"></div>
 
             <div class="toolbar-group">
-                <span class="toolbar-label">Zoom</span>
-                <button class="toolbar-btn" onclick="zoomOut()" title="Perkecil">
+
+                <button class="toolbar-btn" onclick="zoomOut()">
                     <i class="bi bi-zoom-out"></i>
                 </button>
-                <input type="range" class="zoom-slider" id="zoomSlider" min="50" max="200" value="100"
-                    onchange="setZoom()">
+
                 <span class="zoom-percent" id="zoomPercent">100%</span>
-                <button class="toolbar-btn" onclick="zoomIn()" title="Perbesar">
+
+                <button class="toolbar-btn" onclick="zoomIn()">
                     <i class="bi bi-zoom-in"></i>
                 </button>
+
             </div>
 
             <div class="toolbar-group">
-                <a href="{{ asset('Buku-Panduan-Rakernas-JKPI-XI-Yogyakarta-2025_Batch-Compress.pdf') }}"
-                    class="toolbar-btn primary" download title="Download PDF">
-                    <i class="bi bi-download"></i> Download
+
+                <a href="{{ asset('buku_panduan.pdf') }}" download class="toolbar-btn primary">
+                    <i class="bi bi-download"></i>
+                    Download
                 </a>
-                <button class="toolbar-btn" onclick="window.print()" title="Cetak">
-                    <i class="bi bi-printer"></i> Cetak
+
+                <button class="toolbar-btn" onclick="toggleFullscreen()">
+                    <i class="bi bi-arrows-fullscreen"></i>
+                    Fullscreen
                 </button>
+
             </div>
+
         </div>
 
-        {{-- PDF VIEWER --}}
+        {{-- VIEWER --}}
         <div class="pdf-viewer-wrapper">
-            <div class="pdf-loading" id="pdfLoading">
-                <div class="spinner"></div>
-                <p>Memuat dokumen...</p>
+
+            <div class="pdf-viewer-container" id="viewerContainer">
+
+                <div class="pdf-loading active" id="pdfLoading">
+                    <div class="spinner"></div>
+                    <p>Memuat buku panduan...</p>
+                </div>
+
+                <div id="flipbook"></div>
+
             </div>
-            <div class="pdf-viewer-container">
-                <canvas id="pdfViewer"></canvas>
-            </div>
+
         </div>
 
     </div>
+
 @endsection
 
 @push('scripts')
+    {{-- PDF JS --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        // Setup PDF.js
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        const pdfUrl = '{{ asset('Buku-Panduan-Rakernas-JKPI-XI-Yogyakarta-2025_Batch-Compress.pdf') }}';
-        const canvas = document.getElementById('pdfViewer');
-        const ctx = canvas.getContext('2d');
+    {{-- PAGE FLIP --}}
+    <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+        const pdfUrl = "{{ asset('buku_panduan.pdf') }}";
 
         let pdfDoc = null;
-        let currentPage = 1;
-        let currentZoom = 100;
+        let pageFlip = null;
+        let currentZoom = 1;
 
-        // Load PDF
+        // ═══════════════════════════════════════════
+        //  LOAD PDF — dimensi mengikuti ukuran PDF
+        // ═══════════════════════════════════════════
+
         async function loadPDF() {
             try {
                 showLoading(true);
-                hideError();
 
                 pdfDoc = await pdfjsLib.getDocument(pdfUrl).promise;
-                document.getElementById('pageCount').textContent = '/ ' + pdfDoc.numPages;
-                document.getElementById('pageNum').max = pdfDoc.numPages;
 
-                await renderPage(currentPage);
-                showLoading(false);
-            } catch (error) {
-                console.error('Error loading PDF:', error);
-                showError('Gagal memuat dokumen PDF. Silakan coba lagi atau download file langsung.');
-                showLoading(false);
-            }
-        }
+                document.getElementById('pageCount').innerText =
+                    '/ ' + pdfDoc.numPages;
 
-        // Render Page
-        async function renderPage(pageNum) {
-            try {
-                showLoading(true);
+                // ── 1. Ambil dimensi asli halaman pertama ──
+                const firstPage = await pdfDoc.getPage(1);
+                const rawViewport = firstPage.getViewport({
+                    scale: 1
+                });
+                const pdfW = rawViewport.width; // lebar 1 halaman (pts)
+                const pdfH = rawViewport.height; // tinggi 1 halaman (pts)
 
-                if (pageNum < 1 || pageNum > pdfDoc.numPages) {
-                    pageNum = 1;
+                // ── 2. Tentukan mode tampilan ──
+                const isMobile = window.innerWidth < 768;
+                const usePortrait = true; // mobile: 1 halaman | desktop: spread 2 halaman
+
+                // ── 3. Hitung ruang yang tersedia ──
+                const container = document.getElementById('viewerContainer');
+                const padding = isMobile ? 24 : 80; // kiri + kanan
+                const availW = container.clientWidth - padding;
+                const availH = Math.max(window.innerHeight * 0.82, 400);
+
+                // ── 4. Hitung ukuran display 1 halaman ──
+                //    Aspect ratio dipertahankan dari PDF asli
+                let pageDispW, pageDispH;
+
+                // if (usePortrait) {
+                //     // Muat 1 halaman → fit ke availW / availH
+                //     pageDispH = availH;
+                //     pageDispW = pageDispH * (pdfW / pdfH);
+                //     if (pageDispW > availW) {
+                //         pageDispW = availW;
+                //         pageDispH = pageDispW * (pdfH / pdfW);
+                //     }
+                // } else {
+                //     // Spread 2 halaman → total lebar = 2 × pageDispW
+                //     pageDispH = availH;
+                //     pageDispW = pageDispH * (pdfW / pdfH);
+                //     if (2 * pageDispW > availW) {
+                //         pageDispW = availW / 2;
+                //         pageDispH = pageDispW * (pdfH / pdfW);
+                //     }
+                // }
+                pageDispH = availH;
+
+                pageDispW = pageDispH * (pdfW / pdfH);
+
+                if (pageDispW > availW) {
+
+                    pageDispW = availW;
+
+                    pageDispH = pageDispW * (pdfH / pdfW);
+                }
+                pageDispW = Math.round(pageDispW);
+                pageDispH = Math.round(pageDispH);
+
+                // ── 5. Atur tinggi container agar pas ──
+                container.style.minHeight = (pageDispH + padding) + 'px';
+
+                // ── 6. Render scale — 2× untuk kualitas tajam ──
+                const renderScale = (pageDispW / pdfW) * 2;
+
+                // ── 7. Render semua halaman ke canvas ──
+                const pages = [];
+
+                for (let n = 1; n <= pdfDoc.numPages; n++) {
+
+                    const page = await pdfDoc.getPage(n);
+                    const viewport = page.getViewport({
+                        scale: renderScale
+                    });
+
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    await page.render({
+                        canvasContext: ctx,
+                        viewport
+                    }).promise;
+
+                    const div = document.createElement('div');
+                    div.classList.add('page');
+                    div.style.width = pageDispW + 'px';
+                    div.style.height = pageDispH + 'px';
+                    div.appendChild(canvas);
+
+                    pages.push(div);
                 }
 
-                currentPage = pageNum;
-                document.getElementById('pageNum').value = pageNum;
+                // ── 8. Ukuran elemen flipbook ──
+                const flipbookEl = document.getElementById('flipbook');
+                const totalFlipW = pageDispW;
+                flipbookEl.style.width = totalFlipW + 'px';
+                flipbookEl.style.height = pageDispH + 'px';
 
-                const page = await pdfDoc.getPage(pageNum);
-                const scale = currentZoom / 100;
-                const viewport = page.getViewport({
-                    scale: scale
+                // ── 9. Init PageFlip ──
+                pageFlip = new St.PageFlip(flipbookEl, {
+                    width: pageDispW, // lebar 1 halaman
+                    height: pageDispH, // tinggi 1 halaman
+
+                    size: 'fixed',
+
+                    minWidth: 100,
+                    maxWidth: 3000,
+                    minHeight: 100,
+                    maxHeight: 5000,
+
+                    showCover: false,
+
+                    usePortrait: usePortrait, // false = spread horizontal
+
+                    startZIndex: 0,
+
+                    autoSize: false,
+
+                    maxShadowOpacity: 0.3,
+
+                    mobileScrollSupport: false,
+
+                    swipeDistance: 30,
+
+                    clickEventForward: true,
+
+                    useMouseEvents: true,
+
+                    flippingTime: 700,
+
+                    drawShadow: true,
+
+                    showPageCorners: true,
+
+                    disableFlipByClick: false,
                 });
 
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
+                // loadFromHTML saja — tidak perlu updateFromHtml
+                pageFlip.loadFromHTML(pages);
 
-                const renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-
-                await page.render(renderContext).promise;
-
-                // Update button states
-                document.getElementById('prevBtn').disabled = pageNum === 1;
-                document.getElementById('nextBtn').disabled = pageNum === pdfDoc.numPages;
+                // ── EVENT FLIP ──
+                pageFlip.on('flip', (e) => {
+                    document.getElementById('pageNum').value = e.data + 1;
+                    playFlipSound();
+                });
 
                 showLoading(false);
+
             } catch (error) {
-                console.error('Error rendering page:', error);
-                showError('Gagal menampilkan halaman. Silakan coba lagi.');
+                console.error(error);
+                alert('Gagal memuat PDF');
                 showLoading(false);
             }
         }
 
-        // Navigation
+        // ═══════════════════════════════════════════
+        //  NAVIGASI
+        // ═══════════════════════════════════════════
+
         function nextPage() {
-            if (currentPage < pdfDoc.numPages) {
-                renderPage(currentPage + 1);
-            }
+            if (pageFlip) pageFlip.flipNext();
         }
 
         function prevPage() {
-            if (currentPage > 1) {
-                renderPage(currentPage - 1);
-            }
+            if (pageFlip) pageFlip.flipPrev();
         }
 
         function gotoPage() {
-            const pageNum = parseInt(document.getElementById('pageNum').value);
-            if (!isNaN(pageNum)) {
-                renderPage(pageNum);
-            }
+            const page = parseInt(document.getElementById('pageNum').value);
+            if (pageFlip) pageFlip.flip(page - 1);
         }
 
-        // Zoom
+        // ═══════════════════════════════════════════
+        //  ZOOM
+        // ═══════════════════════════════════════════
+
         function zoomIn() {
-            if (currentZoom < 200) {
-                currentZoom += 10;
-                setZoom();
-            }
+            currentZoom = Math.min(currentZoom + 0.1, 3);
+            applyZoom();
         }
 
         function zoomOut() {
-            if (currentZoom > 50) {
-                currentZoom -= 10;
-                setZoom();
-            }
+            currentZoom = Math.max(currentZoom - 0.1, 0.4);
+            applyZoom();
         }
 
-        function setZoom() {
-            currentZoom = parseInt(document.getElementById('zoomSlider').value);
-            document.getElementById('zoomPercent').textContent = currentZoom + '%';
-            renderPage(currentPage);
+        function applyZoom() {
+            document.getElementById('flipbook').style.transform =
+                `scale(${currentZoom})`;
+            document.getElementById('zoomPercent').innerText =
+                Math.round(currentZoom * 100) + '%';
         }
 
-        // UI Helpers
-        function showLoading(show) {
-            const loadingEl = document.getElementById('pdfLoading');
-            if (show) {
-                loadingEl.classList.add('active');
+        // ═══════════════════════════════════════════
+        //  FULLSCREEN
+        // ═══════════════════════════════════════════
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
             } else {
-                loadingEl.classList.remove('active');
+                document.exitFullscreen();
             }
         }
 
-        function showError(message) {
-            const errorEl = document.getElementById('pdfError');
-            document.getElementById('errorMessage').textContent = message;
-            errorEl.classList.add('active');
+        // ═══════════════════════════════════════════
+        //  LOADING
+        // ═══════════════════════════════════════════
+
+        function showLoading(show) {
+            const loading = document.getElementById('pdfLoading');
+            loading.classList.toggle('active', show);
         }
 
-        function hideError() {
-            const errorEl = document.getElementById('pdfError');
-            errorEl.classList.remove('active');
+        // ═══════════════════════════════════════════
+        //  SOUND
+        // ═══════════════════════════════════════════
+
+        function playFlipSound() {
+            const sounds = [
+                '/sounds/page-flip-1.mp3',
+                '/sounds/page-flip-2.mp3',
+                '/sounds/page-flip-3.mp3',
+            ];
+            const audio = new Audio(sounds[Math.floor(Math.random() * sounds.length)]);
+            audio.volume = 0.35;
+            audio.play().catch(() => {}); // abaikan jika browser blokir autoplay
         }
 
-        // Keyboard shortcuts
+        // ═══════════════════════════════════════════
+        //  KEYBOARD
+        // ═══════════════════════════════════════════
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') nextPage();
             if (e.key === 'ArrowLeft') prevPage();
-            if (e.key === '+' || e.key === '=') zoomIn();
+            if (e.key === '+') zoomIn();
             if (e.key === '-') zoomOut();
         });
 
-        // Load PDF on page load
+        // ═══════════════════════════════════════════
+        //  INIT
+        // ═══════════════════════════════════════════
+
         document.addEventListener('DOMContentLoaded', loadPDF);
     </script>
 @endpush

@@ -796,12 +796,14 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label" for="timestamp">Timestamp</label>
-                            <input type="text" class="form-control" id="timestamp" name="timestamp"
-                                value="{{ now()->format('d/m/Y, H.i') }}" readonly>
+                            <label class="form-label">
+                                Jumlah Rombongan <span class="required">*</span>
+                            </label>
+                            <input type="number" min="1" class="form-control" name="jumlah_rombongan"
+                                value="{{ old('jumlah_rombongan', 1) }}" required>
                             <span class="field-help">
-                                <i class="bi bi-clock"></i>
-                                Otomatis diisi sistem saat submit.
+                                <i class="bi bi-people"></i>
+                                Termasuk kepala daerah, pasangan, ajudan, OPD dan tim pendamping.
                             </span>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -924,11 +926,11 @@
                         </div>
                     </div>
 
-                    {{-- ============ INFORMASI TAMBAHAN ============ --}}
+                    {{-- ============ INFORMASI TAMBAHAN ============
                     <h3 class="form-section-title">
                         <span class="icon-badge"><i class="bi bi-card-checklist"></i></span>
                         Informasi Tambahan
-                    </h3>
+                    </h3> --}}
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -947,15 +949,19 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">
-                                Jumlah Rombongan <span class="required">*</span>
+                                Ukuran Baju Pasangan Kepala Daerah
                             </label>
-                            <input type="number" min="1" class="form-control" name="jumlah_rombongan"
-                                value="{{ old('jumlah_rombongan', 1) }}" required>
-                            <span class="field-help">
-                                <i class="bi bi-people"></i>
-                                Termasuk kepala daerah, pasangan, ajudan, dan tim pendamping.
-                            </span>
+                            <select class="form-select" name="ukuran_baju" required>
+                                <option value="">Pilih Ukuran</option>
+                                @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $ukuran)
+                                    <option value="{{ $ukuran }}"
+                                        {{ old('ukuran_baju') == $ukuran ? 'selected' : '' }}>
+                                        {{ $ukuran }}
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
+
                     </div>
 
                     {{-- ============ KEGIATAN ============ --}}
@@ -1032,12 +1038,23 @@
                             </div>
                         </label>
 
-                        <label class="event-check-item" style="grid-column: 1 / -1;">
-                            <input type="checkbox" name="kegiatan[]" value="Expo dan Pentas Budaya"
+                        <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Expo UMKM" onchange="onEventChange()">
+                            <div class="event-check-content">
+                                <span class="event-date-chip chip-d1">26–29 AGUSTUS</span>
+                                <div class="event-check-title">Expo UMKM (4 Hari)</div>
+                                <div class="event-check-meta">
+                                    <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                </div>
+                            </div>
+                        </label>
+
+                        <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Pentas Budaya"
                                 onchange="onEventChange()">
                             <div class="event-check-content">
                                 <span class="event-date-chip chip-d1">26–29 AGUSTUS</span>
-                                <div class="event-check-title">Expo dan Pentas Budaya (4 Hari)</div>
+                                <div class="event-check-title">Pentas Budaya (4 Hari)</div>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                 </div>
