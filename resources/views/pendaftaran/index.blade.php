@@ -74,8 +74,7 @@
            =========================== */
         .hero {
             position: relative;
-            background:
-                linear-gradient(135deg, var(--navy) 0%, #0a2240 55%, var(--teal-deep) 130%);
+            background: linear-gradient(135deg, #0a2a3c 0%, #0d4f5e 40%, #099aa7 100%);
             color: #fff;
             overflow: hidden;
             padding: 56px 0 90px;

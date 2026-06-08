@@ -46,14 +46,26 @@
         }
 
         .panduan-header::before {
-            content: '';
+            content: "";
             position: absolute;
             inset: 0;
-            opacity: .08;
             background-image:
-                radial-gradient(circle at 20% 20%, white 1px, transparent 1px),
-                radial-gradient(circle at 80% 80%, white 1px, transparent 1px);
-            background-size: 40px 40px;
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 18px),
+                repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 18px);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .panduan-header::after {
+            content: "";
+            position: absolute;
+            right: -120px;
+            top: -120px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(184, 118, 60, 0.35), transparent 70%);
+            pointer-events: none;
         }
 
         .panduan-header-content {

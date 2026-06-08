@@ -33,14 +33,26 @@
         }
 
         .kuliner-hero::before {
-            content: '';
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            opacity: 0.6;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 18px),
+                repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 18px);
+            opacity: 0.9;
+            pointer-events: none;
+        }
+
+        .kuliner-hero::after {
+            content: "";
+            position: absolute;
+            right: -120px;
+            top: -120px;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(184, 118, 60, 0.35), transparent 70%);
+            pointer-events: none;
         }
 
         .kuliner-hero .container {
@@ -811,204 +823,1174 @@
         // ========== DATA KULINER ==========
         const kulinerData = [
             // RESTORAN
-            {no: 1, name: "ROYAL'S RESTO AND FUNCTION HALL", address: "Jln. Branjangan Kel. Santiong", type: "Restoran"},
-            {no: 2, name: "PONDOK KATU", address: "Jln. Branjangan Kel. Kalumpang", type: "Restoran"},
-            {no: 3, name: "GRAND FATMAH", address: "Kel. Moya", type: "Restoran"},
-            {no: 4, name: "BAKSO LAPANGAN TEMBAK", address: "Jln. A.R Mononutu Kel. Stadion", type: "Restoran"},
-            {no: 5, name: "SARI BUNDO", address: "Kel. Tanah Raja", type: "Restoran"},
-            {no: 6, name: "BUKIT PELANGI", address: "Kel Dufa Dufa Belakang", type: "Restoran"},
-            {no: 7, name: "PAPARONZ", address: "Mall Jatiland Kel. Gamalama", type: "Restoran"},
-            {no: 8, name: "EXCELSO", address: "Mall Jatiland Kel. Gamalama", type: "Restoran"},
-            {no: 9, name: "KFC", address: "Mall Jatiland Kel. Gamalama", type: "Restoran"},
-            {no: 10, name: "SOLARIA", address: "Mall Jatiland Kel. Gamalama", type: "Restoran"},
-            {no: 11, name: "SOLARIA", address: "Samping Mall Jatiland Kel. Gamalama", type: "Restoran"},
-            {no: 12, name: "CFC", address: "Jln. Jati Kel. Mangga Dua Utara", type: "Restoran"},
-            {no: 13, name: "BAKMI NAGA", address: "Jln. Jati Kel. Mangga Dua Utara", type: "Restoran"},
-            {no: 14, name: "SS RESTO", address: "Kel. Mangga Dua", type: "Restoran"},
-            {no: 15, name: "PIZZA HUT", address: "Jln A.R Mononutu Kel. Tanah Raja", type: "Restoran"},
-            {no: 16, name: "MC DONALD", address: "Kel. Gamalama", type: "Restoran"},
-            {no: 17, name: "RICHEESE FACTORY", address: "Jln A.R Mononutu Kel. Stadion", type: "Restoran"},
-            {no: 18, name: "MOONLIGHT", address: "Jln. Pahlawan Revolusi Kel. Gamalama", type: "Restoran"},
-            {no: 19, name: "MUARA RESTO", address: "Jln. Merdeka Kel. Gamalama", type: "Restoran"},
-            {no: 20, name: "DAHAN MAS", address: "Batu Anteru Kel. Maliaro", type: "Restoran"},
-            {no: 21, name: "K62", address: "Kel. Kalumpang", type: "Restoran"},
-            {no: 22, name: "DAPUR NONA JO", address: "Kel. Gamalama", type: "Restoran"},
-            {no: 23, name: "SYAMATIRAH", address: "Kel. Makassar Timur", type: "Restoran"},
-            {no: 24, name: "ANOMALI", address: "Jln. Merdeka Kel. Santiong", type: "Restoran"},
-            {no: 25, name: "RICA RICA", address: "Kel. Kota Baru", type: "Restoran"},
-            {no: 26, name: "LILIAN BEACH RESORT", address: "Kel. Takome", type: "Restoran"},
-            {no: 27, name: "D'CLIFF", address: "Kel. Kalumata", type: "Restoran"},
-            {no: 28, name: "VILA RIA", address: "Kel. Sasa", type: "Restoran"},
-            {no: 29, name: "ICHIBAN", address: "Jatiland Mall Kel. Gamalama", type: "Restoran"},
-            {no: 30, name: "PADDOCK", address: "Kel. Toboko", type: "Restoran"},
-            {no: 31, name: "WAKAME", address: "Kel. Soa Sio", type: "Restoran"},
-            
+            {
+                no: 1,
+                name: "ROYAL'S RESTO AND FUNCTION HALL",
+                address: "Jln. Branjangan Kel. Santiong",
+                type: "Restoran"
+            },
+            {
+                no: 2,
+                name: "PONDOK KATU",
+                address: "Jln. Branjangan Kel. Kalumpang",
+                type: "Restoran"
+            },
+            {
+                no: 3,
+                name: "GRAND FATMAH",
+                address: "Kel. Moya",
+                type: "Restoran"
+            },
+            {
+                no: 4,
+                name: "BAKSO LAPANGAN TEMBAK",
+                address: "Jln. A.R Mononutu Kel. Stadion",
+                type: "Restoran"
+            },
+            {
+                no: 5,
+                name: "SARI BUNDO",
+                address: "Kel. Tanah Raja",
+                type: "Restoran"
+            },
+            {
+                no: 6,
+                name: "BUKIT PELANGI",
+                address: "Kel Dufa Dufa Belakang",
+                type: "Restoran"
+            },
+            {
+                no: 7,
+                name: "PAPARONZ",
+                address: "Mall Jatiland Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 8,
+                name: "EXCELSO",
+                address: "Mall Jatiland Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 9,
+                name: "KFC",
+                address: "Mall Jatiland Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 10,
+                name: "SOLARIA",
+                address: "Mall Jatiland Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 11,
+                name: "SOLARIA",
+                address: "Samping Mall Jatiland Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 12,
+                name: "CFC",
+                address: "Jln. Jati Kel. Mangga Dua Utara",
+                type: "Restoran"
+            },
+            {
+                no: 13,
+                name: "BAKMI NAGA",
+                address: "Jln. Jati Kel. Mangga Dua Utara",
+                type: "Restoran"
+            },
+            {
+                no: 14,
+                name: "SS RESTO",
+                address: "Kel. Mangga Dua",
+                type: "Restoran"
+            },
+            {
+                no: 15,
+                name: "PIZZA HUT",
+                address: "Jln A.R Mononutu Kel. Tanah Raja",
+                type: "Restoran"
+            },
+            {
+                no: 16,
+                name: "MC DONALD",
+                address: "Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 17,
+                name: "RICHEESE FACTORY",
+                address: "Jln A.R Mononutu Kel. Stadion",
+                type: "Restoran"
+            },
+            {
+                no: 18,
+                name: "MOONLIGHT",
+                address: "Jln. Pahlawan Revolusi Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 19,
+                name: "MUARA RESTO",
+                address: "Jln. Merdeka Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 20,
+                name: "DAHAN MAS",
+                address: "Batu Anteru Kel. Maliaro",
+                type: "Restoran"
+            },
+            {
+                no: 21,
+                name: "K62",
+                address: "Kel. Kalumpang",
+                type: "Restoran"
+            },
+            {
+                no: 22,
+                name: "DAPUR NONA JO",
+                address: "Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 23,
+                name: "SYAMATIRAH",
+                address: "Kel. Makassar Timur",
+                type: "Restoran"
+            },
+            {
+                no: 24,
+                name: "ANOMALI",
+                address: "Jln. Merdeka Kel. Santiong",
+                type: "Restoran"
+            },
+            {
+                no: 25,
+                name: "RICA RICA",
+                address: "Kel. Kota Baru",
+                type: "Restoran"
+            },
+            {
+                no: 26,
+                name: "LILIAN BEACH RESORT",
+                address: "Kel. Takome",
+                type: "Restoran"
+            },
+            {
+                no: 27,
+                name: "D'CLIFF",
+                address: "Kel. Kalumata",
+                type: "Restoran"
+            },
+            {
+                no: 28,
+                name: "VILA RIA",
+                address: "Kel. Sasa",
+                type: "Restoran"
+            },
+            {
+                no: 29,
+                name: "ICHIBAN",
+                address: "Jatiland Mall Kel. Gamalama",
+                type: "Restoran"
+            },
+            {
+                no: 30,
+                name: "PADDOCK",
+                address: "Kel. Toboko",
+                type: "Restoran"
+            },
+            {
+                no: 31,
+                name: "WAKAME",
+                address: "Kel. Soa Sio",
+                type: "Restoran"
+            },
+
             // RUMAH MAKAN
-            {no: 32, name: "PASTEAK", address: "Kel. Sangaji (Siko)", type: "Rumah Makan"},
-            {no: 33, name: "R.M MAJOR KITCHEN", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 34, name: "R.M SWADAYA", address: "Ruko Jatiland Kel. Gamalama", type: "Rumah Makan"},
-            {no: 35, name: "R.M AL-HIKMAH", address: "Kel. Tanah Raja", type: "Rumah Makan"},
-            {no: 36, name: "R.M SIMPANG RAYA", address: "Kel. Makassar Timur", type: "Rumah Makan"},
-            {no: 37, name: "R.M PAPA KO", address: "Kel. Kalumpang", type: "Rumah Makan"},
-            {no: 38, name: "R.M DAPUR CHEESY", address: "Kel. Kalumpang", type: "Rumah Makan"},
-            {no: 39, name: "R.M AYAM BAKAR PAK RT 1", address: "Kel. Muhajirin", type: "Rumah Makan"},
-            {no: 40, name: "R.M AYAM BAKAR PAK RT 2", address: "Jati Lurus Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 41, name: "R.M AYAM BAKAR MAS JA 1", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 42, name: "R.M AYAM BAKAR MAS JA 2", address: "Kel. Maliaro", type: "Rumah Makan"},
-            {no: 43, name: "R.M AYAM BAKAR PAK RT 3", address: "Kel. Kasturian", type: "Rumah Makan"},
-            {no: 44, name: "R.M AYAM BAKAR DABU DABU", address: "Kel. Santiong", type: "Rumah Makan"},
-            {no: 45, name: "R.M DAPUR NONA JAWA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 46, name: "R.M IJO ROYO ROYO 1", address: "Kel. Akehuda", type: "Rumah Makan"},
-            {no: 47, name: "R.M IJO ROYO ROYO 2", address: "Kel. Tubo", type: "Rumah Makan"},
-            {no: 48, name: "R.M OK CHIKEN", address: "Kel. Makassar Timur", type: "Rumah Makan"},
-            {no: 49, name: "R.M DAPUR MA MENA", address: "Kel. Makassar Timur", type: "Rumah Makan"},
-            {no: 50, name: "R.M ANAK MANDE", address: "Dufa-Dufa", type: "Rumah Makan"},
-            {no: 51, name: "WM. 888", address: "Kel. Akehuda", type: "Rumah Makan"},
-            {no: 52, name: "MIDJO 1947", address: "Kel. Tanah Raja", type: "Rumah Makan"},
-            {no: 53, name: "SATE MADURA LANGGAR IJO", address: "Kel. Tanah Raja", type: "Rumah Makan"},
-            {no: 54, name: "MAS BRO KREMES", address: "Kel. Kalumpang", type: "Rumah Makan"},
-            {no: 55, name: "SOP SODARA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 56, name: "R.M PANGKEP", address: "Kel. Kalumpang", type: "Rumah Makan"},
-            {no: 57, name: "SAUNG ABA", address: "Kel. Sangaji", type: "Rumah Makan"},
-            {no: 58, name: "R.M LILIAN", address: "Kel. Santiong", type: "Rumah Makan"},
-            {no: 59, name: "BAKSO AMBIGU", address: "Kel. Santiong", type: "Rumah Makan"},
-            {no: 60, name: "MINANG RAYA", address: "Kel. Muhajirin", type: "Rumah Makan"},
-            {no: 61, name: "R.M JAILOLO", address: "Kel Muhajirin", type: "Rumah Makan"},
-            {no: 62, name: "R.M ROHANI", address: "Kel. Muhajirin", type: "Rumah Makan"},
-            {no: 63, name: "R.M TANAH WANGKO", address: "Jln. Sultan Iskandar Muhamad Djabir Sjah Kel. Gamalama", type: "Rumah Makan"},
-            {no: 64, name: "WM. ABZ", address: "Kel Muhajirin", type: "Rumah Makan"},
-            {no: 65, name: "R.M RESIDENCE", address: "Kel Muhajirin", type: "Rumah Makan"},
-            {no: 66, name: "WM. JEPARA INDAH", address: "Kel. Makassar Timur", type: "Rumah Makan"},
-            {no: 67, name: "R.M 3 PUTRA", address: "Kel. Dufa Dufa", type: "Rumah Makan"},
-            {no: 68, name: "WM. TUBAN PUTRA", address: "Kel. Makassar Barat", type: "Rumah Makan"},
-            {no: 69, name: "WARUNG SOLO BARU", address: "Kel. Makassar Barat", type: "Rumah Makan"},
-            {no: 70, name: "WARUNG LAMONGAN", address: "Kel. Makassar Barat", type: "Rumah Makan"},
-            {no: 71, name: "BURGER BANGER", address: "Kel. Makassar Barat", type: "Rumah Makan"},
-            {no: 72, name: "DAPUR MANISO", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 73, name: "R.M SIDODADI (KOLONCUCU)", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 74, name: "R.M BAGHDAD", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 75, name: "KEDAI CAPILONG", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 76, name: "R.M QUEEN", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 77, name: "R.M DUA PUTRI", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 78, name: "R.M RISKA JAYA", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 79, name: "R.M MANDARIDA", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 80, name: "R.M ALULA", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 81, name: "COTO MAKASSAR KAMPUNG PISANG", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 82, name: "SERUNI", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 83, name: "SATE KAMPIS", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 84, name: "KEDAI KAMPIS BOWL", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 85, name: "R.M MITA JAYA", address: "Kel. Kampung Pisang", type: "Rumah Makan"},
-            {no: 86, name: "SATE MARYAM GAMALAMA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 87, name: "RUMAH MAKAN GAMALAMA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 88, name: "R.M PONANG", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 89, name: "R.M DAPUR RAYA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 90, name: "RUMAH MAKAN UNIX", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 91, name: "R.M PUPEDA TIGA PUTRA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 92, name: "WARUNG MANALAGI", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 93, name: "LISA JAYA", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 94, name: "WARUNG PANGKEP HI ALI", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 95, name: "BOOM DONUT BAKERY AND CAKE", address: "Kel. Gamalama", type: "Rumah Makan"},
-            {no: 96, name: "R.M BAKSO 4G", address: "Kel. Toboko", type: "Rumah Makan"},
-            {no: 97, name: "HOLLAND FRIED CIKEN", address: "Kel. Tanah Tinggi", type: "Rumah Makan"},
-            {no: 98, name: "R.M JUJUR BERSAMA", address: "Kel. Tanah Tinggi", type: "Rumah Makan"},
-            {no: 99, name: "KHARISMA", address: "Kel. Sasa", type: "Rumah Makan"},
-            {no: 100, name: "BAKSO ROSA", address: "Kel. Sasa", type: "Rumah Makan"},
-            {no: 101, name: "NO & UTI", address: "Kel. Sasa", type: "Rumah Makan"},
-            {no: 102, name: "KJA MANILA", address: "Kel. Ngade", type: "Rumah Makan"},
-            {no: 103, name: "KEDAI RISA", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 104, name: "DAPUR SO MASAK", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 105, name: "RUMAH MAKAN REJO", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 106, name: "WARUNG BIRU LESTARI SOLO", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 107, name: "RUMAH MAKAN PARTON", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 108, name: "R.M YUSMAR", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 109, name: "KEDAI MAKANAN ARIS", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 110, name: "BAKSO SEMUT MERAH", address: "Kel. Mangga Dua Utara", type: "Rumah Makan"},
-            {no: 111, name: "R.M PANGKEP CABANG MANGGA DUA", address: "Kel. Mangga Dua", type: "Rumah Makan"},
-            {no: 112, name: "RUMAH MAKAN WANDAN", address: "Kel. Mangga Dua", type: "Rumah Makan"},
-            {no: 113, name: "PELANGI SAFA", address: "Kel. Mangga Dua", type: "Rumah Makan"},
-            {no: 114, name: "INDO GORENG", address: "Kel. Mangga Dua", type: "Rumah Makan"},
-            {no: 115, name: "KEDAI CINTA", address: "Kel. Mangga Dua", type: "Rumah Makan"},
-            {no: 116, name: "R.M ASSIFA BAROKAH", address: "Kel. Mangga Dua", type: "Rumah Makan"},
-            {no: 117, name: "MUNIRA KULINER", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 118, name: "WARUNG NASI KUNING AZIS", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 119, name: "R.M YU SRI KLATEN", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 120, name: "WARUNG SISIR", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 121, name: "MEDINA", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 122, name: "R.M MEDINA 12", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 123, name: "RUMAH MAKAN INDAH JAYA", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 124, name: "R.M TISSA", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 125, name: "R.M KANJENG MAMI", address: "Kel. Kalumata", type: "Rumah Makan"},
-            {no: 126, name: "RUMAH MAKAN CAK KATROK", address: "Kel. Jati", type: "Rumah Makan"},
-            {no: 127, name: "KEDAI AR RAHMAH COTO MAKASSAR PUTRA GAMALAMA", address: "Kel. Jati", type: "Rumah Makan"},
-            {no: 128, name: "WARUNG SOPO NYONO", address: "Kel. Jati", type: "Rumah Makan"},
-            {no: 129, name: "RUMAH MAKAN INDRI", address: "Kel. Jati", type: "Rumah Makan"},
-            {no: 130, name: "R.M RASTA", address: "Kel. Jati", type: "Rumah Makan"},
-            {no: 131, name: "SARIAH", address: "Kel. Fitu", type: "Rumah Makan"},
-            {no: 132, name: "LESEHAN RIFANI", address: "Kel. Fitu", type: "Rumah Makan"},
-            {no: 133, name: "WARUNG SAHABAT", address: "Kel. Bastiong Talangame", type: "Rumah Makan"},
-            {no: 134, name: "WARUNG MAKAN MBAK MINTEN", address: "Kel. Bastiong Talangame", type: "Rumah Makan"},
-            {no: 135, name: "R.M AYAH", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 136, name: "RUMAH MAKAN ISKILA BROTHERS", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 137, name: "R.M LIFA", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 138, name: "R.M NAURA", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 139, name: "R.M DAPUR CITRA", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 140, name: "R.M ALIFA", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 141, name: "WARUNG AMALIA", address: "Kel. Bastiong", type: "Rumah Makan"},
-            {no: 142, name: "DAP", address: "Kel. Maliaro", type: "Rumah Makan"},
-            {no: 143, name: "KIMI SUSHI", address: "Kel. Tanah Raja", type: "Rumah Makan"},
-            {no: 144, name: "KATAJI", address: "Kel. Kota Baru", type: "Rumah Makan"},
-            {no: 145, name: "MIE AYAM BAKSO JAKARTA", address: "Kel. Santiong", type: "Rumah Makan"},
+            {
+                no: 32,
+                name: "PASTEAK",
+                address: "Kel. Sangaji (Siko)",
+                type: "Rumah Makan"
+            },
+            {
+                no: 33,
+                name: "R.M MAJOR KITCHEN",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 34,
+                name: "R.M SWADAYA",
+                address: "Ruko Jatiland Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 35,
+                name: "R.M AL-HIKMAH",
+                address: "Kel. Tanah Raja",
+                type: "Rumah Makan"
+            },
+            {
+                no: 36,
+                name: "R.M SIMPANG RAYA",
+                address: "Kel. Makassar Timur",
+                type: "Rumah Makan"
+            },
+            {
+                no: 37,
+                name: "R.M PAPA KO",
+                address: "Kel. Kalumpang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 38,
+                name: "R.M DAPUR CHEESY",
+                address: "Kel. Kalumpang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 39,
+                name: "R.M AYAM BAKAR PAK RT 1",
+                address: "Kel. Muhajirin",
+                type: "Rumah Makan"
+            },
+            {
+                no: 40,
+                name: "R.M AYAM BAKAR PAK RT 2",
+                address: "Jati Lurus Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 41,
+                name: "R.M AYAM BAKAR MAS JA 1",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 42,
+                name: "R.M AYAM BAKAR MAS JA 2",
+                address: "Kel. Maliaro",
+                type: "Rumah Makan"
+            },
+            {
+                no: 43,
+                name: "R.M AYAM BAKAR PAK RT 3",
+                address: "Kel. Kasturian",
+                type: "Rumah Makan"
+            },
+            {
+                no: 44,
+                name: "R.M AYAM BAKAR DABU DABU",
+                address: "Kel. Santiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 45,
+                name: "R.M DAPUR NONA JAWA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 46,
+                name: "R.M IJO ROYO ROYO 1",
+                address: "Kel. Akehuda",
+                type: "Rumah Makan"
+            },
+            {
+                no: 47,
+                name: "R.M IJO ROYO ROYO 2",
+                address: "Kel. Tubo",
+                type: "Rumah Makan"
+            },
+            {
+                no: 48,
+                name: "R.M OK CHIKEN",
+                address: "Kel. Makassar Timur",
+                type: "Rumah Makan"
+            },
+            {
+                no: 49,
+                name: "R.M DAPUR MA MENA",
+                address: "Kel. Makassar Timur",
+                type: "Rumah Makan"
+            },
+            {
+                no: 50,
+                name: "R.M ANAK MANDE",
+                address: "Dufa-Dufa",
+                type: "Rumah Makan"
+            },
+            {
+                no: 51,
+                name: "WM. 888",
+                address: "Kel. Akehuda",
+                type: "Rumah Makan"
+            },
+            {
+                no: 52,
+                name: "MIDJO 1947",
+                address: "Kel. Tanah Raja",
+                type: "Rumah Makan"
+            },
+            {
+                no: 53,
+                name: "SATE MADURA LANGGAR IJO",
+                address: "Kel. Tanah Raja",
+                type: "Rumah Makan"
+            },
+            {
+                no: 54,
+                name: "MAS BRO KREMES",
+                address: "Kel. Kalumpang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 55,
+                name: "SOP SODARA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 56,
+                name: "R.M PANGKEP",
+                address: "Kel. Kalumpang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 57,
+                name: "SAUNG ABA",
+                address: "Kel. Sangaji",
+                type: "Rumah Makan"
+            },
+            {
+                no: 58,
+                name: "R.M LILIAN",
+                address: "Kel. Santiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 59,
+                name: "BAKSO AMBIGU",
+                address: "Kel. Santiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 60,
+                name: "MINANG RAYA",
+                address: "Kel. Muhajirin",
+                type: "Rumah Makan"
+            },
+            {
+                no: 61,
+                name: "R.M JAILOLO",
+                address: "Kel Muhajirin",
+                type: "Rumah Makan"
+            },
+            {
+                no: 62,
+                name: "R.M ROHANI",
+                address: "Kel. Muhajirin",
+                type: "Rumah Makan"
+            },
+            {
+                no: 63,
+                name: "R.M TANAH WANGKO",
+                address: "Jln. Sultan Iskandar Muhamad Djabir Sjah Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 64,
+                name: "WM. ABZ",
+                address: "Kel Muhajirin",
+                type: "Rumah Makan"
+            },
+            {
+                no: 65,
+                name: "R.M RESIDENCE",
+                address: "Kel Muhajirin",
+                type: "Rumah Makan"
+            },
+            {
+                no: 66,
+                name: "WM. JEPARA INDAH",
+                address: "Kel. Makassar Timur",
+                type: "Rumah Makan"
+            },
+            {
+                no: 67,
+                name: "R.M 3 PUTRA",
+                address: "Kel. Dufa Dufa",
+                type: "Rumah Makan"
+            },
+            {
+                no: 68,
+                name: "WM. TUBAN PUTRA",
+                address: "Kel. Makassar Barat",
+                type: "Rumah Makan"
+            },
+            {
+                no: 69,
+                name: "WARUNG SOLO BARU",
+                address: "Kel. Makassar Barat",
+                type: "Rumah Makan"
+            },
+            {
+                no: 70,
+                name: "WARUNG LAMONGAN",
+                address: "Kel. Makassar Barat",
+                type: "Rumah Makan"
+            },
+            {
+                no: 71,
+                name: "BURGER BANGER",
+                address: "Kel. Makassar Barat",
+                type: "Rumah Makan"
+            },
+            {
+                no: 72,
+                name: "DAPUR MANISO",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 73,
+                name: "R.M SIDODADI (KOLONCUCU)",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 74,
+                name: "R.M BAGHDAD",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 75,
+                name: "KEDAI CAPILONG",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 76,
+                name: "R.M QUEEN",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 77,
+                name: "R.M DUA PUTRI",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 78,
+                name: "R.M RISKA JAYA",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 79,
+                name: "R.M MANDARIDA",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 80,
+                name: "R.M ALULA",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 81,
+                name: "COTO MAKASSAR KAMPUNG PISANG",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 82,
+                name: "SERUNI",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 83,
+                name: "SATE KAMPIS",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 84,
+                name: "KEDAI KAMPIS BOWL",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 85,
+                name: "R.M MITA JAYA",
+                address: "Kel. Kampung Pisang",
+                type: "Rumah Makan"
+            },
+            {
+                no: 86,
+                name: "SATE MARYAM GAMALAMA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 87,
+                name: "RUMAH MAKAN GAMALAMA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 88,
+                name: "R.M PONANG",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 89,
+                name: "R.M DAPUR RAYA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 90,
+                name: "RUMAH MAKAN UNIX",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 91,
+                name: "R.M PUPEDA TIGA PUTRA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 92,
+                name: "WARUNG MANALAGI",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 93,
+                name: "LISA JAYA",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 94,
+                name: "WARUNG PANGKEP HI ALI",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 95,
+                name: "BOOM DONUT BAKERY AND CAKE",
+                address: "Kel. Gamalama",
+                type: "Rumah Makan"
+            },
+            {
+                no: 96,
+                name: "R.M BAKSO 4G",
+                address: "Kel. Toboko",
+                type: "Rumah Makan"
+            },
+            {
+                no: 97,
+                name: "HOLLAND FRIED CIKEN",
+                address: "Kel. Tanah Tinggi",
+                type: "Rumah Makan"
+            },
+            {
+                no: 98,
+                name: "R.M JUJUR BERSAMA",
+                address: "Kel. Tanah Tinggi",
+                type: "Rumah Makan"
+            },
+            {
+                no: 99,
+                name: "KHARISMA",
+                address: "Kel. Sasa",
+                type: "Rumah Makan"
+            },
+            {
+                no: 100,
+                name: "BAKSO ROSA",
+                address: "Kel. Sasa",
+                type: "Rumah Makan"
+            },
+            {
+                no: 101,
+                name: "NO & UTI",
+                address: "Kel. Sasa",
+                type: "Rumah Makan"
+            },
+            {
+                no: 102,
+                name: "KJA MANILA",
+                address: "Kel. Ngade",
+                type: "Rumah Makan"
+            },
+            {
+                no: 103,
+                name: "KEDAI RISA",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 104,
+                name: "DAPUR SO MASAK",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 105,
+                name: "RUMAH MAKAN REJO",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 106,
+                name: "WARUNG BIRU LESTARI SOLO",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 107,
+                name: "RUMAH MAKAN PARTON",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 108,
+                name: "R.M YUSMAR",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 109,
+                name: "KEDAI MAKANAN ARIS",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 110,
+                name: "BAKSO SEMUT MERAH",
+                address: "Kel. Mangga Dua Utara",
+                type: "Rumah Makan"
+            },
+            {
+                no: 111,
+                name: "R.M PANGKEP CABANG MANGGA DUA",
+                address: "Kel. Mangga Dua",
+                type: "Rumah Makan"
+            },
+            {
+                no: 112,
+                name: "RUMAH MAKAN WANDAN",
+                address: "Kel. Mangga Dua",
+                type: "Rumah Makan"
+            },
+            {
+                no: 113,
+                name: "PELANGI SAFA",
+                address: "Kel. Mangga Dua",
+                type: "Rumah Makan"
+            },
+            {
+                no: 114,
+                name: "INDO GORENG",
+                address: "Kel. Mangga Dua",
+                type: "Rumah Makan"
+            },
+            {
+                no: 115,
+                name: "KEDAI CINTA",
+                address: "Kel. Mangga Dua",
+                type: "Rumah Makan"
+            },
+            {
+                no: 116,
+                name: "R.M ASSIFA BAROKAH",
+                address: "Kel. Mangga Dua",
+                type: "Rumah Makan"
+            },
+            {
+                no: 117,
+                name: "MUNIRA KULINER",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 118,
+                name: "WARUNG NASI KUNING AZIS",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 119,
+                name: "R.M YU SRI KLATEN",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 120,
+                name: "WARUNG SISIR",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 121,
+                name: "MEDINA",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 122,
+                name: "R.M MEDINA 12",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 123,
+                name: "RUMAH MAKAN INDAH JAYA",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 124,
+                name: "R.M TISSA",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 125,
+                name: "R.M KANJENG MAMI",
+                address: "Kel. Kalumata",
+                type: "Rumah Makan"
+            },
+            {
+                no: 126,
+                name: "RUMAH MAKAN CAK KATROK",
+                address: "Kel. Jati",
+                type: "Rumah Makan"
+            },
+            {
+                no: 127,
+                name: "KEDAI AR RAHMAH COTO MAKASSAR PUTRA GAMALAMA",
+                address: "Kel. Jati",
+                type: "Rumah Makan"
+            },
+            {
+                no: 128,
+                name: "WARUNG SOPO NYONO",
+                address: "Kel. Jati",
+                type: "Rumah Makan"
+            },
+            {
+                no: 129,
+                name: "RUMAH MAKAN INDRI",
+                address: "Kel. Jati",
+                type: "Rumah Makan"
+            },
+            {
+                no: 130,
+                name: "R.M RASTA",
+                address: "Kel. Jati",
+                type: "Rumah Makan"
+            },
+            {
+                no: 131,
+                name: "SARIAH",
+                address: "Kel. Fitu",
+                type: "Rumah Makan"
+            },
+            {
+                no: 132,
+                name: "LESEHAN RIFANI",
+                address: "Kel. Fitu",
+                type: "Rumah Makan"
+            },
+            {
+                no: 133,
+                name: "WARUNG SAHABAT",
+                address: "Kel. Bastiong Talangame",
+                type: "Rumah Makan"
+            },
+            {
+                no: 134,
+                name: "WARUNG MAKAN MBAK MINTEN",
+                address: "Kel. Bastiong Talangame",
+                type: "Rumah Makan"
+            },
+            {
+                no: 135,
+                name: "R.M AYAH",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 136,
+                name: "RUMAH MAKAN ISKILA BROTHERS",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 137,
+                name: "R.M LIFA",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 138,
+                name: "R.M NAURA",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 139,
+                name: "R.M DAPUR CITRA",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 140,
+                name: "R.M ALIFA",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 141,
+                name: "WARUNG AMALIA",
+                address: "Kel. Bastiong",
+                type: "Rumah Makan"
+            },
+            {
+                no: 142,
+                name: "DAP",
+                address: "Kel. Maliaro",
+                type: "Rumah Makan"
+            },
+            {
+                no: 143,
+                name: "KIMI SUSHI",
+                address: "Kel. Tanah Raja",
+                type: "Rumah Makan"
+            },
+            {
+                no: 144,
+                name: "KATAJI",
+                address: "Kel. Kota Baru",
+                type: "Rumah Makan"
+            },
+            {
+                no: 145,
+                name: "MIE AYAM BAKSO JAKARTA",
+                address: "Kel. Santiong",
+                type: "Rumah Makan"
+            },
 
             // CAFÉ
-            {no: 146, name: "JAROD", address: "Kel. Stadion", type: "Café"},
-            {no: 147, name: "BOUGENVILE", address: "Jln. Nukila Kel. Gamalama", type: "Café"},
-            {no: 148, name: "SHANGRI LA", address: "Jln. Nukila Kel. Gamalama", type: "Café"},
-            {no: 149, name: "SINAR GEMILANG", address: "Kel. Jati", type: "Café"},
-            {no: 150, name: "MOLUCAS CAFÉ AND EATERY", address: "Kel. Gamalama", type: "Café"},
-            {no: 151, name: "ATAP MANDIRI", address: "Kel Muhajirin", type: "Café"},
-            {no: 152, name: "TITIK NOL", address: "Kel. Tanah Tinggi", type: "Café"},
-            {no: 153, name: "TIK NOL", address: "Kel. Salero", type: "Café"},
-            {no: 154, name: "SUDUT HATI", address: "Kel. Stadion", type: "Café"},
-            {no: 155, name: "MONOI KOFI", address: "Kel. Akehuda", type: "Café"},
-            {no: 156, name: "ARCHIE", address: "Kel. Salero", type: "Café"},
-            {no: 157, name: "SONGARA", address: "Kel. Ubo-Ubo", type: "Café"},
-            {no: 158, name: "DEEPAA", address: "Kel. Makassar Barat", type: "Café"},
-            {no: 159, name: "ROTOM", address: "Kel Gamalama", type: "Café"},
-            {no: 160, name: "MARS ROOM", address: "Kel. Kalumpang", type: "Café"},
-            {no: 161, name: "INDIS", address: "Kel. Tanah Raja", type: "Café"},
-            {no: 162, name: "KABLAKANG", address: "Batu Anteru Kel. Maliaro", type: "Café"},
-            {no: 163, name: "KANAN SPACE", address: "Batu Anteru Kel. Maliaro", type: "Café"},
-            {no: 164, name: "DIPERTIGAAN", address: "Kel. Jati Perumnas", type: "Café"},
-            {no: 165, name: "UP SALAH", address: "Kel. Torano", type: "Café"},
-            {no: 166, name: "KANNEE", address: "Kel. Maliaro, BTN", type: "Café"},
-            {no: 167, name: "SINI COFFEE", address: "Kel. Santiong", type: "Café"},
-            {no: 168, name: "SERASA", address: "Kel. Stadion", type: "Café"},
-            {no: 169, name: "GARASI MORASA", address: "Kel. Toboleu", type: "Café"},
-            {no: 170, name: "FALA KANCI", address: "Kel. Soa Sio", type: "Café"},
-            {no: 171, name: "POTENTIAL", address: "Kel. Kasturian", type: "Café"},
-            {no: 172, name: "q'KECIL", address: "Kel. Makassar Timur", type: "Café"},
-            {no: 173, name: "SYAMATIRA CAFÉ'", address: "Kel. Makassar Timur", type: "Café"},
-            {no: 174, name: "MOZAIK", address: "Kel. Kalumata", type: "Café"},
-            {no: 175, name: "ROTASI", address: "Kel. Kalumata", type: "Café"},
-            {no: 176, name: "KELANA", address: "Kel. Kalumata", type: "Café"},
-            {no: 177, name: "LAGUNA HILL", address: "Kel. Ngade", type: "Café"},
-            {no: 178, name: "COCONUT KAI", address: "Jati Lurus Kel Mangga Dua Utara", type: "Café"},
-            {no: 179, name: "DRUPADI", address: "Jati Kecil Kel. Mangga Dua Utara", type: "Café"},
-            {no: 180, name: "KOPI SOE", address: "Kel. Toboko", type: "Café"},
-            {no: 181, name: "TABADIKU", address: "Kel. Gambesi", type: "Café"},
-            {no: 182, name: "FROM US", address: "Kel. Soa Sio", type: "Café"},
-            {no: 183, name: "KOPI UYO", address: "Kel. Toboko", type: "Café"},
-            {no: 184, name: "ISTANA CAFÉ", address: "Kel. Gamalama", type: "Café"},
-            {no: 185, name: "ROSCO - KOHIKAN", address: "Jln. Jerebusua Kel. Tanah Tinggi Barat", type: "Café"},
-            {no: 186, name: "THE COGAN", address: "Ngidi Kel. Makassar Barat", type: "Café"},
-            {no: 187, name: "NATURAL", address: "Kel. Muhajirin", type: "Café"},
-            {no: 188, name: "WARKOP JENGGALA", address: "Kel. Toboko", type: "Café"},
-            {no: 189, name: "KEDAI KOFIA", address: "Kel. Sangaji", type: "Café"},
-            {no: 190, name: "CAFÉ BASANOHI", address: "Kel. Kotabaru", type: "Café"},
-            {no: 191, name: "FALA COFFEE", address: "Kel. Dufa Dufa", type: "Café"},
-            {no: 192, name: "RUMAH KOPI NUKILA", address: "Jln. Nukila Kel. Gamalama", type: "Café"},
-            {no: 193, name: "LEGEND", address: "Jln. Kapitan Pattimura, Kel. Kalumpang", type: "Café"},
-            {no: 194, name: "ES TEH INDONESIA", address: "Jln. Sultan M. Djabir Sjah", type: "Café"}
+            {
+                no: 146,
+                name: "JAROD",
+                address: "Kel. Stadion",
+                type: "Café"
+            },
+            {
+                no: 147,
+                name: "BOUGENVILE",
+                address: "Jln. Nukila Kel. Gamalama",
+                type: "Café"
+            },
+            {
+                no: 148,
+                name: "SHANGRI LA",
+                address: "Jln. Nukila Kel. Gamalama",
+                type: "Café"
+            },
+            {
+                no: 149,
+                name: "SINAR GEMILANG",
+                address: "Kel. Jati",
+                type: "Café"
+            },
+            {
+                no: 150,
+                name: "MOLUCAS CAFÉ AND EATERY",
+                address: "Kel. Gamalama",
+                type: "Café"
+            },
+            {
+                no: 151,
+                name: "ATAP MANDIRI",
+                address: "Kel Muhajirin",
+                type: "Café"
+            },
+            {
+                no: 152,
+                name: "TITIK NOL",
+                address: "Kel. Tanah Tinggi",
+                type: "Café"
+            },
+            {
+                no: 153,
+                name: "TIK NOL",
+                address: "Kel. Salero",
+                type: "Café"
+            },
+            {
+                no: 154,
+                name: "SUDUT HATI",
+                address: "Kel. Stadion",
+                type: "Café"
+            },
+            {
+                no: 155,
+                name: "MONOI KOFI",
+                address: "Kel. Akehuda",
+                type: "Café"
+            },
+            {
+                no: 156,
+                name: "ARCHIE",
+                address: "Kel. Salero",
+                type: "Café"
+            },
+            {
+                no: 157,
+                name: "SONGARA",
+                address: "Kel. Ubo-Ubo",
+                type: "Café"
+            },
+            {
+                no: 158,
+                name: "DEEPAA",
+                address: "Kel. Makassar Barat",
+                type: "Café"
+            },
+            {
+                no: 159,
+                name: "ROTOM",
+                address: "Kel Gamalama",
+                type: "Café"
+            },
+            {
+                no: 160,
+                name: "MARS ROOM",
+                address: "Kel. Kalumpang",
+                type: "Café"
+            },
+            {
+                no: 161,
+                name: "INDIS",
+                address: "Kel. Tanah Raja",
+                type: "Café"
+            },
+            {
+                no: 162,
+                name: "KABLAKANG",
+                address: "Batu Anteru Kel. Maliaro",
+                type: "Café"
+            },
+            {
+                no: 163,
+                name: "KANAN SPACE",
+                address: "Batu Anteru Kel. Maliaro",
+                type: "Café"
+            },
+            {
+                no: 164,
+                name: "DIPERTIGAAN",
+                address: "Kel. Jati Perumnas",
+                type: "Café"
+            },
+            {
+                no: 165,
+                name: "UP SALAH",
+                address: "Kel. Torano",
+                type: "Café"
+            },
+            {
+                no: 166,
+                name: "KANNEE",
+                address: "Kel. Maliaro, BTN",
+                type: "Café"
+            },
+            {
+                no: 167,
+                name: "SINI COFFEE",
+                address: "Kel. Santiong",
+                type: "Café"
+            },
+            {
+                no: 168,
+                name: "SERASA",
+                address: "Kel. Stadion",
+                type: "Café"
+            },
+            {
+                no: 169,
+                name: "GARASI MORASA",
+                address: "Kel. Toboleu",
+                type: "Café"
+            },
+            {
+                no: 170,
+                name: "FALA KANCI",
+                address: "Kel. Soa Sio",
+                type: "Café"
+            },
+            {
+                no: 171,
+                name: "POTENTIAL",
+                address: "Kel. Kasturian",
+                type: "Café"
+            },
+            {
+                no: 172,
+                name: "q'KECIL",
+                address: "Kel. Makassar Timur",
+                type: "Café"
+            },
+            {
+                no: 173,
+                name: "SYAMATIRA CAFÉ'",
+                address: "Kel. Makassar Timur",
+                type: "Café"
+            },
+            {
+                no: 174,
+                name: "MOZAIK",
+                address: "Kel. Kalumata",
+                type: "Café"
+            },
+            {
+                no: 175,
+                name: "ROTASI",
+                address: "Kel. Kalumata",
+                type: "Café"
+            },
+            {
+                no: 176,
+                name: "KELANA",
+                address: "Kel. Kalumata",
+                type: "Café"
+            },
+            {
+                no: 177,
+                name: "LAGUNA HILL",
+                address: "Kel. Ngade",
+                type: "Café"
+            },
+            {
+                no: 178,
+                name: "COCONUT KAI",
+                address: "Jati Lurus Kel Mangga Dua Utara",
+                type: "Café"
+            },
+            {
+                no: 179,
+                name: "DRUPADI",
+                address: "Jati Kecil Kel. Mangga Dua Utara",
+                type: "Café"
+            },
+            {
+                no: 180,
+                name: "KOPI SOE",
+                address: "Kel. Toboko",
+                type: "Café"
+            },
+            {
+                no: 181,
+                name: "TABADIKU",
+                address: "Kel. Gambesi",
+                type: "Café"
+            },
+            {
+                no: 182,
+                name: "FROM US",
+                address: "Kel. Soa Sio",
+                type: "Café"
+            },
+            {
+                no: 183,
+                name: "KOPI UYO",
+                address: "Kel. Toboko",
+                type: "Café"
+            },
+            {
+                no: 184,
+                name: "ISTANA CAFÉ",
+                address: "Kel. Gamalama",
+                type: "Café"
+            },
+            {
+                no: 185,
+                name: "ROSCO - KOHIKAN",
+                address: "Jln. Jerebusua Kel. Tanah Tinggi Barat",
+                type: "Café"
+            },
+            {
+                no: 186,
+                name: "THE COGAN",
+                address: "Ngidi Kel. Makassar Barat",
+                type: "Café"
+            },
+            {
+                no: 187,
+                name: "NATURAL",
+                address: "Kel. Muhajirin",
+                type: "Café"
+            },
+            {
+                no: 188,
+                name: "WARKOP JENGGALA",
+                address: "Kel. Toboko",
+                type: "Café"
+            },
+            {
+                no: 189,
+                name: "KEDAI KOFIA",
+                address: "Kel. Sangaji",
+                type: "Café"
+            },
+            {
+                no: 190,
+                name: "CAFÉ BASANOHI",
+                address: "Kel. Kotabaru",
+                type: "Café"
+            },
+            {
+                no: 191,
+                name: "FALA COFFEE",
+                address: "Kel. Dufa Dufa",
+                type: "Café"
+            },
+            {
+                no: 192,
+                name: "RUMAH KOPI NUKILA",
+                address: "Jln. Nukila Kel. Gamalama",
+                type: "Café"
+            },
+            {
+                no: 193,
+                name: "LEGEND",
+                address: "Jln. Kapitan Pattimura, Kel. Kalumpang",
+                type: "Café"
+            },
+            {
+                no: 194,
+                name: "ES TEH INDONESIA",
+                address: "Jln. Sultan M. Djabir Sjah",
+                type: "Café"
+            }
         ];
 
         // ========== HELPERS ==========
@@ -1028,7 +2010,7 @@
                 'restoran': 'badge-restoran',
                 'rumah-makan': 'badge-rumah-makan',
                 'cafe': 'badge-cafe'
-            }[cat] || 'badge-other';
+            } [cat] || 'badge-other';
         }
 
         function getBadgeIcon(cat) {
@@ -1036,12 +2018,14 @@
                 'restoran': '<i class="bi bi-shop me-1"></i>',
                 'rumah-makan': '<i class="bi bi-house-door me-1"></i>',
                 'cafe': '<i class="bi bi-cup-hot me-1"></i>'
-            }[cat] || '';
+            } [cat] || '';
         }
 
         // ========== UPDATE STATS ==========
         function updateStats() {
-            let restoran = 0, rumahMakan = 0, cafe = 0;
+            let restoran = 0,
+                rumahMakan = 0,
+                cafe = 0;
             kulinerData.forEach(k => {
                 const c = getCategory(k.type);
                 if (c === 'restoran') restoran++;
@@ -1059,8 +2043,8 @@
             const search = document.getElementById('kulinerSearch').value.toLowerCase();
 
             const filtered = kulinerData.filter(k => {
-                const matchSearch = k.name.toLowerCase().includes(search) || 
-                                  k.address.toLowerCase().includes(search);
+                const matchSearch = k.name.toLowerCase().includes(search) ||
+                    k.address.toLowerCase().includes(search);
                 const cat = getCategory(k.type);
                 const matchFilter = currentFilter === 'all' || cat === currentFilter;
                 return matchSearch && matchFilter;
