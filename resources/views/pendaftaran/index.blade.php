@@ -951,11 +951,11 @@
                             <label class="form-label">
                                 Ukuran Baju Pasangan Kepala Daerah
                             </label>
-                            <select class="form-select" name="ukuran_baju" required>
+                            <select class="form-select" name="ukuran_baju_pasangan">
                                 <option value="">Pilih Ukuran</option>
                                 @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $ukuran)
                                     <option value="{{ $ukuran }}"
-                                        {{ old('ukuran_baju') == $ukuran ? 'selected' : '' }}>
+                                        {{ old('ukuran_baju_pasangan') == $ukuran ? 'selected' : '' }}>
                                         {{ $ukuran }}
                                     </option>
                                 @endforeach
@@ -1064,11 +1064,13 @@
                         {{-- 27 Agustus --}}
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]"
-                                value="Simposium Internasional – Pulau-Pulau Penghasil Rempah"
+                                value="Simposium Internasional - Pulau-Pulau Penghasil Rempah"
                                 onchange="onEventChange()">
                             <div class="event-check-content">
                                 <span class="event-date-chip chip-d2">27 AGUSTUS</span>
-                                <div class="event-check-title">Simposium Internasional</div>
+                                <div class="event-check-title">
+                                    Simposium Internasional - Pulau-Pulau Penghasil Rempah
+                                </div>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Bela Hotel
                                 </div>
