@@ -45,7 +45,7 @@
                     <ul>
                         <li><a href="{{ url('/registrasi') }}">Rakernas JKPI XII 2026</a></li>
                         <li><a href="#!">Nusantara Raya Run</a></li>
-                        <li><a href="#!">Expo dan Pentas Budaya</a></li>
+                        <li><a href="#!">Expo UMKM</a></li>
 
                     </ul>
                 </li>
