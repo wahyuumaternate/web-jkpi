@@ -203,10 +203,7 @@
             padding: 40px;
             overflow: auto;
             position: relative;
-            background:
-                radial-gradient(circle at center,
-                    #34495e 0%,
-                    #1e293b 100%);
+            background: #077b86;
             /* min-height ditentukan JS setelah tahu dimensi PDF */
             min-height: 60vh;
         }
