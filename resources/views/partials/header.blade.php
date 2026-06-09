@@ -34,7 +34,7 @@
                         <li><a href="{{ url('/hotel') }}">Daftar Hotel</a></li>
                         <li><a href="{{ url('/') }}#sebaran-lokasi">Sebaran Lokasi</a></li>
                         <li><a href="{{ url('/cafe-resto') }}">Daftar Resto & Cafe</a></li>
-                        <li><a href="{{ url('/') }}#oleh-oleh">Toko Oleh-Oleh</a></li>
+                        <li><a href="{{ url('/toko-oleh-oleh') }}#oleh-oleh">Toko Oleh-Oleh</a></li>
                         <li><a href="{{ url('/') }}#appointment">Kontak</a></li>
                     </ul>
                 </li>

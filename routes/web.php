@@ -17,6 +17,9 @@ Route::get('/cafe-resto', function () {
     return view('cafe_resto');
 });
 
+Route::get('/toko-oleh-oleh', function () {
+    return view('toko_oleh_oleh');
+});
 
 Route::get('/buku-panduan', function () {
     return view('buku_panduan');
@@ -114,4 +117,3 @@ Route::get('/test-pdf-preview', function () {
 
     return $pdf->stream('preview-idcard.pdf');
 });
-
