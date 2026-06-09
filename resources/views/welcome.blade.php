@@ -911,7 +911,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Master Class</h4>
-                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 07.00 – 10.30 WIT</p>
+                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 09.00 – 15.00 WIT</p>
                                         <p class="event-description">
                                             <strong>Economic Culture &amp; Pengelolaan Museum</strong> – Benteng
                                             Oranje<br>
@@ -938,7 +938,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Ladies Program</h4>
-                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 09.00 – 15.00 WIT</p>
+                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 07.00 – 10.30 WIT</p>
                                         <p class="event-description">Pengenalan Keanekaragaman Warisan Budaya: Kuliner,
                                             Kerajinan, dan Seni Budaya.</p>
                                         <p class="event-location">
