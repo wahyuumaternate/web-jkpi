@@ -21,32 +21,88 @@
         <!-- Navigation -->
         <nav id="navmenu" class="navmenu">
             <ul>
-                <li><a href="{{ url('/') }}#hero" class="{{ request()->is('/') ? 'active' : '' }}">Beranda</a></li>
-                {{-- <li><a href="{{ url('/') }}#tentang">Tentang</a></li> --}}
-                <li><a href="{{ url('/') }}#tujuan">Tujuan</a></li>
-                <li><a href="{{ url('/') }}#rangkaian">Rangkaian Kegiatan</a></li>
-                <li><a href="{{ url('/buku-panduan') }}">Buku Panduan</a></li>
+                <li>
+                    <a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">
+                        Beranda
+                    </a>
+                </li>
 
+                <li>
+                    <a href="{{ url('/') }}#tujuan" id="menu-tujuan">
+                        Tujuan
+                    </a>
+                </li>
 
-                <li class="dropdown"><a href="#"><span>Informasi Akomodasi</span> <i
-                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <li>
+                    <a href="{{ url('/') }}#rangkaian" id="menu-rangkaian">
+                        Rangkaian Kegiatan
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url('/buku-panduan') }}" class="{{ Request::is('buku-panduan') ? 'active' : '' }}">
+                        Buku Panduan
+                    </a>
+                </li>
+
+                <li
+                    class="dropdown {{ Request::is('hotel') || Request::is('cafe-resto') || Request::is('toko-oleh-oleh') ? 'active' : '' }}">
+                    <a href="#">
+                        <span>Informasi Akomodasi</span>
+                        <i class="bi bi-chevron-down toggle-dropdown"></i>
+                    </a>
+
                     <ul>
-                        <li><a href="{{ url('/hotel') }}">Daftar Hotel</a></li>
-                        <li><a href="{{ url('/') }}#sebaran-lokasi">Sebaran Lokasi</a></li>
-                        <li><a href="{{ url('/cafe-resto') }}">Daftar Resto & Cafe</a></li>
-                        <li><a href="{{ url('/toko-oleh-oleh') }}#oleh-oleh">Toko Oleh-Oleh</a></li>
-                        <li><a href="{{ url('/') }}#appointment">Kontak</a></li>
+                        <li>
+                            <a href="{{ url('/hotel') }}" class="{{ Request::is('hotel') ? 'active' : '' }}">
+                                Daftar Hotel
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/') }}#sebaran-lokasi">
+                                Sebaran Lokasi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/cafe-resto') }}"
+                                class="{{ Request::is('cafe-resto') ? 'active' : '' }}">
+                                Daftar Resto & Cafe
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/toko-oleh-oleh') }}"
+                                class="{{ Request::is('toko-oleh-oleh') ? 'active' : '' }}">
+                                Toko Oleh-Oleh
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url('/') }}#appointment">
+                                Kontak
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
-                {{-- <li><a href="{{ url('/') }}#galeri">Galeri</a></li> --}}
-                <li class="dropdown "><a href="#"><span>Pendaftaran</span> <i
-                            class="bi bi-chevron-down toggle-dropdown"></i></a>
+                <li class="dropdown {{ Request::is('registrasi') ? 'active' : '' }}">
+                    <a href="#">
+                        <span>Pendaftaran</span>
+                        <i class="bi bi-chevron-down toggle-dropdown"></i>
+                    </a>
+
                     <ul>
-                        <li><a href="{{ url('/registrasi') }}">Rakernas JKPI XII 2026</a></li>
+                        <li>
+                            <a href="{{ url('/registrasi') }}"
+                                class="{{ Request::is('registrasi') ? 'active' : '' }}">
+                                Rakernas JKPI XII 2026
+                            </a>
+                        </li>
+
                         <li><a href="#!">Nusantara Raya Run</a></li>
                         <li><a href="#!">Expo UMKM</a></li>
-
                     </ul>
                 </li>
             </ul>
