@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Peserta as PendaftaranPeserta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -14,20 +15,23 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class DashboardController extends Controller
 {
+    // ─── Web ──────────────────────────────────────────────────────────────────
+
     public function index(Request $request)
     {
-        $query = PendaftaranPeserta::with('narahubung');
+        $query = PendaftaranPeserta::with(['narahubung', 'kegiatan']);
 
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('nama_daerah', 'like', "%{$search}%")
-                    ->orWhere('nama_kepala_daerah', 'like', "%{$search}%")
-                    ->orWhere('kode_registrasi', 'like', "%{$search}%")
-                    ->orWhere('nama_ajudan', 'like', "%{$search}%")
-                    ->orWhereHas('narahubung', function ($q2) use ($search) {
-                        $q2->where('nama', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%");
-                    });
+                  ->orWhere('nama_kepala_daerah', 'like', "%{$search}%")
+                  ->orWhere('kode_registrasi', 'like', "%{$search}%")
+                  ->orWhere('nama_ajudan', 'like', "%{$search}%")
+                  ->orWhereHas('narahubung', function ($q2) use ($search) {
+                      $q2->where('nama', 'like', "%{$search}%")
+                         ->orWhere('email', 'like', "%{$search}%");
+                  });
             });
         }
 
@@ -38,9 +42,9 @@ class DashboardController extends Controller
         $peserta = $query->latest()->paginate(20)->withQueryString();
 
         $stats = [
-            'total' => PendaftaranPeserta::count(),
+            'total'     => PendaftaranPeserta::count(),
             'confirmed' => PendaftaranPeserta::where('status', 'confirmed')->count(),
-            'pending' => PendaftaranPeserta::where('status', 'pending')->count(),
+            'pending'   => PendaftaranPeserta::where('status', 'pending')->count(),
             'cancelled' => PendaftaranPeserta::where('status', 'cancelled')->count(),
         ];
 
@@ -49,94 +53,70 @@ class DashboardController extends Controller
 
     public function show($id)
     {
-        $peserta = PendaftaranPeserta::with('narahubung')->findOrFail($id);
+        // Eager-load kegiatan agar section "Kegiatan Yang Akan Diikuti" terisi
+        $peserta = PendaftaranPeserta::with(['narahubung', 'kegiatan'])->findOrFail($id);
         return view('admin.dashboard.show', compact('peserta'));
     }
 
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,confirmed,cancelled',
+            'status'  => 'required|in:pending,confirmed,cancelled',
             'catatan' => 'nullable|string',
         ]);
 
         $peserta = PendaftaranPeserta::findOrFail($id);
         $peserta->update([
-            'status' => $request->status,
+            'status'  => $request->status,
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('admin.dashboard.show', $id)->with('success', 'Status berhasil diupdate!');
+        return redirect()->route('admin.dashboard.show', $id)
+                         ->with('success', 'Status berhasil diupdate!');
     }
 
     public function destroy($id)
     {
         try {
-            $peserta = PendaftaranPeserta::findOrFail($id);
-
-            // Narahubung akan terhapus otomatis via cascadeOnDelete
-            $peserta->delete();
-
-            return redirect()->route('admin.dashboard')->with('success', 'Data peserta berhasil dihapus!');
+            PendaftaranPeserta::findOrFail($id)->delete();
+            return redirect()->route('admin.dashboard')
+                             ->with('success', 'Data peserta berhasil dihapus!');
         } catch (\Exception $e) {
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+            return redirect()->route('admin.dashboard')
+                             ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
     }
 
-    // ─── Export ───────────────────────────────────────────────────────────────
+    // ─── Export entry points ──────────────────────────────────────────────────
 
-    public function exportAll()
-    {
-        return $this->exportByStatus(null, 'Semua_Peserta');
-    }
+    public function exportAll()       { return $this->exportByStatus(null,        'Semua_Peserta'); }
+    public function exportConfirmed() { return $this->exportByStatus('confirmed', 'Peserta_Confirmed'); }
+    public function exportPending()   { return $this->exportByStatus('pending',   'Peserta_Pending'); }
+    public function exportCancelled() { return $this->exportByStatus('cancelled', 'Peserta_Cancelled'); }
 
-    public function exportConfirmed()
-    {
-        return $this->exportByStatus('confirmed', 'Peserta_Confirmed');
-    }
-
-    public function exportPending()
-    {
-        return $this->exportByStatus('pending', 'Peserta_Pending');
-    }
-
-    public function exportCancelled()
-    {
-        return $this->exportByStatus('cancelled', 'Peserta_Cancelled');
-    }
+    // ─── exportByStatus (20 kolom: A – T) ────────────────────────────────────
 
     private function exportByStatus($status, $filename)
     {
         try {
-            $query = PendaftaranPeserta::with('narahubung');
-
+            $query = PendaftaranPeserta::with(['narahubung', 'kegiatan']);
             if ($status) {
                 $query->where('status', $status);
             }
-
             $data = $query->get();
 
             Log::info("Export {$filename}: {$data->count()} records");
 
             $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
+            $sheet       = $spreadsheet->getActiveSheet();
             $sheet->setTitle('Data Peserta');
 
             $headerStyle = [
-                'fill' => [
-                    'fillType' => Fill::FILL_SOLID,
-                    'startColor' => ['rgb' => '099AA7'],
-                ],
-                'font' => [
-                    'bold' => true,
-                    'color' => ['rgb' => 'FFFFFF'],
-                    'size' => 11,
-                ],
+                'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
+                'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_CENTER,
-                    'vertical' => Alignment::VERTICAL_CENTER,
+                    'vertical'   => Alignment::VERTICAL_CENTER,
                 ],
             ];
 
@@ -146,45 +126,56 @@ class DashboardController extends Controller
                 'C' => 'Kode Registrasi',
                 'D' => 'Nama Daerah',
                 'E' => 'Nama Kepala Daerah',
-                'F' => 'Nama Pasangan',
-                'G' => 'Nama Ajudan',
-                'H' => 'Telepon Ajudan',
-                'I' => 'Nomor Plat',
-                'J' => 'Info Kedatangan',
-                'K' => 'Info Kepulangan',
-                'L' => 'Narahubung',
-                'M' => 'Telepon Narahubung',
-                'N' => 'Email Narahubung',
-                'O' => 'Catatan',
-                'P' => 'Tanggal Daftar',
+                'F' => 'Ukuran Baju KD',
+                'G' => 'Nama Pasangan KD',
+                'H' => 'Ukuran Baju Pasangan',
+                'I' => 'Jumlah Rombongan',
+                'J' => 'Nama Ajudan',
+                'K' => 'Telepon Ajudan',
+                'L' => 'Nomor Plat',
+                'M' => 'Info Kedatangan',
+                'N' => 'Info Kepulangan',
+                'O' => 'Nama Narahubung',
+                'P' => 'Telepon Narahubung',
+                'Q' => 'Email Narahubung',
+                'R' => 'Kegiatan',
+                'S' => 'Catatan',
+                'T' => 'Tanggal Daftar',
             ];
 
             foreach ($headers as $col => $header) {
                 $sheet->setCellValue("{$col}1", $header);
             }
-            $sheet->getStyle('A1:P1')->applyFromArray($headerStyle);
+            $sheet->getStyle('A1:T1')->applyFromArray($headerStyle);
 
             $row = 2;
             foreach ($data as $index => $item) {
-                // Ambil narahubung pertama (jika ada lebih dari satu, gabungkan)
-                $narahubung = $item->narahubung->first();
+                // Gabungkan semua narahubung dengan separator " | "
+                $narahubungNama    = $item->narahubung->pluck('nama')->implode(' | ');
+                $narahubungTelepon = $item->narahubung->pluck('telepon')->implode(' | ');
+                $narahubungEmail   = $item->narahubung->pluck('email')->implode(' | ');
+                $kegiatan          = $item->kegiatan->pluck('nama_kegiatan')->implode(', ');
 
                 $sheet->setCellValue("A{$row}", $index + 1);
                 $sheet->setCellValue("B{$row}", strtoupper($item->status));
                 $sheet->setCellValue("C{$row}", $item->kode_registrasi);
                 $sheet->setCellValue("D{$row}", $item->nama_daerah);
                 $sheet->setCellValue("E{$row}", $item->nama_kepala_daerah);
-                $sheet->setCellValue("F{$row}", $item->nama_pasangan_kepala_daerah ?? '-');
-                $sheet->setCellValue("G{$row}", $item->nama_ajudan ?? '-');
-                $sheet->setCellValue("H{$row}", $item->telepon_ajudan ?? '-');
-                $sheet->setCellValue("I{$row}", $item->nomor_plat ?? '-');
-                $sheet->setCellValue("J{$row}", $item->info_kedatangan);
-                $sheet->setCellValue("K{$row}", $item->info_kepulangan);
-                $sheet->setCellValue("L{$row}", $narahubung?->nama ?? '-');
-                $sheet->setCellValue("M{$row}", $narahubung?->telepon ?? '-');
-                $sheet->setCellValue("N{$row}", $narahubung?->email ?? '-');
-                $sheet->setCellValue("O{$row}", $item->catatan ?? '-');
-                $sheet->setCellValue("P{$row}", $item->created_at->format('d/m/Y H:i'));
+                $sheet->setCellValue("F{$row}", $item->ukuran_baju);
+                $sheet->setCellValue("G{$row}", $item->nama_pasangan_kepala_daerah ?? '-');
+                $sheet->setCellValue("H{$row}", $item->ukuran_baju_pasangan ?? '-');
+                $sheet->setCellValue("I{$row}", $item->jumlah_rombongan);
+                $sheet->setCellValue("J{$row}", $item->nama_ajudan ?? '-');
+                $sheet->setCellValue("K{$row}", $item->telepon_ajudan ?? '-');
+                $sheet->setCellValue("L{$row}", $item->nomor_plat ?? '-');
+                $sheet->setCellValue("M{$row}", $item->info_kedatangan);
+                $sheet->setCellValue("N{$row}", $item->info_kepulangan);
+                $sheet->setCellValue("O{$row}", $narahubungNama    ?: '-');
+                $sheet->setCellValue("P{$row}", $narahubungTelepon ?: '-');
+                $sheet->setCellValue("Q{$row}", $narahubungEmail   ?: '-');
+                $sheet->setCellValue("R{$row}", $kegiatan          ?: '-');
+                $sheet->setCellValue("S{$row}", $item->catatan ?? '-');
+                $sheet->setCellValue("T{$row}", $item->created_at->format('d/m/Y H:i'));
                 $row++;
             }
 
@@ -198,32 +189,30 @@ class DashboardController extends Controller
                     'font' => ['bold' => true, 'size' => 12],
                 ]);
                 $row++;
-
                 foreach (['confirmed', 'pending', 'cancelled'] as $s) {
-                    $count = $data->where('status', $s)->count();
                     $sheet->setCellValue("A{$row}", ucfirst($s));
-                    $sheet->setCellValue("B{$row}", $count);
+                    $sheet->setCellValue("B{$row}", $data->where('status', $s)->count());
                     $row++;
                 }
             }
 
-            foreach (range('A', 'P') as $col) {
+            foreach (range('A', 'T') as $col) {
                 $sheet->getColumnDimension($col)->setAutoSize(true);
             }
             $sheet->freezePane('A2');
 
             if ($data->count() > 0) {
-                $sheet->getStyle('A1:P' . (1 + $data->count()))->applyFromArray([
+                $sheet->getStyle('A1:T' . (1 + $data->count()))->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
-                            'color' => ['rgb' => 'CCCCCC'],
+                            'color'       => ['rgb' => 'CCCCCC'],
                         ],
                     ],
                 ]);
             }
 
-            $writer = new Xlsx($spreadsheet);
+            $writer   = new Xlsx($spreadsheet);
             $fileName = $filename . '_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
@@ -231,39 +220,137 @@ class DashboardController extends Controller
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             Log::error("Export {$filename} Error: " . $e->getMessage());
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('error', 'Error export: ' . $e->getMessage());
+            return redirect()->route('admin.dashboard')
+                             ->with('error', 'Error export: ' . $e->getMessage());
         }
     }
+
+    // ─── exportStatistik (5 seksi) ────────────────────────────────────────────
 
     public function exportStatistik()
     {
         try {
             $spreadsheet = new Spreadsheet();
-            $sheet = $spreadsheet->getActiveSheet();
+            $sheet       = $spreadsheet->getActiveSheet();
             $sheet->setTitle('Statistik');
+
+            $sectionStyle = [
+                'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
+                'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
+            ];
 
             $sheet->setCellValue('A1', 'STATISTIK PESERTA JKPI 2026');
             $sheet->mergeCells('A1:B1');
             $sheet->getStyle('A1')->applyFromArray([
-                'font' => ['bold' => true, 'size' => 14],
+                'font'      => ['bold' => true, 'size' => 14],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
 
-            $rows = [['Total Peserta', PendaftaranPeserta::count()], ['Confirmed', PendaftaranPeserta::where('status', 'confirmed')->count()], ['Pending', PendaftaranPeserta::where('status', 'pending')->count()], ['Cancelled', PendaftaranPeserta::where('status', 'cancelled')->count()], [''], ['Dengan Pasangan', PendaftaranPeserta::whereNotNull('nama_pasangan_kepala_daerah')->count()], ['Dengan Ajudan', PendaftaranPeserta::whereNotNull('nama_ajudan')->count()], ['Dengan Nomor Plat', PendaftaranPeserta::whereNotNull('nomor_plat')->count()]];
-
             $row = 3;
-            foreach ($rows as $r) {
-                $sheet->setCellValue("A{$row}", $r[0] ?? '');
-                $sheet->setCellValue("B{$row}", $r[1] ?? '');
+
+            // ── 1. Status Pendaftaran ──────────────────────────────────────
+            $sheet->setCellValue("A{$row}", 'STATUS PENDAFTARAN');
+            $sheet->mergeCells("A{$row}:B{$row}");
+            $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
+            $row++;
+
+            foreach ([
+                'Total Peserta' => PendaftaranPeserta::count(),
+                'Confirmed'     => PendaftaranPeserta::where('status', 'confirmed')->count(),
+                'Pending'       => PendaftaranPeserta::where('status', 'pending')->count(),
+                'Cancelled'     => PendaftaranPeserta::where('status', 'cancelled')->count(),
+            ] as $label => $value) {
+                $sheet->setCellValue("A{$row}", $label);
+                $sheet->setCellValue("B{$row}", $value);
                 $row++;
+            }
+            $row++;
+
+            // ── 2. Rombongan ──────────────────────────────────────────────
+            $sheet->setCellValue("A{$row}", 'ROMBONGAN');
+            $sheet->mergeCells("A{$row}:B{$row}");
+            $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
+            $row++;
+
+            foreach ([
+                'Total Orang Rombongan' => PendaftaranPeserta::sum('jumlah_rombongan'),
+                'Dengan Pasangan'       => PendaftaranPeserta::whereNotNull('nama_pasangan_kepala_daerah')->count(),
+                'Dengan Ajudan'         => PendaftaranPeserta::whereNotNull('nama_ajudan')->count(),
+                'Dengan Nomor Plat'     => PendaftaranPeserta::whereNotNull('nomor_plat')->count(),
+            ] as $label => $value) {
+                $sheet->setCellValue("A{$row}", $label);
+                $sheet->setCellValue("B{$row}", $value);
+                $row++;
+            }
+            $row++;
+
+            // ── 3. Ukuran Baju Kepala Daerah ──────────────────────────────
+            $sheet->setCellValue("A{$row}", 'UKURAN BAJU KEPALA DAERAH');
+            $sheet->mergeCells("A{$row}:B{$row}");
+            $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
+            $row++;
+
+            $ukuranKd = PendaftaranPeserta::selectRaw("ukuran_baju, COUNT(*) as total")
+                ->groupBy('ukuran_baju')
+                ->orderByRaw("FIELD(ukuran_baju,'S','M','L','XL','XXL','XXXL')")
+                ->get();
+            foreach ($ukuranKd as $u) {
+                $sheet->setCellValue("A{$row}", $u->ukuran_baju);
+                $sheet->setCellValue("B{$row}", $u->total);
+                $row++;
+            }
+            $row++;
+
+            // ── 4. Ukuran Baju Pasangan ───────────────────────────────────
+            $sheet->setCellValue("A{$row}", 'UKURAN BAJU PASANGAN');
+            $sheet->mergeCells("A{$row}:B{$row}");
+            $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
+            $row++;
+
+            $ukuranPasangan = PendaftaranPeserta::selectRaw("ukuran_baju_pasangan, COUNT(*) as total")
+                ->whereNotNull('ukuran_baju_pasangan')
+                ->groupBy('ukuran_baju_pasangan')
+                ->orderByRaw("FIELD(ukuran_baju_pasangan,'S','M','L','XL','XXL','XXXL')")
+                ->get();
+
+            if ($ukuranPasangan->isNotEmpty()) {
+                foreach ($ukuranPasangan as $u) {
+                    $sheet->setCellValue("A{$row}", $u->ukuran_baju_pasangan);
+                    $sheet->setCellValue("B{$row}", $u->total);
+                    $row++;
+                }
+            } else {
+                $sheet->setCellValue("A{$row}", '(Tidak ada data)');
+                $row++;
+            }
+            $row++;
+
+            // ── 5. Kegiatan Yang Dipilih ──────────────────────────────────
+            $sheet->setCellValue("A{$row}", 'KEGIATAN YANG DIPILIH');
+            $sheet->mergeCells("A{$row}:B{$row}");
+            $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
+            $row++;
+
+            $kegiatanStats = DB::table('pendaftaran_kegiatan')
+                ->selectRaw('nama_kegiatan, COUNT(*) as total')
+                ->groupBy('nama_kegiatan')
+                ->orderByDesc('total')
+                ->get();
+
+            if ($kegiatanStats->isNotEmpty()) {
+                foreach ($kegiatanStats as $k) {
+                    $sheet->setCellValue("A{$row}", $k->nama_kegiatan);
+                    $sheet->setCellValue("B{$row}", $k->total);
+                    $row++;
+                }
+            } else {
+                $sheet->setCellValue("A{$row}", '(Tidak ada data)');
             }
 
             $sheet->getColumnDimension('A')->setAutoSize(true);
             $sheet->getColumnDimension('B')->setAutoSize(true);
 
-            $writer = new Xlsx($spreadsheet);
+            $writer   = new Xlsx($spreadsheet);
             $fileName = 'Statistik_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
@@ -271,18 +358,22 @@ class DashboardController extends Controller
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             Log::error('Export Statistik Error: ' . $e->getMessage());
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('error', 'Error export statistik: ' . $e->getMessage());
+            return redirect()->route('admin.dashboard')
+                             ->with('error', 'Error export statistik: ' . $e->getMessage());
         }
     }
+
+    // ─── exportByDaerah (13 kolom: A – M) ────────────────────────────────────
 
     public function exportByDaerah()
     {
         try {
             $spreadsheet = new Spreadsheet();
 
-            $daerahList = PendaftaranPeserta::select('nama_daerah')->distinct()->orderBy('nama_daerah')->pluck('nama_daerah');
+            $daerahList = PendaftaranPeserta::select('nama_daerah')
+                ->distinct()
+                ->orderBy('nama_daerah')
+                ->pluck('nama_daerah');
 
             foreach ($daerahList as $index => $daerah) {
                 if ($index > 0) {
@@ -297,33 +388,49 @@ class DashboardController extends Controller
                     'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                 ];
 
-                $headers = ['No', 'Nama Kepala Daerah', 'Nama Pasangan', 'Nama Ajudan', 'Telepon Ajudan', 'Info Kedatangan', 'Info Kepulangan', 'Nomor Plat', 'Status'];
+                $headers = [
+                    'No', 'Nama Kepala Daerah', 'Ukuran Baju KD',
+                    'Nama Pasangan KD', 'Ukuran Baju Pasangan',
+                    'Jumlah Rombongan',
+                    'Nama Ajudan', 'Telepon Ajudan',
+                    'Info Kedatangan', 'Info Kepulangan', 'Nomor Plat',
+                    'Kegiatan', 'Status',
+                ];
                 $sheet->fromArray($headers, null, 'A1');
-                $sheet->getStyle('A1:I1')->applyFromArray($headerStyle);
+                $sheet->getStyle('A1:M1')->applyFromArray($headerStyle);
 
-                $data = PendaftaranPeserta::where('nama_daerah', $daerah)->get();
+                $data = PendaftaranPeserta::with(['kegiatan'])
+                    ->where('nama_daerah', $daerah)
+                    ->get();
+
                 $row = 2;
                 foreach ($data as $no => $item) {
+                    $kegiatan = $item->kegiatan->pluck('nama_kegiatan')->implode(', ');
+
                     $sheet->setCellValue("A{$row}", $no + 1);
                     $sheet->setCellValue("B{$row}", $item->nama_kepala_daerah);
-                    $sheet->setCellValue("C{$row}", $item->nama_pasangan_kepala_daerah ?? '-');
-                    $sheet->setCellValue("D{$row}", $item->nama_ajudan ?? '-');
-                    $sheet->setCellValue("E{$row}", $item->telepon_ajudan ?? '-');
-                    $sheet->setCellValue("F{$row}", $item->info_kedatangan);
-                    $sheet->setCellValue("G{$row}", $item->info_kepulangan);
-                    $sheet->setCellValue("H{$row}", $item->nomor_plat ?? '-');
-                    $sheet->setCellValue("I{$row}", strtoupper($item->status));
+                    $sheet->setCellValue("C{$row}", $item->ukuran_baju);
+                    $sheet->setCellValue("D{$row}", $item->nama_pasangan_kepala_daerah ?? '-');
+                    $sheet->setCellValue("E{$row}", $item->ukuran_baju_pasangan ?? '-');
+                    $sheet->setCellValue("F{$row}", $item->jumlah_rombongan);
+                    $sheet->setCellValue("G{$row}", $item->nama_ajudan ?? '-');
+                    $sheet->setCellValue("H{$row}", $item->telepon_ajudan ?? '-');
+                    $sheet->setCellValue("I{$row}", $item->info_kedatangan);
+                    $sheet->setCellValue("J{$row}", $item->info_kepulangan);
+                    $sheet->setCellValue("K{$row}", $item->nomor_plat ?? '-');
+                    $sheet->setCellValue("L{$row}", $kegiatan ?: '-');
+                    $sheet->setCellValue("M{$row}", strtoupper($item->status));
                     $row++;
                 }
 
-                foreach (range('A', 'I') as $col) {
+                foreach (range('A', 'M') as $col) {
                     $sheet->getColumnDimension($col)->setAutoSize(true);
                 }
             }
 
             $spreadsheet->setActiveSheetIndex(0);
 
-            $writer = new Xlsx($spreadsheet);
+            $writer   = new Xlsx($spreadsheet);
             $fileName = 'Peserta_By_Daerah_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
@@ -331,9 +438,8 @@ class DashboardController extends Controller
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             Log::error('Export By Daerah Error: ' . $e->getMessage());
-            return redirect()
-                ->route('admin.dashboard')
-                ->with('error', 'Error export by daerah: ' . $e->getMessage());
+            return redirect()->route('admin.dashboard')
+                             ->with('error', 'Error export by daerah: ' . $e->getMessage());
         }
     }
 }

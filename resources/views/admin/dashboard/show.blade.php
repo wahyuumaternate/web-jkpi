@@ -34,7 +34,9 @@
 
     <div class="row">
 
-        {{-- Kolom Kiri --}}
+        {{-- ═══════════════════════════════════════════════════════════════════
+             KOLOM KIRI
+        ════════════════════════════════════════════════════════════════════════ --}}
         <div class="col-lg-8">
 
             {{-- Data Daerah & Kepala Daerah --}}
@@ -77,15 +79,13 @@
                         </div>
                         <div class="col-md-6">
                             <p class="text-muted fw-semibold mb-1 font-13">Nama Pasangan Kepala Daerah</p>
-                            <p class="fw-bold mb-0">
-                                {{ $peserta->nama_pasangan_kepala_daerah ?? '-' }}
-                            </p>
+                            <p class="fw-bold mb-0">{{ $peserta->nama_pasangan_kepala_daerah ?? '-' }}</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- Informasi Tambahan (BARU) --}}
+            {{-- Informasi Tambahan --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
                     <i class="mdi mdi-details me-2 text-info" style="font-size:1.25rem;"></i>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <p class="text-muted fw-semibold mb-1 font-13">
                                 <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju Kepala Daerah
                             </p>
@@ -101,7 +101,19 @@
                                 <span class="badge bg-primary">{{ $peserta->ukuran_baju }}</span>
                             </p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <p class="text-muted fw-semibold mb-1 font-13">
+                                <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju Pasangan
+                            </p>
+                            <p class="fw-bold mb-0">
+                                @if ($peserta->ukuran_baju_pasangan)
+                                    <span class="badge bg-info">{{ $peserta->ukuran_baju_pasangan }}</span>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </p>
+                        </div>
+                        <div class="col-md-4">
                             <p class="text-muted fw-semibold mb-1 font-13">
                                 <i class="mdi mdi-account-multiple me-1"></i>Jumlah Rombongan
                             </p>
@@ -203,7 +215,7 @@
                 </div>
             </div>
 
-            {{-- Kegiatan Yang Akan Diikuti (BARU) --}}
+            {{-- Kegiatan Yang Akan Diikuti --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
                     <i class="mdi mdi-calendar-check me-2 text-success" style="font-size:1.25rem;"></i>
@@ -249,7 +261,9 @@
 
         </div>
 
-        {{-- Kolom Kanan (Sidebar) --}}
+        {{-- ═══════════════════════════════════════════════════════════════════
+             KOLOM KANAN (Sidebar)
+        ════════════════════════════════════════════════════════════════════════ --}}
         <div class="col-lg-4">
 
             {{-- Info Tambahan --}}
@@ -287,26 +301,60 @@
                         <div class="col-12">
                             <div class="bg-light rounded p-3 text-center">
                                 <p class="text-muted font-13 mb-1">Total Rombongan</p>
-                                <p class="fw-bold text-primary" style="font-size:1.8rem;">
-                                    {{ $peserta->jumlah_rombongan }} <span style="font-size:0.9rem;">orang</span></p>
+                                <p class="fw-bold text-primary mb-0" style="font-size:1.8rem;">
+                                    {{ $peserta->jumlah_rombongan }}
+                                    <span style="font-size:0.9rem;">orang</span>
+                                </p>
                             </div>
                         </div>
                         <div class="col-12">
                             <p class="text-muted font-13 mb-2">Terdiri dari:</p>
                             <ul class="mb-0 ps-3">
-                                <li class="mb-1">1 Kepala Daerah (Ukuran: <strong>{{ $peserta->ukuran_baju }}</strong>)
+                                <li class="mb-2">
+                                    1 Kepala Daerah
+                                    <span class="badge bg-primary ms-1">{{ $peserta->ukuran_baju }}</span>
                                 </li>
                                 @if ($peserta->nama_pasangan_kepala_daerah)
-                                    <li class="mb-1">1 Pasangan Kepala Daerah</li>
+                                    <li class="mb-2">
+                                        1 Pasangan Kepala Daerah
+                                        @if ($peserta->ukuran_baju_pasangan)
+                                            <span class="badge bg-info ms-1">{{ $peserta->ukuran_baju_pasangan }}</span>
+                                        @endif
+                                    </li>
                                 @endif
                                 @if ($peserta->nama_ajudan)
-                                    <li class="mb-1">1 Ajudan/ADC</li>
+                                    <li class="mb-2">1 Ajudan/ADC</li>
                                 @endif
-                                @if ($peserta->narahubung->count())
-                                    <li class="mb-1">{{ $peserta->narahubung->count() }} Narahubung</li>
+                                @if ($peserta->narahubung && $peserta->narahubung->count())
+                                    <li class="mb-2">{{ $peserta->narahubung->count() }} Narahubung</li>
                                 @endif
                             </ul>
                         </div>
+
+                        {{-- Kegiatan summary --}}
+                        @if ($peserta->kegiatan && $peserta->kegiatan->count())
+                            <div class="col-12">
+                                <div class="bg-opacity-10 rounded p-3">
+                                    <p class="text-muted font-13 mb-1">
+                                        <i class="mdi mdi-calendar-check me-1 text-success"></i>
+                                        Kegiatan Dipilih
+                                    </p>
+                                    <p class="fw-bold text-success mb-0" style="font-size:1.4rem;">
+                                        {{ $peserta->kegiatan->count() }} / 12
+                                        <span style="font-size:0.9rem;">kegiatan</span>
+                                    </p>
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-12">
+                                <div class="bg-warning bg-opacity-10 rounded p-3">
+                                    <p class="text-muted font-13 mb-0">
+                                        <i class="mdi mdi-calendar-remove me-1 text-warning"></i>
+                                        Belum memilih kegiatan
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -324,15 +372,12 @@
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Status</label>
                             <select name="status" class="form-select" required>
-                                <option value="pending" {{ $peserta->status == 'pending' ? 'selected' : '' }}>
-                                    Pending
+                                <option value="pending" {{ $peserta->status == 'pending' ? 'selected' : '' }}>Pending
                                 </option>
                                 <option value="confirmed" {{ $peserta->status == 'confirmed' ? 'selected' : '' }}>
-                                    Confirmed
-                                </option>
+                                    Confirmed</option>
                                 <option value="cancelled" {{ $peserta->status == 'cancelled' ? 'selected' : '' }}>
-                                    Cancelled
-                                </option>
+                                    Cancelled</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -346,7 +391,7 @@
                 </div>
             </div>
 
-            {{-- Aksi Berbahaya --}}
+            {{-- Zona Berbahaya --}}
             <div class="card grid-margin border-danger">
                 <div class="card-header d-flex align-items-center bg-danger bg-opacity-10">
                     <i class="mdi mdi-alert me-2 text-danger" style="font-size:1.25rem;"></i>
@@ -354,7 +399,8 @@
                 </div>
                 <div class="card-body">
                     <p class="text-muted font-13 mb-3">
-                        Menghapus data akan menghapus seluruh data peserta beserta narahubung dan kegiatan secara permanen.
+                        Menghapus data akan menghapus seluruh data peserta beserta narahubung
+                        dan kegiatan secara permanen.
                     </p>
                     <form action="{{ route('admin.dashboard.destroy', $peserta->id) }}" method="POST">
                         @csrf

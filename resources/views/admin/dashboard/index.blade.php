@@ -1,4 +1,4 @@
-{{-- dashboard.blade.php (disesuaikan dengan DB) --}}
+{{-- resources/views/admin/dashboard/index.blade.php --}}
 @extends('admin.layouts.app')
 
 @section('title', 'Dashboard Admin - JKPI 2026')
@@ -13,8 +13,12 @@
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
-                <a href="#"><p class="m-0 pe-3">Dashboard</p></a>
-                <a class="ps-3 me-4" href="#"><p class="m-0">JKPI 2026</p></a>
+                <a href="#">
+                    <p class="m-0 pe-3">Dashboard</p>
+                </a>
+                <a class="ps-3 me-4" href="#">
+                    <p class="m-0">JKPI 2026</p>
+                </a>
             </div>
         </div>
     </div>
@@ -35,25 +39,25 @@
                 [
                     'label' => 'Total Peserta',
                     'value' => $stats['total'],
-                    'icon'  => 'mdi-account-group',
+                    'icon' => 'mdi-account-group',
                     'color' => 'primary',
                 ],
                 [
                     'label' => 'Confirmed',
                     'value' => $stats['confirmed'],
-                    'icon'  => 'mdi-check-circle',
+                    'icon' => 'mdi-check-circle',
                     'color' => 'success',
                 ],
                 [
                     'label' => 'Pending',
                     'value' => $stats['pending'],
-                    'icon'  => 'mdi-clock-outline',
+                    'icon' => 'mdi-clock-outline',
                     'color' => 'warning',
                 ],
                 [
                     'label' => 'Cancelled',
                     'value' => $stats['cancelled'],
-                    'icon'  => 'mdi-close-circle',
+                    'icon' => 'mdi-close-circle',
                     'color' => 'danger',
                 ],
             ];
@@ -90,7 +94,7 @@
                     <h4 class="card-title mb-0">Export Data Excel</h4>
                 </div>
                 <div class="card-body">
-                    <p class="fw-semibold mb-2">Export by Status</p>
+                    <p class="fw-semibold mb-2">Export semua data peserta</p>
                     <div class="row g-2 mb-4">
                         @if ($stats['total'] != 0)
                             <div class="col-6 col-md-3">
@@ -99,7 +103,7 @@
                                 </a>
                             </div>
                         @endif
-                        @if ($stats['confirmed'] != 0)
+                        {{-- @if ($stats['confirmed'] != 0)
                             <div class="col-6 col-md-3">
                                 <a href="{{ url('/admin/dashboard/export/confirmed') }}" class="btn btn-success w-100">
                                     <i class="mdi mdi-check-circle me-1"></i> Confirmed ({{ $stats['confirmed'] }})
@@ -119,10 +123,10 @@
                                     <i class="mdi mdi-close-circle me-1"></i> Cancelled ({{ $stats['cancelled'] }})
                                 </a>
                             </div>
-                        @endif
+                        @endif --}}
                     </div>
 
-                    <p class="fw-semibold mb-2">Export Lainnya</p>
+                    {{-- <p class="fw-semibold mb-2">Export Lainnya</p>
                     <div class="row g-2">
                         <div class="col-6 col-md-3">
                             <a href="{{ url('/admin/dashboard/export/statistik') }}" class="btn btn-info w-100">
@@ -134,7 +138,7 @@
                                 <i class="mdi mdi-map me-1"></i> By Daerah
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -155,8 +159,7 @@
                                 <label class="form-label fw-semibold">
                                     <i class="mdi mdi-magnify me-1"></i>Cari Peserta
                                 </label>
-                                <input type="text" class="form-control" name="search"
-                                    value="{{ request('search') }}"
+                                <input type="text" class="form-control" name="search" value="{{ request('search') }}"
                                     placeholder="Nama Daerah, Nama Kepala Daerah, Kode Registrasi, atau Ajudan">
                             </div>
                             <div class="col-md-4">
@@ -165,12 +168,12 @@
                                 </label>
                                 <select class="form-select" name="status">
                                     <option value="">Semua Status</option>
-                                    <option value="confirmed"
-                                        {{ request('status') == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
-                                    <option value="pending"
-                                        {{ request('status') == 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="cancelled"
-                                        {{ request('status') == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                    <option value="confirmed" {{ request('status') == 'confirmed' ? 'selected' : '' }}>
+                                        Confirmed</option>
+                                    <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>
+                                        Pending</option>
+                                    <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>
+                                        Cancelled</option>
                                 </select>
                             </div>
                         </div>
@@ -210,9 +213,10 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode</th>
+                                    {{-- <th>Kode</th> --}}
                                     <th>Daerah & Kepala Daerah</th>
                                     <th>Pasangan</th>
+                                    <th>Rombongan</th>
                                     <th>Ajudan / ADC</th>
                                     <th>Narahubung</th>
                                     <th>Perjalanan</th>
@@ -226,24 +230,52 @@
                                         <td>{{ $peserta->firstItem() + $index }}</td>
 
                                         {{-- KODE REGISTRASI --}}
-                                        <td>
+                                        {{-- <td>
                                             <span class="badge bg-secondary">
                                                 {{ $p->kode_registrasi }}
                                             </span>
-                                        </td>
+                                        </td> --}}
 
-                                        {{-- DAERAH & KEPALA DAERAH --}}
+                                        {{-- DAERAH & KEPALA DAERAH + UKURAN BAJU KD --}}
                                         <td>
                                             <div class="fw-bold">{{ $p->nama_kepala_daerah }}</div>
                                             <small class="text-muted">{{ $p->nama_daerah }}</small>
+                                            <br>
+                                            <span class="badge bg-primary bg-opacity-75 mt-1">
+                                                <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju }}
+                                            </span>
                                         </td>
 
-                                        {{-- PASANGAN --}}
+                                        {{-- PASANGAN + UKURAN BAJU PASANGAN --}}
                                         <td>
                                             @if ($p->nama_pasangan_kepala_daerah)
-                                                {{ $p->nama_pasangan_kepala_daerah }}
+                                                <div>{{ $p->nama_pasangan_kepala_daerah }}</div>
+                                                @if ($p->ukuran_baju_pasangan)
+                                                    <span class="badge bg-info bg-opacity-75 mt-1">
+                                                        <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_pasangan }}
+                                                    </span>
+                                                @endif
                                             @else
                                                 <small class="text-muted">-</small>
+                                            @endif
+                                        </td>
+
+                                        {{-- ROMBONGAN + KEGIATAN --}}
+                                        <td>
+                                            <div class="fw-bold text-primary">
+                                                {{ $p->jumlah_rombongan }}
+                                                <small class="text-muted fw-normal">orang</small>
+                                            </div>
+                                            @if ($p->kegiatan && $p->kegiatan->count())
+                                                <small class="text-muted">
+                                                    <i class="mdi mdi-calendar-check me-1"></i>
+                                                    {{ $p->kegiatan->count() }} kegiatan
+                                                </small>
+                                            @else
+                                                <small class="text-muted">
+                                                    <i class="mdi mdi-calendar-remove me-1"></i>
+                                                    Belum pilih kegiatan
+                                                </small>
                                             @endif
                                         </td>
 
@@ -259,7 +291,7 @@
                                             @endif
                                         </td>
 
-                                        {{-- NARAHUBUNG (relasi) --}}
+                                        {{-- NARAHUBUNG --}}
                                         <td>
                                             @if ($p->narahubung && $p->narahubung->count())
                                                 @foreach ($p->narahubung as $nh)
@@ -312,7 +344,6 @@
                                                 class="btn btn-sm btn-primary">
                                                 <i class="mdi mdi-eye"></i>
                                             </a>
-
                                             <button onclick="confirmDelete({{ $p->id }})"
                                                 class="btn btn-sm btn-danger">
                                                 <i class="mdi mdi-trash-can"></i>
@@ -320,8 +351,8 @@
 
                                             {{-- Hidden delete form --}}
                                             <form id="delete-form-{{ $p->id }}"
-                                                action="{{ route('admin.dashboard.destroy', $p->id) }}"
-                                                method="POST" class="d-none">
+                                                action="{{ route('admin.dashboard.destroy', $p->id) }}" method="POST"
+                                                class="d-none">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
@@ -329,7 +360,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="9" class="text-center py-4 text-muted">
+                                        <td colspan="10" class="text-center py-4 text-muted">
                                             <i class="mdi mdi-inbox-outline" style="font-size:2rem;"></i>
                                             <p class="mb-0 mt-1">Tidak ada data peserta</p>
                                         </td>

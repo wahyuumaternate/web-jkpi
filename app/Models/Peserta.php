@@ -1,18 +1,6 @@
 <?php
 
-/**
- * ============================================================
- *  CATATAN UPDATE UNTUK app/Models/Peserta.php
- * ============================================================
- *
- *  Tidak perlu rewrite seluruh model — cukup pastikan 3 hal
- *  di bawah ini sudah ada / ditambahkan:
- *
- *  1) Tambahkan 'ukuran_baju' & 'jumlah_rombongan' ke $fillable
- *  2) (Opsional) Tambah cast untuk jumlah_rombongan
- *  3) Tambah relasi kegiatan()
- * ============================================================
- */
+// app/Models/Peserta.php
 
 namespace App\Models;
 
@@ -31,12 +19,9 @@ class Peserta extends Model
         'nama_daerah',
         'nama_kepala_daerah',
         'nama_pasangan_kepala_daerah',
-
-        // ⬇⬇⬇ TAMBAHKAN 2 BARIS INI
         'ukuran_baju',
+        'ukuran_baju_pasangan',         // nullable
         'jumlah_rombongan',
-        // ⬆⬆⬆
-
         'nomor_plat',
         'info_kedatangan',
         'info_kepulangan',
@@ -48,13 +33,11 @@ class Peserta extends Model
     ];
 
     protected $casts = [
-        'jumlah_rombongan' => 'integer', // opsional, tapi disarankan
+        'jumlah_rombongan' => 'integer',
     ];
 
-    /**
-     * Auto-generate kode registrasi (kemungkinan sudah ada di model Anda;
-     * jangan diduplikasi kalau sudah ada).
-     */
+    // ===== AUTO-GENERATE KODE REGISTRASI =====
+
     protected static function booted(): void
     {
         static::creating(function (self $peserta) {
@@ -68,14 +51,11 @@ class Peserta extends Model
 
     public function narahubung(): HasMany
     {
-        // Sudah ada di model Anda — biarkan apa adanya.
         return $this->hasMany(PendaftaranNarahubung::class, 'peserta_id');
     }
 
-    // ⬇⬇⬇ TAMBAHKAN RELASI INI
     public function kegiatan(): HasMany
     {
-        return $this->hasMany(Kegiatan::class, 'peserta_id');
+        return $this->hasMany(PendaftaranKegiatan::class, 'peserta_id');
     }
-    // ⬆⬆⬆
 }

@@ -40,12 +40,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#!">
-                <i class="mdi mdi-clipboard-check-outline menu-icon"></i>
-                <span class="menu-title">Daftar Hadir</span>
-            </a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('logout') }}"
                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
