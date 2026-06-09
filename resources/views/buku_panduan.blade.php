@@ -394,6 +394,9 @@
             </div>
 
         </div>
+        <audio id="pageFlipSound" preload="auto">
+            <source src="{{ asset('flipbook.mp3') }}" type="audio/mpeg">
+        </audio>
 
     </div>
 
@@ -669,5 +672,27 @@
         // ═══════════════════════════════════════════
 
         document.addEventListener('DOMContentLoaded', loadPDF);
+        // ═══════════════════════════════════════════
+        //  SOUND EFFECT
+        // ═══════════════════════════════════════════
+
+        function playFlipSound() {
+            const audio = document.getElementById('pageFlipSound');
+
+            if (!audio) return;
+
+            audio.currentTime = 0;
+            audio.volume = 0.4;
+
+            audio.play().catch(err => {
+                console.log('Autoplay diblokir browser:', err);
+            });
+        }
+        pageFlip.on('flip', (e) => {
+            document.getElementById('pageNum').value = e.data + 1;
+
+            // suara kertas
+            playFlipSound();
+        });
     </script>
 @endpush
