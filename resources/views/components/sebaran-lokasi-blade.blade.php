@@ -487,7 +487,7 @@
 
                 // ── AREA PASAR MALAM & PAMERAN ────────────────────────────────────
                 {
-                    name: "Salero",
+                    name: "Lapangan Ngaralamo Salero",
                     category: "Pameran-area",
                     lat: 0.800323,
                     lng: 127.385542,
@@ -497,7 +497,7 @@
                     time: "±3 menit",
                     icon: "bi-shop",
                     color: "#00b4d8",
-                    image: "{{ asset('assets/img/kadaton.jpg') }}"
+                    image: "{{ asset('assets/img/lapangan.jpg') }}"
                 },
                 {
                     name: "Tongle ",
@@ -527,47 +527,23 @@
                     color: "#38f9d7",
                     image: "{{ asset('assets/img/kadaton.jpg') }}"
                 },
-                {
-                    name: "CAGS (Cultural & Art Gathering Space)",
-                    category: "workshop-room",
-                    lat: 0.786909,
-                    lng: 127.377228,
-                    address: "Kec. Ternate Tengah, Kota Ternate, Maluku Utara",
-                    description: "Festival Gastronomi – Cerminan Identitas Budaya Lokal dan Sarana Pelestarian Tradisi (25–26 Agustus 2026).",
-                    distance: "±2.0 km dari Hotel Bela",
-                    time: "±10 menit",
-                    icon: "bi-people-fill",
-                    color: "#38f9d7",
-                    image: "{{ asset('assets/img/tongole.jpg') }}"
-                },
 
                 // ── PANGGUNG SENI / STAGE ─────────────────────────────────────────
                 {
-                    name: "Salero – Panggung Utama Karnaval",
+                    name: "Landmark Ternate",
                     category: "stage-culture",
-                    lat: 0.800323,
-                    lng: 127.385542,
-                    address: "Jl. Salero, Kel. Salero, Ternate Tengah",
-                    description: "Pawai Budaya dan Karnaval Delegasi JKPI (27 Agustus 2026) & Gelar Budaya serta Penyerahan Pataka ke Kota Bandung (28 Agustus 2026).",
+                    lat: 0.7856124826974457,
+                    lng: 127.38905123815788,
+                    address: "Jl. Pahlawan Revolusi, Muhajirin, Kec. Ternate Tengah, Kota Ternate, Maluku Utara",
+                    description: "Gelar Budaya & Penyerahan Pataka JKPI XIII",
                     distance: "±0.5 km dari pusat kota",
-                    time: "±3 menit",
+                    time: "±5 menit",
                     icon: "bi-music-note-beamed",
                     color: "#f77f00",
-                    image: "{{ asset('assets/img/kadaton.jpg') }}"
-                },
-                {
-                    name: "Nusantara Raya Run – Start/Finish",
-                    category: "stage-culture",
-                    lat: 0.800323,
-                    lng: 127.385542,
-                     address: "Jl. Salero, Kel. Salero, Ternate Tengah",
-                    description: "Ajang Lari Nasional – Memadukan Olahraga, Semangat Persatuan, dan Promosi Budaya & Pariwisata Daerah (28 Agustus 2026).",
-                    distance: "±1.5 km dari Hotel Bela",
-                    time: "±6 menit",
-                    icon: "bi-flag-fill",
-                    color: "#f77f00",
-                    image: "{{ asset('assets/img/Benteng-Oranje.jpg') }}"
+                    image: "{{ asset('assets/img/landmark.jpeg') }}",
+
                 }
+
             ];
 
             // Store markers
