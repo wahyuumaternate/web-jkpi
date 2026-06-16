@@ -101,8 +101,9 @@
                             </a>
                         </li>
 
-                        <li><a href="#!">Nusantara Raya Run</a></li>
-                        <li><a href="#!">Expo UMKM</a></li>
+                        <li><a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
+                                target="_blank">Nusantara Raya Run</a></li>
+
                     </ul>
                 </li>
             </ul>
