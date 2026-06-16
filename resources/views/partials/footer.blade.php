@@ -27,6 +27,9 @@
                      <li><a href="#tentang">Tentang JKPI</a></li>
                      <li><a href="#tujuan">Tujuan</a></li>
                      <li><a href="#rangkaian">Rangkaian Kegiatan</a></li>
+                     <li><a href="{{ url('/registrasi') }}">Pendaftaran Rakernas</a></li>
+                     <li><a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
+                             target="_blank">Pendaftaran Nusantara Raya Run</a></li>
                  </ul>
              </div>
 

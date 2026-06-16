@@ -606,7 +606,7 @@
                             <div data-aos="fade-up" data-aos-delay="700" style="margin-bottom: 40px;">
                                 <a href="{{ url('/registrasi') }}"
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4), 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; border: none;">
-                                    <i class="bi bi-pencil-square me-2"></i>DAFTAR SEKARANG
+                                    <i class="bi bi-pencil-square me-2"></i>DAFTAR RAKERNAS JKPI XII 2026
                                 </a>
                             </div>
                         </div>
@@ -1257,6 +1257,335 @@
         </style>
 
         @include('components.sebaran-lokasi-blade')
+
+        <!-- Nusantara Raya Run Section -->
+        <section id="nusantara-run" class="nrr-section section">
+
+            <!-- Decorative background elements -->
+            <div class="nrr-bg-accent nrr-bg-accent--left"></div>
+            <div class="nrr-bg-accent nrr-bg-accent--right"></div>
+
+            <div class="container" data-aos="fade-up">
+
+                <!-- Section Header -->
+                <div class="row justify-content-center mb-5">
+                    <div class="col-lg-9 text-center">
+                        <span class="nrr-eyebrow" data-aos="fade-down" data-aos-delay="100">30 Agustus 2026 &bull;
+                            05.30 – 11.00 WIT</span>
+                        <h2 class="nrr-title" data-aos="fade-up" data-aos-delay="150">
+                            Nusantara Raya<br><span class="nrr-title-accent">Run</span>
+                        </h2>
+                        <p class="nrr-subtitle" data-aos="fade-up" data-aos-delay="200">
+                            Ajang lari nasional <em>Fort to Fort</em> yang memadukan semangat olahraga,
+                            persatuan Nusantara, dan promosi budaya serta pariwisata Ternate — menutup rangkaian
+                            Rakernas XII JKPI 2026 dengan penuh energi.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Route & Info cards -->
+                <div class="row gy-4 justify-content-center mb-5">
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="nrr-info-card">
+                            <div class="nrr-info-icon">
+                                <i class="bi bi-signpost-2-fill"></i>
+                            </div>
+                            <h4 class="nrr-info-label">Rute</h4>
+                            <p class="nrr-info-value">Fort to Fort</p>
+                            <p class="nrr-info-sub">Benteng Oranje</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="nrr-info-card">
+                            <div class="nrr-info-icon">
+                                <i class="bi bi-alarm-fill"></i>
+                            </div>
+                            <h4 class="nrr-info-label">Waktu Acara</h4>
+                            <p class="nrr-info-value">05.30 WIT</p>
+                            <p class="nrr-info-sub">Minggu, 30 Agustus 2026</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="nrr-info-card">
+                            <div class="nrr-info-icon">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </div>
+                            <h4 class="nrr-info-label">Lokasi</h4>
+                            <p class="nrr-info-value">Kota Ternate</p>
+                            <p class="nrr-info-sub">Maluku Utara, Indonesia</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Highlights strip -->
+                <div class="nrr-highlights" data-aos="fade-up" data-aos-delay="300">
+                    <div class="nrr-highlight-item">
+                        <i class="bi bi-people-fill"></i>
+                        <span>Terbuka untuk Umum</span>
+                    </div>
+                    <div class="nrr-highlight-sep"></div>
+                    <div class="nrr-highlight-item">
+                        <i class="bi bi-trophy-fill"></i>
+                        <span>Hadiah Menarik</span>
+                    </div>
+                    <div class="nrr-highlight-sep"></div>
+                    <div class="nrr-highlight-item">
+                        <i class="bi bi-camera-fill"></i>
+                        <span>Pemandangan Bersejarah</span>
+                    </div>
+                    <div class="nrr-highlight-sep"></div>
+                    <div class="nrr-highlight-item">
+                        <i class="bi bi-flag-fill"></i>
+                        <span>Semangat Persatuan Nusantara</span>
+                    </div>
+                </div>
+
+                <!-- CTA -->
+                <div class="text-center mt-5" data-aos="zoom-in" data-aos-delay="400">
+                    <a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
+                        target="_blank" rel="noopener noreferrer" class="nrr-cta-btn">
+                        <i class="bi bi-ticket-perforated-fill me-2"></i>
+                        Daftar Nusantara Raya Run
+                    </a>
+                    <p class="nrr-cta-note mt-3">Pendaftaran melalui platform Etix &bull; Slot terbatas</p>
+                </div>
+
+            </div>
+        </section><!-- /Nusantara Raya Run Section -->
+
+        <style>
+            /* ── Nusantara Raya Run Section ────────────────────────────── */
+            .nrr-section {
+                position: relative;
+                overflow: hidden;
+                background: #f7fefe;
+                padding: 100px 0;
+            }
+
+            /* Decorative blobs */
+            .nrr-bg-accent {
+                position: absolute;
+                width: 520px;
+                height: 520px;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(9, 154, 167, 0.10) 0%, transparent 70%);
+                pointer-events: none;
+            }
+
+            .nrr-bg-accent--left {
+                top: -120px;
+                left: -180px;
+            }
+
+            .nrr-bg-accent--right {
+                bottom: -120px;
+                right: -180px;
+            }
+
+            /* Eyebrow */
+            .nrr-eyebrow {
+                display: inline-block;
+                background: rgba(9, 154, 167, 0.10);
+                color: #099aa7;
+                font-size: 0.88rem;
+                font-weight: 700;
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                padding: 8px 22px;
+                border-radius: 50px;
+                margin-bottom: 20px;
+                border: 1.5px solid rgba(9, 154, 167, 0.25);
+            }
+
+            /* Title */
+            .nrr-title {
+                font-size: 3.4rem;
+                font-weight: 900;
+                color: #1a2e35;
+                line-height: 1.1;
+                margin-bottom: 22px;
+                letter-spacing: -1px;
+            }
+
+            .nrr-title-accent {
+                color: #099aa7;
+                position: relative;
+                display: inline-block;
+            }
+
+            .nrr-title-accent::after {
+                content: '';
+                position: absolute;
+                bottom: 4px;
+                left: 0;
+                width: 100%;
+                height: 5px;
+                background: linear-gradient(90deg, #099aa7, #05c9d9);
+                border-radius: 3px;
+                opacity: 0.4;
+            }
+
+            /* Subtitle */
+            .nrr-subtitle {
+                font-size: 1.15rem;
+                color: #555;
+                line-height: 1.75;
+                max-width: 680px;
+                margin: 0 auto;
+            }
+
+            /* Info Cards */
+            .nrr-info-card {
+                background: #fff;
+                border-radius: 18px;
+                padding: 36px 28px;
+                text-align: center;
+                box-shadow: 0 4px 24px rgba(9, 154, 167, 0.08);
+                border: 2px solid transparent;
+                transition: all 0.35s ease;
+                height: 100%;
+            }
+
+            .nrr-info-card:hover {
+                border-color: #099aa7;
+                transform: translateY(-6px);
+                box-shadow: 0 12px 36px rgba(9, 154, 167, 0.16);
+            }
+
+            .nrr-info-icon {
+                width: 64px;
+                height: 64px;
+                background: linear-gradient(135deg, #099aa7, #05c9d9);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 18px;
+                font-size: 1.6rem;
+                color: #fff;
+                box-shadow: 0 6px 18px rgba(9, 154, 167, 0.30);
+            }
+
+            .nrr-info-label {
+                font-size: 0.8rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: #099aa7;
+                margin-bottom: 6px;
+            }
+
+            .nrr-info-value {
+                font-size: 1.45rem;
+                font-weight: 800;
+                color: #1a2e35;
+                margin-bottom: 4px;
+            }
+
+            .nrr-info-sub {
+                font-size: 0.9rem;
+                color: #888;
+                margin: 0;
+            }
+
+            /* Highlights strip */
+            .nrr-highlights {
+                background: linear-gradient(135deg, #099aa7 0%, #077b86 100%);
+                border-radius: 16px;
+                padding: 28px 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0;
+                box-shadow: 0 8px 32px rgba(9, 154, 167, 0.30);
+            }
+
+            .nrr-highlight-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: #fff;
+                font-size: 0.98rem;
+                font-weight: 600;
+                padding: 8px 28px;
+            }
+
+            .nrr-highlight-item i {
+                font-size: 1.1rem;
+                opacity: 0.9;
+            }
+
+            .nrr-highlight-sep {
+                width: 1.5px;
+                height: 28px;
+                background: rgba(255, 255, 255, 0.3);
+            }
+
+            /* CTA */
+            .nrr-cta-btn {
+                display: inline-block;
+                background: linear-gradient(135deg, #099aa7 0%, #05c9d9 100%);
+                color: #fff;
+                font-size: 1.15rem;
+                font-weight: 700;
+                padding: 18px 54px;
+                border-radius: 50px;
+                text-decoration: none;
+                box-shadow: 0 10px 36px rgba(9, 154, 167, 0.38);
+                transition: all 0.3s ease;
+                letter-spacing: 0.3px;
+            }
+
+            .nrr-cta-btn:hover {
+                color: #fff;
+                transform: translateY(-4px);
+                box-shadow: 0 18px 50px rgba(9, 154, 167, 0.50);
+            }
+
+            .nrr-cta-note {
+                font-size: 0.88rem;
+                color: #999;
+                margin: 0;
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .nrr-highlights {
+                    gap: 10px;
+                    padding: 24px 20px;
+                }
+
+                .nrr-highlight-sep {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .nrr-title {
+                    font-size: 2.4rem;
+                }
+
+                .nrr-section {
+                    padding: 70px 0;
+                }
+
+                .nrr-cta-btn {
+                    padding: 16px 36px;
+                    font-size: 1rem;
+                }
+
+                .nrr-highlights {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 12px;
+                }
+            }
+        </style>
 
         <!-- Galeri Section -->
         <section id="galeri" class="home-about section light-background">

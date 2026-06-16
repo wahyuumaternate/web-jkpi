@@ -87,31 +87,13 @@
                     </ul>
                 </li>
 
-                <li class="dropdown {{ Request::is('registrasi') ? 'active' : '' }}">
-                    <a href="#">
-                        <span>Pendaftaran</span>
-                        <i class="bi bi-chevron-down toggle-dropdown"></i>
-                    </a>
-
-                    <ul>
-                        <li>
-                            <a href="{{ url('/registrasi') }}"
-                                class="{{ Request::is('registrasi') ? 'active' : '' }}">
-                                Rakernas JKPI XII 2026
-                            </a>
-                        </li>
-
-                        <li><a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
-                                target="_blank">Nusantara Raya Run</a></li>
-
-                    </ul>
-                </li>
+                <li><a href="#nusantara-run">Nusantara Raya Run</a></li>
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
 
         <!-- CTA -->
-        {{-- <a class="btn-getstarted d-none d-md-block" href="{{ url('/registrasi') }}">Registrasi</a> --}}
+        {{-- <a class="btn-getstarted d-none d-md-block" href="{{ url('/registrasi') }}">Nusantara Raya Run</a> --}}
 
     </div>
 </header>
