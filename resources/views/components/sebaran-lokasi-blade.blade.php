@@ -322,61 +322,75 @@
 
 
         <!-- Legend -->
-        <div class="location-legend-jkpi ">
+        <!-- Legend -->
+        <div class="location-legend-jkpi">
             <div class="legend-title-jkpi">
                 <i class="bi bi-list-ul"></i>
-                Kategori Lokasi di Kota Ternate
+                Kategori Lokasi Kegiatan JKPI 2026
             </div>
+
             <div class="row">
+
+                <!-- Kolom Kiri -->
                 <div class="col-md-6">
+
                     <div class="legend-item-jkpi" onclick="filterMarkersJKPI('venue-main')">
                         <div class="legend-icon-jkpi venue-main">
-                            <i class="bi bi-building"></i>
+                            <i class="bi bi-building-fill"></i>
                         </div>
                         <div class="legend-text-jkpi">
                             <h5>Venue Utama</h5>
-                            <p>Gedung sidang pleno dan seminar</p>
+                            <p>Simposium Internasional & Rakernas JKPI</p>
                         </div>
                     </div>
+
                     <div class="legend-item-jkpi" onclick="filterMarkersJKPI('heritage-site')">
                         <div class="legend-icon-jkpi heritage-site">
                             <i class="bi bi-bank"></i>
                         </div>
                         <div class="legend-text-jkpi">
                             <h5>Situs Heritage</h5>
-                            <p>Benteng, museum, dan keraton</p>
+                            <p>Benteng, geopark, dan lokasi aktivasi budaya</p>
                         </div>
                     </div>
-                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('market-area')">
+
+                    <div class="legend-item-jkpi" onclick="filterMarkersJKPI('Pameran-area')">
                         <div class="legend-icon-jkpi market-area">
                             <i class="bi bi-shop"></i>
                         </div>
                         <div class="legend-text-jkpi">
-                            <h5>Area Pasar Malam</h5>
-                            <p>Pameran UMKM dan festival kuliner</p>
+                            <h5>Area Pameran & Expo</h5>
+                            <p>Pentas budaya, UMKM, dan delegasi JKPI</p>
                         </div>
                     </div>
+
                 </div>
+
+                <!-- Kolom Kanan -->
                 <div class="col-md-6">
+
                     <div class="legend-item-jkpi" onclick="filterMarkersJKPI('workshop-room')">
                         <div class="legend-icon-jkpi workshop-room">
-                            <i class="bi bi-people"></i>
+                            <i class="bi bi-people-fill"></i>
                         </div>
                         <div class="legend-text-jkpi">
-                            <h5>Ruang Workshop</h5>
-                            <p>Seminar dan diskusi kelompok</p>
+                            <h5>Workshop & Master Class</h5>
+                            <p>Diskusi, pembelajaran budaya, dan gala dinner</p>
                         </div>
                     </div>
+
                     <div class="legend-item-jkpi" onclick="filterMarkersJKPI('stage-culture')">
                         <div class="legend-icon-jkpi stage-culture">
                             <i class="bi bi-music-note-beamed"></i>
                         </div>
                         <div class="legend-text-jkpi">
                             <h5>Panggung Seni</h5>
-                            <p>Pertunjukan seni dan budaya</p>
+                            <p>Gelar Budaya & Penyerahan Pataka – Landmark Ternate</p>
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
 
