@@ -894,7 +894,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Welcome Dinner</h4>
-                                        <p class="event-datetime">Selasa, 25 Agustus 2026 &bull; 19.30 – 22.00 WIT</p>
+                                        <p class="event-datetime">Selasa, 25 Agustus 2026 &bull; 19.15 – 22.00 WIT</p>
                                         <p class="event-description">Jamuan Makan Malam Kebudayaan sebagai pembuka
                                             rangkaian Rakernas JKPI ke-XII Ternate 2026.</p>
                                         <p class="event-location">
@@ -911,7 +911,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Master Class</h4>
-                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 09.00 – 15.00 WIT</p>
+                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 07.30 – 15.30 WIT</p>
                                         <p class="event-description">
                                             <strong>Economic Culture &amp; Pengelolaan Museum</strong> – Benteng
                                             Oranje<br>
@@ -927,7 +927,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Heritage City Tour</h4>
-                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 09.00 – 15.00 WIT</p>
+                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 08.30 – 13.40 WIT</p>
                                         <p class="event-description">Kunjungan Kepala Daerah Peserta JKPI ke Kawasan
                                             Cagar Budaya dan Kadaton Kesultanan Ternate.</p>
                                         <p class="event-location">
@@ -949,10 +949,10 @@
                                     </div>
 
                                     <div class="event-item">
-                                        <h4 class="event-name">Expo dan Pentas Budaya <span class="badge-hari">Hari
+                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
+                                                class="badge-hari">Hari
                                                 ke-1</span></h4>
-                                        <p class="event-datetime">Rabu – Sabtu, 26 – 29 Agustus 2026 &bull; 09.00 –
-                                            24.00 WIT</p>
+                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 16.30 – 23.00 WIT</p>
                                         <p class="event-description">
                                             Pembukaan · Pameran "Surat-Surat Dari Ternate" · Pertunjukan Seni Budaya
                                             Delegasi
@@ -974,7 +974,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Simposium Internasional</h4>
-                                        <p class="event-datetime">Kamis, 27 Agustus 2026 &bull; 09.00 – 15.00 WIT</p>
+                                        <p class="event-datetime">Kamis, 27 Agustus 2026 &bull; 08.00 – 16.00 WIT</p>
                                         <p class="event-description">Tema: <em>"Pulau-Pulau Penghasil Rempah"</em> —
                                             forum internasional yang mempertemukan akademisi, pelaku industri, dan
                                             pemangku
@@ -985,10 +985,10 @@
                                     </div>
 
                                     <div class="event-item">
-                                        <h4 class="event-name">Expo dan Pentas Budaya <span class="badge-hari">Hari
+                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
+                                                class="badge-hari">Hari
                                                 ke-2</span></h4>
-                                        <p class="event-datetime">Rabu – Sabtu, 26 – 29 Agustus 2026 &bull; 09.00 –
-                                            24.00 WIT</p>
+                                        <p class="event-datetime">Kamis, 27 Agustus 2026 &bull; 15.00 – 23.00 WIT</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan Pameran
                                             Booth Kota — Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari
                                             Seluruh
@@ -1007,7 +1007,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Rapat Kerja Nasional</h4>
-                                        <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 09.00 – 12.00 WIT</p>
+                                        <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 08.00 – 12.00 WIT</p>
                                         <p class="event-description">Penyusunan Kebijakan dan Memperkuat Kolaborasi
                                             dalam Pelestarian Kota Pusaka Secara Berkelanjutan.</p>
                                         <p class="event-location">
@@ -1027,27 +1027,27 @@
                                     </div>
 
                                     <div class="event-item">
-                                        <h4 class="event-name">Gelar Budaya &amp; Penyerahan Pataka</h4>
-                                        <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 19.30 – 22.00 WIT</p>
-                                        <p class="event-description">Ramah Tamah, Pagelaran Budaya, dan Penyerahan
-                                            Tanggung Jawab Penyelenggaraan Tuan Rumah Rakernas JKPI ke-XIII ke Kota
-                                            Bandung.</p>
-                                        <p class="event-location">
-                                            <i class="bi bi-geo-alt-fill"></i> Landmark Ternate
-                                        </p>
-                                    </div>
-
-                                    <div class="event-item">
-                                        <h4 class="event-name">Expo dan Pentas Budaya <span class="badge-hari">Hari
+                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
+                                                class="badge-hari">Hari
                                                 ke-3</span></h4>
-                                        <p class="event-datetime">Rabu – Sabtu, 26 – 29 Agustus 2026 &bull; 09.00 –
-                                            24.00 WIT</p>
+                                        <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 15.00 – 23.00 WIT</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan Pameran
                                             Booth Kota — Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari
                                             Seluruh
                                             Peserta JKPI.</p>
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                        </p>
+                                    </div>
+
+                                    <div class="event-item">
+                                        <h4 class="event-name">Gelar Budaya &amp; Penyerahan Pataka</h4>
+                                        <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 19.00 – 21.55 WIT</p>
+                                        <p class="event-description">Ramah Tamah, Pagelaran Budaya, dan Penyerahan
+                                            Tanggung Jawab Penyelenggaraan Tuan Rumah Rakernas JKPI ke-XIII ke Kota
+                                            Bandung.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Landmark Ternate
                                         </p>
                                     </div>
 
@@ -1059,8 +1059,20 @@
                                 <div class="event-list">
 
                                     <div class="event-item">
+                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
+                                                class="badge-hari">Hari
+                                                ke-4</span></h4>
+                                        <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 14.00 – 18.00 WIT</p>
+                                        <p class="event-description">Hari keempat Expo dan Pentas Budaya — Pertunjukan
+                                            Seni Budaya Delegasi JKPI dan Pameran Booth Kota.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                        </p>
+                                    </div>
+
+                                    <div class="event-item">
                                         <h4 class="event-name">Pawai Budaya dan Karnaval</h4>
-                                        <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 19.00 – 24.00 WIT</p>
+                                        <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 19.30 – 23.00 WIT</p>
                                         <p class="event-description">Pawai Budaya Delegasi JKPI — menampilkan Karya
                                             Budaya Khas Daerah dalam defile sepanjang rute Benteng Oranje menuju
                                             Lapangan
@@ -1068,18 +1080,6 @@
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Benteng Oranje – Lapangan Ngaralamo
                                             Salero
-                                        </p>
-                                    </div>
-
-                                    <div class="event-item">
-                                        <h4 class="event-name">Expo dan Pentas Budaya <span class="badge-hari">Hari
-                                                ke-4 (Penutup)</span></h4>
-                                        <p class="event-datetime">Rabu – Sabtu, 26 – 29 Agustus 2026 &bull; 09.00 –
-                                            24.00 WIT</p>
-                                        <p class="event-description">Hari terakhir Expo dan Pentas Budaya — Pertunjukan
-                                            Seni Budaya Delegasi JKPI dan Pameran Booth Kota.</p>
-                                        <p class="event-location">
-                                            <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                         </p>
                                     </div>
 
@@ -1092,7 +1092,7 @@
 
                                     <div class="event-item">
                                         <h4 class="event-name">Nusantara Raya Run</h4>
-                                        <p class="event-datetime">Minggu, 30 Agustus 2026 &bull; 06.00 – 09.00 WIT</p>
+                                        <p class="event-datetime">Minggu, 30 Agustus 2026 &bull; 05.30 – 09.00 WIT</p>
                                         <p class="event-description">Ajang Lari Nasional Fort to Fort yang Memadukan
                                             Olahraga, Semangat Persatuan, dan Promosi Potensi Budaya serta Pariwisata
                                             Daerah.</p>
