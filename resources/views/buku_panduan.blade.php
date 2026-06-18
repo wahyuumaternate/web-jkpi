@@ -362,10 +362,10 @@
 
             <div class="toolbar-group">
 
-                <a href="{{ asset('buku_panduan.pdf') }}" download class="toolbar-btn primary">
+                {{-- <a href="" download class="toolbar-btn primary">
                     <i class="bi bi-download"></i>
                     Download
-                </a>
+                </a> --}}
 
                 <button class="toolbar-btn" onclick="toggleFullscreen()">
                     <i class="bi bi-arrows-fullscreen"></i>
@@ -410,7 +410,7 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc =
             'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        const pdfUrl = "{{ asset('buku_panduan.pdf') }}";
+        const pdfUrl = "";
 
         let pdfDoc = null;
         let pageFlip = null;
