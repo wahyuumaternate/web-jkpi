@@ -922,9 +922,10 @@
                             <label class="form-label" for="nama_pasangan_kepala_daerah">
                                 Nama Lengkap Pasangan Kepala Daerah
                             </label>
+                            {{-- Nama Pasangan --}}
                             <input type="text" class="form-control" id="nama_pasangan_kepala_daerah"
                                 name="nama_pasangan_kepala_daerah" value="{{ old('nama_pasangan_kepala_daerah') }}"
-                                placeholder="Opsional, kosongkan jika tidak hadir">
+                                placeholder="Opsional, kosongkan jika tidak hadir" oninput="toggleUkuranPasangan()">
                         </div>
                     </div>
 
@@ -949,11 +950,15 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">
+                            {{-- Label ukuran baju pasangan, ubah jadi dinamis --}}
+                            <label class="form-label" id="label_ukuran_pasangan">
                                 Ukuran Baju Pasangan Kepala Daerah
+                                <span class="required" id="required_ukuran_pasangan" style="display:none">*</span>
                             </label>
-                            <select class="form-select" name="ukuran_baju_pasangan">
+                            {{-- Ukuran Baju Pasangan --}}
+                            <select class="form-select" name="ukuran_baju_pasangan" id="ukuran_baju_pasangan">
                                 <option value="">Pilih Ukuran</option>
                                 @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $ukuran)
                                     <option value="{{ $ukuran }}"
@@ -962,6 +967,8 @@
                                     </option>
                                 @endforeach
                             </select>
+
+
                         </div>
 
                     </div>
@@ -1408,6 +1415,25 @@
 
         // initial state
         onEventChange();
+    </script>
+    <script>
+        function toggleUkuranPasangan() {
+            const namaPasangan = document.getElementById('nama_pasangan_kepala_daerah').value.trim();
+            const selectUkuran = document.getElementById('ukuran_baju_pasangan');
+            const requiredMark = document.getElementById('required_ukuran_pasangan');
+
+            if (namaPasangan !== '') {
+                selectUkuran.required = true;
+                requiredMark.style.display = 'inline';
+            } else {
+                selectUkuran.required = false;
+                selectUkuran.value = '';
+                requiredMark.style.display = 'none';
+            }
+        }
+
+        // Jalankan saat halaman load (untuk handle old() value setelah validasi gagal)
+        document.addEventListener('DOMContentLoaded', toggleUkuranPasangan);
     </script>
 </body>
 
