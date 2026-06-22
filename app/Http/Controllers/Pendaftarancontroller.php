@@ -25,7 +25,7 @@ class PendaftaranController extends Controller
     {
         try {
             $data = $request->validated();
-
+            dd($data);
             // Pisahkan relasi dari data peserta
             $narahubungData = $data['narahubung'] ?? [];
             $kegiatanData = $data['kegiatan'] ?? [];
