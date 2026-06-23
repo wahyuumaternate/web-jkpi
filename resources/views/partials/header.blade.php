@@ -103,11 +103,7 @@
                             </a>
                         </li>
 
-                        {{-- <li>
-                            <a href="{{ url('/') }}#appointment">
-                                Kontak
-                            </a>
-                        </li> --}}
+                      
                     </ul>
                 </li>
 
