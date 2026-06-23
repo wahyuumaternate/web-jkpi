@@ -44,7 +44,31 @@
                         Buku Panduan
                     </a>
                 </li>
+                <li class="dropdown ">
+                    <a href="#">
+                        <span>Pendaftaran</span>
+                        <i class="bi bi-chevron-down toggle-dropdown"></i>
+                    </a>
 
+                    <ul>
+                        <li>
+                            <a href="{{ url('/registrasi') }}" target="_blank">
+                                Rekernas XII JKPI 2026
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#nusantara-run">
+                                Nusantara Raya Run
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://forms.gle/umG33qVW5MLA5Zvh7" target="_blank">
+                                Harmoni Budaya Nusantara
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li
                     class="dropdown {{ Request::is('hotel') || Request::is('cafe-resto') || Request::is('toko-oleh-oleh') ? 'active' : '' }}">
                     <a href="#">
@@ -79,15 +103,15 @@
                             </a>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="{{ url('/') }}#appointment">
                                 Kontak
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
 
-                <li><a href="#nusantara-run">Nusantara Raya Run</a></li>
+
             </ul>
             <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
