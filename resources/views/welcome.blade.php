@@ -949,8 +949,8 @@
                                     <div class="event-item">
                                         <h4 class="event-name">Makan Bersama</h4>
                                         <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 19.15 – 22.00 WIT</p>
-                                        <p class="event-description">Jamuan Makan Kebudayaan sebagai pembuka
-                                            rangkaian Rakernas JKPI ke-XII Ternate 2026.</p>
+                                        <p class="event-description">Jamuan Makan Kebudayaan Sebagai Pembuka
+                                            Rangkaian Rakernas JKPI ke-XII Ternate 2026.</p>
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Pendopo Kediaman Wali Kota Ternate
                                         </p>
@@ -980,9 +980,9 @@
                                         <h4 class="event-name">Simposium Internasional</h4>
                                         <p class="event-datetime">Kamis, 27 Agustus 2026 &bull; 08.00 – 16.00 WIT</p>
                                         <p class="event-description">Tema: <em>"Pulau-Pulau Penghasil Rempah"</em> —
-                                            forum internasional yang mempertemukan akademisi, pelaku industri, dan
-                                            pemangku
-                                            kepentingan rempah dari berbagai negara.</p>
+                                            Forum Internasional yang Mempertemukan Akademisi, Pelaku Industri, dan
+                                            Pemangku
+                                            Kepentingan Rempah Dari Berbagai Negara.</p>
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Bela Hotel
                                         </p>
@@ -1021,8 +1021,10 @@
                                     <div class="event-item">
                                         <h4 class="event-name">Seminar Nasional</h4>
                                         <p class="event-datetime">Sabtu, 28 Agustus 2026 &bull; 13.30 – 15.30 WIT</p>
-                                        <p class="event-description">Tema: City Gallery sebagai Ruang Inklusif untuk
-                                            Memperkuat Identitas Kota Pusaka - Forum Kolaborasi Nasional Hexahelix Memori Kolektif dan Kota Pusaka.</p>
+                                        <p class="event-description">Tema: <em>"City Gallery sebagai Ruang Inklusif
+                                                untuk
+                                                Memperkuat Identitas Kota Pusaka"</em> - Forum Kolaborasi Nasional
+                                            Hexahelix Memori Kolektif dan Kota Pusaka.</p>
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Aula Banau Kampus 1 Universitas Khairun
                                         </p>
@@ -1031,8 +1033,8 @@
                                         <h4 class="event-name">Festival Gastronomi</h4>
                                         <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 15.00 – 18.00 WIT</p>
                                         <p class="event-description">Cerminan Identitas Budaya Lokal dan Sarana
-                                            Pelestarian Tradisi — kurasi tenant makanan berbasis rempah dengan narasi
-                                            budaya.</p>
+                                            Pelestarian Tradisi — Kurasi Tenant Makanan Berbasis Rempah Dengan Narasi
+                                            Budaya.</p>
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                         </p>
@@ -1094,8 +1096,8 @@
                                     <div class="event-item">
                                         <h4 class="event-name">Pawai Budaya dan Karnaval</h4>
                                         <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 19.30 – 23.00 WIT</p>
-                                        <p class="event-description">Pawai Budaya Delegasi JKPI — menampilkan Karya
-                                            Budaya Khas Daerah dalam defile sepanjang rute Benteng Oranje menuju
+                                        <p class="event-description">Pawai Budaya Delegasi JKPI — Menampilkan Karya
+                                            Budaya Khas Daerah Dalam Defile Sepanjang Rute Benteng Oranje Menuju
                                             Lapangan
                                             Ngaralamo Salero.</p>
                                         <p class="event-location">
