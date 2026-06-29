@@ -783,7 +783,7 @@
 
             <div class="container section-title" data-aos="fade-up">
                 <h2>Rangkaian Kegiatan JKPI 2026</h2>
-                <p>25 – 30 Agustus 2026 &bull; Kota Ternate, Maluku Utara</p>
+                <p>26 – 30 Agustus 2026 &bull; Kota Ternate, Maluku Utara</p>
             </div>
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -1018,7 +1018,15 @@
                                             <i class="bi bi-geo-alt-fill"></i> Bela Hotel
                                         </p>
                                     </div>
-
+                                    <div class="event-item">
+                                        <h4 class="event-name">Seminar Nasional</h4>
+                                        <p class="event-datetime">Sabtu, 28 Agustus 2026 &bull; 13.30 – 15.30 WIT</p>
+                                        <p class="event-description">Tema: City Gallery sebagai Ruang Inklusif untuk
+                                            Memperkuat Identitas Kota Pusaka - Forum Kolaborasi Nasional Hexahelix Memori Kolektif dan Kota Pusaka.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Aula Banau Kampus 1 Universitas Khairun
+                                        </p>
+                                    </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Festival Gastronomi</h4>
                                         <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 15.00 – 18.00 WIT</p>
@@ -1082,14 +1090,7 @@
                                             <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                         </p>
                                     </div>
-                                    <div class="event-item">
-                                        <h4 class="event-name">Seminar Nasional</h4>
-                                        <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 13.30 – 15.30 WIT</p>
-                                        <p class="event-description">.</p>
-                                        <p class="event-location">
-                                            <i class="bi bi-geo-alt-fill"></i> Universitas Khairun Ternate
-                                        </p>
-                                    </div>
+
                                     <div class="event-item">
                                         <h4 class="event-name">Pawai Budaya dan Karnaval</h4>
                                         <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 19.30 – 23.00 WIT</p>

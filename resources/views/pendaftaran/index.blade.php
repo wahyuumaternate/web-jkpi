@@ -1104,6 +1104,17 @@
                             </div>
                         </label>
                         <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Seminar Nasional"
+                                onchange="onEventChange()">
+                            <div class="event-check-content">
+                                <span class="event-date-chip chip-d3">29 AGUSTUS</span>
+                                <div class="event-check-title">Seminar Nasional</div>
+                                <div class="event-check-meta">
+                                    <i class="bi bi-geo-alt-fill"></i>Universitas Khairun Ternate
+                                </div>
+                            </div>
+                        </label>
+                        <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Festival Gastronomi"
                                 onchange="onEventChange()">
                             <div class="event-check-content">
@@ -1138,17 +1149,7 @@
                             </div>
                         </label>
                         {{-- 29 Agustus --}}
-                        <label class="event-check-item">
-                            <input type="checkbox" name="kegiatan[]" value="Seminar Nasional"
-                                onchange="onEventChange()">
-                            <div class="event-check-content">
-                                <span class="event-date-chip chip-d4">29 AGUSTUS</span>
-                                <div class="event-check-title">Seminar Nasional</div>
-                                <div class="event-check-meta">
-                                    <i class="bi bi-geo-alt-fill"></i>Universitas Khairun Ternate
-                                </div>
-                            </div>
-                        </label>
+
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Pawai Budaya dan Karnaval"
                                 onchange="onEventChange()">
