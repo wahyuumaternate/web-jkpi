@@ -744,7 +744,7 @@
             </p>
 
             <div class="hero-meta">
-                <div><i class="bi bi-calendar-event"></i> 25 – 30 Agustus 2026</div>
+                <div><i class="bi bi-calendar-event"></i> 26 – 30 Agustus 2026</div>
                 <div><i class="bi bi-geo-alt"></i> Kota Ternate, Maluku Utara</div>
                 <div><i class="bi bi-shield-check"></i> Data terenkripsi</div>
             </div>
@@ -1048,13 +1048,13 @@
                             <div class="event-check-content">
                                 <span class="event-date-chip chip-d6">26–29 AGUSTUS</span>
                                 <div class="event-check-title">Pentas Budaya (4 Hari)</div>
-                                <span class="event-check-link">
-                                    Pendaftaran melalui formulir online terpisah —
-                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-cQrDYIoF8JoOY0oOwSoNwFrhvKg4bH4Pq1rYWB9iiQy5-g/viewform"
-                                        target="_blank" onclick="event.stopPropagation()">
-                                        Isi formulir di sini
-                                    </a>
-                                </span>
+                                <small> <span class="event-check-link">
+                                        Pendaftaran melalui formulir online terpisah —
+                                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-cQrDYIoF8JoOY0oOwSoNwFrhvKg4bH4Pq1rYWB9iiQy5-g/viewform"
+                                            target="_blank" onclick="event.stopPropagation()">
+                                            Isi formulir di sini
+                                        </a>
+                                    </span></small>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                 </div>
@@ -1168,13 +1168,13 @@
                             <div class="event-check-content">
                                 <span class="event-date-chip chip-d5">30 AGUSTUS</span>
                                 <div class="event-check-title">Nusantara Raya Run</div>
-                                <span class="event-check-link">
-                                    Pendaftaran dilakukan melalui laman resmi —
-                                    <a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
-                                        target="_blank" onclick="event.stopPropagation()">
-                                        Daftar sekarang
-                                    </a>
-                                </span>
+                                <small><span class="event-check-link">
+                                        Pendaftaran dilakukan melalui laman resmi —
+                                        <a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
+                                            target="_blank" onclick="event.stopPropagation()">
+                                            Daftar sekarang
+                                        </a>
+                                    </span></small>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Fort to Fort
                                 </div>
