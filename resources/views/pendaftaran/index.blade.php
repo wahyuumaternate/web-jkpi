@@ -1049,6 +1049,13 @@
                             <div class="event-check-content">
                                 <span class="event-date-chip chip-d6">26–29 AGUSTUS</span>
                                 <div class="event-check-title">Pentas Budaya (4 Hari)</div>
+                                <p>
+                                    Pendaftaran kegiatan Pentas Budaya dilakukan melalui formulir online.
+                                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSf-cQrDYIoF8JoOY0oOwSoNwFrhvKg4bH4Pq1rYWB9iiQy5-g/viewform"
+                                        target="_blank">
+                                        Isi formulir di sini
+                                    </a>.
+                                </p>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                 </div>
@@ -1148,9 +1155,20 @@
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Nusantara Raya Run"
                                 onchange="onEventChange()">
+
                             <div class="event-check-content">
                                 <span class="event-date-chip chip-d5">30 AGUSTUS</span>
+
                                 <div class="event-check-title">Nusantara Raya Run</div>
+
+                                <p>
+                                    Untuk mengikuti Nusantara Raya Run, silakan lakukan pendaftaran melalui
+                                    <a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
+                                        target="_blank">
+                                        formulir pendaftaran
+                                    </a>.
+                                </p>
+
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Fort to Fort
                                 </div>
