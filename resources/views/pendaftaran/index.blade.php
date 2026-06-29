@@ -472,9 +472,9 @@
         }
 
         .chip-d3 {
-            background: var(--teal-soft);
-            color: var(--teal-deep);
-            border: 1px solid rgba(10, 138, 150, 0.2);
+            background: #e8fff8;
+            color: #00796b;
+            border: 1px solid rgba(0, 121, 107, 0.18);
         }
 
         .chip-d4 {
@@ -487,6 +487,12 @@
             background: #fce4ec;
             color: #c2185b;
             border: 1px solid rgba(194, 24, 91, 0.2);
+        }
+
+        .chip-d6 {
+            background: #f3e8ff;
+            color: #6b21a8;
+            border: 1px solid rgba(107, 33, 168, 0.18);
         }
 
         .event-check-title {
@@ -997,18 +1003,7 @@
                     </div>
 
                     <div class="events-list-wrap">
-                        {{-- Pre Event --}}
-                        <label class="event-check-item">
-                            <input type="checkbox" name="kegiatan[]" value="Welcome Dinner"
-                                onchange="onEventChange()">
-                            <div class="event-check-content">
-                                <span class="event-date-chip chip-pre">25 AGUSTUS</span>
-                                <div class="event-check-title">Welcome Dinner</div>
-                                <div class="event-check-meta">
-                                    <i class="bi bi-geo-alt-fill"></i> Pendopo Kediaman Wali Kota Ternate
-                                </div>
-                            </div>
-                        </label>
+
 
                         {{-- 26 Agustus --}}
                         <label class="event-check-item">
@@ -1022,35 +1017,25 @@
                                 </div>
                             </div>
                         </label>
-
+                        {{-- Pre Event --}}
                         <label class="event-check-item">
-                            <input type="checkbox" name="kegiatan[]" value="Heritage City Tour"
+                            <input type="checkbox" name="kegiatan[]" value="Welcome Dinner"
                                 onchange="onEventChange()">
                             <div class="event-check-content">
-                                <span class="event-date-chip chip-d1">26 AGUSTUS</span>
-                                <div class="event-check-title">Heritage City Tour</div>
+                                <span class="event-date-chip chip-pre">26 AGUSTUS</span>
+                                <div class="event-check-title">Makan Bersama</div>
                                 <div class="event-check-meta">
-                                    <i class="bi bi-geo-alt-fill"></i> Kadaton Kesultanan & Cagar Budaya
+                                    <i class="bi bi-geo-alt-fill"></i> Pendopo Kediaman Wali Kota Ternate
                                 </div>
                             </div>
                         </label>
 
-                        <label class="event-check-item">
-                            <input type="checkbox" name="kegiatan[]" value="Ladies Program"
-                                onchange="onEventChange()">
-                            <div class="event-check-content">
-                                <span class="event-date-chip chip-d1">26 AGUSTUS</span>
-                                <div class="event-check-title">Ladies Program</div>
-                                <div class="event-check-meta">
-                                    <i class="bi bi-geo-alt-fill"></i> Benteng Oranje & Pusat Kreatif
-                                </div>
-                            </div>
-                        </label>
+
 
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Expo UMKM" onchange="onEventChange()">
                             <div class="event-check-content">
-                                <span class="event-date-chip chip-d1">26–29 AGUSTUS</span>
+                                <span class="event-date-chip chip-d6">26–29 AGUSTUS</span>
                                 <div class="event-check-title">Expo UMKM (4 Hari)</div>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
@@ -1062,7 +1047,7 @@
                             <input type="checkbox" name="kegiatan[]" value="Pentas Budaya"
                                 onchange="onEventChange()">
                             <div class="event-check-content">
-                                <span class="event-date-chip chip-d1">26–29 AGUSTUS</span>
+                                <span class="event-date-chip chip-d6">26–29 AGUSTUS</span>
                                 <div class="event-check-title">Pentas Budaya (4 Hari)</div>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
@@ -1071,6 +1056,18 @@
                         </label>
 
                         {{-- 27 Agustus --}}
+                        <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Ladies Program"
+                                onchange="onEventChange()">
+                            <div class="event-check-content">
+                                <span class="event-date-chip chip-d2">27 AGUSTUS</span>
+                                <div class="event-check-title">Ladies Program</div>
+                                <div class="event-check-meta">
+                                    <i class="bi bi-geo-alt-fill"></i> Benteng Oranje & Pusat Kreatif
+                                </div>
+                            </div>
+                        </label>
+
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]"
                                 value="Simposium Internasional - Pulau-Pulau Penghasil Rempah"
@@ -1086,19 +1083,9 @@
                             </div>
                         </label>
 
-                        <label class="event-check-item">
-                            <input type="checkbox" name="kegiatan[]" value="Festival Gastronomi"
-                                onchange="onEventChange()">
-                            <div class="event-check-content">
-                                <span class="event-date-chip chip-d2">27–28 AGUSTUS</span>
-                                <div class="event-check-title">Festival Gastronomi</div>
-                                <div class="event-check-meta">
-                                    <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
-                                </div>
-                            </div>
-                        </label>
 
                         {{-- 28 Agustus --}}
+
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Rapat Kerja Nasional"
                                 onchange="onEventChange()">
@@ -1107,6 +1094,17 @@
                                 <div class="event-check-title">Rapat Kerja Nasional</div>
                                 <div class="event-check-meta">
                                     <i class="bi bi-geo-alt-fill"></i> Bela Hotel
+                                </div>
+                            </div>
+                        </label>
+                        <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Festival Gastronomi"
+                                onchange="onEventChange()">
+                            <div class="event-check-content">
+                                <span class="event-date-chip chip-d3">28 AGUSTUS</span>
+                                <div class="event-check-title">Festival Gastronomi</div>
+                                <div class="event-check-meta">
+                                    <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                 </div>
                             </div>
                         </label>
@@ -1122,7 +1120,17 @@
                                 </div>
                             </div>
                         </label>
-
+                        <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Heritage City Tour"
+                                onchange="onEventChange()">
+                            <div class="event-check-content">
+                                <span class="event-date-chip chip-d4">29 AGUSTUS</span>
+                                <div class="event-check-title">Heritage City Tour</div>
+                                <div class="event-check-meta">
+                                    <i class="bi bi-geo-alt-fill"></i> Kadaton Kesultanan & Cagar Budaya
+                                </div>
+                            </div>
+                        </label>
                         {{-- 29 Agustus --}}
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Pawai Budaya dan Karnaval"

@@ -834,16 +834,16 @@
                         <div class="d-flex justify-content-center">
                             <ul class="nav nav-pills event-tabs mb-5" id="eventTabs" role="tablist">
 
-                                <li class="nav-item" role="presentation">
+                                {{-- <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pre-event-tab" data-bs-toggle="pill"
                                         data-bs-target="#pre-event" type="button" role="tab"
                                         aria-controls="pre-event" aria-selected="true">
                                         Pre Event
                                     </button>
-                                </li>
+                                </li> --}}
 
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="hari1-tab" data-bs-toggle="pill"
+                                    <button class="nav-link active" id="hari1-tab" data-bs-toggle="pill"
                                         data-bs-target="#hari1" type="button" role="tab" aria-controls="hari1"
                                         aria-selected="false">
                                         26 Agustus
@@ -888,7 +888,7 @@
                         <div class="tab-content" id="eventTabsContent">
 
                             <!-- ══ Pre Event: 25 Agustus ══ -->
-                            <div class="tab-pane fade show active" id="pre-event" role="tabpanel"
+                            {{-- <div class="tab-pane fade show active" id="pre-event" role="tabpanel"
                                 aria-labelledby="pre-event-tab">
                                 <div class="event-list">
 
@@ -903,10 +903,11 @@
                                     </div>
 
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <!-- ══ 26 Agustus (Rabu): Master Class, Heritage City Tour, Ladies Program, Expo & Pentas Budaya (hari 1) ══ -->
-                            <div class="tab-pane fade" id="hari1" role="tabpanel" aria-labelledby="hari1-tab">
+                            <!-- ══ 26 Agustus (Rabu): Master Class, Ladies Program, Expo & Pentas Budaya (hari 1) ══ -->
+                            <div class="tab-pane fade show active" id="hari1" role="tabpanel"
+                                aria-labelledby="hari1-tab">
                                 <div class="event-list">
 
                                     <div class="event-item">
@@ -923,38 +924,18 @@
                                         <p class="event-location">
                                             <i class="bi bi-geo-alt-fill"></i> Berbagai Titik Cagar Budaya Ternate
                                         </p>
+
                                     </div>
 
                                     <div class="event-item">
-                                        <h4 class="event-name">Heritage City Tour</h4>
-                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 08.30 – 13.40 WIT</p>
-                                        <p class="event-description">Kunjungan Kepala Daerah Peserta JKPI ke Kawasan
-                                            Cagar Budaya dan Kadaton Kesultanan Ternate.</p>
-                                        <p class="event-location">
-                                            <i class="bi bi-geo-alt-fill"></i> Kadaton Kesultanan Ternate &amp; Kawasan
-                                            Cagar Budaya
-                                        </p>
-                                    </div>
-
-                                    <div class="event-item">
-                                        <h4 class="event-name">Ladies Program</h4>
-                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 07.00 – 10.30 WIT</p>
-                                        <p class="event-description">Pengenalan Keanekaragaman Warisan Budaya: Kuliner,
-                                            Kerajinan, dan Seni Budaya.</p>
-                                        <p class="event-location">
-                                            <i class="bi bi-geo-alt-fill"></i> Benteng Oranje &amp; Beberapa Titik
-                                            Pusat
-                                            Kreatif
-                                        </p>
-                                    </div>
-
-                                    <div class="event-item">
-                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
-                                                class="badge-hari">Hari
+                                        <h4 class="event-name"> Opening Ceremony <br> Pasar Malam Indonesia, Pentas
+                                            Budaya
+                                            &amp; Festival Gastronomi <span class="badge-hari">Hari
                                                 ke-1</span></h4>
                                         <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 16.30 – 23.00 WIT</p>
                                         <p class="event-description">
-                                            Pembukaan · Pameran "Surat-Surat Dari Ternate" · Pertunjukan Seni Budaya
+                                            Pembukaan Pasar Malam Indonesia · Pameran "Surat-Surat Dari Ternate" ·
+                                            Pertunjukan Seni Budaya
                                             Delegasi
                                             JKPI · Menampilkan Keragaman Budaya, Kuliner, dan Kreativitas dari Seluruh
                                             Peserta
@@ -965,13 +946,36 @@
                                         </p>
                                     </div>
 
+                                    <div class="event-item">
+                                        <h4 class="event-name">Makan Bersama</h4>
+                                        <p class="event-datetime">Rabu, 26 Agustus 2026 &bull; 19.15 – 22.00 WIT</p>
+                                        <p class="event-description">Jamuan Makan Kebudayaan sebagai pembuka
+                                            rangkaian Rakernas JKPI ke-XII Ternate 2026.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Pendopo Kediaman Wali Kota Ternate
+                                        </p>
+                                    </div>
+
+
+
+
+
+
                                 </div>
                             </div>
 
                             <!-- ══ 27 Agustus (Kamis): Simposium Internasional, Expo & Pentas (hari 2) ══ -->
                             <div class="tab-pane fade" id="hari2" role="tabpanel" aria-labelledby="hari2-tab">
                                 <div class="event-list">
-
+                                    <div class="event-item">
+                                        <h4 class="event-name">Ladies Program</h4>
+                                        <p class="event-datetime">Rabu, 27 Agustus 2026 &bull; 07.00 – 10.30 WIT</p>
+                                        <p class="event-description">Yoga Bersama, Demo Masak dan Pengenalan Tenun
+                                            Ternate.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
+                                        </p>
+                                    </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Simposium Internasional</h4>
                                         <p class="event-datetime">Kamis, 27 Agustus 2026 &bull; 08.00 – 16.00 WIT</p>
@@ -985,8 +989,8 @@
                                     </div>
 
                                     <div class="event-item">
-                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
-                                                class="badge-hari">Hari
+                                        <h4 class="event-name">Pasar Malam Indonesia, Pentas Budaya &amp; Festival
+                                            Gastronomi <span class="badge-hari">Hari
                                                 ke-2</span></h4>
                                         <p class="event-datetime">Kamis, 27 Agustus 2026 &bull; 15.00 – 23.00 WIT</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan Pameran
@@ -1027,8 +1031,8 @@
                                     </div>
 
                                     <div class="event-item">
-                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
-                                                class="badge-hari">Hari
+                                        <h4 class="event-name">Pasar Malam Indonesia, Pentas Budaya &amp; Festival
+                                            Gastronomi <span class="badge-hari">Hari
                                                 ke-3</span></h4>
                                         <p class="event-datetime">Jumat, 28 Agustus 2026 &bull; 15.00 – 23.00 WIT</p>
                                         <p class="event-description">Pertunjukan Seni Budaya Delegasi JKPI dan Pameran
@@ -1057,10 +1061,19 @@
                             <!-- ══ 29 Agustus (Sabtu): Pawai Budaya & Karnaval, Expo (hari 4 / penutup) ══ -->
                             <div class="tab-pane fade" id="hari4" role="tabpanel" aria-labelledby="hari4-tab">
                                 <div class="event-list">
-
                                     <div class="event-item">
-                                        <h4 class="event-name">Expo, Pentas Budaya &amp; Festival Gastronomi <span
-                                                class="badge-hari">Hari
+                                        <h4 class="event-name">Heritage City Tour</h4>
+                                        <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 08.30 – 13.40 WIT</p>
+                                        <p class="event-description">Kunjungan Kepala Daerah Peserta JKPI ke Kawasan
+                                            Cagar Budaya dan Kadaton Kesultanan Ternate.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Kadaton Kesultanan Ternate &amp; Kawasan
+                                            Cagar Budaya
+                                        </p>
+                                    </div>
+                                    <div class="event-item">
+                                        <h4 class="event-name">Pasar Malam Indonesia, Pentas Budaya &amp; Festival
+                                            Gastronomi <span class="badge-hari">Hari
                                                 ke-4</span></h4>
                                         <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 14.00 – 18.00 WIT</p>
                                         <p class="event-description">Hari keempat Expo dan Pentas Budaya — Pertunjukan
@@ -1069,7 +1082,14 @@
                                             <i class="bi bi-geo-alt-fill"></i> Benteng Oranje
                                         </p>
                                     </div>
-
+                                    <div class="event-item">
+                                        <h4 class="event-name">Seminar Nasional</h4>
+                                        <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 13.30 – 15.30 WIT</p>
+                                        <p class="event-description">.</p>
+                                        <p class="event-location">
+                                            <i class="bi bi-geo-alt-fill"></i> Universitas Khairun Ternate
+                                        </p>
+                                    </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Pawai Budaya dan Karnaval</h4>
                                         <p class="event-datetime">Sabtu, 29 Agustus 2026 &bull; 19.30 – 23.00 WIT</p>
