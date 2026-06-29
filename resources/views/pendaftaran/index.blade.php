@@ -1001,7 +1001,6 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="events-list-wrap">
 
 
@@ -1140,6 +1139,17 @@
                         </label>
                         {{-- 29 Agustus --}}
                         <label class="event-check-item">
+                            <input type="checkbox" name="kegiatan[]" value="Seminar Nasional"
+                                onchange="onEventChange()">
+                            <div class="event-check-content">
+                                <span class="event-date-chip chip-d4">29 AGUSTUS</span>
+                                <div class="event-check-title">Seminar Nasional</div>
+                                <div class="event-check-meta">
+                                    <i class="bi bi-geo-alt-fill"></i>Universitas Khairun Ternate
+                                </div>
+                            </div>
+                        </label>
+                        <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Pawai Budaya dan Karnaval"
                                 onchange="onEventChange()">
                             <div class="event-check-content">
@@ -1150,7 +1160,6 @@
                                 </div>
                             </div>
                         </label>
-
                         {{-- 30 Agustus --}}
                         <label class="event-check-item">
                             <input type="checkbox" name="kegiatan[]" value="Nusantara Raya Run"
@@ -1175,6 +1184,7 @@
                             </div>
                         </label>
                     </div>
+
 
                     {{-- ============ PERJALANAN ============ --}}
                     <h3 class="form-section-title">
