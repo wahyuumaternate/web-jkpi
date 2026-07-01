@@ -362,7 +362,7 @@
 
             <div class="toolbar-group">
 
-                <a href="" download class="toolbar-btn primary">
+                <a href="{{ asset('buku_panduan.pdf') }}" download class="toolbar-btn primary">
                     <i class="bi bi-download"></i>
                     Download
                 </a>
