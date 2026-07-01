@@ -1020,7 +1020,7 @@
                                     </div>
                                     <div class="event-item">
                                         <h4 class="event-name">Seminar Nasional</h4>
-                                        <p class="event-datetime">Sabtu, 28 Agustus 2026 &bull; 13.30 – 15.30 WIT</p>
+                                        <p class="event-datetime">Sabtu, 28 Agustus 2026 &bull; 13.30 – 16.00 WIT</p>
                                         <p class="event-description">Tema: <em>"City Gallery sebagai Ruang Inklusif
                                                 untuk
                                                 Memperkuat Identitas Kota Pusaka"</em> - Forum Kolaborasi Nasional

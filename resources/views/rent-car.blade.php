@@ -688,7 +688,7 @@
             </p>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <span class="hero-stat-number" id="statTotal">9</span>
+                    <span class="hero-stat-number" id="statTotal">10</span>
                     <span class="hero-stat-label">Total Penyedia</span>
                 </div>
             </div>
@@ -712,7 +712,7 @@
                         <button type="button" class="view-btn" data-view="table" title="Tampilan Tabel"><i
                                 class="bi bi-list-ul"></i></button>
                     </div>
-                    <div class="result-count">Menampilkan <strong id="rentcarCount">9</strong> penyedia</div>
+                    <div class="result-count">Menampilkan <strong id="rentcarCount">10</strong> penyedia</div>
                 </div>
             </div>
 
@@ -803,7 +803,14 @@
                 name: "Resident Transport Rent Car",
                 contactName: "Pak Fathur",
                 phone: ["085343618792"]
+            },
+            {
+                no: 10,
+                name: "Cyberternate Rental",
+                contactName: "Pak Rustam",
+                phone: ["081242717630"]
             }
+
         ];
 
         // ========== HELPER ==========

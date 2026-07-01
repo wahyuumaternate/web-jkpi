@@ -43,11 +43,17 @@
             }
 
             #map-jkpi {
-                height: 700px;
+                height: 65vh;
+                /* relatif terhadap viewport, aman di semua HP */
+                min-height: 320px;
+                max-height: 700px;
                 width: 100%;
                 border-radius: 15px;
                 box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
                 border: 3px solid #099aa7;
+                /* PENTING: cegah touch event "bocor" ke parent scroll */
+                touch-action: none;
+
             }
 
             .map-container-jkpi {
@@ -276,8 +282,13 @@
             }
 
             @media (max-width: 768px) {
+
                 #map-jkpi {
-                    height: 500px;
+                    height: 55vh;
+                    /* lebih kecil di HP kecil */
+                    min-height: 280px;
+                    border-radius: 10px;
+                    border-width: 2px;
                 }
 
                 .section-title-map h2 {
