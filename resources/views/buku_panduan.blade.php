@@ -362,10 +362,10 @@
 
             <div class="toolbar-group">
 
-                {{-- <a href="" download class="toolbar-btn primary">
+                <a href="" download class="toolbar-btn primary">
                     <i class="bi bi-download"></i>
                     Download
-                </a> --}}
+                </a>
 
                 <button class="toolbar-btn" onclick="toggleFullscreen()">
                     <i class="bi bi-arrows-fullscreen"></i>
@@ -410,7 +410,8 @@
         pdfjsLib.GlobalWorkerOptions.workerSrc =
             'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        const pdfUrl = "";
+        // ✅ FIX 1: Isi path PDF Anda
+        const pdfUrl = "{{ asset('buku_panduan.pdf') }}";
 
         let pdfDoc = null;
         let pageFlip = null;

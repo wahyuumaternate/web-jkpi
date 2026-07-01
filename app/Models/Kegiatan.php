@@ -14,7 +14,7 @@ class Kegiatan extends Model
     /**
      * Harus sama persis dengan value checkbox di form
      */
-    const KEGIATAN_VALID = ['Welcome Dinner', 'Master Class', 'Heritage City Tour', 'Ladies Program', 'Expo UMKM', 'Pentas Budaya', 'Simposium Internasional - Pulau-Pulau Penghasil Rempah', 'Festival Gastronomi', 'Rapat Kerja Nasional', 'Gelar Budaya dan Penyerahan Pataka', 'Pawai Budaya dan Karnaval', 'Nusantara Raya Run'];
+    const KEGIATAN_VALID = ['Welcome Dinner', 'Master Class', 'Heritage City Tour', 'Ladies Program', 'Expo UMKM', 'Pentas Budaya', 'Simposium Internasional - Pulau-Pulau Penghasil Rempah', 'Festival Gastronomi', 'Rapat Kerja Nasional', 'Gelar Budaya dan Penyerahan Pataka', 'Pawai Budaya dan Karnaval', 'Nusantara Raya Run', 'Seminar Nasional'];
 
     public function peserta(): BelongsTo
     {
