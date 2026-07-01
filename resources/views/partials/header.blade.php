@@ -102,6 +102,11 @@
                                 Toko Oleh-Oleh
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('kontak') }}" class="{{ Request::is('kontak') ? 'active' : '' }}">
+                                Kontak PIC
+                            </a>
+                        </li>
 
 
                     </ul>

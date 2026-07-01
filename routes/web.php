@@ -21,6 +21,10 @@ Route::get('/toko-oleh-oleh', function () {
     return view('toko_oleh_oleh');
 });
 
+Route::get('/kontak', function () {
+    return view('kontak');
+});
+
 Route::get('/buku-panduan', function () {
     return view('buku_panduan');
 });
