@@ -1,4 +1,2 @@
-- hapus pre event pindahkan ke hari rabu
-- pentas budaya dan nusantara raya run buat terpisah pada pendaftaran rakernas
-- tambahkan seminar nasional pada pendaftarana
+
 - tambahkan input manual pada pilihan kab/kota pendaftaran

@@ -25,7 +25,12 @@ class PendaftaranController extends Controller
     {
         try {
             $data = $request->validated();
-
+            // Resolve nama daerah manual jika pilih "Lainnya"
+            if (($data['nama_daerah'] ?? '') === '__lainnya__') {
+                $data['nama_daerah'] = trim($data['nama_daerah_lainnya'] ?? '');
+            }
+            // Buang field sementara agar tidak masuk ke Eloquent
+            unset($data['nama_daerah_lainnya']);
             // Pisahkan relasi dari data peserta
             $narahubungData = $data['narahubung'] ?? [];
             $kegiatanData = $data['kegiatan'] ?? [];

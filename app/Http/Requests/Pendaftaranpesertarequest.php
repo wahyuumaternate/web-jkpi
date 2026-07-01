@@ -21,6 +21,8 @@ class PendaftaranPesertaRequest extends FormRequest
         return [
             // ── Data Daerah & Kepala Daerah ──────────────────────────
             'nama_daerah' => ['required', 'string', 'max:100'],
+            'nama_daerah_lainnya' => ['nullable', 'string', 'max:100',
+                           'required_if:nama_daerah,__lainnya__'],
             'nama_kepala_daerah' => ['required', 'string', 'max:150'],
 
             // ── Informasi Tambahan ────────────────────────────────────
@@ -54,6 +56,7 @@ class PendaftaranPesertaRequest extends FormRequest
     {
         return [
             'nama_daerah.required' => 'Nama daerah wajib dipilih.',
+            'nama_daerah_lainnya.required_if' => 'Nama daerah wajib diisi jika memilih opsi "Lainnya".',
             'nama_kepala_daerah.required' => 'Nama kepala daerah wajib diisi.',
             'ukuran_baju.required' => 'Ukuran baju kepala daerah wajib dipilih.',
             'ukuran_baju.in' => 'Ukuran baju tidak valid.',

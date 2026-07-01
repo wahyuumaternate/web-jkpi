@@ -719,6 +719,10 @@
                 gap: 14px 22px;
             }
         }
+
+        #daerahLainnyaWrap {
+            animation: fadeInUp .2s ease;
+        }
     </style>
 </head>
 
@@ -818,7 +822,8 @@
                             <label class="form-label" for="nama_daerah">
                                 Nama Daerah <span class="required">*</span>
                             </label>
-                            <select class="form-select" id="nama_daerah" name="nama_daerah" required>
+                            <select class="form-select" id="nama_daerah" name="nama_daerah" required
+                                onchange="toggleDaerahLainnya()">
                                 <option value="">Pilih Daerah</option>
                                 <optgroup label="Anggota JKPI">
                                     @php
@@ -904,15 +909,45 @@
                                             'Kab. Lombok Utara',
                                         ];
                                         sort($daerahList);
+
+                                        // Jika old value tidak ada di list → berarti nilai lainnya
+                                        $oldDaerah = old('nama_daerah', 'Kota Ternate');
+                                        $isOther = $oldDaerah !== '' && !in_array($oldDaerah, $daerahList);
                                     @endphp
                                     @foreach ($daerahList as $daerah)
                                         <option value="{{ $daerah }}"
-                                            {{ old('nama_daerah', 'Kota Ternate') == $daerah ? 'selected' : '' }}>
+                                            {{ !$isOther && $oldDaerah === $daerah ? 'selected' : '' }}>
                                             {{ $daerah }}
                                         </option>
                                     @endforeach
                                 </optgroup>
+                                <optgroup label="Lainnya">
+                                    <option value="__lainnya__" {{ $isOther ? 'selected' : '' }}>
+                                        Ketik nama daerah lainnya...
+                                    </option>
+                                </optgroup>
                             </select>
+
+                            {{-- Input manual — muncul saat "Lainnya" dipilih --}}
+                            <div id="daerahLainnyaWrap"
+                                style="display:{{ $isOther ? 'block' : 'none' }}; margin-top:10px;">
+                                <div style="position:relative;">
+                                    <span
+                                        style="
+                position:absolute; left:14px; top:50%; transform:translateY(-50%);
+                color:#9aa3af; font-size:.9rem; pointer-events:none;">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="nama_daerah_lainnya"
+                                        name="nama_daerah_lainnya" value="{{ $isOther ? $oldDaerah : '' }}"
+                                        placeholder="Tulis nama Kab./Kota Anda..." style="padding-left:38px;"
+                                        {{ $isOther ? 'required' : '' }}>
+                                </div>
+                                <span class="field-help">
+                                    <i class="bi bi-info-circle"></i>
+                                    Tulis lengkap, contoh: <strong>Kab. Halmahera Tengah</strong>
+                                </span>
+                            </div>
                         </div>
                     </div>
 
@@ -921,8 +956,9 @@
                             <label class="form-label" for="nama_kepala_daerah">
                                 Nama Lengkap Kepala Daerah <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control" id="nama_kepala_daerah" name="nama_kepala_daerah"
-                                value="{{ old('nama_kepala_daerah') }}" placeholder="Lengkap dengan gelar" required>
+                            <input type="text" class="form-control" id="nama_kepala_daerah"
+                                name="nama_kepala_daerah" value="{{ old('nama_kepala_daerah') }}"
+                                placeholder="Lengkap dengan gelar" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label" for="nama_pasangan_kepala_daerah">
@@ -1467,6 +1503,22 @@
 
         // Jalankan saat halaman load (untuk handle old() value setelah validasi gagal)
         document.addEventListener('DOMContentLoaded', toggleUkuranPasangan);
+
+        // ===== DAERAH LAINNYA =====
+        function toggleDaerahLainnya() {
+            const select = document.getElementById('nama_daerah');
+            const wrap = document.getElementById('daerahLainnyaWrap');
+            const input = document.getElementById('nama_daerah_lainnya');
+            const isOther = select.value === '__lainnya__';
+
+            wrap.style.display = isOther ? 'block' : 'none';
+            input.required = isOther;
+
+            if (!isOther) input.value = '';
+        }
+
+        // Jalankan saat load (handle old() setelah validasi gagal)
+        document.addEventListener('DOMContentLoaded', toggleDaerahLainnya);
     </script>
 </body>
 
