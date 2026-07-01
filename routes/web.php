@@ -25,6 +25,10 @@ Route::get('/kontak', function () {
     return view('kontak');
 });
 
+Route::get('/rent-car', function () {
+    return view('rent-car');
+});
+
 Route::get('/buku-panduan', function () {
     return view('buku_panduan');
 });

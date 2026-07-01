@@ -107,6 +107,11 @@
                                 Kontak PIC
                             </a>
                         </li>
+                        <li>
+                            <a href="{{ url('rent-car') }}" class="{{ Request::is('rent-car') ? 'active' : '' }}">
+                                RENT CAR
+                            </a>
+                        </li>
 
 
                     </ul>
