@@ -2002,7 +2002,8 @@
             const telAjudan = pvGet('[name="telepon_ajudan"]');
 
             /* Header chip */
-            document.getElementById('pv-daerah-chip').textContent = namaDaerah || '—';
+            document.getElementById('pv-daerah-chip').textContent = namaDaerah ? `Daerah Anda : ${namaDaerah}` :
+                'Daerah Anda : —';
 
             /* Populate fields */
             pvSet('pv-jumlah', jumlah ? jumlah + ' orang' : '—', !jumlah);
