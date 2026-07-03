@@ -691,7 +691,7 @@
                             <img src="{{ asset('logo/LOGO RAKERNAS JKPI TERNATE 2026 - BLACK.png') }}"
                                 class="img-fluid mb-3" style="max-height:180px;">
 
-                            <h5 class="fw-bold">Logo JKPI Berwarna</h5>
+                            <h5 class="fw-bold">Logo JKPI Monokrom</h5>
 
                             <a href="{{ asset('logo/LOGO RAKERNAS JKPI TERNATE 2026 - BLACK.png') }}"
                                 class="nrr-cta-btn mt-3" download>
@@ -707,7 +707,7 @@
                             <img src="{{ asset('logo/LOGO RAKERNAS JKPI TERNATE 2026 - CLOUR.png') }}"
                                 class="img-fluid mb-3" style="max-height:180px;">
 
-                            <h5 class="fw-bold">Logo JKPI Putih</h5>
+                            <h5 class="fw-bold">Logo JKPI Berwarna</h5>
 
                             <a href="{{ asset('logo/LOGO RAKERNAS JKPI TERNATE 2026 - CLOUR.png') }}"
                                 class="nrr-cta-btn mt-3" download>
@@ -723,7 +723,7 @@
                             <img src="{{ asset('logo/LOGO RAKERNAS JKPI TERNATE 2026 - WHITE.png') }}"
                                 class="img-fluid mb-3 bg-dark rounded-4" style="max-height:180px;">
 
-                            <h5 class="fw-bold">Logo JKPI Monokrom</h5>
+                            <h5 class="fw-bold">Logo JKPI Putih</h5>
 
                             <a href="{{ asset('logo/LOGO RAKERNAS JKPI TERNATE 2026 - WHITE.png') }}"
                                 class="nrr-cta-btn mt-3" download>
@@ -903,11 +903,11 @@
                             <i class="bi bi-geo-alt-fill" style="margin-top:4px;"></i>
                             <div class="outlet-list">
                                 ${k.address.map(a => `
-                                                                                                        <div class="outlet-item">
-                                                                                                            ${a.label ? `<span class="outlet-label">${a.label}</span>` : ''}
-                                                                                                            <span>${a.text}</span>
-                                                                                                        </div>
-                                                                                                    `).join('')}
+                                                                                                            <div class="outlet-item">
+                                                                                                                ${a.label ? `<span class="outlet-label">${a.label}</span>` : ''}
+                                                                                                                <span>${a.text}</span>
+                                                                                                            </div>
+                                                                                                        `).join('')}
                             </div>
                         </div>` :
                     `<div class="oleholeh-info-row">
