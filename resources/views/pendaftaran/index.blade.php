@@ -1956,7 +1956,34 @@
         function goToPreview() {
             const form = document.getElementById('registrationForm');
             if (!form.reportValidity()) return;
+            /* Validasi: minimal 1 kegiatan harus dipilih */
+            const checkedEvents = document.querySelectorAll('input[name="kegiatan[]"]:checked');
+            if (checkedEvents.length === 0) {
+                const bar = document.querySelector('.event-summary-bar');
+                bar.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                // Tampilkan pesan error sementara
+                let errEl = document.getElementById('event-required-msg');
+                if (!errEl) {
+                    errEl = document.createElement('div');
+                    errEl.id = 'event-required-msg';
+                    errEl.className = 'alert alert-danger mt-2 mb-2 d-flex align-items-center gap-2';
+                    errEl.innerHTML =
+                        '<i class="bi bi-exclamation-triangle-fill"></i> Silakan pilih <strong>minimal satu kegiatan</strong> sebelum melanjutkan.';
+                    bar.after(errEl);
+                }
+                errEl.style.display = 'flex';
+                setTimeout(() => {
+                    if (errEl) errEl.style.display = 'none';
+                }, 4000);
+                return;
+            }
 
+            // Sembunyikan pesan error jika ada
+            const errEl = document.getElementById('event-required-msg');
+            if (errEl) errEl.style.display = 'none';
             /* Collect values */
             const daerahRaw = document.getElementById('nama_daerah').value;
             const namaDaerah = daerahRaw === '__lainnya__' ?
