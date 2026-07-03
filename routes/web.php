@@ -33,6 +33,10 @@ Route::get('/buku-panduan', function () {
     return view('buku_panduan');
 });
 
+Route::get('/logo-download', function () {
+    return redirect()->away('https://drive.google.com/drive/folders/1wCfTmE3HzPkDIU2Gv55_RuhhTxxNIV7I');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
