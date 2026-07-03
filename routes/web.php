@@ -34,7 +34,7 @@ Route::get('/buku-panduan', function () {
 });
 
 Route::get('/logo-download', function () {
-    return redirect()->away('https://drive.google.com/drive/folders/1wCfTmE3HzPkDIU2Gv55_RuhhTxxNIV7I');
+    return view('logo');
 });
 
 Route::middleware('auth')->group(function () {
