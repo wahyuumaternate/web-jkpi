@@ -67,6 +67,12 @@
                                 Pentas Budaya
                             </a>
                         </li>
+                        <li>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqhlkZeeFmfHzcURAkbeDaXBC70Mhp5S9JRPIG3ZTlElLEFg/viewform?usp=dialog"
+                                target="_blank">
+                                Masterclass
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li
