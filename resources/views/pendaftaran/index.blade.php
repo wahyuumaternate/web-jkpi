@@ -1413,8 +1413,8 @@
                                         AGUSTUS</span>
                                     <div class="event-check-title">Master Class</div><small><a
                                             href="https://docs.google.com/forms/d/e/1FAIpQLSeqhlkZeeFmfHzcURAkbeDaXBC70Mhp5S9JRPIG3ZTlElLEFg/viewform"
-                                            target="_blank" onclick="event.stopPropagation()">Daftar di laman
-                                            resmi</a></small>
+                                            target="_blank" onclick="event.stopPropagation()">Isi formulir terpisah di
+                                            sini </a></small>
                                     <div class="event-check-meta"><i class="bi bi-geo-alt-fill"></i> Berbagai Titik
                                         Cagar Budaya</div>
                                 </div>
