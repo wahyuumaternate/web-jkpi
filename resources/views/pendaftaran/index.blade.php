@@ -1219,11 +1219,11 @@
                                     ajudan, OPD dan tim pendamping.</span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" for="nama_daerah">Nama Daerah <span
+                                <label class="form-label" for="nama_daerah">Kabupaten/Kota Asal <span
                                         class="required">*</span></label>
                                 <select class="form-select" id="nama_daerah" name="nama_daerah" required
                                     onchange="toggleDaerahLainnya()">
-                                    <option value="">Pilih Daerah</option>
+                                    <option value="">Pilih Kabupaten/Kota Asal</option>
                                     <optgroup label="Anggota JKPI">
                                         @php
                                             $daerahList = [
@@ -1308,7 +1308,7 @@
                                                 'Kab. Lombok Utara',
                                             ];
                                             sort($daerahList);
-                                            $oldDaerah = old('nama_daerah', 'Kota Ternate');
+                                            $oldDaerah = old('nama_daerah', '');
                                             $isOther = $oldDaerah !== '' && !in_array($oldDaerah, $daerahList);
                                         @endphp
                                         @foreach ($daerahList as $daerah)
