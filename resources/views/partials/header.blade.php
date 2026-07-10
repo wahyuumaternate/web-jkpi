@@ -73,6 +73,11 @@
                                 Masterclass
                             </a>
                         </li>
+                        <li>
+                            <a href="https://bit.ly/FormPawaiBudaya_KarnavalJKPI2026" target="_blank">
+                                Pawai Dudaya dan Karnaval
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li
