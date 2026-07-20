@@ -12,7 +12,7 @@
             <p class="text-muted mb-0">{{ $peserta->nama_kepala_daerah }} — {{ $peserta->nama_daerah }}</p>
         </div>
         <div class="header-right d-flex flex-wrap align-items-center mt-2 mt-sm-0">
-            <a href="{{ route('admin.dashboard.edit', $peserta->id) }}" class="btn btn-primary btn-sm me-3">
+            <a href="{{ route('admin.dashboard.edit', $peserta->id) }}" class="btn btn-primary text-white btn- p-2 me-3">
                 <i class="mdi mdi-pencil me-1"></i>Edit Data
             </a>
             <div class="d-flex align-items-center">
@@ -117,7 +117,8 @@
                     <h4 class="card-title mb-0">Informasi Tambahan</h4>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted fw-semibold mb-2 font-13 text-uppercase" style="font-size:.72rem; letter-spacing:.05em;">
+                    <p class="text-muted fw-semibold mb-2 font-13 text-uppercase"
+                        style="font-size:.72rem; letter-spacing:.05em;">
                         Kepala Daerah
                     </p>
                     <div class="row g-3 mb-3">
@@ -157,7 +158,8 @@
 
                     @if ($peserta->nama_wakil_kepala_daerah || $peserta->ukuran_baju_wakil || $peserta->ukuran_peci_wakil)
                         <hr>
-                        <p class="text-muted fw-semibold mb-2 font-13 text-uppercase" style="font-size:.72rem; letter-spacing:.05em;">
+                        <p class="text-muted fw-semibold mb-2 font-13 text-uppercase"
+                            style="font-size:.72rem; letter-spacing:.05em;">
                             Wakil Kepala Daerah
                         </p>
                         <div class="row g-3 mb-3">
@@ -420,7 +422,8 @@
                                             <span class="badge bg-primary ms-1">{{ $peserta->ukuran_baju_wakil }}</span>
                                         @endif
                                         @if ($peserta->ukuran_peci_wakil)
-                                            <span class="badge bg-secondary ms-1">Peci {{ $peserta->ukuran_peci_wakil }}</span>
+                                            <span class="badge bg-secondary ms-1">Peci
+                                                {{ $peserta->ukuran_peci_wakil }}</span>
                                         @endif
                                     </li>
                                 @endif
@@ -428,7 +431,8 @@
                                     <li class="mb-2">
                                         1 Pasangan Wakil Kepala Daerah
                                         @if ($peserta->ukuran_baju_pasangan_wakil)
-                                            <span class="badge bg-info ms-1">{{ $peserta->ukuran_baju_pasangan_wakil }}</span>
+                                            <span
+                                                class="badge bg-info ms-1">{{ $peserta->ukuran_baju_pasangan_wakil }}</span>
                                         @endif
                                     </li>
                                 @endif
