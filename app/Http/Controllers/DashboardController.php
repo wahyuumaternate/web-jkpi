@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PendaftaranPesertaRequest;
 use App\Models\Peserta as PendaftaranPeserta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,55 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 class DashboardController extends Controller
 {
     // ─── Web ──────────────────────────────────────────────────────────────────
+    public function edit($id)
+    {
+        $peserta = PendaftaranPeserta::with(['narahubung', 'kegiatan'])->findOrFail($id);
+
+        return view('admin.dashboard.edit', [
+            'peserta' => $peserta,
+            'isEdit' => true,
+        ]);
+    }
+
+    public function update(PendaftaranPesertaRequest $request, $id)
+    {
+        $peserta = PendaftaranPeserta::findOrFail($id);
+        $validated = $request->validated();
+
+        $peserta->update([
+            'nama_daerah' => $validated['nama_daerah'] === '__lainnya__' ? $validated['nama_daerah_lainnya'] : $validated['nama_daerah'],
+            'nama_kepala_daerah' => $validated['nama_kepala_daerah'],
+            'nama_pasangan_kepala_daerah' => $validated['nama_pasangan_kepala_daerah'] ?? null,
+            'nama_wakil_kepala_daerah' => $validated['nama_wakil_kepala_daerah'] ?? null,
+            'nama_pasangan_wakil_kepala_daerah' => $validated['nama_pasangan_wakil_kepala_daerah'] ?? null,
+            'ukuran_baju' => $validated['ukuran_baju'],
+            'ukuran_baju_pasangan' => $validated['ukuran_baju_pasangan'] ?? null,
+            'ukuran_peci' => $validated['ukuran_peci'] ?? null,
+            'ukuran_baju_wakil' => $validated['ukuran_baju_wakil'] ?? null,
+            'ukuran_baju_pasangan_wakil' => $validated['ukuran_baju_pasangan_wakil'] ?? null,
+            'ukuran_peci_wakil' => $validated['ukuran_peci_wakil'] ?? null,
+            'jumlah_rombongan' => $validated['jumlah_rombongan'],
+            'nomor_plat' => $validated['nomor_plat'] ?? null,
+            'info_kedatangan' => $validated['info_kedatangan'],
+            'info_kepulangan' => $validated['info_kepulangan'],
+            'nama_ajudan' => $validated['nama_ajudan'] ?? null,
+            'telepon_ajudan' => $validated['telepon_ajudan'] ?? null,
+        ]);
+
+        // Sinkronkan kegiatan: hapus lama, simpan ulang yang dipilih
+        $peserta->kegiatan()->delete();
+        foreach ($validated['kegiatan'] ?? [] as $namaKegiatan) {
+            $peserta->kegiatan()->create(['nama_kegiatan' => $namaKegiatan]);
+        }
+
+        // Sinkronkan narahubung: hapus lama, simpan ulang
+        $peserta->narahubung()->delete();
+        foreach ($validated['narahubung'] as $nh) {
+            $peserta->narahubung()->create($nh);
+        }
+
+        return redirect()->route('admin.dashboard.show', $peserta->id)->with('success', 'Data peserta berhasil diperbarui.');
+    }
 
     public function index(Request $request)
     {
@@ -25,13 +75,12 @@ class DashboardController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->where('nama_daerah', 'like', "%{$search}%")
-                  ->orWhere('nama_kepala_daerah', 'like', "%{$search}%")
-                  ->orWhere('kode_registrasi', 'like', "%{$search}%")
-                  ->orWhere('nama_ajudan', 'like', "%{$search}%")
-                  ->orWhereHas('narahubung', function ($q2) use ($search) {
-                      $q2->where('nama', 'like', "%{$search}%")
-                         ->orWhere('email', 'like', "%{$search}%");
-                  });
+                    ->orWhere('nama_kepala_daerah', 'like', "%{$search}%")
+                    ->orWhere('kode_registrasi', 'like', "%{$search}%")
+                    ->orWhere('nama_ajudan', 'like', "%{$search}%")
+                    ->orWhereHas('narahubung', function ($q2) use ($search) {
+                        $q2->where('nama', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%");
+                    });
             });
         }
 
@@ -42,9 +91,9 @@ class DashboardController extends Controller
         $peserta = $query->latest()->paginate(20)->withQueryString();
 
         $stats = [
-            'total'     => PendaftaranPeserta::count(),
+            'total' => PendaftaranPeserta::count(),
             'confirmed' => PendaftaranPeserta::where('status', 'confirmed')->count(),
-            'pending'   => PendaftaranPeserta::where('status', 'pending')->count(),
+            'pending' => PendaftaranPeserta::where('status', 'pending')->count(),
             'cancelled' => PendaftaranPeserta::where('status', 'cancelled')->count(),
         ];
 
@@ -61,38 +110,49 @@ class DashboardController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status'  => 'required|in:pending,confirmed,cancelled',
+            'status' => 'required|in:pending,confirmed,cancelled',
             'catatan' => 'nullable|string',
         ]);
 
         $peserta = PendaftaranPeserta::findOrFail($id);
         $peserta->update([
-            'status'  => $request->status,
+            'status' => $request->status,
             'catatan' => $request->catatan,
         ]);
 
-        return redirect()->route('admin.dashboard.show', $id)
-                         ->with('success', 'Status berhasil diupdate!');
+        return redirect()->route('admin.dashboard.show', $id)->with('success', 'Status berhasil diupdate!');
     }
 
     public function destroy($id)
     {
         try {
             PendaftaranPeserta::findOrFail($id)->delete();
-            return redirect()->route('admin.dashboard')
-                             ->with('success', 'Data peserta berhasil dihapus!');
+            return redirect()->route('admin.dashboard')->with('success', 'Data peserta berhasil dihapus!');
         } catch (\Exception $e) {
-            return redirect()->route('admin.dashboard')
-                             ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('error', 'Gagal menghapus data: ' . $e->getMessage());
         }
     }
 
     // ─── Export entry points ──────────────────────────────────────────────────
 
-    public function exportAll()       { return $this->exportByStatus(null,        'Semua_Peserta'); }
-    public function exportConfirmed() { return $this->exportByStatus('confirmed', 'Peserta_Confirmed'); }
-    public function exportPending()   { return $this->exportByStatus('pending',   'Peserta_Pending'); }
-    public function exportCancelled() { return $this->exportByStatus('cancelled', 'Peserta_Cancelled'); }
+    public function exportAll()
+    {
+        return $this->exportByStatus(null, 'Semua_Peserta');
+    }
+    public function exportConfirmed()
+    {
+        return $this->exportByStatus('confirmed', 'Peserta_Confirmed');
+    }
+    public function exportPending()
+    {
+        return $this->exportByStatus('pending', 'Peserta_Pending');
+    }
+    public function exportCancelled()
+    {
+        return $this->exportByStatus('cancelled', 'Peserta_Cancelled');
+    }
 
     // ─── exportByStatus (20 kolom: A – T) ────────────────────────────────────
 
@@ -108,15 +168,15 @@ class DashboardController extends Controller
             Log::info("Export {$filename}: {$data->count()} records");
 
             $spreadsheet = new Spreadsheet();
-            $sheet       = $spreadsheet->getActiveSheet();
+            $sheet = $spreadsheet->getActiveSheet();
             $sheet->setTitle('Data Peserta');
 
             $headerStyle = [
-                'fill'      => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
-                'font'      => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
+                'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
+                'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
                 'alignment' => [
                     'horizontal' => Alignment::HORIZONTAL_CENTER,
-                    'vertical'   => Alignment::VERTICAL_CENTER,
+                    'vertical' => Alignment::VERTICAL_CENTER,
                 ],
             ];
 
@@ -151,10 +211,10 @@ class DashboardController extends Controller
             $row = 2;
             foreach ($data as $index => $item) {
                 // Gabungkan semua narahubung dengan separator " | "
-                $narahubungNama    = $item->narahubung->pluck('nama')->implode(' | ');
+                $narahubungNama = $item->narahubung->pluck('nama')->implode(' | ');
                 $narahubungTelepon = $item->narahubung->pluck('telepon')->implode(' | ');
-                $narahubungEmail   = $item->narahubung->pluck('email')->implode(' | ');
-                $kegiatan          = $item->kegiatan->pluck('nama_kegiatan')->implode(', ');
+                $narahubungEmail = $item->narahubung->pluck('email')->implode(' | ');
+                $kegiatan = $item->kegiatan->pluck('nama_kegiatan')->implode(', ');
 
                 $sheet->setCellValue("A{$row}", $index + 1);
                 $sheet->setCellValue("B{$row}", strtoupper($item->status));
@@ -170,10 +230,10 @@ class DashboardController extends Controller
                 $sheet->setCellValue("L{$row}", $item->nomor_plat ?? '-');
                 $sheet->setCellValue("M{$row}", $item->info_kedatangan);
                 $sheet->setCellValue("N{$row}", $item->info_kepulangan);
-                $sheet->setCellValue("O{$row}", $narahubungNama    ?: '-');
+                $sheet->setCellValue("O{$row}", $narahubungNama ?: '-');
                 $sheet->setCellValue("P{$row}", $narahubungTelepon ?: '-');
-                $sheet->setCellValue("Q{$row}", $narahubungEmail   ?: '-');
-                $sheet->setCellValue("R{$row}", $kegiatan          ?: '-');
+                $sheet->setCellValue("Q{$row}", $narahubungEmail ?: '-');
+                $sheet->setCellValue("R{$row}", $kegiatan ?: '-');
                 $sheet->setCellValue("S{$row}", $item->catatan ?? '-');
                 $sheet->setCellValue("T{$row}", $item->created_at->format('d/m/Y H:i'));
                 $row++;
@@ -206,13 +266,13 @@ class DashboardController extends Controller
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
-                            'color'       => ['rgb' => 'CCCCCC'],
+                            'color' => ['rgb' => 'CCCCCC'],
                         ],
                     ],
                 ]);
             }
 
-            $writer   = new Xlsx($spreadsheet);
+            $writer = new Xlsx($spreadsheet);
             $fileName = $filename . '_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
@@ -220,8 +280,9 @@ class DashboardController extends Controller
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             Log::error("Export {$filename} Error: " . $e->getMessage());
-            return redirect()->route('admin.dashboard')
-                             ->with('error', 'Error export: ' . $e->getMessage());
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('error', 'Error export: ' . $e->getMessage());
         }
     }
 
@@ -231,7 +292,7 @@ class DashboardController extends Controller
     {
         try {
             $spreadsheet = new Spreadsheet();
-            $sheet       = $spreadsheet->getActiveSheet();
+            $sheet = $spreadsheet->getActiveSheet();
             $sheet->setTitle('Statistik');
 
             $sectionStyle = [
@@ -242,7 +303,7 @@ class DashboardController extends Controller
             $sheet->setCellValue('A1', 'STATISTIK PESERTA JKPI 2026');
             $sheet->mergeCells('A1:B1');
             $sheet->getStyle('A1')->applyFromArray([
-                'font'      => ['bold' => true, 'size' => 14],
+                'font' => ['bold' => true, 'size' => 14],
                 'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER],
             ]);
 
@@ -254,12 +315,15 @@ class DashboardController extends Controller
             $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
             $row++;
 
-            foreach ([
-                'Total Peserta' => PendaftaranPeserta::count(),
-                'Confirmed'     => PendaftaranPeserta::where('status', 'confirmed')->count(),
-                'Pending'       => PendaftaranPeserta::where('status', 'pending')->count(),
-                'Cancelled'     => PendaftaranPeserta::where('status', 'cancelled')->count(),
-            ] as $label => $value) {
+            foreach (
+                [
+                    'Total Peserta' => PendaftaranPeserta::count(),
+                    'Confirmed' => PendaftaranPeserta::where('status', 'confirmed')->count(),
+                    'Pending' => PendaftaranPeserta::where('status', 'pending')->count(),
+                    'Cancelled' => PendaftaranPeserta::where('status', 'cancelled')->count(),
+                ]
+                as $label => $value
+            ) {
                 $sheet->setCellValue("A{$row}", $label);
                 $sheet->setCellValue("B{$row}", $value);
                 $row++;
@@ -272,12 +336,15 @@ class DashboardController extends Controller
             $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
             $row++;
 
-            foreach ([
-                'Total Orang Rombongan' => PendaftaranPeserta::sum('jumlah_rombongan'),
-                'Dengan Pasangan'       => PendaftaranPeserta::whereNotNull('nama_pasangan_kepala_daerah')->count(),
-                'Dengan Ajudan'         => PendaftaranPeserta::whereNotNull('nama_ajudan')->count(),
-                'Dengan Nomor Plat'     => PendaftaranPeserta::whereNotNull('nomor_plat')->count(),
-            ] as $label => $value) {
+            foreach (
+                [
+                    'Total Orang Rombongan' => PendaftaranPeserta::sum('jumlah_rombongan'),
+                    'Dengan Pasangan' => PendaftaranPeserta::whereNotNull('nama_pasangan_kepala_daerah')->count(),
+                    'Dengan Ajudan' => PendaftaranPeserta::whereNotNull('nama_ajudan')->count(),
+                    'Dengan Nomor Plat' => PendaftaranPeserta::whereNotNull('nomor_plat')->count(),
+                ]
+                as $label => $value
+            ) {
                 $sheet->setCellValue("A{$row}", $label);
                 $sheet->setCellValue("B{$row}", $value);
                 $row++;
@@ -290,10 +357,7 @@ class DashboardController extends Controller
             $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
             $row++;
 
-            $ukuranKd = PendaftaranPeserta::selectRaw("ukuran_baju, COUNT(*) as total")
-                ->groupBy('ukuran_baju')
-                ->orderByRaw("FIELD(ukuran_baju,'S','M','L','XL','XXL','XXXL')")
-                ->get();
+            $ukuranKd = PendaftaranPeserta::selectRaw('ukuran_baju, COUNT(*) as total')->groupBy('ukuran_baju')->orderByRaw("FIELD(ukuran_baju,'S','M','L','XL','XXL','XXXL')")->get();
             foreach ($ukuranKd as $u) {
                 $sheet->setCellValue("A{$row}", $u->ukuran_baju);
                 $sheet->setCellValue("B{$row}", $u->total);
@@ -307,11 +371,7 @@ class DashboardController extends Controller
             $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
             $row++;
 
-            $ukuranPasangan = PendaftaranPeserta::selectRaw("ukuran_baju_pasangan, COUNT(*) as total")
-                ->whereNotNull('ukuran_baju_pasangan')
-                ->groupBy('ukuran_baju_pasangan')
-                ->orderByRaw("FIELD(ukuran_baju_pasangan,'S','M','L','XL','XXL','XXXL')")
-                ->get();
+            $ukuranPasangan = PendaftaranPeserta::selectRaw('ukuran_baju_pasangan, COUNT(*) as total')->whereNotNull('ukuran_baju_pasangan')->groupBy('ukuran_baju_pasangan')->orderByRaw("FIELD(ukuran_baju_pasangan,'S','M','L','XL','XXL','XXXL')")->get();
 
             if ($ukuranPasangan->isNotEmpty()) {
                 foreach ($ukuranPasangan as $u) {
@@ -331,11 +391,7 @@ class DashboardController extends Controller
             $sheet->getStyle("A{$row}:B{$row}")->applyFromArray($sectionStyle);
             $row++;
 
-            $kegiatanStats = DB::table('pendaftaran_kegiatan')
-                ->selectRaw('nama_kegiatan, COUNT(*) as total')
-                ->groupBy('nama_kegiatan')
-                ->orderByDesc('total')
-                ->get();
+            $kegiatanStats = DB::table('pendaftaran_kegiatan')->selectRaw('nama_kegiatan, COUNT(*) as total')->groupBy('nama_kegiatan')->orderByDesc('total')->get();
 
             if ($kegiatanStats->isNotEmpty()) {
                 foreach ($kegiatanStats as $k) {
@@ -350,7 +406,7 @@ class DashboardController extends Controller
             $sheet->getColumnDimension('A')->setAutoSize(true);
             $sheet->getColumnDimension('B')->setAutoSize(true);
 
-            $writer   = new Xlsx($spreadsheet);
+            $writer = new Xlsx($spreadsheet);
             $fileName = 'Statistik_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
@@ -358,8 +414,9 @@ class DashboardController extends Controller
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             Log::error('Export Statistik Error: ' . $e->getMessage());
-            return redirect()->route('admin.dashboard')
-                             ->with('error', 'Error export statistik: ' . $e->getMessage());
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('error', 'Error export statistik: ' . $e->getMessage());
         }
     }
 
@@ -370,10 +427,7 @@ class DashboardController extends Controller
         try {
             $spreadsheet = new Spreadsheet();
 
-            $daerahList = PendaftaranPeserta::select('nama_daerah')
-                ->distinct()
-                ->orderBy('nama_daerah')
-                ->pluck('nama_daerah');
+            $daerahList = PendaftaranPeserta::select('nama_daerah')->distinct()->orderBy('nama_daerah')->pluck('nama_daerah');
 
             foreach ($daerahList as $index => $daerah) {
                 if ($index > 0) {
@@ -388,14 +442,7 @@ class DashboardController extends Controller
                     'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF']],
                 ];
 
-                $headers = [
-                    'No', 'Nama Kepala Daerah', 'Ukuran Baju KD',
-                    'Nama Pasangan KD', 'Ukuran Baju Pasangan',
-                    'Jumlah Rombongan',
-                    'Nama Ajudan', 'Telepon Ajudan',
-                    'Info Kedatangan', 'Info Kepulangan', 'Nomor Plat',
-                    'Kegiatan', 'Status',
-                ];
+                $headers = ['No', 'Nama Kepala Daerah', 'Ukuran Baju KD', 'Nama Pasangan KD', 'Ukuran Baju Pasangan', 'Jumlah Rombongan', 'Nama Ajudan', 'Telepon Ajudan', 'Info Kedatangan', 'Info Kepulangan', 'Nomor Plat', 'Kegiatan', 'Status'];
                 $sheet->fromArray($headers, null, 'A1');
                 $sheet->getStyle('A1:M1')->applyFromArray($headerStyle);
 
@@ -430,7 +477,7 @@ class DashboardController extends Controller
 
             $spreadsheet->setActiveSheetIndex(0);
 
-            $writer   = new Xlsx($spreadsheet);
+            $writer = new Xlsx($spreadsheet);
             $fileName = 'Peserta_By_Daerah_' . date('Ymd_His') . '.xlsx';
             $tempFile = tempnam(sys_get_temp_dir(), $fileName);
             $writer->save($tempFile);
@@ -438,8 +485,9 @@ class DashboardController extends Controller
             return response()->download($tempFile, $fileName)->deleteFileAfterSend(true);
         } catch (\Exception $e) {
             Log::error('Export By Daerah Error: ' . $e->getMessage());
-            return redirect()->route('admin.dashboard')
-                             ->with('error', 'Error export by daerah: ' . $e->getMessage());
+            return redirect()
+                ->route('admin.dashboard')
+                ->with('error', 'Error export by daerah: ' . $e->getMessage());
         }
     }
 }

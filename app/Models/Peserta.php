@@ -1,7 +1,5 @@
 <?php
 
-// app/Models/Peserta.php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -19,8 +17,21 @@ class Peserta extends Model
         'nama_daerah',
         'nama_kepala_daerah',
         'nama_pasangan_kepala_daerah',
+
+        // Data Wakil Kepala Daerah
+        'nama_wakil_kepala_daerah',
+        'nama_pasangan_wakil_kepala_daerah',
+
+        // Kepala Daerah
         'ukuran_baju',
-        'ukuran_baju_pasangan',         // nullable
+        'ukuran_baju_pasangan',
+        'ukuran_peci',
+
+        // Wakil Kepala Daerah
+        'ukuran_baju_wakil',
+        'ukuran_baju_pasangan_wakil',
+        'ukuran_peci_wakil',
+
         'jumlah_rombongan',
         'nomor_plat',
         'info_kedatangan',
@@ -36,8 +47,9 @@ class Peserta extends Model
         'jumlah_rombongan' => 'integer',
     ];
 
-    // ===== AUTO-GENERATE KODE REGISTRASI =====
-
+    /**
+     * Auto Generate Kode Registrasi
+     */
     protected static function booted(): void
     {
         static::creating(function (self $peserta) {
@@ -47,13 +59,17 @@ class Peserta extends Model
         });
     }
 
-    // ===== RELATIONS =====
-
+    /**
+     * Relasi Narahubung
+     */
     public function narahubung(): HasMany
     {
         return $this->hasMany(PendaftaranNarahubung::class, 'peserta_id');
     }
 
+    /**
+     * Relasi Kegiatan
+     */
     public function kegiatan(): HasMany
     {
         return $this->hasMany(PendaftaranKegiatan::class, 'peserta_id');

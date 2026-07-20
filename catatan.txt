@@ -1,2 +1,2 @@
-
-- tambahkan input manual pada pilihan kab/kota pendaftaran
+- tambahkan edit data
+- tambahkan data wakil kepala daerah seperti kepala daerah (ukuran baju, ukuran baju pasangan, dll.) dan juga ukuran peci

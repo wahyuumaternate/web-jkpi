@@ -25,10 +25,19 @@ class PendaftaranPesertaRequest extends FormRequest
                            'required_if:nama_daerah,__lainnya__'],
             'nama_kepala_daerah' => ['required', 'string', 'max:150'],
 
-            // ── Informasi Tambahan ────────────────────────────────────
+            // ── Informasi Tambahan — Kepala Daerah ────────────────────
             'ukuran_baju' => ['required', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
+            'ukuran_peci' => ['nullable', 'string', 'max:10'],
             'nama_pasangan_kepala_daerah' => ['nullable', 'string', 'max:150'],
             'ukuran_baju_pasangan' => ['nullable', 'required_with:nama_pasangan_kepala_daerah', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
+
+            // ── Data Wakil Kepala Daerah ───────────────────────────────
+            'nama_wakil_kepala_daerah' => ['nullable', 'string', 'max:150'],
+            'ukuran_baju_wakil' => ['nullable', 'required_with:nama_wakil_kepala_daerah', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
+            'ukuran_peci_wakil' => ['nullable', 'string', 'max:10'],
+            'nama_pasangan_wakil_kepala_daerah' => ['nullable', 'string', 'max:150'],
+            'ukuran_baju_pasangan_wakil' => ['nullable', 'required_with:nama_pasangan_wakil_kepala_daerah', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
+
             'jumlah_rombongan' => ['required', 'integer', 'min:1', 'max:999'],
 
             // ── Kegiatan (opsional, tapi tiap item harus valid) ───────
@@ -61,6 +70,15 @@ class PendaftaranPesertaRequest extends FormRequest
             'ukuran_baju.required' => 'Ukuran baju kepala daerah wajib dipilih.',
             'ukuran_baju.in' => 'Ukuran baju tidak valid.',
             'ukuran_baju_pasangan.in' => 'Ukuran baju pasangan tidak valid.',
+            'ukuran_baju_pasangan.required_with' => 'Ukuran baju pasangan wajib dipilih jika nama pasangan diisi.',
+            'ukuran_peci.max' => 'Ukuran peci tidak valid.',
+
+            'ukuran_baju_wakil.required_with' => 'Ukuran baju wakil kepala daerah wajib dipilih jika nama wakil kepala daerah diisi.',
+            'ukuran_baju_wakil.in' => 'Ukuran baju wakil kepala daerah tidak valid.',
+            'ukuran_baju_pasangan_wakil.required_with' => 'Ukuran baju pasangan wakil kepala daerah wajib dipilih jika nama pasangan wakil diisi.',
+            'ukuran_baju_pasangan_wakil.in' => 'Ukuran baju pasangan wakil kepala daerah tidak valid.',
+            'ukuran_peci_wakil.max' => 'Ukuran peci wakil kepala daerah tidak valid.',
+
             'jumlah_rombongan.required' => 'Jumlah rombongan wajib diisi.',
             'jumlah_rombongan.integer' => 'Jumlah rombongan harus berupa angka.',
             'jumlah_rombongan.min' => 'Jumlah rombongan minimal 1.',
@@ -73,7 +91,6 @@ class PendaftaranPesertaRequest extends FormRequest
             'narahubung.*.telepon.required' => 'Nomor telepon narahubung wajib diisi.',
             'narahubung.*.email.required' => 'Email narahubung wajib diisi.',
             'narahubung.*.email.email' => 'Format email narahubung tidak valid.',
-            'ukuran_baju_pasangan.required_with' => 'Ukuran baju pasangan wajib dipilih jika nama pasangan diisi.',
         ];
     }
 }

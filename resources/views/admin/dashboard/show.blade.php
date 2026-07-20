@@ -11,7 +11,10 @@
             <h3 class="fw-bold mb-0">Detail Peserta</h3>
             <p class="text-muted mb-0">{{ $peserta->nama_kepala_daerah }} — {{ $peserta->nama_daerah }}</p>
         </div>
-        <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
+        <div class="header-right d-flex flex-wrap align-items-center mt-2 mt-sm-0">
+            <a href="{{ route('admin.dashboard.edit', $peserta->id) }}" class="btn btn-primary btn-sm me-3">
+                <i class="mdi mdi-pencil me-1"></i>Edit Data
+            </a>
             <div class="d-flex align-items-center">
                 <a href="{{ route('admin.dashboard') }}">
                     <p class="m-0 pe-3">Dashboard</p>
@@ -85,6 +88,28 @@
                 </div>
             </div>
 
+            {{-- Data Wakil Kepala Daerah --}}
+            @if ($peserta->nama_wakil_kepala_daerah || $peserta->nama_pasangan_wakil_kepala_daerah)
+                <div class="card grid-margin">
+                    <div class="card-header d-flex align-items-center">
+                        <i class="mdi mdi-account-tie-outline me-2 text-primary" style="font-size:1.25rem;"></i>
+                        <h4 class="card-title mb-0">Data Wakil Kepala Daerah</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <p class="text-muted fw-semibold mb-1 font-13">Nama Wakil Kepala Daerah</p>
+                                <p class="fw-bold mb-0">{{ $peserta->nama_wakil_kepala_daerah ?? '-' }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-muted fw-semibold mb-1 font-13">Nama Pasangan Wakil Kepala Daerah</p>
+                                <p class="fw-bold mb-0">{{ $peserta->nama_pasangan_wakil_kepala_daerah ?? '-' }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             {{-- Informasi Tambahan --}}
             <div class="card grid-margin">
                 <div class="card-header d-flex align-items-center">
@@ -92,10 +117,13 @@
                     <h4 class="card-title mb-0">Informasi Tambahan</h4>
                 </div>
                 <div class="card-body">
-                    <div class="row g-3">
+                    <p class="text-muted fw-semibold mb-2 font-13 text-uppercase" style="font-size:.72rem; letter-spacing:.05em;">
+                        Kepala Daerah
+                    </p>
+                    <div class="row g-3 mb-3">
                         <div class="col-md-4">
                             <p class="text-muted fw-semibold mb-1 font-13">
-                                <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju Kepala Daerah
+                                <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju
                             </p>
                             <p class="fw-bold mb-0">
                                 <span class="badge bg-primary">{{ $peserta->ukuran_baju }}</span>
@@ -113,6 +141,66 @@
                                 @endif
                             </p>
                         </div>
+                        <div class="col-md-4">
+                            <p class="text-muted fw-semibold mb-1 font-13">
+                                <i class="mdi mdi-hat-fedora me-1"></i>Ukuran Peci
+                            </p>
+                            <p class="fw-bold mb-0">
+                                @if ($peserta->ukuran_peci)
+                                    <span class="badge bg-secondary">{{ $peserta->ukuran_peci }}</span>
+                                @else
+                                    <span class="text-muted">-</span>
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+
+                    @if ($peserta->nama_wakil_kepala_daerah || $peserta->ukuran_baju_wakil || $peserta->ukuran_peci_wakil)
+                        <hr>
+                        <p class="text-muted fw-semibold mb-2 font-13 text-uppercase" style="font-size:.72rem; letter-spacing:.05em;">
+                            Wakil Kepala Daerah
+                        </p>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <p class="text-muted fw-semibold mb-1 font-13">
+                                    <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju Wakil
+                                </p>
+                                <p class="fw-bold mb-0">
+                                    @if ($peserta->ukuran_baju_wakil)
+                                        <span class="badge bg-primary">{{ $peserta->ukuran_baju_wakil }}</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted fw-semibold mb-1 font-13">
+                                    <i class="mdi mdi-tshirt-v me-1"></i>Ukuran Baju Pasangan Wakil
+                                </p>
+                                <p class="fw-bold mb-0">
+                                    @if ($peserta->ukuran_baju_pasangan_wakil)
+                                        <span class="badge bg-info">{{ $peserta->ukuran_baju_pasangan_wakil }}</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p class="text-muted fw-semibold mb-1 font-13">
+                                    <i class="mdi mdi-hat-fedora me-1"></i>Ukuran Peci Wakil
+                                </p>
+                                <p class="fw-bold mb-0">
+                                    @if ($peserta->ukuran_peci_wakil)
+                                        <span class="badge bg-secondary">{{ $peserta->ukuran_peci_wakil }}</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </p>
+                            </div>
+                        </div>
+                    @endif
+
+                    <div class="row g-3">
                         <div class="col-md-4">
                             <p class="text-muted fw-semibold mb-1 font-13">
                                 <i class="mdi mdi-account-multiple me-1"></i>Jumlah Rombongan
@@ -313,12 +401,34 @@
                                 <li class="mb-2">
                                     1 Kepala Daerah
                                     <span class="badge bg-primary ms-1">{{ $peserta->ukuran_baju }}</span>
+                                    @if ($peserta->ukuran_peci)
+                                        <span class="badge bg-secondary ms-1">Peci {{ $peserta->ukuran_peci }}</span>
+                                    @endif
                                 </li>
                                 @if ($peserta->nama_pasangan_kepala_daerah)
                                     <li class="mb-2">
                                         1 Pasangan Kepala Daerah
                                         @if ($peserta->ukuran_baju_pasangan)
                                             <span class="badge bg-info ms-1">{{ $peserta->ukuran_baju_pasangan }}</span>
+                                        @endif
+                                    </li>
+                                @endif
+                                @if ($peserta->nama_wakil_kepala_daerah)
+                                    <li class="mb-2">
+                                        1 Wakil Kepala Daerah
+                                        @if ($peserta->ukuran_baju_wakil)
+                                            <span class="badge bg-primary ms-1">{{ $peserta->ukuran_baju_wakil }}</span>
+                                        @endif
+                                        @if ($peserta->ukuran_peci_wakil)
+                                            <span class="badge bg-secondary ms-1">Peci {{ $peserta->ukuran_peci_wakil }}</span>
+                                        @endif
+                                    </li>
+                                @endif
+                                @if ($peserta->nama_pasangan_wakil_kepala_daerah)
+                                    <li class="mb-2">
+                                        1 Pasangan Wakil Kepala Daerah
+                                        @if ($peserta->ukuran_baju_pasangan_wakil)
+                                            <span class="badge bg-info ms-1">{{ $peserta->ukuran_baju_pasangan_wakil }}</span>
                                         @endif
                                     </li>
                                 @endif

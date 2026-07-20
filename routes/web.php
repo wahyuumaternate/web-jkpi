@@ -87,6 +87,7 @@ Route::middleware(['auth'])
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+        Route::get('/dashboard/{id}/edit', [DashboardController::class, 'edit'])->name('dashboard.edit');
         // Export Routes (HARUS DI ATAS route {id} agar tidak conflict)
         Route::get('/dashboard/export/all', [DashboardController::class, 'exportAll'])->name('dashboard.export.all');
         Route::get('/dashboard/export/verified', [DashboardController::class, 'exportVerified'])->name('dashboard.export.verified');
@@ -97,9 +98,11 @@ Route::middleware(['auth'])
 
         // CRUD Routes (HARUS DI BAWAH route export)
         Route::get('/dashboard/{id}', [DashboardController::class, 'show'])->name('dashboard.show');
+        Route::put('/dashboard/{id}', [DashboardController::class, 'update'])->name('dashboard.update');
         Route::patch('/dashboard/{id}/status', [DashboardController::class, 'updateStatus'])->name('dashboard.update-status');
         Route::delete('/dashboard/{id}', [DashboardController::class, 'destroy'])->name('dashboard.destroy');
     });
+
 Route::get('/pendaftaran/verify/{token}', [VerifikasiController::class, 'verify'])->name('pendaftaran.verify');
 require __DIR__ . '/auth.php';
 Route::get('/test-pdf-preview', function () {

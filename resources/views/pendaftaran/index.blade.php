@@ -1359,7 +1359,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label class="form-label">Ukuran Baju Kepala Daerah <span
                                         class="required">*</span></label>
                                 <select class="form-select" name="ukuran_baju" required>
@@ -1371,7 +1371,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label class="form-label" id="label_ukuran_pasangan">
                                     Ukuran Baju Pasangan Kepala Daerah
                                     <span class="required" id="required_ukuran_pasangan"
@@ -1385,6 +1385,75 @@
                                             {{ $u }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Ukuran Peci Kepala Daerah <span
+                                        class="required">*</span></label>
+                                <input type="text" class="form-control" name="ukuran_peci"
+                                    value="{{ old('ukuran_peci') }}" placeholder="Contoh: 8" required>
+                            </div>
+                        </div>
+
+                        {{-- Data Wakil Kepala Daerah --}}
+                        <h3 class="form-section-title">
+                            <span class="icon-badge"><i class="bi bi-person-vcard-fill"></i></span>Data Wakil Kepala
+                            Daerah <small>· Kosongkan jika tidak hadir</small>
+                        </h3>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="nama_wakil_kepala_daerah">Nama Lengkap Wakil Kepala
+                                    Daerah</label>
+                                <input type="text" class="form-control" id="nama_wakil_kepala_daerah"
+                                    name="nama_wakil_kepala_daerah" value="{{ old('nama_wakil_kepala_daerah') }}"
+                                    placeholder="Opsional, kosongkan jika tidak hadir" oninput="toggleUkuranWakil()">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="nama_pasangan_wakil_kepala_daerah">Nama Lengkap
+                                    Pasangan Wakil Kepala Daerah</label>
+                                <input type="text" class="form-control" id="nama_pasangan_wakil_kepala_daerah"
+                                    name="nama_pasangan_wakil_kepala_daerah"
+                                    value="{{ old('nama_pasangan_wakil_kepala_daerah') }}"
+                                    placeholder="Opsional, kosongkan jika tidak hadir"
+                                    oninput="toggleUkuranPasanganWakil()">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label" id="label_ukuran_wakil">
+                                    Ukuran Baju Wakil Kepala Daerah
+                                    <span class="required" id="required_ukuran_wakil" style="display:none">*</span>
+                                </label>
+                                <select class="form-select" name="ukuran_baju_wakil" id="ukuran_baju_wakil">
+                                    <option value="">Pilih Ukuran</option>
+                                    @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $u)
+                                        <option value="{{ $u }}"
+                                            {{ old('ukuran_baju_wakil') == $u ? 'selected' : '' }}>{{ $u }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label" id="label_ukuran_pasangan_wakil">
+                                    Ukuran Baju Pasangan Wakil
+                                    <span class="required" id="required_ukuran_pasangan_wakil"
+                                        style="display:none">*</span>
+                                </label>
+                                <select class="form-select" name="ukuran_baju_pasangan_wakil"
+                                    id="ukuran_baju_pasangan_wakil">
+                                    <option value="">Pilih Ukuran</option>
+                                    @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $u)
+                                        <option value="{{ $u }}"
+                                            {{ old('ukuran_baju_pasangan_wakil') == $u ? 'selected' : '' }}>
+                                            {{ $u }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Ukuran Peci Wakil Kepala Daerah</label>
+                                <input type="text" class="form-control" name="ukuran_peci_wakil"
+                                    value="{{ old('ukuran_peci_wakil') }}" placeholder="Contoh: 8">
                             </div>
                         </div>
 
@@ -1686,6 +1755,40 @@
                                             <div class="pv-field-label">Ukuran Baju Pasangan</div>
                                             <div class="pv-field-value" id="pv-ukuran-pasangan">—</div>
                                         </div>
+                                        <div class="pv-field">
+                                            <div class="pv-field-label">Ukuran Peci Kepala Daerah</div>
+                                            <div class="pv-field-value" id="pv-ukuran-peci">—</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- Data Wakil Kepala Daerah --}}
+                                <div class="pv-block">
+                                    <div class="pv-block-title">
+                                        <span class="icon-badge"><i class="bi bi-person-vcard-fill"></i></span>Data
+                                        Wakil Kepala Daerah
+                                    </div>
+                                    <div class="pv-fields">
+                                        <div class="pv-field">
+                                            <div class="pv-field-label">Nama Wakil Kepala Daerah</div>
+                                            <div class="pv-field-value" id="pv-nama-wakil">—</div>
+                                        </div>
+                                        <div class="pv-field">
+                                            <div class="pv-field-label">Nama Pasangan Wakil</div>
+                                            <div class="pv-field-value" id="pv-nama-pasangan-wakil">—</div>
+                                        </div>
+                                        <div class="pv-field">
+                                            <div class="pv-field-label">Ukuran Baju Wakil</div>
+                                            <div class="pv-field-value" id="pv-ukuran-baju-wakil">—</div>
+                                        </div>
+                                        <div class="pv-field">
+                                            <div class="pv-field-label">Ukuran Baju Pasangan Wakil</div>
+                                            <div class="pv-field-value" id="pv-ukuran-pasangan-wakil">—</div>
+                                        </div>
+                                        <div class="pv-field">
+                                            <div class="pv-field-label">Ukuran Peci Wakil</div>
+                                            <div class="pv-field-value" id="pv-ukuran-peci-wakil">—</div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1899,6 +2002,29 @@
         }
         document.addEventListener('DOMContentLoaded', toggleUkuranPasangan);
 
+        /* ────── UKURAN WAKIL & PASANGAN WAKIL ────── */
+        function toggleUkuranWakil() {
+            const has = document.getElementById('nama_wakil_kepala_daerah').value.trim() !== '';
+            const sel = document.getElementById('ukuran_baju_wakil');
+            const req = document.getElementById('required_ukuran_wakil');
+            sel.required = has;
+            req.style.display = has ? 'inline' : 'none';
+            if (!has) sel.value = '';
+        }
+
+        function toggleUkuranPasanganWakil() {
+            const has = document.getElementById('nama_pasangan_wakil_kepala_daerah').value.trim() !== '';
+            const sel = document.getElementById('ukuran_baju_pasangan_wakil');
+            const req = document.getElementById('required_ukuran_pasangan_wakil');
+            sel.required = has;
+            req.style.display = has ? 'inline' : 'none';
+            if (!has) sel.value = '';
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleUkuranWakil();
+            toggleUkuranPasanganWakil();
+        });
+
         /* ══════════════════════════════════════
            STEP NAVIGATION
            ══════════════════════════════════════ */
@@ -1998,6 +2124,12 @@
             const namaPasangan = pvGet('[name="nama_pasangan_kepala_daerah"]');
             const ukuranBaju = pvGet('[name="ukuran_baju"]');
             const ukuranPasangan = pvGet('[name="ukuran_baju_pasangan"]');
+            const ukuranPeci = pvGet('[name="ukuran_peci"]');
+            const namaWakil = pvGet('[name="nama_wakil_kepala_daerah"]');
+            const namaPasanganWakil = pvGet('[name="nama_pasangan_wakil_kepala_daerah"]');
+            const ukuranBajuWakil = pvGet('[name="ukuran_baju_wakil"]');
+            const ukuranPasanganWakil = pvGet('[name="ukuran_baju_pasangan_wakil"]');
+            const ukuranPeciWakil = pvGet('[name="ukuran_peci_wakil"]');
             const plat = pvGet('[name="nomor_plat"]');
             const kedatangan = pvGet('[name="info_kedatangan"]');
             const kepulangan = pvGet('[name="info_kepulangan"]');
@@ -2014,6 +2146,13 @@
             pvSet('pv-nama-pasangan', namaPasangan || '(tidak hadir)', !namaPasangan);
             pvSet('pv-ukuran-baju', ukuranBaju || '—', !ukuranBaju);
             pvSet('pv-ukuran-pasangan', namaPasangan ? (ukuranPasangan || '—') : '(tidak hadir)', !namaPasangan);
+            pvSet('pv-ukuran-peci', ukuranPeci || '(tidak diisi)', !ukuranPeci);
+            pvSet('pv-nama-wakil', namaWakil || '(tidak hadir)', !namaWakil);
+            pvSet('pv-nama-pasangan-wakil', namaPasanganWakil || '(tidak hadir)', !namaPasanganWakil);
+            pvSet('pv-ukuran-baju-wakil', namaWakil ? (ukuranBajuWakil || '—') : '(tidak hadir)', !namaWakil);
+            pvSet('pv-ukuran-pasangan-wakil', namaPasanganWakil ? (ukuranPasanganWakil || '—') : '(tidak hadir)',
+                !namaPasanganWakil);
+            pvSet('pv-ukuran-peci-wakil', ukuranPeciWakil || '(tidak diisi)', !ukuranPeciWakil);
             pvSet('pv-plat', plat || '(tidak dicantumkan)', !plat);
             pvSet('pv-kedatangan', kedatangan || '—', !kedatangan);
             pvSet('pv-kepulangan', kepulangan || '—', !kepulangan);

@@ -340,10 +340,19 @@
 
                                         {{-- AKSI --}}
                                         <td>
+                                            {{-- Lihat --}}
                                             <a href="{{ route('admin.dashboard.show', $p->id) }}"
                                                 class="btn btn-sm btn-primary">
                                                 <i class="mdi mdi-eye"></i>
                                             </a>
+
+                                            {{-- Edit --}}
+                                            <a href="{{ route('admin.dashboard.edit', $p->id) }}"
+                                                class="btn btn-sm btn-warning">
+                                                <i class="mdi mdi-pencil"></i>
+                                            </a>
+
+                                            {{-- Hapus --}}
                                             <button onclick="confirmDelete({{ $p->id }})"
                                                 class="btn btn-sm btn-danger">
                                                 <i class="mdi mdi-trash-can"></i>
