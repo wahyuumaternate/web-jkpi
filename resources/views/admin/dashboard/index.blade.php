@@ -215,7 +215,7 @@
                                     <th>No</th>
                                     {{-- <th>Kode</th> --}}
                                     <th>Daerah & Kepala Daerah</th>
-                                    <th>Pasangan</th>
+                                    <th>Pasangan Kepala Daerah</th>
                                     <th>Wakil Kepala Daerah</th>
                                     <th>Rombongan</th>
                                     <th>Ajudan / ADC</th>
@@ -242,9 +242,14 @@
                                             <div class="fw-bold">{{ $p->nama_kepala_daerah }}</div>
                                             <small class="text-muted">{{ $p->nama_daerah }}</small>
                                             <br>
-                                            <span class="badge bg-primary bg-opacity-75 mt-1">
+                                            <span class="badge bg-primary bg-opacity-75 mt-1 me-1">
                                                 <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju }}
                                             </span>
+                                            @if ($p->ukuran_peci)
+                                                <span class="badge bg-secondary bg-opacity-75 mt-1">
+                                                    <i class="mdi mdi-hat-fedora me-1"></i>{{ $p->ukuran_peci }}
+                                                </span>
+                                            @endif
                                         </td>
 
                                         {{-- PASANGAN + UKURAN BAJU PASANGAN --}}
@@ -285,7 +290,8 @@
                                                 <div class="mt-2">{{ $p->nama_pasangan_wakil_kepala_daerah }}</div>
                                                 @if ($p->ukuran_baju_pasangan_wakil)
                                                     <span class="badge bg-info bg-opacity-75 mt-1 me-1">
-                                                        <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_pasangan_wakil }}
+                                                        <i
+                                                            class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_pasangan_wakil }}
                                                     </span>
                                                 @endif
                                             @endif
