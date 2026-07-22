@@ -1215,8 +1215,11 @@
                                 <label class="form-label">Jumlah Rombongan <span class="required">*</span></label>
                                 <input type="number" min="1" class="form-control" name="jumlah_rombongan"
                                     value="{{ old('jumlah_rombongan', 1) }}" required>
-                                <span class="field-help"><i class="bi bi-people"></i>Termasuk kepala daerah, pasangan,
-                                    ajudan, OPD dan tim pendamping.</span>
+                                <span class="field-help">
+                                    <i class="bi bi-people"></i>
+                                    Termasuk kepala daerah, wakil kepala daerah, pasangan (suami/istri), ajudan, OPD,
+                                    dan tim pendamping.
+                                </span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="nama_daerah">Kabupaten/Kota Asal <span
