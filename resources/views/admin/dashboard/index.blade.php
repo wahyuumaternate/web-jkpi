@@ -216,6 +216,7 @@
                                     {{-- <th>Kode</th> --}}
                                     <th>Daerah & Kepala Daerah</th>
                                     <th>Pasangan</th>
+                                    <th>Wakil Kepala Daerah</th>
                                     <th>Rombongan</th>
                                     <th>Ajudan / ADC</th>
                                     <th>Narahubung</th>
@@ -257,6 +258,36 @@
                                                 @endif
                                             @else
                                                 <small class="text-muted">-</small>
+                                            @endif
+                                        </td>
+
+                                        {{-- WAKIL KEPALA DAERAH --}}
+                                        <td>
+                                            @if ($p->nama_wakil_kepala_daerah)
+                                                <div class="fw-bold">{{ $p->nama_wakil_kepala_daerah }}</div>
+                                                @if ($p->ukuran_baju_wakil)
+                                                    <span class="badge bg-primary bg-opacity-75 mt-1 me-1">
+                                                        <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_wakil }}
+                                                    </span>
+                                                @endif
+                                                @if ($p->ukuran_peci_wakil)
+                                                    <span class="badge bg-secondary bg-opacity-75 mt-1">
+                                                        <i class="mdi mdi-hat-fedora me-1"></i>{{ $p->ukuran_peci_wakil }}
+                                                    </span>
+                                                @endif
+                                            @elseif ($p->nama_pasangan_wakil_kepala_daerah)
+                                                <div class="fw-bold">-</div>
+                                            @else
+                                                <small class="text-muted">-</small>
+                                            @endif
+
+                                            @if ($p->nama_pasangan_wakil_kepala_daerah)
+                                                <div class="mt-2">{{ $p->nama_pasangan_wakil_kepala_daerah }}</div>
+                                                @if ($p->ukuran_baju_pasangan_wakil)
+                                                    <span class="badge bg-info bg-opacity-75 mt-1 me-1">
+                                                        <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_pasangan_wakil }}
+                                                    </span>
+                                                @endif
                                             @endif
                                         </td>
 

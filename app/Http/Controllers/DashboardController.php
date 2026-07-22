@@ -189,24 +189,30 @@ class DashboardController extends Controller
                 'F' => 'Ukuran Baju KD',
                 'G' => 'Nama Pasangan KD',
                 'H' => 'Ukuran Baju Pasangan',
-                'I' => 'Jumlah Rombongan',
-                'J' => 'Nama Ajudan',
-                'K' => 'Telepon Ajudan',
-                'L' => 'Nomor Plat',
-                'M' => 'Info Kedatangan',
-                'N' => 'Info Kepulangan',
-                'O' => 'Nama Narahubung',
-                'P' => 'Telepon Narahubung',
-                'Q' => 'Email Narahubung',
-                'R' => 'Kegiatan',
-                'S' => 'Catatan',
-                'T' => 'Tanggal Daftar',
+                'I' => 'Ukuran Peci KD',
+                'J' => 'Nama Wakil Kepala Daerah',
+                'K' => 'Nama Pasangan Wakil',
+                'L' => 'Ukuran Baju Wakil',
+                'M' => 'Ukuran Baju Pasangan Wakil',
+                'N' => 'Ukuran Peci Wakil',
+                'O' => 'Jumlah Rombongan',
+                'P' => 'Nama Ajudan',
+                'Q' => 'Telepon Ajudan',
+                'R' => 'Nomor Plat',
+                'S' => 'Info Kedatangan',
+                'T' => 'Info Kepulangan',
+                'U' => 'Nama Narahubung',
+                'V' => 'Telepon Narahubung',
+                'W' => 'Email Narahubung',
+                'X' => 'Kegiatan',
+                'Y' => 'Catatan',
+                'Z' => 'Tanggal Daftar',
             ];
 
             foreach ($headers as $col => $header) {
                 $sheet->setCellValue("{$col}1", $header);
             }
-            $sheet->getStyle('A1:T1')->applyFromArray($headerStyle);
+            $sheet->getStyle('A1:Z1')->applyFromArray($headerStyle);
 
             $row = 2;
             foreach ($data as $index => $item) {
@@ -224,18 +230,24 @@ class DashboardController extends Controller
                 $sheet->setCellValue("F{$row}", $item->ukuran_baju);
                 $sheet->setCellValue("G{$row}", $item->nama_pasangan_kepala_daerah ?? '-');
                 $sheet->setCellValue("H{$row}", $item->ukuran_baju_pasangan ?? '-');
-                $sheet->setCellValue("I{$row}", $item->jumlah_rombongan);
-                $sheet->setCellValue("J{$row}", $item->nama_ajudan ?? '-');
-                $sheet->setCellValue("K{$row}", $item->telepon_ajudan ?? '-');
-                $sheet->setCellValue("L{$row}", $item->nomor_plat ?? '-');
-                $sheet->setCellValue("M{$row}", $item->info_kedatangan);
-                $sheet->setCellValue("N{$row}", $item->info_kepulangan);
-                $sheet->setCellValue("O{$row}", $narahubungNama ?: '-');
-                $sheet->setCellValue("P{$row}", $narahubungTelepon ?: '-');
-                $sheet->setCellValue("Q{$row}", $narahubungEmail ?: '-');
-                $sheet->setCellValue("R{$row}", $kegiatan ?: '-');
-                $sheet->setCellValue("S{$row}", $item->catatan ?? '-');
-                $sheet->setCellValue("T{$row}", $item->created_at->format('d/m/Y H:i'));
+                $sheet->setCellValue("I{$row}", $item->ukuran_peci ?? '-');
+                $sheet->setCellValue("J{$row}", $item->nama_wakil_kepala_daerah ?? '-');
+                $sheet->setCellValue("K{$row}", $item->nama_pasangan_wakil_kepala_daerah ?? '-');
+                $sheet->setCellValue("L{$row}", $item->ukuran_baju_wakil ?? '-');
+                $sheet->setCellValue("M{$row}", $item->ukuran_baju_pasangan_wakil ?? '-');
+                $sheet->setCellValue("N{$row}", $item->ukuran_peci_wakil ?? '-');
+                $sheet->setCellValue("O{$row}", $item->jumlah_rombongan);
+                $sheet->setCellValue("P{$row}", $item->nama_ajudan ?? '-');
+                $sheet->setCellValue("Q{$row}", $item->telepon_ajudan ?? '-');
+                $sheet->setCellValue("R{$row}", $item->nomor_plat ?? '-');
+                $sheet->setCellValue("S{$row}", $item->info_kedatangan);
+                $sheet->setCellValue("T{$row}", $item->info_kepulangan);
+                $sheet->setCellValue("U{$row}", $narahubungNama ?: '-');
+                $sheet->setCellValue("V{$row}", $narahubungTelepon ?: '-');
+                $sheet->setCellValue("W{$row}", $narahubungEmail ?: '-');
+                $sheet->setCellValue("X{$row}", $kegiatan ?: '-');
+                $sheet->setCellValue("Y{$row}", $item->catatan ?? '-');
+                $sheet->setCellValue("Z{$row}", $item->created_at->format('d/m/Y H:i'));
                 $row++;
             }
 
@@ -256,13 +268,13 @@ class DashboardController extends Controller
                 }
             }
 
-            foreach (range('A', 'T') as $col) {
+            foreach (range('A', 'Z') as $col) {
                 $sheet->getColumnDimension($col)->setAutoSize(true);
             }
             $sheet->freezePane('A2');
 
             if ($data->count() > 0) {
-                $sheet->getStyle('A1:T' . (1 + $data->count()))->applyFromArray([
+                $sheet->getStyle('A1:Z' . (1 + $data->count()))->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
