@@ -197,16 +197,19 @@
                                 $peserta->kegiatan ? $peserta->kegiatan->pluck('nama_kegiatan')->toArray() : [],
                             );
                         @endphp
-                        <div class="row g-2">
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
                             @foreach ($daftarKegiatan as $k)
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="kegiatan[]"
-                                            value="{{ $k }}" id="kegiatan-{{ $loop->index }}"
-                                            {{ in_array($k, $selectedKegiatan) ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="kegiatan-{{ $loop->index }}">
-                                            {{ $k }}
-                                        </label>
+                                <div class="col">
+                                    <div class="border rounded-3 p-3 h-100 bg-light bg-opacity-50">
+                                        <div class="form-check mb-0">
+                                            <input class="form-check-input" type="checkbox" name="kegiatan[]"
+                                                value="{{ $k }}" id="kegiatan-{{ $loop->index }}"
+                                                {{ in_array($k, $selectedKegiatan) ? 'checked' : '' }}>
+                                            <label class="form-check-label text-dark ms-2"
+                                                for="kegiatan-{{ $loop->index }}" style="word-break: break-word;">
+                                                {{ $k }}
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
