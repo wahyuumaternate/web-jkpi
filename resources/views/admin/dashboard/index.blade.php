@@ -239,13 +239,19 @@
 
                                         {{-- DAERAH & KEPALA DAERAH + UKURAN BAJU KD --}}
                                         <td>
-                                            <div class="fw-bold">{{ $p->nama_kepala_daerah }}</div>
+                                            @if ($p->nama_kepala_daerah)
+                                                <div class="fw-bold">{{ $p->nama_kepala_daerah }}</div>
+                                            @else
+                                                <div class="fw-bold text-muted">Kepala daerah tidak hadir</div>
+                                            @endif
                                             <small class="text-muted">{{ $p->nama_daerah }}</small>
                                             <br>
-                                            <span class="badge bg-primary bg-opacity-75 mt-1 me-1">
-                                                <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju }}
-                                            </span>
-                                            @if ($p->ukuran_peci)
+                                            @if ($p->nama_kepala_daerah && $p->ukuran_baju)
+                                                <span class="badge bg-primary bg-opacity-75 mt-1 me-1">
+                                                    <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju }}
+                                                </span>
+                                            @endif
+                                            @if ($p->nama_kepala_daerah && $p->ukuran_peci)
                                                 <span class="badge bg-secondary bg-opacity-75 mt-1">
                                                     <i class="mdi mdi-hat-fedora me-1"></i>{{ $p->ukuran_peci }}
                                                 </span>

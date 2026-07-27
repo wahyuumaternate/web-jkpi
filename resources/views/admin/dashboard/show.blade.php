@@ -454,7 +454,7 @@
                                         Kegiatan Dipilih
                                     </p>
                                     <p class="fw-bold text-success mb-0" style="font-size:1.4rem;">
-                                        {{ $peserta->kegiatan->count() }} / 12
+                                        {{ $peserta->kegiatan->count() }} / 13
                                         <span style="font-size:0.9rem;">kegiatan</span>
                                     </p>
                                 </div>

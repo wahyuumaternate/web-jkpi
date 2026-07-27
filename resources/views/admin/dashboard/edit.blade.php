@@ -9,7 +9,14 @@
     <div class="page-header flex-wrap">
         <div class="header-left">
             <h3 class="fw-bold mb-0">Edit Peserta</h3>
-            <p class="text-muted mb-0">{{ $peserta->nama_kepala_daerah }} — {{ $peserta->nama_daerah }}</p>
+            <p class="text-muted mb-0">
+                @if ($peserta->nama_kepala_daerah)
+                    {{ $peserta->nama_kepala_daerah }} —
+                @else
+                    <span class="text-muted">Kepala daerah tidak hadir —</span>
+                @endif
+                {{ $peserta->nama_daerah }}
+            </p>
         </div>
         <div class="header-right d-flex flex-wrap mt-2 mt-sm-0">
             <div class="d-flex align-items-center">
@@ -69,10 +76,12 @@
                                     value="{{ old('jumlah_rombongan', $peserta->jumlah_rombongan) }}" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Nama Kepala Daerah <span
-                                        class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="nama_kepala_daerah"
-                                    value="{{ old('nama_kepala_daerah', $peserta->nama_kepala_daerah) }}" required>
+                                <label class="form-label fw-semibold">Nama Kepala Daerah
+                                    <small class="text-muted">(opsional jika tidak hadir)</small></label>
+                                <input type="text" class="form-control" id="nama_kepala_daerah"
+                                    name="nama_kepala_daerah"
+                                    value="{{ old('nama_kepala_daerah', $peserta->nama_kepala_daerah) }}"
+                                    oninput="toggleUkuranKepalaDaerah()">
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Nama Pasangan Kepala Daerah</label>
@@ -82,9 +91,10 @@
                                     oninput="toggleRequired('nama_pasangan_kepala_daerah','ukuran_baju_pasangan')">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Ukuran Baju Kepala Daerah <span
-                                        class="text-danger">*</span></label>
-                                <select class="form-select" name="ukuran_baju" required>
+                                <label class="form-label fw-semibold">Ukuran Baju Kepala Daerah
+                                    <span class="text-danger" id="required_ukuran_kepala" style="display:none">*</span>
+                                </label>
+                                <select class="form-select" name="ukuran_baju" id="ukuran_baju">
                                     <option value="">Pilih Ukuran</option>
                                     @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $u)
                                         <option value="{{ $u }}"
@@ -105,8 +115,10 @@
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label fw-semibold">Ukuran Peci</label>
-                                <input type="text" class="form-control" name="ukuran_peci"
+                                <label class="form-label fw-semibold">Ukuran Peci
+                                    <span class="text-danger" id="required_ukuran_peci" style="display:none">*</span>
+                                </label>
+                                <input type="text" class="form-control" name="ukuran_peci" id="ukuran_peci"
                                     value="{{ old('ukuran_peci', $peserta->ukuran_peci) }}" placeholder="Contoh: 58">
                             </div>
                         </div>
@@ -419,10 +431,40 @@
             if (!nameEl || !sizeEl) return;
             sizeEl.required = nameEl.value.trim() !== '';
         }
+
+        function toggleUkuranKepalaDaerah() {
+            const has = document.getElementById('nama_kepala_daerah').value.trim() !== '';
+            const ukuranBaju = document.getElementById('ukuran_baju');
+            const requiredUkuranBaju = document.getElementById('required_ukuran_kepala');
+            const ukuranPeci = document.getElementById('ukuran_peci');
+            const requiredUkuranPeci = document.getElementById('required_ukuran_peci');
+
+            if (ukuranBaju) {
+                ukuranBaju.required = has;
+            }
+            if (requiredUkuranBaju) {
+                requiredUkuranBaju.style.display = has ? 'inline' : 'none';
+            }
+            if (!has && ukuranBaju) {
+                ukuranBaju.value = '';
+            }
+
+            if (ukuranPeci) {
+                ukuranPeci.required = has;
+            }
+            if (requiredUkuranPeci) {
+                requiredUkuranPeci.style.display = has ? 'inline' : 'none';
+            }
+            if (!has && ukuranPeci) {
+                ukuranPeci.value = '';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             toggleRequired('nama_pasangan_kepala_daerah', 'ukuran_baju_pasangan');
             toggleRequired('nama_wakil_kepala_daerah', 'ukuran_baju_wakil');
             toggleRequired('nama_pasangan_wakil_kepala_daerah', 'ukuran_baju_pasangan_wakil');
+            toggleUkuranKepalaDaerah();
         });
 
         /* Narahubung dinamis */

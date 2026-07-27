@@ -1209,6 +1209,9 @@
                         <h3 class="form-section-title">
                             <span class="icon-badge"><i class="bi bi-person-vcard"></i></span>Data Kepala Daerah
                         </h3>
+                        <div class="alert alert-info mb-4">
+                            <strong>Batas pendaftaran sampai tanggal 30 Juli.</strong> Kosongkan nama kepala daerah jika tidak hadir dan hanya wakil yang hadir.
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -1344,11 +1347,12 @@
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label" for="nama_kepala_daerah">Nama Lengkap Kepala Daerah <span
-                                        class="required">*</span></label>
+                                <label class="form-label" for="nama_kepala_daerah">Nama Lengkap Kepala Daerah
+                                    <small class="text-muted">(opsional jika tidak hadir)</small></label>
                                 <input type="text" class="form-control" id="nama_kepala_daerah"
                                     name="nama_kepala_daerah" value="{{ old('nama_kepala_daerah') }}"
-                                    placeholder="Lengkap dengan gelar" required>
+                                    placeholder="Lengkap dengan gelar" oninput="toggleUkuranKepalaDaerah()">
+                                <span class="field-help"><i class="bi bi-info-circle"></i>Kosongkan jika kepala daerah tidak hadir dan hanya wakil yang hadir.</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="nama_pasangan_kepala_daerah">Nama Lengkap Pasangan
@@ -1363,9 +1367,10 @@
 
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Ukuran Baju Kepala Daerah <span
-                                        class="required">*</span></label>
-                                <select class="form-select" name="ukuran_baju" required>
+                                <label class="form-label">Ukuran Baju Kepala Daerah
+                                    <span class="required" id="required_ukuran_kepala" style="display:none">*</span>
+                                </label>
+                                <select class="form-select" name="ukuran_baju" id="ukuran_baju">
                                     <option value="">Pilih Ukuran</option>
                                     @foreach (['S', 'M', 'L', 'XL', 'XXL', 'XXXL'] as $u)
                                         <option value="{{ $u }}"
@@ -1390,10 +1395,11 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Ukuran Peci Kepala Daerah <span
-                                        class="required">*</span></label>
-                                <input type="text" class="form-control" name="ukuran_peci"
-                                    value="{{ old('ukuran_peci') }}" placeholder="Contoh: 8" required>
+                                <label class="form-label">Ukuran Peci Kepala Daerah
+                                    <span class="required" id="required_ukuran_peci" style="display:none">*</span>
+                                </label>
+                                <input type="text" class="form-control" id="ukuran_peci" name="ukuran_peci"
+                                    value="{{ old('ukuran_peci') }}" placeholder="Contoh: 8">
                             </div>
                         </div>
 
@@ -1994,6 +2000,21 @@
         }
         document.addEventListener('DOMContentLoaded', toggleDaerahLainnya);
 
+        function toggleUkuranKepalaDaerah() {
+            const has = document.getElementById('nama_kepala_daerah').value.trim() !== '';
+            const sel = document.getElementById('ukuran_baju');
+            const req = document.getElementById('required_ukuran_kepala');
+            sel.required = has;
+            req.style.display = has ? 'inline' : 'none';
+            if (!has) sel.value = '';
+
+            const peci = document.getElementById('ukuran_peci');
+            const peciReq = document.getElementById('required_ukuran_peci');
+            peci.required = has;
+            peciReq.style.display = has ? 'inline' : 'none';
+            if (!has) peci.value = '';
+        }
+
         /* ────── UKURAN PASANGAN ────── */
         function toggleUkuranPasangan() {
             const has = document.getElementById('nama_pasangan_kepala_daerah').value.trim() !== '';
@@ -2003,7 +2024,10 @@
             req.style.display = has ? 'inline' : 'none';
             if (!has) sel.value = '';
         }
-        document.addEventListener('DOMContentLoaded', toggleUkuranPasangan);
+        document.addEventListener('DOMContentLoaded', () => {
+            toggleUkuranPasangan();
+            toggleUkuranKepalaDaerah();
+        });
 
         /* ────── UKURAN WAKIL & PASANGAN WAKIL ────── */
         function toggleUkuranWakil() {
@@ -2104,6 +2128,30 @@
                     errEl.className = 'alert alert-danger mt-2 mb-2 d-flex align-items-center gap-2';
                     errEl.innerHTML =
                         '<i class="bi bi-exclamation-triangle-fill"></i> Silakan pilih <strong>minimal satu kegiatan</strong> sebelum melanjutkan.';
+                    bar.after(errEl);
+                }
+                errEl.style.display = 'flex';
+                setTimeout(() => {
+                    if (errEl) errEl.style.display = 'none';
+                }, 4000);
+                return;
+            }
+
+            const namaKepalaCheck = pvGet('[name="nama_kepala_daerah"]');
+            const namaWakilCheck = pvGet('[name="nama_wakil_kepala_daerah"]');
+            if (!namaKepalaCheck && !namaWakilCheck) {
+                const bar = document.querySelector('.event-summary-bar');
+                bar.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                let errEl = document.getElementById('person-required-msg');
+                if (!errEl) {
+                    errEl = document.createElement('div');
+                    errEl.id = 'person-required-msg';
+                    errEl.className = 'alert alert-danger mt-2 mb-2 d-flex align-items-center gap-2';
+                    errEl.innerHTML =
+                        '<i class="bi bi-exclamation-triangle-fill"></i> Silakan isi <strong>Kepala Daerah atau Wakil Kepala Daerah</strong> sebelum melanjutkan.';
                     bar.after(errEl);
                 }
                 errEl.style.display = 'flex';
