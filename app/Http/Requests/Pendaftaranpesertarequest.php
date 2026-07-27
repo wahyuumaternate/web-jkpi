@@ -58,7 +58,7 @@ class PendaftaranPesertaRequest extends FormRequest
             'narahubung.*.email' => ['required', 'email', 'max:150'],
         ];
     }
-
+// 
     public function messages(): array
     {
         return [
