@@ -425,7 +425,7 @@
                     {{-- Pagination --}}
                     @if ($peserta->hasPages())
                         <div class="p-3 border-top d-flex justify-content-end">
-                            {{ $peserta->links() }}
+                            {{ $peserta->links('pagination::bootstrap-5') }}
                         </div>
                     @endif
                 </div>

@@ -382,7 +382,7 @@
                     <!-- Pagination -->
                     @if ($peserta->hasPages())
                         <div class="mt-6">
-                            {{ $peserta->links() }}
+                            {{ $peserta->links('pagination::bootstrap-5') }}
                         </div>
                     @endif
                 </div>
