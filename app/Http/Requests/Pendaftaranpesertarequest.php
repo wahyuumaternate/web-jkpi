@@ -21,18 +21,22 @@ class PendaftaranPesertaRequest extends FormRequest
         return [
             // ── Data Daerah & Kepala Daerah ──────────────────────────
             'nama_daerah' => ['required', 'string', 'max:100'],
-            'nama_daerah_lainnya' => ['nullable', 'string', 'max:100',
-                           'required_if:nama_daerah,__lainnya__'],
-            'nama_kepala_daerah' => ['required', 'string', 'max:150'],
+            'nama_daerah_lainnya' => [
+                'nullable',
+                'string',
+                'max:100',
+                'required_if:nama_daerah,__lainnya__'
+            ],
+            'nama_kepala_daerah' => ['nullable', 'string', 'max:150', 'required_without:nama_wakil_kepala_daerah'],
 
             // ── Informasi Tambahan — Kepala Daerah ────────────────────
-            'ukuran_baju' => ['required', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
-            'ukuran_peci' => ['nullable', 'string', 'max:10'],
+            'ukuran_baju' => ['nullable', 'required_with:nama_kepala_daerah', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
+            'ukuran_peci' => ['nullable', 'required_with:nama_kepala_daerah', 'string', 'max:10'],
             'nama_pasangan_kepala_daerah' => ['nullable', 'string', 'max:150'],
             'ukuran_baju_pasangan' => ['nullable', 'required_with:nama_pasangan_kepala_daerah', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
 
             // ── Data Wakil Kepala Daerah ───────────────────────────────
-            'nama_wakil_kepala_daerah' => ['nullable', 'string', 'max:150'],
+            'nama_wakil_kepala_daerah' => ['nullable', 'string', 'max:150', 'required_without:nama_kepala_daerah'],
             'ukuran_baju_wakil' => ['nullable', 'required_with:nama_wakil_kepala_daerah', Rule::in(['S', 'M', 'L', 'XL', 'XXL', 'XXXL'])],
             'ukuran_peci_wakil' => ['nullable', 'string', 'max:10'],
             'nama_pasangan_wakil_kepala_daerah' => ['nullable', 'string', 'max:150'],
@@ -60,14 +64,15 @@ class PendaftaranPesertaRequest extends FormRequest
             'narahubung.*.email' => ['required', 'email', 'max:150'],
         ];
     }
-// 
+    // 
     public function messages(): array
     {
         return [
             'nama_daerah.required' => 'Nama daerah wajib dipilih.',
             'nama_daerah_lainnya.required_if' => 'Nama daerah wajib diisi jika memilih opsi "Lainnya".',
-            'nama_kepala_daerah.required' => 'Nama kepala daerah wajib diisi.',
-            'ukuran_baju.required' => 'Ukuran baju kepala daerah wajib dipilih.',
+            'nama_kepala_daerah.required_without' => 'Nama kepala daerah atau nama wakil kepala daerah wajib diisi.',
+            'nama_wakil_kepala_daerah.required_without' => 'Nama wakil kepala daerah atau nama kepala daerah wajib diisi.',
+            'ukuran_baju.required_with' => 'Ukuran baju kepala daerah wajib dipilih jika nama kepala daerah diisi.',
             'ukuran_baju.in' => 'Ukuran baju tidak valid.',
             'ukuran_baju_pasangan.in' => 'Ukuran baju pasangan tidak valid.',
             'ukuran_baju_pasangan.required_with' => 'Ukuran baju pasangan wajib dipilih jika nama pasangan diisi.',
