@@ -19,6 +19,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyles, ShouldAutoSize, WithTitle, WithEvents
 {
     protected $status;
+    protected $rowGroups = [];
 
     public function __construct($status = null)
     {
@@ -36,7 +37,7 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
 
     public function headings(): array
     {
-        return ['NO', 'NAMA DAERAH', 'NAMA KEPALA DAERAH', 'NAMA WAKIL KEPALA DAERAH', 'NAMA AJUDAN', 'TELEPON AJUDAN', 'NAMA NARAHUBUNG', 'TELEPON NARAHUBUNG', 'EMAIL NARAHUBUNG'];
+        return ['NO', 'JABATAN', 'NAMA', 'NAMA AJUDAN', 'TELEPON AJUDAN', 'NAMA NARAHUBUNG', 'TELEPON NARAHUBUNG', 'EMAIL NARAHUBUNG'];
     }
 
     protected function formatPhone(?string $phone): string
@@ -49,16 +50,44 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
         return "'{$phone}";
     }
 
+    /**
+     * Setiap Peserta menghasilkan sampai 2 baris:
+     * 1) Kepala Daerah
+     * 2) Wakil Kepala Daerah
+     * Kolom AJUDAN & NARAHUBUNG (sama untuk kedua baris) akan di-merge vertikal
+     * antar kedua baris ini di registerEvents.
+     */
     public function map($item): array
     {
         static $no = 0;
-        $no++;
 
         $narahubungNama = $item->narahubung->pluck('nama')->map(fn($v) => strtoupper($v))->implode(' | ');
         $narahubungTelepon = $item->narahubung->pluck('telepon')->map(fn($value) => $this->formatPhone($value))->implode(' | ');
         $narahubungEmail = $item->narahubung->pluck('email')->implode(' | ');
 
-        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->nama_ajudan ?? '-'), $this->formatPhone($item->telepon_ajudan), $narahubungNama ?: '-', $narahubungTelepon ?: '-', $narahubungEmail ?: '-'];
+        $namaAjudan = strtoupper($item->nama_ajudan ?? '-');
+        $teleponAjudan = $this->formatPhone($item->telepon_ajudan);
+        $narahubungNama = $narahubungNama ?: '-';
+        $narahubungTelepon = $narahubungTelepon ?: '-';
+        $narahubungEmail = $narahubungEmail ?: '-';
+
+        $rows = [];
+
+        // Jika kepala daerah ada
+        if (!empty($item->nama_kepala_daerah)) {
+            $no++;
+            $rows[] = [$no, 'KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), $namaAjudan, $teleponAjudan, $narahubungNama, $narahubungTelepon, $narahubungEmail];
+        }
+
+        // Jika wakil kepala daerah ada
+        if (!empty($item->nama_wakil_kepala_daerah)) {
+            $no++;
+            $rows[] = [$no, 'WAKIL KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_wakil_kepala_daerah), $namaAjudan, $teleponAjudan, $narahubungNama, $narahubungTelepon, $narahubungEmail];
+        }
+
+        $this->rowGroups[] = count($rows);
+
+        return $rows;
     }
 
     public function styles(Worksheet $sheet)
@@ -81,7 +110,7 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
                 $sheet->insertNewRowBefore(1, 2);
                 $highestRow = $sheet->getHighestRow();
 
-                $sheet->getStyle("A3:I{$highestRow}")->applyFromArray([
+                $sheet->getStyle("A3:H{$highestRow}")->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => Border::BORDER_THIN,
@@ -96,7 +125,7 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
                 // ===== Judul =====
                 $sheet->setCellValue('A1', 'DAFTAR KEPALA DAERAH, WAKIL KEPALA DAERAH, AJUDAN DAN NARAHUBUNG (UPDATE WEBSITE ' . strtoupper(date('d F Y')) . ')');
 
-                $sheet->mergeCells('A1:I1');
+                $sheet->mergeCells('A1:H1');
 
                 $sheet->getStyle('A1')->applyFromArray([
                     'font' => [
@@ -134,8 +163,41 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
                     ],
                 ];
 
-                $sheet->getStyle('A3:I3')->applyFromArray($headerStyle);
+                $sheet->getStyle('A3:H3')->applyFromArray($headerStyle);
                 $sheet->getRowDimension(3)->setRowHeight(30);
+
+                // ===== Zebra & merge kolom AJUDAN/NARAHUBUNG per pasangan baris (Kepala+Wakil) =====
+                $firstDataRow = 4;
+                $currentRow = $firstDataRow;
+                $colors = ['FFFFFF', 'F2F2F2'];
+                $index = 0;
+
+                foreach ($this->rowGroups as $groupRows) {
+                    $endRow = $currentRow + $groupRows - 1;
+
+                    $sheet->getStyle("A{$currentRow}:H{$endRow}")->applyFromArray([
+                        'fill' => [
+                            'fillType' => Fill::FILL_SOLID,
+                            'startColor' => ['rgb' => $colors[$index % 2]],
+                        ],
+                    ]);
+
+                    // Merge kolom D-H (Ajudan & Narahubung) hanya jika ada Kepala + Wakil
+                    if ($groupRows == 2) {
+                        foreach (['D', 'E', 'F', 'G', 'H'] as $col) {
+                            $sheet->mergeCells("{$col}{$currentRow}:{$col}{$endRow}");
+                        }
+
+                        $sheet
+                            ->getStyle("D{$currentRow}:H{$endRow}")
+                            ->getAlignment()
+                            ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                            ->setVertical(Alignment::VERTICAL_CENTER);
+                    }
+
+                    $currentRow = $endRow + 1;
+                    $index++;
+                }
 
                 // Freeze pane
                 $sheet->freezePane('A4');
@@ -143,7 +205,7 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
                 // ===== Print Area =====
                 $highestRow = $sheet->getHighestRow();
 
-                $sheet->getPageSetup()->setPrintArea("A1:I{$highestRow}");
+                $sheet->getPageSetup()->setPrintArea("A1:H{$highestRow}");
                 $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
                 $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
                 $sheet->getPageSetup()->setFitToWidth(1);

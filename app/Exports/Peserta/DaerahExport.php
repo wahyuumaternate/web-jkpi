@@ -19,6 +19,11 @@ use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAutoSize, WithTitle, WithEvents
 {
     protected $status;
+    protected $rowGroups = [];
+
+    // Cache koleksi supaya query tidak dijalankan berulang kali
+    // (sekali untuk export, sekali lagi untuk hitung total).
+    protected $cachedCollection;
 
     // Baris data pertama setelah judul (1) + baris kosong (2) + header (3)
     const HEADER_ROWS = 3;
@@ -30,11 +35,15 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
 
     public function collection()
     {
-        $query = Peserta::with(['narahubung', 'kegiatan']);
-        if ($this->status) {
-            $query->where('status', $this->status);
+        if ($this->cachedCollection === null) {
+            $query = Peserta::with(['narahubung', 'kegiatan']);
+            if ($this->status) {
+                $query->where('status', $this->status);
+            }
+            $this->cachedCollection = $query->orderBy('created_at', 'desc')->get();
         }
-        return $query->orderBy('created_at', 'desc')->get();
+
+        return $this->cachedCollection;
     }
 
     /**
@@ -49,19 +58,24 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
 
         $rows = [];
 
+        // Pastikan jumlah_rombongan selalu berupa angka (hindari null yang bikin tampilan aneh / warning)
+        $jumlahRombongan = is_numeric($item->jumlah_rombongan) ? (int) $item->jumlah_rombongan : 0;
+
         // Jika kepala daerah ada
         if (!empty($item->nama_kepala_daerah)) {
             $no++;
 
-            $rows[] = [$no, 'KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju ?? ''), strtoupper($item->nama_pasangan_kepala_daerah ?? ''), strtoupper($item->ukuran_baju_pasangan ?? ''), strtoupper($item->ukuran_peci ?? ''), strtoupper($item->nomor_plat ?? ''), $item->jumlah_rombongan];
+            $rows[] = [$no, 'KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju ?? ''), strtoupper($item->nama_pasangan_kepala_daerah ?? ''), strtoupper($item->ukuran_baju_pasangan ?? ''), strtoupper($item->ukuran_peci ?? ''), strtoupper($item->nomor_plat ?? ''), $jumlahRombongan];
         }
 
         // Jika wakil kepala daerah ada
         if (!empty($item->nama_wakil_kepala_daerah)) {
             $no++;
 
-            $rows[] = [$no, 'WAKIL KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_wakil_kepala_daerah), strtoupper($item->ukuran_baju_wakil ?? ''), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? ''), strtoupper($item->ukuran_baju_pasangan_wakil ?? ''), strtoupper($item->ukuran_peci_wakil ?? ''), strtoupper($item->nomor_plat ?? ''), $item->jumlah_rombongan];
+            $rows[] = [$no, 'WAKIL KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_wakil_kepala_daerah), strtoupper($item->ukuran_baju_wakil ?? ''), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? ''), strtoupper($item->ukuran_baju_pasangan_wakil ?? ''), strtoupper($item->ukuran_peci_wakil ?? ''), strtoupper($item->nomor_plat ?? ''), $jumlahRombongan];
         }
+
+        $this->rowGroups[] = count($rows);
 
         return $rows;
     }
@@ -134,49 +148,37 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
                 ]);
 
                 // ===== Belang-belang (zebra) per pasangan baris (Kepala + Wakil) =====
-                $zebraColors = ['FFFFFF', 'F2F2F2'];
-                $pairIndex = 0;
-                for ($row = $firstDataRow; $row <= $highestRow; $row += 2) {
-                    $rowEnd = min($row + 1, $highestRow);
-                    $color = $zebraColors[$pairIndex % 2];
-                    $sheet->getStyle("A{$row}:I{$rowEnd}")->applyFromArray([
-                        'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $color]],
+                $currentRow = $firstDataRow;
+                $colors = ['FFFFFF', 'F2F2F2'];
+                $index = 0;
+
+                foreach ($this->rowGroups as $groupRows) {
+                    $endRow = $currentRow + $groupRows - 1;
+
+                    // Zebra sesuai 1 daerah
+                    $sheet->getStyle("A{$currentRow}:I{$endRow}")->applyFromArray([
+                        'fill' => [
+                            'fillType' => Fill::FILL_SOLID,
+                            'startColor' => [
+                                'rgb' => $colors[$index % 2],
+                            ],
+                        ],
                     ]);
-                    $pairIndex++;
-                }
 
-                $placeholderStyle = [
-                    'fill' => [
-                        'fillType' => Fill::FILL_SOLID,
-                        'startColor' => ['rgb' => 'FFF1E0'],
-                    ],
-                    'font' => [
-                        'color' => ['rgb' => '000000'],
-                    ],
-                ];
+                    // Merge hanya jika ada Kepala + Wakil
+                    if ($groupRows == 2) {
+                        $sheet->mergeCells("H{$currentRow}:H{$endRow}");
+                        $sheet->mergeCells("I{$currentRow}:I{$endRow}");
 
-                foreach (range($firstDataRow, $highestRow) as $row) {
-                    foreach (range('C', 'H') as $col) {
-                        $value = trim((string) $sheet->getCell("{$col}{$row}")->getValue());
-                        if ($value === '-') {
-                            $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
-                        }
+                        $sheet
+                            ->getStyle("H{$currentRow}:I{$endRow}")
+                            ->getAlignment()
+                            ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                            ->setVertical(Alignment::VERTICAL_CENTER);
                     }
-                }
 
-                // ===== Merge NOMOR PLAT (H) & JUMLAH ROMBONGAN (I) per pasangan baris (Kepala+Wakil) =====
-                for ($row = $firstDataRow; $row <= $highestRow; $row += 2) {
-                    $rowEnd = $row + 1;
-                    if ($rowEnd > $highestRow) {
-                        break;
-                    }
-                    $sheet->mergeCells("H{$row}:H{$rowEnd}");
-                    $sheet->mergeCells("I{$row}:I{$rowEnd}");
-                    $sheet
-                        ->getStyle("H{$row}:I{$rowEnd}")
-                        ->getAlignment()
-                        ->setVertical(Alignment::VERTICAL_CENTER)
-                        ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                    $currentRow = $endRow + 1;
+                    $index++;
                 }
 
                 // ===== Baris total di bawah tabel =====
@@ -184,7 +186,10 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
                 $sheet->setCellValue('B' . $totalRow, 'TOTAL JUMLAH ROMBONGAN');
                 // Total dihitung langsung dari PHP (bukan formula SUM), agar tidak terjadi #REF!
                 // akibat sebagian baris I ikut ter-merge.
-                $totalRombongan = $this->collection()->sum('jumlah_rombongan');
+                // Gunakan collection() yang sudah di-cache, dan pastikan hasilnya numerik.
+                $totalRombongan = $this->collection()->sum(function ($item) {
+                    return is_numeric($item->jumlah_rombongan) ? (int) $item->jumlah_rombongan : 0;
+                });
                 $sheet->setCellValue('I' . $totalRow, $totalRombongan);
 
                 $sheet->getStyle('B' . $totalRow . ':I' . $totalRow)->applyFromArray([
