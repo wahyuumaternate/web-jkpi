@@ -44,22 +44,7 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         static $no = 0;
         $no++;
 
-        return [
-            $no,
-            strtoupper($item->nama_daerah),
-            strtoupper($item->nama_kepala_daerah),
-            strtoupper($item->ukuran_baju),
-            strtoupper($item->nama_pasangan_kepala_daerah ?? '-'),
-            strtoupper($item->ukuran_baju_pasangan ?? '-'),
-            strtoupper($item->ukuran_peci ?? '-'),
-            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
-            strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? '-'),
-            strtoupper($item->ukuran_baju_wakil ?? '-'),
-            strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'),
-            strtoupper($item->ukuran_peci_wakil ?? '-'),
-            strtoupper($item->nomor_plat ?? '-'),
-            $item->jumlah_rombongan
-        ];
+        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju), strtoupper($item->nama_pasangan_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_pasangan ?? '-'), strtoupper($item->ukuran_peci ?? '-'), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_wakil ?? '-'), strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'), strtoupper($item->ukuran_peci_wakil ?? '-'), strtoupper($item->nomor_plat ?? '-'), $item->jumlah_rombongan];
     }
 
     public function styles(Worksheet $sheet)
@@ -84,7 +69,7 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $sheet->getStyle('C2:G' . $highestRow)->applyFromArray([
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'F5F7FA'],
+                'startColor' => ['rgb' => 'ffffff'],
             ],
         ]);
 
@@ -92,7 +77,7 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $sheet->getStyle('H2:L' . $highestRow)->applyFromArray([
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'F5F7FA'],
+                'startColor' => ['rgb' => 'ffffff'],
             ],
         ]);
 
@@ -100,16 +85,16 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $sheet->getStyle('C1:G1')->applyFromArray([
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'D9E6F2'],
+                'startColor' => ['rgb' => '099AA7'],
             ],
-            'font' => ['bold' => true, 'color' => ['rgb' => '000000']],
+            'font' => ['bold' => true, 'color' => ['rgb' => 'ffffff']],
         ]);
         $sheet->getStyle('H1:L1')->applyFromArray([
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'C9CDCF'],
+                'startColor' => ['rgb' => '099AA7'],
             ],
-            'font' => ['bold' => true, 'color' => ['rgb' => '000000']],
+            'font' => ['bold' => true, 'color' => ['rgb' => 'ffffff']],
         ]);
 
         // Style placeholder cells for missing data with soft gray
