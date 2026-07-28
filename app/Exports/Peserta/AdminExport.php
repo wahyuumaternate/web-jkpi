@@ -86,6 +86,21 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
             'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
         ]);
 
+        $placeholderStyle = [
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFF1E0'],
+            ],
+        ];
+
+        for ($row = 2; $row <= $highestRow; $row++) {
+            foreach (range('A', 'I') as $col) {
+                if (trim((string) $sheet->getCell("{$col}{$row}")->getValue()) === '-') {
+                    $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
+                }
+            }
+        }
+
         $sheet->getColumnDimension('B')->setWidth(20);
         $sheet->getColumnDimension('C')->setWidth(28);
         $sheet->getColumnDimension('D')->setWidth(22);

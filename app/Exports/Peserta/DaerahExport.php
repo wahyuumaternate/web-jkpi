@@ -97,7 +97,7 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
             'font' => ['bold' => true, 'color' => ['rgb' => 'ffffff']],
         ]);
 
-        // Style placeholder cells for missing data with soft gray
+        // Style placeholder cells for missing data with soft orange
         $placeholderStyle = [
             'fill' => [
                 'fillType' => Fill::FILL_SOLID,

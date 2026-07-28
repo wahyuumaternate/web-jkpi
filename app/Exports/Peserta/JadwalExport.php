@@ -75,6 +75,21 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
             'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
         ]);
 
+        $placeholderStyle = [
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFF1E0'],
+            ],
+        ];
+
+        for ($row = 2; $row <= $highestRow; $row++) {
+            foreach (range('A', 'G') as $col) {
+                if (trim((string) $sheet->getCell("{$col}{$row}")->getValue()) === '-') {
+                    $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
+                }
+            }
+        }
+
         $sheet->getColumnDimension('E')->setWidth(25);
         $sheet->getColumnDimension('F')->setWidth(25);
         $sheet->getColumnDimension('G')->setWidth(40);
