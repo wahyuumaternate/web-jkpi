@@ -78,8 +78,7 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Nama Kepala Daerah
                                     <small class="text-muted">(opsional jika tidak hadir)</small></label>
-                                <input type="text" class="form-control" id="nama_kepala_daerah"
-                                    name="nama_kepala_daerah"
+                                <input type="text" class="form-control" id="nama_kepala_daerah" name="nama_kepala_daerah"
                                     value="{{ old('nama_kepala_daerah', $peserta->nama_kepala_daerah) }}"
                                     oninput="toggleUkuranKepalaDaerah()">
                             </div>
@@ -119,7 +118,7 @@
                                     <span class="text-danger" id="required_ukuran_peci" style="display:none">*</span>
                                 </label>
                                 <input type="text" class="form-control" name="ukuran_peci" id="ukuran_peci"
-                                    value="{{ old('ukuran_peci', $peserta->ukuran_peci) }}" placeholder="Contoh: 58">
+                                    value="{{ old('ukuran_peci', $peserta->ukuran_peci) }}" placeholder="Contoh: 8">
                             </div>
                         </div>
                     </div>
@@ -175,7 +174,7 @@
                                 <label class="form-label fw-semibold">Ukuran Peci Wakil</label>
                                 <input type="text" class="form-control" name="ukuran_peci_wakil"
                                     value="{{ old('ukuran_peci_wakil', $peserta->ukuran_peci_wakil) }}"
-                                    placeholder="Contoh: 58">
+                                    placeholder="Contoh: 8">
                             </div>
                         </div>
                     </div>
