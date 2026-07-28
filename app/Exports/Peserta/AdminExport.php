@@ -52,16 +52,16 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
         static $no = 0;
         $no++;
 
-        $narahubungNama = $item->narahubung->pluck('nama')->implode(' | ');
+        $narahubungNama = $item->narahubung->pluck('nama')->map(fn($v) => strtoupper($v))->implode(' | ');
         $narahubungTelepon = $item->narahubung->pluck('telepon')->map(fn($value) => $this->formatPhone($value))->implode(' | ');
         $narahubungEmail = $item->narahubung->pluck('email')->implode(' | ');
 
         return [
             $no,
-            $item->nama_daerah,
-            $item->nama_kepala_daerah,
-            $item->nama_wakil_kepala_daerah ?? '-',
-            $item->nama_ajudan ?? '-',
+            strtoupper($item->nama_daerah),
+            strtoupper($item->nama_kepala_daerah),
+            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
+            strtoupper($item->nama_ajudan ?? '-'),
             $this->formatPhone($item->telepon_ajudan),
             $narahubungNama ?: '-',
             $narahubungTelepon ?: '-',

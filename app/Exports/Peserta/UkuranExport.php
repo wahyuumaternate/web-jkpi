@@ -44,15 +44,15 @@ class UkuranExport implements FromCollection, WithHeadings, WithMapping, WithSty
 
         return [
             $no,
-            $item->nama_daerah,
-            $item->nama_kepala_daerah,
-            $item->ukuran_baju,
-            $item->ukuran_peci ?? '-',
-            $item->ukuran_baju_pasangan ?? '-',
-            $item->nama_wakil_kepala_daerah ?? '-',
-            $item->ukuran_baju_wakil ?? '-',
-            $item->ukuran_peci_wakil ?? '-',
-            $item->ukuran_baju_pasangan_wakil ?? '-',
+            strtoupper($item->nama_daerah),
+            strtoupper($item->nama_kepala_daerah),
+            strtoupper($item->ukuran_baju),
+            strtoupper($item->ukuran_peci ?? '-'),
+            strtoupper($item->ukuran_baju_pasangan ?? '-'),
+            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
+            strtoupper($item->ukuran_baju_wakil ?? '-'),
+            strtoupper($item->ukuran_peci_wakil ?? '-'),
+            strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'),
         ];
     }
 

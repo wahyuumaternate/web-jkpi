@@ -54,7 +54,7 @@ class PesertaByStatusExport implements FromCollection, WithHeadings, WithMapping
         static $no = 0;
         $no++;
 
-        return [$no, strtoupper($peserta->status), $peserta->kode_registrasi, $peserta->nama_lengkap, $peserta->email, $peserta->nomor_wa, $peserta->provinsi, $peserta->kabupaten_kota, $peserta->instansi ?? '-', $peserta->is_anggota_jkpi ? 'Ya' : 'Tidak', $peserta->created_at->format('d-m-Y H:i')];
+        return [$no, strtoupper($peserta->status), $peserta->kode_registrasi, strtoupper($peserta->nama_lengkap), $peserta->email, $peserta->nomor_wa, strtoupper($peserta->provinsi), strtoupper($peserta->kabupaten_kota), strtoupper($peserta->instansi ?? '-'), $peserta->is_anggota_jkpi ? 'YA' : 'TIDAK', $peserta->created_at->format('d-m-Y H:i')];
     }
 
     /**

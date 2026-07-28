@@ -74,10 +74,10 @@ class IdentitasExport implements FromCollection, WithHeadings, WithMapping, With
         return [
             $no,
             $peserta->kode_registrasi,
-            $peserta->nama_lengkap,
+            strtoupper($peserta->nama_lengkap),
             "'" . $peserta->nik,
-            $peserta->jenis_kelamin,
-            $peserta->tempat_lahir,
+            strtoupper($peserta->jenis_kelamin),
+            strtoupper($peserta->tempat_lahir),
             $peserta->tanggal_lahir ? $peserta->tanggal_lahir->format('d-m-Y') : '',
             $peserta->umur . ' tahun',
         ];

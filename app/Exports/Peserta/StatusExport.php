@@ -74,11 +74,11 @@ class StatusExport implements FromCollection, WithHeadings, WithMapping, WithSty
         return [
             $no,
             $peserta->kode_registrasi,
-            $peserta->nama_lengkap,
+            strtoupper($peserta->nama_lengkap),
             strtoupper($peserta->status),
             $peserta->created_at->format('d-m-Y H:i:s'),
             $peserta->updated_at->format('d-m-Y H:i:s'),
-            $peserta->provinsi,
+            strtoupper($peserta->provinsi),
         ];
     }
 

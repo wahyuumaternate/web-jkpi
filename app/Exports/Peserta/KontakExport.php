@@ -74,9 +74,9 @@ class KontakExport implements FromCollection, WithHeadings, WithMapping, WithSty
         return [
             $no,
             $peserta->kode_registrasi,
-            $peserta->nama_lengkap,
+            strtoupper($peserta->nama_lengkap),
             $peserta->email,
-            $peserta->email_verified_at ? 'Verified (' . $peserta->email_verified_at->format('d-m-Y H:i') . ')' : 'Belum Verified',
+            $peserta->email_verified_at ? 'VERIFIED (' . $peserta->email_verified_at->format('d-m-Y H:i') . ')' : 'BELUM VERIFIED',
             $peserta->nomor_telepon ?? '-',
             $peserta->nomor_wa,
         ];

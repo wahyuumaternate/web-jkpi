@@ -44,16 +44,16 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
 
         $kegiatanItems = $item->kegiatan->pluck('nama_kegiatan')->filter()->values();
         $kegiatan = $kegiatanItems->count() > 0
-            ? $kegiatanItems->map(fn($value) => '- ' . $value)->implode("\n")
+            ? $kegiatanItems->map(fn($value) => '- ' . strtoupper($value))->implode("\n")
             : '-';
 
         return [
             $no,
-            $item->nama_daerah,
-            $item->nama_kepala_daerah,
-            $item->nama_wakil_kepala_daerah ?? '-',
-            $item->info_kedatangan,
-            $item->info_kepulangan,
+            strtoupper($item->nama_daerah),
+            strtoupper($item->nama_kepala_daerah),
+            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
+            strtoupper($item->info_kedatangan),
+            strtoupper($item->info_kepulangan),
             $kegiatan,
         ];
     }

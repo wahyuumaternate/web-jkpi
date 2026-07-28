@@ -44,13 +44,13 @@ class RombonganExport implements FromCollection, WithHeadings, WithMapping, With
 
         return [
             $no,
-            $item->nama_daerah,
-            $item->nama_kepala_daerah,
-            $item->nama_wakil_kepala_daerah ?? '-',
+            strtoupper($item->nama_daerah),
+            strtoupper($item->nama_kepala_daerah),
+            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
             $item->jumlah_rombongan,
-            $item->nama_ajudan ?? '-',
+            strtoupper($item->nama_ajudan ?? '-'),
             $item->telepon_ajudan ?? '-',
-            $item->nomor_plat ?? '-',
+            strtoupper($item->nomor_plat ?? '-'),
         ];
     }
 

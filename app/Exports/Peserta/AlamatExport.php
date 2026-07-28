@@ -74,12 +74,12 @@ class AlamatExport implements FromCollection, WithHeadings, WithMapping, WithSty
         return [
             $no,
             $peserta->kode_registrasi,
-            $peserta->nama_lengkap,
-            $peserta->alamat,
-            $peserta->provinsi,
-            $peserta->kabupaten_kota,
-            $peserta->kecamatan ?? '-',
-            $peserta->kelurahan ?? '-',
+            strtoupper($peserta->nama_lengkap),
+            strtoupper($peserta->alamat),
+            strtoupper($peserta->provinsi),
+            strtoupper($peserta->kabupaten_kota),
+            strtoupper($peserta->kecamatan ?? '-'),
+            strtoupper($peserta->kelurahan ?? '-'),
             $peserta->kode_pos ?? '-',
         ];
     }

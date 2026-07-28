@@ -74,11 +74,11 @@ class PekerjaanExport implements FromCollection, WithHeadings, WithMapping, With
         return [
             $no,
             $peserta->kode_registrasi,
-            $peserta->nama_lengkap,
-            $peserta->instansi ?? '-',
-            $peserta->jabatan ?? '-',
-            $peserta->bidang_pekerjaan ?? '-',
-            $peserta->is_anggota_jkpi ? 'Ya' : 'Tidak',
+            strtoupper($peserta->nama_lengkap),
+            strtoupper($peserta->instansi ?? '-'),
+            strtoupper($peserta->jabatan ?? '-'),
+            strtoupper($peserta->bidang_pekerjaan ?? '-'),
+            $peserta->is_anggota_jkpi ? 'YA' : 'TIDAK',
         ];
     }
 

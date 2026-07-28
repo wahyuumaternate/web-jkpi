@@ -74,9 +74,9 @@ class KebutuhanExport implements FromCollection, WithHeadings, WithMapping, With
         return [
             $no,
             $peserta->kode_registrasi,
-            $peserta->nama_lengkap,
-            $peserta->butuh_akomodasi ? 'Ya' : 'Tidak',
-            $peserta->kebutuhan_khusus ?? '-',
+            strtoupper($peserta->nama_lengkap),
+            $peserta->butuh_akomodasi ? 'YA' : 'TIDAK',
+            strtoupper($peserta->kebutuhan_khusus ?? '-'),
         ];
     }
 

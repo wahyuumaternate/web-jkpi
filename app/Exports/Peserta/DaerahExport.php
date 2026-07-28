@@ -44,7 +44,22 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         static $no = 0;
         $no++;
 
-        return [$no, $item->nama_daerah, $item->nama_kepala_daerah, $item->ukuran_baju, $item->nama_pasangan_kepala_daerah ?? '-', $item->ukuran_baju_pasangan ?? '-', $item->ukuran_peci ?? '-', $item->nama_wakil_kepala_daerah ?? '-', $item->nama_pasangan_wakil_kepala_daerah ?? '-', $item->ukuran_baju_wakil ?? '-', $item->ukuran_baju_pasangan_wakil ?? '-', $item->ukuran_peci_wakil ?? '-', $item->nomor_plat ?? '-', $item->jumlah_rombongan];
+        return [
+            $no,
+            strtoupper($item->nama_daerah),
+            strtoupper($item->nama_kepala_daerah),
+            strtoupper($item->ukuran_baju),
+            strtoupper($item->nama_pasangan_kepala_daerah ?? '-'),
+            strtoupper($item->ukuran_baju_pasangan ?? '-'),
+            strtoupper($item->ukuran_peci ?? '-'),
+            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
+            strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? '-'),
+            strtoupper($item->ukuran_baju_wakil ?? '-'),
+            strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'),
+            strtoupper($item->ukuran_peci_wakil ?? '-'),
+            strtoupper($item->nomor_plat ?? '-'),
+            $item->jumlah_rombongan
+        ];
     }
 
     public function styles(Worksheet $sheet)
@@ -64,6 +79,58 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
             'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
             'alignment' => ['vertical' => Alignment::VERTICAL_TOP, 'wrapText' => true],
         ]);
+
+        // Style Kepala Daerah columns with soft gray
+        $sheet->getStyle('C2:G' . $highestRow)->applyFromArray([
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'F5F7FA'],
+            ],
+        ]);
+
+        // Style Wakil columns with soft orange
+        $sheet->getStyle('H2:L' . $highestRow)->applyFromArray([
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'F5F7FA'],
+            ],
+        ]);
+
+        // Style header segments for Kepala Daerah and Wakil
+        $sheet->getStyle('C1:G1')->applyFromArray([
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'D9E6F2'],
+            ],
+            'font' => ['bold' => true, 'color' => ['rgb' => '000000']],
+        ]);
+        $sheet->getStyle('H1:L1')->applyFromArray([
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'C9CDCF'],
+            ],
+            'font' => ['bold' => true, 'color' => ['rgb' => '000000']],
+        ]);
+
+        // Style placeholder cells for missing data with soft gray
+        $placeholderStyle = [
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => 'FFF1E0'],
+            ],
+            'font' => [
+                'color' => ['rgb' => '000000'],
+            ],
+        ];
+
+        for ($row = 2; $row <= $highestRow; $row++) {
+            foreach (range('C', 'N') as $col) {
+                $value = trim((string) $sheet->getCell("{$col}{$row}")->getValue());
+                if ($value === '-') {
+                    $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
+                }
+            }
+        }
 
         // Set column widths
         $sheet->getColumnDimension('A')->setWidth(5);
