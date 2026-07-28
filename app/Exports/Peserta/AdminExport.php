@@ -13,8 +13,10 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyles, ShouldAutoSize, WithTitle
+class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyles, ShouldAutoSize, WithTitle, WithEvents
 {
     protected $status;
 
@@ -56,66 +58,103 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
         $narahubungTelepon = $item->narahubung->pluck('telepon')->map(fn($value) => $this->formatPhone($value))->implode(' | ');
         $narahubungEmail = $item->narahubung->pluck('email')->implode(' | ');
 
-        return [
-            $no,
-            strtoupper($item->nama_daerah),
-            strtoupper($item->nama_kepala_daerah),
-            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
-            strtoupper($item->nama_ajudan ?? '-'),
-            $this->formatPhone($item->telepon_ajudan),
-            $narahubungNama ?: '-',
-            $narahubungTelepon ?: '-',
-            $narahubungEmail ?: '-',
-        ];
+        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->nama_ajudan ?? '-'), $this->formatPhone($item->telepon_ajudan), $narahubungNama ?: '-', $narahubungTelepon ?: '-', $narahubungEmail ?: '-'];
     }
 
     public function styles(Worksheet $sheet)
     {
-        $headerStyle = [
-            'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
-            'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
-        ];
-
-        $sheet->getStyle('A1:I1')->applyFromArray($headerStyle);
-        $sheet->getRowDimension(1)->setRowHeight(25);
-
-        $highestRow = $sheet->getHighestRow();
-        $sheet->getStyle('A2:I' . $highestRow)->applyFromArray([
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
-        ]);
-
-        $placeholderStyle = [
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFF1E0'],
-            ],
-        ];
-
-        for ($row = 2; $row <= $highestRow; $row++) {
-            foreach (range('A', 'I') as $col) {
-                if (trim((string) $sheet->getCell("{$col}{$row}")->getValue()) === '-') {
-                    $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
-                }
-            }
-        }
-
-        $sheet->getColumnDimension('B')->setWidth(20);
-        $sheet->getColumnDimension('C')->setWidth(28);
-        $sheet->getColumnDimension('D')->setWidth(22);
-        $sheet->getColumnDimension('E')->setWidth(22);
-        $sheet->getColumnDimension('F')->setWidth(18);
-        $sheet->getColumnDimension('G')->setWidth(24);
-        $sheet->getColumnDimension('H')->setWidth(24);
-        $sheet->getColumnDimension('I')->setWidth(30);
-
-        $sheet->freezePane('A2');
-        return $sheet;
+        return [];
     }
 
     public function title(): string
     {
         return 'Ajudan & Narahubung';
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+
+                // Tambahkan 2 baris (judul + kosong)
+                $sheet->insertNewRowBefore(1, 2);
+                $highestRow = $sheet->getHighestRow();
+
+                $sheet->getStyle("A3:I{$highestRow}")->applyFromArray([
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                            'color' => ['rgb' => 'CCCCCC'],
+                        ],
+                    ],
+                    'alignment' => [
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                ]);
+
+                // ===== Judul =====
+                $sheet->setCellValue('A1', 'DAFTAR KEPALA DAERAH, WAKIL KEPALA DAERAH, AJUDAN DAN NARAHUBUNG (UPDATE WEBSITE ' . strtoupper(date('d F Y')) . ')');
+
+                $sheet->mergeCells('A1:I1');
+
+                $sheet->getStyle('A1')->applyFromArray([
+                    'font' => [
+                        'bold' => true,
+                        'size' => 12,
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                    ],
+                ]);
+
+                $sheet->getRowDimension(1)->setRowHeight(22);
+
+                // Header pindah ke baris 3
+                $headerStyle = [
+                    'font' => [
+                        'bold' => true,
+                        'color' => ['rgb' => 'FFFFFF'],
+                        'size' => 11,
+                    ],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => '099AA7'],
+                    ],
+                    'alignment' => [
+                        'horizontal' => Alignment::HORIZONTAL_CENTER,
+                        'vertical' => Alignment::VERTICAL_CENTER,
+                        'wrapText' => true,
+                    ],
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_THIN,
+                        ],
+                    ],
+                ];
+
+                $sheet->getStyle('A3:I3')->applyFromArray($headerStyle);
+                $sheet->getRowDimension(3)->setRowHeight(30);
+
+                // Freeze pane
+                $sheet->freezePane('A4');
+
+                // ===== Print Area =====
+                $highestRow = $sheet->getHighestRow();
+
+                $sheet->getPageSetup()->setPrintArea("A1:I{$highestRow}");
+                $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+                $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+                $sheet->getPageSetup()->setFitToWidth(1);
+                $sheet->getPageSetup()->setFitToHeight(0);
+
+                // Ulangi header di setiap halaman
+                $sheet->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(1, 3);
+
+                // Margin
+                $sheet->getPageMargins()->setTop(0.3)->setBottom(0.3)->setLeft(0.3)->setRight(0.3);
+            },
+        ];
     }
 }

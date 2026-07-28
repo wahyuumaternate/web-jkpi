@@ -14,6 +14,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 
 class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAutoSize, WithTitle, WithEvents
 {
@@ -46,13 +47,23 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
     {
         static $no = 0;
 
-        $no++;
-        $rowKepala = [$no, 'KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju), strtoupper($item->nama_pasangan_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_pasangan ?? '-'), strtoupper($item->ukuran_peci ?? '-'), strtoupper($item->nomor_plat ?? '-'), $item->jumlah_rombongan];
+        $rows = [];
 
-        $no++;
-        $rowWakil = [$no, 'WAKIL KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_wakil ?? '-'), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'), strtoupper($item->ukuran_peci_wakil ?? '-'), strtoupper($item->nomor_plat ?? '-'), $item->jumlah_rombongan];
+        // Jika kepala daerah ada
+        if (!empty($item->nama_kepala_daerah)) {
+            $no++;
 
-        return [$rowKepala, $rowWakil];
+            $rows[] = [$no, 'KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju ?? ''), strtoupper($item->nama_pasangan_kepala_daerah ?? ''), strtoupper($item->ukuran_baju_pasangan ?? ''), strtoupper($item->ukuran_peci ?? ''), strtoupper($item->nomor_plat ?? ''), $item->jumlah_rombongan];
+        }
+
+        // Jika wakil kepala daerah ada
+        if (!empty($item->nama_wakil_kepala_daerah)) {
+            $no++;
+
+            $rows[] = [$no, 'WAKIL KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_wakil_kepala_daerah), strtoupper($item->ukuran_baju_wakil ?? ''), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? ''), strtoupper($item->ukuran_baju_pasangan_wakil ?? ''), strtoupper($item->ukuran_peci_wakil ?? ''), strtoupper($item->nomor_plat ?? ''), $item->jumlah_rombongan];
+        }
+
+        return $rows;
     }
 
     public function styles(Worksheet $sheet)
@@ -87,7 +98,7 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
                 $sheet->mergeCells('A1:I1');
                 $sheet->getStyle('A1')->applyFromArray([
                     'font' => ['bold' => true, 'size' => 12],
-                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT, 'vertical' => Alignment::VERTICAL_CENTER],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER],
                 ]);
                 $sheet->getRowDimension(1)->setRowHeight(22);
 
@@ -134,11 +145,16 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
                     $pairIndex++;
                 }
 
-                // ===== Placeholder "-" diberi warna oranye lembut =====
                 $placeholderStyle = [
-                    'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => 'FFF1E0']],
-                    'font' => ['color' => ['rgb' => '000000']],
+                    'fill' => [
+                        'fillType' => Fill::FILL_SOLID,
+                        'startColor' => ['rgb' => 'FFF1E0'],
+                    ],
+                    'font' => [
+                        'color' => ['rgb' => '000000'],
+                    ],
                 ];
+
                 foreach (range($firstDataRow, $highestRow) as $row) {
                     foreach (range('C', 'H') as $col) {
                         $value = trim((string) $sheet->getCell("{$col}{$row}")->getValue());
@@ -196,6 +212,26 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
                 $sheet->getColumnDimension('H')->setWidth(14);
                 $sheet->getColumnDimension('I')->setWidth(14);
 
+                // ===== Print Area & Page Setup =====
+                $sheet->getPageSetup()->setPrintArea("A1:I{$totalRow}");
+                $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+                $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);
+
+                // Muat semua kolom dalam 1 halaman
+                $sheet->getPageSetup()->setFitToWidth(1);
+                $sheet->getPageSetup()->setFitToHeight(0);
+
+                // Margin
+                $sheet->getPageMargins()->setTop(0.4)->setRight(0.25)->setLeft(0.25)->setBottom(0.4);
+
+                // Header tabel diulang pada setiap halaman
+                $sheet->getPageSetup()->setRowsToRepeatAtTopByStartAndEnd(3, 3);
+
+                // Tampilkan garis grid saat dicetak (opsional)
+                $sheet->setPrintGridlines(true);
+
+                // Posisi di tengah halaman
+                $sheet->getPageSetup()->setHorizontalCentered(true)->setVerticalCentered(false);
                 $sheet->freezePane('A' . $firstDataRow);
             },
         ];
