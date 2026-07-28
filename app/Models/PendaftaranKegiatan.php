@@ -14,7 +14,7 @@ class PendaftaranKegiatan extends Model
     /**
      * Daftar kegiatan yang valid (untuk validasi).
      */
-    public const KEGIATAN_VALID = ['Welcome Dinner', 'Master Class', 'Heritage City Tour', 'Ladies Program', 'Expo UMKM', 'Pentas Budaya', 'Simposium Internasional - Pulau-Pulau Penghasil Rempah', 'Festival Gastronomi', 'Rapat Kerja Nasional', 'Gelar Budaya dan Penyerahan Pataka', 'Pawai Budaya dan Karnaval', 'Nusantara Raya Run'];
+    public const KEGIATAN_VALID = ['Welcome Dinner', 'Master Class', 'Heritage City Tour', 'Ladies Program', 'Expo UMKM', 'Pentas Budaya', 'Simposium Internasional', 'Festival Gastronomi', 'Rapat Kerja Nasional', 'Gelar Budaya dan Penyerahan Pataka', 'Pawai Budaya dan Karnaval', 'Nusantara Raya Run'];
 
     public function peserta(): BelongsTo
     {

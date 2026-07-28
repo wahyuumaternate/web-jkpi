@@ -1539,11 +1539,10 @@
                                 </div>
                             </label>
                             <label class="event-check-item"><input type="checkbox" name="kegiatan[]"
-                                    value="Simposium Internasional - Pulau-Pulau Penghasil Rempah"
-                                    onchange="onEventChange()">
+                                    value="Simposium Internasional" onchange="onEventChange()">
                                 <div class="event-check-content"><span class="event-date-chip chip-d2">27
                                         AGUSTUS</span>
-                                    <div class="event-check-title">Simposium Internasional – Pulau Penghasil Rempah
+                                    <div class="event-check-title">Simposium Internasional
                                     </div>
                                     <div class="event-check-meta"><i class="bi bi-geo-alt-fill"></i> Bela Hotel</div>
                                 </div>

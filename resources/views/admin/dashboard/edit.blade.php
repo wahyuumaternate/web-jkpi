@@ -195,7 +195,7 @@
                                 'Expo UMKM',
                                 'Pentas Budaya',
                                 'Ladies Program',
-                                'Simposium Internasional - Pulau-Pulau Penghasil Rempah',
+                                'Simposium Internasional',
                                 'Rapat Kerja Nasional',
                                 'Festival Gastronomi',
                                 'Gelar Budaya dan Penyerahan Pataka',
