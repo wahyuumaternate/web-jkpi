@@ -1,2 +1,4 @@
-- tambahkan edit data
-- tambahkan data wakil kepala daerah seperti kepala daerah (ukuran baju, ukuran baju pasangan, dll.) dan juga ukuran peci
+- pisahkan data excel menjadi beberapa sheet, tidak perlu menampilkan koderegistrasii dan status
+- sheet 1 : No	Nama Daerah	Nama Kepala Daerah	Ukuran Baju KD	Nama Pasangan KD	Ukuran Baju Pasangan	Ukuran Peci KD	Nama Wakil Kepala Daerah	Nama Pasangan Wakil	Ukuran Baju Wakil	Ukuran Baju Pasangan Wakil	Ukuran Peci Wakil	Jumlah Rombongan
+- sheet 2: kedatangan, kepulangan dan kegiatan
+- sheet 3 : ajudan dan narahubung

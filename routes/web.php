@@ -105,30 +105,4 @@ Route::middleware(['auth'])
 
 Route::get('/pendaftaran/verify/{token}', [VerifikasiController::class, 'verify'])->name('pendaftaran.verify');
 require __DIR__ . '/auth.php';
-Route::get('/test-pdf-preview', function () {
-    // Load foto dan convert ke base64
-    $fotoPath = public_path('assets/img/foto.png');
-    $fotoBase64 = null;
 
-    if (file_exists($fotoPath)) {
-        $imageData = file_get_contents($fotoPath);
-        $mimeType = mime_content_type($fotoPath);
-        $fotoBase64 = "data:$mimeType;base64," . base64_encode($imageData);
-    }
-
-    $data = [
-        'nama' => 'Dr. Ahmad Hidayat, M.Si',
-        'instansi' => 'Pemerintah Kota Ternate',
-        'status' => 'Kepala Dinas Kebudayaan',
-        'kota' => 'Kota Ternate',
-        'foto' => $fotoBase64, // Foto dalam base64
-        'logo' => null, // Akan tampil text JKPI
-        'qrCode' => base64_encode(\SimpleSoftwareIO\QrCode\Facades\QrCode::format('png')->size(300)->errorCorrection('H')->margin(0)->generate('JKPI2026-ETT7UMLZ')),
-        'nomor_id' => 'JKPI2026-ETT7UMLZ',
-        'initial' => 'D',
-    ];
-
-    $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.id-card', $data)->setPaper([0, 0, 269.287, 357.1596], 'portrait');
-
-    return $pdf->stream('preview-idcard.pdf');
-});
