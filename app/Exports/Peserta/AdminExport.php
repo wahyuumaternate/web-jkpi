@@ -37,13 +37,23 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
         return ['NO', 'NAMA DAERAH', 'NAMA KEPALA DAERAH', 'NAMA WAKIL KEPALA DAERAH', 'NAMA AJUDAN', 'TELEPON AJUDAN', 'NAMA NARAHUBUNG', 'TELEPON NARAHUBUNG', 'EMAIL NARAHUBUNG'];
     }
 
+    protected function formatPhone(?string $phone): string
+    {
+        $phone = trim($phone ?? '');
+        if ($phone === '') {
+            return '-';
+        }
+
+        return "'{$phone}";
+    }
+
     public function map($item): array
     {
         static $no = 0;
         $no++;
 
         $narahubungNama = $item->narahubung->pluck('nama')->implode(' | ');
-        $narahubungTelepon = $item->narahubung->pluck('telepon')->implode(' | ');
+        $narahubungTelepon = $item->narahubung->pluck('telepon')->map(fn($value) => $this->formatPhone($value))->implode(' | ');
         $narahubungEmail = $item->narahubung->pluck('email')->implode(' | ');
 
         return [
@@ -52,7 +62,7 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
             $item->nama_kepala_daerah,
             $item->nama_wakil_kepala_daerah ?? '-',
             $item->nama_ajudan ?? '-',
-            $item->telepon_ajudan ?? '-',
+            $this->formatPhone($item->telepon_ajudan),
             $narahubungNama ?: '-',
             $narahubungTelepon ?: '-',
             $narahubungEmail ?: '-',
