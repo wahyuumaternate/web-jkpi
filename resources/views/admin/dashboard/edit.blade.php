@@ -118,7 +118,8 @@
                                     <span class="text-danger" id="required_ukuran_peci" style="display:none">*</span>
                                 </label>
                                 <input type="text" class="form-control" name="ukuran_peci" id="ukuran_peci"
-                                    value="{{ old('ukuran_peci', $peserta->ukuran_peci) }}" placeholder="Contoh: 8">
+                                    value="{{ old('ukuran_peci', $peserta->ukuran_peci) }}"
+                                    placeholder="Contoh: 8 atau 8,5">
                             </div>
                         </div>
                     </div>
@@ -174,7 +175,7 @@
                                 <label class="form-label fw-semibold">Ukuran Peci Wakil</label>
                                 <input type="text" class="form-control" name="ukuran_peci_wakil"
                                     value="{{ old('ukuran_peci_wakil', $peserta->ukuran_peci_wakil) }}"
-                                    placeholder="Contoh: 8">
+                                    placeholder="Contoh: 8 atau 8,5">
                             </div>
                         </div>
                     </div>

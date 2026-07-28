@@ -1210,7 +1210,8 @@
                             <span class="icon-badge"><i class="bi bi-person-vcard"></i></span>Data Kepala Daerah
                         </h3>
                         <div class="alert alert-info mb-4">
-                            <strong>Batas pendaftaran sampai tanggal 30 Juli.</strong> Kosongkan nama kepala daerah jika tidak hadir dan hanya wakil yang hadir.
+                            <strong>Batas pendaftaran sampai tanggal 30 Juli.</strong> Kosongkan nama kepala daerah jika
+                            tidak hadir dan hanya wakil yang hadir.
                         </div>
 
                         <div class="row">
@@ -1352,7 +1353,8 @@
                                 <input type="text" class="form-control" id="nama_kepala_daerah"
                                     name="nama_kepala_daerah" value="{{ old('nama_kepala_daerah') }}"
                                     placeholder="Lengkap dengan gelar" oninput="toggleUkuranKepalaDaerah()">
-                                <span class="field-help"><i class="bi bi-info-circle"></i>Kosongkan jika kepala daerah tidak hadir dan hanya wakil yang hadir.</span>
+                                <span class="field-help"><i class="bi bi-info-circle"></i>Kosongkan jika kepala daerah
+                                    tidak hadir dan hanya wakil yang hadir.</span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label" for="nama_pasangan_kepala_daerah">Nama Lengkap Pasangan
@@ -1399,7 +1401,7 @@
                                     <span class="required" id="required_ukuran_peci" style="display:none">*</span>
                                 </label>
                                 <input type="text" class="form-control" id="ukuran_peci" name="ukuran_peci"
-                                    value="{{ old('ukuran_peci') }}" placeholder="Contoh: 8">
+                                    value="{{ old('ukuran_peci') }}" placeholder="Contoh: 8 atau 8,5">
                             </div>
                         </div>
 
@@ -1462,7 +1464,7 @@
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">Ukuran Peci Wakil Kepala Daerah</label>
                                 <input type="text" class="form-control" name="ukuran_peci_wakil"
-                                    value="{{ old('ukuran_peci_wakil') }}" placeholder="Contoh: 8">
+                                    value="{{ old('ukuran_peci_wakil') }}" placeholder="Contoh: 8 atau 8,5">
                             </div>
                         </div>
 
