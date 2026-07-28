@@ -5,7 +5,6 @@ namespace App\Exports\Peserta;
 use App\Models\Peserta;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -16,9 +15,12 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithStyles, ShouldAutoSize, WithTitle, WithEvents
+class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAutoSize, WithTitle, WithEvents
 {
     protected $status;
+
+    // Baris data pertama setelah judul (1) + baris kosong (2) + header (3)
+    const HEADER_ROWS = 3;
 
     public function __construct($status = null)
     {
@@ -34,107 +36,30 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         return $query->orderBy('nama_daerah', 'asc')->get();
     }
 
-    public function headings(): array
-    {
-        return ['NO', 'NAMA DAERAH', 'NAMA KEPALA DAERAH', 'BAJU KD', 'NAMA PASANGAN KD', 'BAJU PASANGAN KD', 'PECI KD', 'NAMA WAKIL KEPALA DAERAH', 'NAMA PASANGAN WAKIL', 'BAJU WAKIL', 'BAJU PASANGAN WAKIL', 'PECI WAKIL', 'NOMOR PLAT', 'JUMLAH ROMBONGAN'];
-    }
-
+    /**
+     * Setiap Peserta menghasilkan 2 baris:
+     * 1) Kepala Daerah
+     * 2) Wakil Kepala Daerah
+     * NOMOR PLAT & JUMLAH ROMBONGAN akan di-merge vertikal antara kedua baris ini.
+     */
     public function map($item): array
     {
         static $no = 0;
-        $no++;
 
-        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju), strtoupper($item->nama_pasangan_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_pasangan ?? '-'), strtoupper($item->ukuran_peci ?? '-'), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_wakil ?? '-'), strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'), strtoupper($item->ukuran_peci_wakil ?? '-'), strtoupper($item->nomor_plat ?? '-'), $item->jumlah_rombongan];
+        $no++;
+        $rowKepala = [$no, 'KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju), strtoupper($item->nama_pasangan_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_pasangan ?? '-'), strtoupper($item->ukuran_peci ?? '-'), strtoupper($item->nomor_plat ?? '-'), $item->jumlah_rombongan];
+
+        $no++;
+        $rowWakil = [$no, 'WAKIL KEPALA DAERAH ' . strtoupper($item->nama_daerah), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_wakil ?? '-'), strtoupper($item->nama_pasangan_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'), strtoupper($item->ukuran_peci_wakil ?? '-'), strtoupper($item->nomor_plat ?? '-'), $item->jumlah_rombongan];
+
+        return [$rowKepala, $rowWakil];
     }
 
     public function styles(Worksheet $sheet)
     {
-        $headerStyle = [
-            'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
-            'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
-            'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER, 'wrapText' => true],
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
-        ];
-
-        $sheet->getStyle('A1:N1')->applyFromArray($headerStyle);
-        $sheet->getRowDimension(1)->setRowHeight(35);
-
-        $highestRow = $sheet->getHighestRow();
-        $sheet->getStyle('A2:N' . $highestRow)->applyFromArray([
-            'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
-            'alignment' => ['vertical' => Alignment::VERTICAL_TOP, 'wrapText' => true],
-        ]);
-
-        // Style Kepala Daerah columns with soft gray
-        $sheet->getStyle('C2:G' . $highestRow)->applyFromArray([
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'ffffff'],
-            ],
-        ]);
-
-        // Style Wakil columns with soft orange
-        $sheet->getStyle('H2:L' . $highestRow)->applyFromArray([
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'ffffff'],
-            ],
-        ]);
-
-        // Style header segments for Kepala Daerah and Wakil
-        $sheet->getStyle('C1:G1')->applyFromArray([
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '099AA7'],
-            ],
-            'font' => ['bold' => true, 'color' => ['rgb' => 'ffffff']],
-        ]);
-        $sheet->getStyle('H1:L1')->applyFromArray([
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '099AA7'],
-            ],
-            'font' => ['bold' => true, 'color' => ['rgb' => 'ffffff']],
-        ]);
-
-        // Style placeholder cells for missing data with soft orange
-        $placeholderStyle = [
-            'fill' => [
-                'fillType' => Fill::FILL_SOLID,
-                'startColor' => ['rgb' => 'FFF1E0'],
-            ],
-            'font' => [
-                'color' => ['rgb' => '000000'],
-            ],
-        ];
-
-        for ($row = 2; $row <= $highestRow; $row++) {
-            foreach (range('C', 'N') as $col) {
-                $value = trim((string) $sheet->getCell("{$col}{$row}")->getValue());
-                if ($value === '-') {
-                    $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
-                }
-            }
-        }
-
-        // Set column widths
-        $sheet->getColumnDimension('A')->setWidth(5);
-        $sheet->getColumnDimension('B')->setWidth(20);
-        $sheet->getColumnDimension('C')->setWidth(28);
-        $sheet->getColumnDimension('D')->setWidth(10);
-        $sheet->getColumnDimension('E')->setWidth(22);
-        $sheet->getColumnDimension('F')->setWidth(12);
-        $sheet->getColumnDimension('G')->setWidth(10);
-        $sheet->getColumnDimension('H')->setWidth(22);
-        $sheet->getColumnDimension('I')->setWidth(20);
-        $sheet->getColumnDimension('J')->setWidth(10);
-        $sheet->getColumnDimension('K')->setWidth(15);
-        $sheet->getColumnDimension('L')->setWidth(10);
-        $sheet->getColumnDimension('M')->setWidth(14);
-        $sheet->getColumnDimension('N')->setWidth(12);
-
-        $sheet->freezePane('A2');
-        return $sheet;
+        // Style dasar untuk seluruh area data akan diselesaikan di registerEvents,
+        // karena kita butuh tahu highestRow SETELAH baris judul & header disisipkan.
+        return [];
     }
 
     public function title(): string
@@ -147,13 +72,106 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
         return [
             AfterSheet::class => function (AfterSheet $event) {
                 $sheet = $event->sheet->getDelegate();
-                $highestRow = $sheet->getHighestRow();
+
+                // Jumlah baris data (2 baris per peserta) yang sudah ditulis mulai baris 1
+                $lastDataRow = $sheet->getHighestRow();
+
+                // Sisipkan 3 baris kosong di paling atas untuk judul (1), spacer (2), header (3)
+                $sheet->insertNewRowBefore(1, self::HEADER_ROWS);
+
+                $firstDataRow = self::HEADER_ROWS + 1;
+                $highestRow = $lastDataRow + self::HEADER_ROWS;
+
+                // ===== Judul =====
+                $sheet->setCellValue('A1', 'DAFTAR KEPALA DAERAH DAN WAKIL KEPALA DAERAH (UPDATE WEBSITE ' . strtoupper(date('d F Y')) . ')');
+                $sheet->mergeCells('A1:I1');
+                $sheet->getStyle('A1')->applyFromArray([
+                    'font' => ['bold' => true, 'size' => 12],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_LEFT, 'vertical' => Alignment::VERTICAL_CENTER],
+                ]);
+                $sheet->getRowDimension(1)->setRowHeight(22);
+
+                // ===== Header tabel (baris 3) =====
+                $headings = [
+                    'A3' => 'NO',
+                    'B3' => 'JABATAN',
+                    'C3' => 'NAMA',
+                    'D3' => 'UKURAN BAJU',
+                    'E3' => 'NAMA PASANGAN',
+                    'F3' => 'BAJU PASANGAN',
+                    'G3' => 'UKURAN PECI',
+                    'H3' => 'NOMOR PLAT',
+                    'I3' => 'JUMLAH ROMBONGAN',
+                ];
+                foreach ($headings as $cell => $text) {
+                    $sheet->setCellValue($cell, $text);
+                }
+
+                $headerStyle = [
+                    'font' => ['bold' => true, 'color' => ['rgb' => 'FFFFFF'], 'size' => 11],
+                    'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => '099AA7']],
+                    'alignment' => ['horizontal' => Alignment::HORIZONTAL_CENTER, 'vertical' => Alignment::VERTICAL_CENTER, 'wrapText' => true],
+                    'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
+                ];
+                $sheet->getStyle('A3:I3')->applyFromArray($headerStyle);
+                $sheet->getRowDimension(3)->setRowHeight(35);
+
+                // ===== Border & alignment untuk area data =====
+                $sheet->getStyle("A{$firstDataRow}:I{$highestRow}")->applyFromArray([
+                    'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN, 'color' => ['rgb' => 'CCCCCC']]],
+                    'alignment' => ['vertical' => Alignment::VERTICAL_CENTER, 'wrapText' => true],
+                ]);
+
+                // ===== Belang-belang (zebra) per pasangan baris (Kepala + Wakil) =====
+                $zebraColors = ['FFFFFF', 'F2F2F2'];
+                $pairIndex = 0;
+                for ($row = $firstDataRow; $row <= $highestRow; $row += 2) {
+                    $rowEnd = min($row + 1, $highestRow);
+                    $color = $zebraColors[$pairIndex % 2];
+                    $sheet->getStyle("A{$row}:I{$rowEnd}")->applyFromArray([
+                        'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => $color]],
+                    ]);
+                    $pairIndex++;
+                }
+
+                // ===== Placeholder "-" diberi warna oranye lembut =====
+                $placeholderStyle = [
+                    'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => 'FFF1E0']],
+                    'font' => ['color' => ['rgb' => '000000']],
+                ];
+                foreach (range($firstDataRow, $highestRow) as $row) {
+                    foreach (range('C', 'H') as $col) {
+                        $value = trim((string) $sheet->getCell("{$col}{$row}")->getValue());
+                        if ($value === '-') {
+                            $sheet->getStyle("{$col}{$row}")->applyFromArray($placeholderStyle);
+                        }
+                    }
+                }
+
+                // ===== Merge NOMOR PLAT (H) & JUMLAH ROMBONGAN (I) per pasangan baris (Kepala+Wakil) =====
+                for ($row = $firstDataRow; $row <= $highestRow; $row += 2) {
+                    $rowEnd = $row + 1;
+                    if ($rowEnd > $highestRow) {
+                        break;
+                    }
+                    $sheet->mergeCells("H{$row}:H{$rowEnd}");
+                    $sheet->mergeCells("I{$row}:I{$rowEnd}");
+                    $sheet
+                        ->getStyle("H{$row}:I{$rowEnd}")
+                        ->getAlignment()
+                        ->setVertical(Alignment::VERTICAL_CENTER)
+                        ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+                }
+
+                // ===== Baris total di bawah tabel =====
                 $totalRow = $highestRow + 2;
-
                 $sheet->setCellValue('B' . $totalRow, 'TOTAL JUMLAH ROMBONGAN');
-                $sheet->setCellValue('N' . $totalRow, '=SUM(N2:N' . $highestRow . ')');
+                // Total dihitung langsung dari PHP (bukan formula SUM), agar tidak terjadi #REF!
+                // akibat sebagian baris I ikut ter-merge.
+                $totalRombongan = $this->collection()->sum('jumlah_rombongan');
+                $sheet->setCellValue('I' . $totalRow, $totalRombongan);
 
-                $sheet->getStyle('B' . $totalRow . ':N' . $totalRow)->applyFromArray([
+                $sheet->getStyle('B' . $totalRow . ':I' . $totalRow)->applyFromArray([
                     'font' => ['bold' => true],
                     'fill' => ['fillType' => Fill::FILL_SOLID, 'startColor' => ['rgb' => 'F2F2F2']],
                     'borders' => ['allBorders' => ['borderStyle' => Border::BORDER_THIN]],
@@ -163,9 +181,22 @@ class DaerahExport implements FromCollection, WithHeadings, WithMapping, WithSty
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_RIGHT);
                 $sheet
-                    ->getStyle('M' . $totalRow)
+                    ->getStyle('I' . $totalRow)
                     ->getAlignment()
                     ->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+                // ===== Lebar kolom =====
+                $sheet->getColumnDimension('A')->setWidth(5);
+                $sheet->getColumnDimension('B')->setWidth(28);
+                $sheet->getColumnDimension('C')->setWidth(30);
+                $sheet->getColumnDimension('D')->setWidth(12);
+                $sheet->getColumnDimension('E')->setWidth(28);
+                $sheet->getColumnDimension('F')->setWidth(14);
+                $sheet->getColumnDimension('G')->setWidth(12);
+                $sheet->getColumnDimension('H')->setWidth(14);
+                $sheet->getColumnDimension('I')->setWidth(14);
+
+                $sheet->freezePane('A' . $firstDataRow);
             },
         ];
     }
