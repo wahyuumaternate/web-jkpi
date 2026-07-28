@@ -34,7 +34,7 @@ class DaerahExport implements FromCollection, WithMapping, WithStyles, ShouldAut
         if ($this->status) {
             $query->where('status', $this->status);
         }
-        return $query->orderBy('nama_daerah', 'asc')->get();
+        return $query->orderBy('created_at', 'desc')->get();
     }
 
     /**
