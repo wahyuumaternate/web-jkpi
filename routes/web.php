@@ -41,6 +41,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // tambah peserta
+    Route::get('/tambah-peserta', [PendaftaranController::class, 'tambahPeserta'])->name('tambah-peserta');
+
+    //   Proses pendaftaran
+    Route::post('/', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+
+    // Halaman sukses
+    Route::get('/success', [PendaftaranController::class, 'success'])->name('pendaftaran.success');
+
+    // Verifikasi email
+    Route::get('/verify/{token}', [PendaftaranController::class, 'verify'])->name('pendaftaran.verify');
+
+    // Kirim ulang email verifikasi
+    Route::post('/resend-verification', [PendaftaranController::class, 'resendVerification'])->name('pendaftaran.resend');
+
+    // Cek status pendaftaran
+    Route::post('/check-status', [PendaftaranController::class, 'checkStatus'])->name('pendaftaran.check-status');
+    Route::get('/status', function () {
+        return view('pendaftaran.check-status');
+    })->name('pendaftaran.check-status-form');
 });
 
 /*
@@ -54,24 +75,6 @@ Route::prefix('registrasi')
     ->group(function () {
         // Form pendaftaran
         Route::get('/', [PendaftaranController::class, 'index'])->name('index');
-
-        // Proses pendaftaran
-        // Route::post('/', [PendaftaranController::class, 'store'])->name('store');
-
-        // Halaman sukses
-        // Route::get('/success', [PendaftaranController::class, 'success'])->name('success');
-
-        // // Verifikasi email
-        // Route::get('/verify/{token}', [PendaftaranController::class, 'verify'])->name('verify');
-
-        // // Kirim ulang email verifikasi
-        // Route::post('/resend-verification', [PendaftaranController::class, 'resendVerification'])->name('resend');
-
-        // // Cek status pendaftaran
-        // Route::post('/check-status', [PendaftaranController::class, 'checkStatus'])->name('check-status');
-        // Route::get('/status', function () {
-        //     return view('pendaftaran.check-status');
-        // })->name('check-status-form');
     });
 
 /*
@@ -105,4 +108,3 @@ Route::middleware(['auth'])
 
 Route::get('/pendaftaran/verify/{token}', [VerifikasiController::class, 'verify'])->name('pendaftaran.verify');
 require __DIR__ . '/auth.php';
-

@@ -89,9 +89,14 @@
     <div class="row grid-margin">
         <div class="col-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
-                    <i class="mdi mdi-download me-2 text-primary" style="font-size:1.25rem;"></i>
-                    <h4 class="card-title mb-0">Export Data Excel</h4>
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <i class="mdi mdi-download me-2 text-primary" style="font-size:1.25rem;"></i>
+                        <h4 class="card-title mb-0">Export Data Excel</h4>
+                    </div>
+                    <a href="{{ route('tambah-peserta') }}" class="btn btn-primary">
+                        <i class="mdi mdi-plus me-1"></i> Tambah Peserta
+                    </a>
                 </div>
                 <div class="card-body">
                     <p class="fw-semibold mb-2">Export semua data peserta</p>
@@ -103,42 +108,10 @@
                                 </a>
                             </div>
                         @endif
-                        {{-- @if ($stats['confirmed'] != 0)
-                            <div class="col-6 col-md-3">
-                                <a href="{{ url('/admin/dashboard/export/confirmed') }}" class="btn btn-success w-100">
-                                    <i class="mdi mdi-check-circle me-1"></i> Confirmed ({{ $stats['confirmed'] }})
-                                </a>
-                            </div>
-                        @endif
-                        @if ($stats['pending'] != 0)
-                            <div class="col-6 col-md-3">
-                                <a href="{{ url('/admin/dashboard/export/pending') }}" class="btn btn-warning w-100">
-                                    <i class="mdi mdi-clock-outline me-1"></i> Pending ({{ $stats['pending'] }})
-                                </a>
-                            </div>
-                        @endif
-                        @if ($stats['cancelled'] != 0)
-                            <div class="col-6 col-md-3">
-                                <a href="{{ url('/admin/dashboard/export/cancelled') }}" class="btn btn-danger w-100">
-                                    <i class="mdi mdi-close-circle me-1"></i> Cancelled ({{ $stats['cancelled'] }})
-                                </a>
-                            </div>
-                        @endif --}}
+
                     </div>
 
-                    {{-- <p class="fw-semibold mb-2">Export Lainnya</p>
-                    <div class="row g-2">
-                        <div class="col-6 col-md-3">
-                            <a href="{{ url('/admin/dashboard/export/statistik') }}" class="btn btn-info w-100">
-                                <i class="mdi mdi-chart-bar me-1"></i> Statistik
-                            </a>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <a href="{{ url('/admin/dashboard/export/by-daerah') }}" class="btn btn-secondary w-100">
-                                <i class="mdi mdi-map me-1"></i> By Daerah
-                            </a>
-                        </div>
-                    </div> --}}
+
                 </div>
             </div>
         </div>
@@ -264,7 +237,8 @@
                                                 <div>{{ $p->nama_pasangan_kepala_daerah }}</div>
                                                 @if ($p->ukuran_baju_pasangan)
                                                     <span class="badge bg-info bg-opacity-75 mt-1">
-                                                        <i class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_pasangan }}
+                                                        <i
+                                                            class="mdi mdi-tshirt-v me-1"></i>{{ $p->ukuran_baju_pasangan }}
                                                     </span>
                                                 @endif
                                             @else
