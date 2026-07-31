@@ -56,22 +56,22 @@ Route::prefix('registrasi')
         Route::get('/', [PendaftaranController::class, 'index'])->name('index');
 
         // Proses pendaftaran
-        Route::post('/', [PendaftaranController::class, 'store'])->name('store');
+        // Route::post('/', [PendaftaranController::class, 'store'])->name('store');
 
         // Halaman sukses
-        Route::get('/success', [PendaftaranController::class, 'success'])->name('success');
+        // Route::get('/success', [PendaftaranController::class, 'success'])->name('success');
 
-        // Verifikasi email
-        Route::get('/verify/{token}', [PendaftaranController::class, 'verify'])->name('verify');
+        // // Verifikasi email
+        // Route::get('/verify/{token}', [PendaftaranController::class, 'verify'])->name('verify');
 
-        // Kirim ulang email verifikasi
-        Route::post('/resend-verification', [PendaftaranController::class, 'resendVerification'])->name('resend');
+        // // Kirim ulang email verifikasi
+        // Route::post('/resend-verification', [PendaftaranController::class, 'resendVerification'])->name('resend');
 
-        // Cek status pendaftaran
-        Route::post('/check-status', [PendaftaranController::class, 'checkStatus'])->name('check-status');
-        Route::get('/status', function () {
-            return view('pendaftaran.check-status');
-        })->name('check-status-form');
+        // // Cek status pendaftaran
+        // Route::post('/check-status', [PendaftaranController::class, 'checkStatus'])->name('check-status');
+        // Route::get('/status', function () {
+        //     return view('pendaftaran.check-status');
+        // })->name('check-status-form');
     });
 
 /*
