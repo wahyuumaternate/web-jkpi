@@ -51,7 +51,7 @@
                     </a>
 
                     <ul>
-                        <li>
+                        {{-- <li>
                             <a href="{{ url('/registrasi') }}" target="_blank">
                                 Rekernas XII JKPI 2026
                             </a>
@@ -60,7 +60,7 @@
                             <a href="#nusantara-run">
                                 Nusantara Raya Run
                             </a>
-                        </li>
+                        </li> --}}
 
                         <li>
                             <a href="https://forms.gle/umG33qVW5MLA5Zvh7" target="_blank">
@@ -70,7 +70,7 @@
                         <li>
                             <a href="https://docs.google.com/forms/d/e/1FAIpQLSeqhlkZeeFmfHzcURAkbeDaXBC70Mhp5S9JRPIG3ZTlElLEFg/viewform?usp=dialog"
                                 target="_blank">
-                                Masterclass
+                                Master Class
                             </a>
                         </li>
                         <li>

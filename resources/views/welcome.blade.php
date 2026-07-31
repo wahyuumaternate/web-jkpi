@@ -606,24 +606,24 @@
                             <div data-aos="fade-up" data-aos-delay="600"
                                 style="max-width: 800px; margin: 0 auto 35px;">
                                 <div
-                                    style="background: rgba(255, 193, 7, 0.18);
-               border: 2px solid rgba(255, 193, 7, 0.7);
+                                    style="background: rgba(255, 255, 255, 0.14);
+               border: 2px solid rgba(255, 255, 255, 0.55);
                color: #fff;
                border-radius: 14px;
                padding: 16px 24px;
                backdrop-filter: blur(10px);
                -webkit-backdrop-filter: blur(10px);
                box-shadow: 0 8px 25px rgba(0,0,0,0.25);">
-                                    <i class="bi bi-exclamation-triangle-fill me-2 text-warning"></i>
-                                    <strong>Pemberitahuan:</strong> Pendaftaran peserta hanya dibuka sampai
-                                    <strong>30 Juli 2026</strong>. Segera lakukan registrasi sebelum batas waktu
-                                    berakhir.
+                                    <i class="bi bi-info-circle-fill me-2"></i>
+                                    <strong>Pemberitahuan:</strong> Pendaftaran peserta Rakernas telah
+                                    <strong>ditutup</strong>. Pendaftaran <strong>Master Class</strong> dan
+                                    <strong>Pentas Budaya</strong> masih dibuka melalui formulir terpisah.
                                 </div>
                             </div>
-                            <div data-aos="fade-up" data-aos-delay="700" style="margin-bottom: 40px;">
+                            <div data-aos="fade-up" d style="margin-bottom: 40px;">
                                 <a href="{{ url('/registrasi') }}"
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4), 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; border: none;">
-                                    <i class="bi bi-pencil-square me-2"></i>DAFTAR RAKERNAS JKPI XII 2026
+                                    <i class="bi bi-info-circle me-2"></i>INFO PENDAFTARAN RAKERNAS JKPI XII 2026
                                 </a>
                             </div>
                         </div>
@@ -1384,7 +1384,7 @@
                     </div>
                 </div>
 
-                <!-- CTA -->
+                {{-- <!-- CTA -->
                 <div class="text-center mt-5" data-aos="zoom-in" data-aos-delay="400">
                     <a href="https://widget.etix.co.id/?lan=id&product=ternate-fort-to-fort-harita-nusantara-raya-run-178149830891179"
                         target="_blank" rel="noopener noreferrer" class="nrr-cta-btn">
@@ -1392,7 +1392,7 @@
                         Daftar Nusantara Raya Run
                     </a>
                     <p class="nrr-cta-note mt-3">Pendaftaran melalui platform Etix &bull; Slot terbatas</p>
-                </div>
+                </div> --}}
 
             </div>
         </section><!-- /Nusantara Raya Run Section -->
