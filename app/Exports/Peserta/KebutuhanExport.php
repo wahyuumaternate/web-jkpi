@@ -52,7 +52,7 @@ class KebutuhanExport implements FromCollection, WithHeadings, WithMapping, With
             });
         }
 
-        return $query->orderBy('created_at', 'desc')->get();
+        return $query->orderBy('created_at', 'asc')->get();
     }
 
     /**

@@ -32,7 +32,7 @@ class AdminExport implements FromCollection, WithHeadings, WithMapping, WithStyl
         if ($this->status) {
             $query->where('status', $this->status);
         }
-        return $query->orderBy('created_at', 'desc')->get();
+        return $query->orderBy('created_at', 'asc')->orderBy('id', 'asc')->get();
     }
 
     public function headings(): array

@@ -29,7 +29,7 @@ class UkuranExport implements FromCollection, WithHeadings, WithMapping, WithSty
         if ($this->status) {
             $query->where('status', $this->status);
         }
-        return $query->orderBy('created_at', 'desc')->get();
+        return $query->orderBy('created_at', 'asc')->get();
     }
 
     public function headings(): array
@@ -42,18 +42,7 @@ class UkuranExport implements FromCollection, WithHeadings, WithMapping, WithSty
         static $no = 0;
         $no++;
 
-        return [
-            $no,
-            strtoupper($item->nama_daerah),
-            strtoupper($item->nama_kepala_daerah),
-            strtoupper($item->ukuran_baju),
-            strtoupper($item->ukuran_peci ?? '-'),
-            strtoupper($item->ukuran_baju_pasangan ?? '-'),
-            strtoupper($item->nama_wakil_kepala_daerah ?? '-'),
-            strtoupper($item->ukuran_baju_wakil ?? '-'),
-            strtoupper($item->ukuran_peci_wakil ?? '-'),
-            strtoupper($item->ukuran_baju_pasangan_wakil ?? '-'),
-        ];
+        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->ukuran_baju), strtoupper($item->ukuran_peci ?? '-'), strtoupper($item->ukuran_baju_pasangan ?? '-'), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->ukuran_baju_wakil ?? '-'), strtoupper($item->ukuran_peci_wakil ?? '-'), strtoupper($item->ukuran_baju_pasangan_wakil ?? '-')];
     }
 
     public function styles(Worksheet $sheet)

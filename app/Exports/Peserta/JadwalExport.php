@@ -32,12 +32,15 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
         if ($this->status) {
             $query->where('status', $this->status);
         }
-        return $query->orderBy('created_at', 'desc')->get();
+        return $query
+    ->orderBy('created_at', 'asc')
+    ->orderBy('id', 'asc')
+    ->get();
     }
 
     public function headings(): array
     {
-        return ['NO', 'NAMA DAERAH', 'NAMA KEPALA DAERAH', 'NAMA WAKIL KEPALA DAERAH', 'INFO KEDATANGAN', 'INFO KEPULANGAN', 'KEGIATAN'];
+        return ['NO', 'NAMA DAERAH', 'NAMA KEPALA DAERAH', 'NAMA WAKIL KEPALA DAERAH', 'INFO KEDATANGAN', 'INFO KEPULANGAN', 'KEGIATAN', 'WAKTU PENDAFTARAN'];
     }
 
     public function map($item): array
@@ -48,7 +51,7 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $kegiatanItems = $item->kegiatan->pluck('nama_kegiatan')->filter()->values();
         $kegiatan = $kegiatanItems->count() > 0 ? $kegiatanItems->map(fn($value) => '- ' . strtoupper($value))->implode("\n") : '-';
 
-        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->info_kedatangan), strtoupper($item->info_kepulangan), $kegiatan];
+        return [$no, strtoupper($item->nama_daerah), strtoupper($item->nama_kepala_daerah), strtoupper($item->nama_wakil_kepala_daerah ?? '-'), strtoupper($item->info_kedatangan), strtoupper($item->info_kepulangan), $kegiatan, optional($item->created_at)->format('d-m-Y H:i:s')];
     }
 
     public function styles(Worksheet $sheet)
@@ -65,7 +68,7 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $highestRow = $sheet->getHighestRow();
 
         // Style untuk seluruh tabel
-        $sheet->getStyle('A3:G' . $highestRow)->applyFromArray([
+        $sheet->getStyle('A3:H' . $highestRow)->applyFromArray([
             'alignment' => [
                 'horizontal' => Alignment::HORIZONTAL_CENTER,
                 'vertical' => Alignment::VERTICAL_CENTER,
@@ -79,12 +82,12 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
         ]);
 
         // Header
-        $sheet->getStyle('A1:G1')->applyFromArray($headerStyle);
+        $sheet->getStyle('A1:H1')->applyFromArray($headerStyle);
         $sheet->getRowDimension(1)->setRowHeight(25);
 
         // Agar teks di kolom G tetap turun ke bawah jika panjang
         $sheet
-            ->getStyle('G4:G' . $highestRow)
+            ->getStyle('G4:H' . $highestRow)
             ->getAlignment()
             ->setHorizontal(Alignment::HORIZONTAL_LEFT)
             ->setVertical(Alignment::VERTICAL_CENTER)
@@ -109,7 +112,7 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
         $sheet->getColumnDimension('G')->setWidth(40);
 
         $sheet
-            ->getStyle('G2:G' . $highestRow)
+            ->getStyle('G2:H' . $highestRow)
             ->getAlignment()
             ->setWrapText(true);
 
@@ -134,7 +137,7 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
                 // ===== Judul =====
                 $sheet->setCellValue('A1', 'JADWAL KEDATANGAN, KEPULANGAN DAN KEGIATAN PESERTA (UPDATE WEBSITE ' . strtoupper(date('d F Y')) . ')');
 
-                $sheet->mergeCells('A1:G1');
+                $sheet->mergeCells('A1:H1');
 
                 $sheet->getStyle('A1')->applyFromArray([
                     'font' => [
@@ -172,13 +175,13 @@ class JadwalExport implements FromCollection, WithHeadings, WithMapping, WithSty
                     ],
                 ];
 
-                $sheet->getStyle('A3:G3')->applyFromArray($headerStyle);
+                $sheet->getStyle('A3:H3')->applyFromArray($headerStyle);
                 $sheet->getRowDimension(3)->setRowHeight(35);
 
                 $highestRow = $sheet->getHighestRow();
 
                 // Print Area
-                $sheet->getPageSetup()->setPrintArea("A1:G{$highestRow}");
+                $sheet->getPageSetup()->setPrintArea("A1:H{$highestRow}");
 
                 // Ukuran kertas & orientasi
                 $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_A4);

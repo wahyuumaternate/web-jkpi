@@ -29,7 +29,7 @@ class RombonganExport implements FromCollection, WithHeadings, WithMapping, With
         if ($this->status) {
             $query->where('status', $this->status);
         }
-        return $query->orderBy('created_at', 'desc')->get();
+        return $query->orderBy('created_at', 'asc')->get();
     }
 
     public function headings(): array
