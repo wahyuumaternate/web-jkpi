@@ -470,6 +470,140 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .dok-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+        }
+
+        .dok-modal.active {
+            display: flex;
+        }
+
+        .dok-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 20, 30, 0.85);
+        }
+
+        .dok-modal-content {
+            position: relative;
+            z-index: 1;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .dok-modal-content img {
+            max-width: 100%;
+            max-height: 75vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .dok-modal-footer {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .dok-modal-close {
+            position: absolute;
+            top: -40px;
+            right: -10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        @media (max-width: 480px) {
+            .dok-modal-close {
+                top: -36px;
+                right: 0;
+            }
+        }
+
+        .dok-modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .dok-modal-nav:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .dok-modal-nav:disabled {
+            opacity: 0.3;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .dok-modal-prev {
+            left: 20px;
+        }
+
+        .dok-modal-next {
+            right: 20px;
+        }
+
+        .dok-modal-pos {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .dok-modal-nav {
+                width: 42px;
+                height: 42px;
+                font-size: 1.1rem;
+            }
+
+            .dok-modal-prev {
+                left: 8px;
+            }
+
+            .dok-modal-next {
+                right: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dok-modal-footer {
+                flex-wrap: wrap;
+                justify-content: center;
+                text-align: center;
+            }
+        }
     </style>
 @endpush
 
@@ -478,7 +612,7 @@
     <section class="dok-hero">
         <div class="container">
             @unless ($isRoot)
-                <a href="{{ route('dokumentasi', $parentFolderId) }}" class="hero-back">
+                <a href="{{ route('dokumentasi', $parentFolderId) }}" class="hero-back" id="heroBackLink">
                     <i class="bi bi-arrow-90deg-up"></i> Kembali ke folder sebelumnya
                 </a>
             @endunless
@@ -544,7 +678,12 @@
                     @else
                         <div class="dok-card" data-name="{{ strtolower($file->getName()) }}"
                             style="animation-delay: {{ min($i * 0.05, 0.6) }}s">
-                            <div class="dok-thumb {{ $isImage ? '' : 'dok-thumb--icon' }}">
+                            <div class="dok-thumb {{ $isImage ? '' : 'dok-thumb--icon' }}"
+                                @if ($isImage) data-preview
+         data-full="{{ $file->getThumbnailLink() }}"
+         data-name="{{ $file->getName() }}"
+         data-download="{{ route('dokumentasi.download', $file->getId()) }}"
+         style="cursor:pointer" @endif>
                                 @if ($isImage)
                                     <img src="{{ $file->getThumbnailLink() }}" alt="{{ $file->getName() }}"
                                         loading="lazy">
@@ -579,11 +718,34 @@
             @endif
 
         </div>
+        <div class="dok-modal" id="dokModal">
+            <div class="dok-modal-backdrop" id="dokModalBackdrop"></div>
+
+            <button type="button" class="dok-modal-nav dok-modal-prev" id="dokModalPrev" aria-label="Sebelumnya">
+                <i class="bi bi-chevron-left"></i>
+            </button>
+
+            <div class="dok-modal-content">
+                <button type="button" class="dok-modal-close" id="dokModalClose" aria-label="Tutup">&times;</button>
+                <img id="dokModalImg" src="" alt="">
+                <div class="dok-modal-footer">
+                    <span id="dokModalName"></span>
+                    <span id="dokModalPos" class="dok-modal-pos"></span>
+                    <a id="dokModalDownload" href="#" class="dok-action">
+                        <i class="bi bi-download"></i> Unduh File
+                    </a>
+                </div>
+            </div>
+
+            <button type="button" class="dok-modal-nav dok-modal-next" id="dokModalNext" aria-label="Berikutnya">
+                <i class="bi bi-chevron-right"></i>
+            </button>
+        </div>
     </section>
 @endsection
-
 @push('scripts')
     <script>
+        // ===== SEARCH (tetap sama) =====
         const dokSearch = document.getElementById('dokSearch');
         const dokGrid = document.getElementById('dokGrid');
         const dokCount = document.getElementById('dokCount');
@@ -593,19 +755,121 @@
         function filterDok() {
             const term = dokSearch.value.toLowerCase().trim();
             let visible = 0;
-
             cards.forEach(card => {
                 const match = card.dataset.name.includes(term);
                 card.style.display = match ? '' : 'none';
                 if (match) visible++;
             });
-
             dokCount.textContent = visible;
             noResults.style.display = (visible === 0 && cards.length > 0) ? 'block' : 'none';
         }
+        if (dokSearch) dokSearch.addEventListener('input', filterDok);
 
-        if (dokSearch) {
-            dokSearch.addEventListener('input', filterDok);
-        }
+        // ===== NAVIGASI BERBASIS URL (tidak bergantung ke field "parents" Drive) =====
+        (function() {
+            const pathParts = window.location.pathname.split('/').filter(Boolean);
+            const baseIndex = pathParts.indexOf('dokumentasi');
+            if (baseIndex === -1) return;
+
+            const basePath = '/' + pathParts.slice(0, baseIndex + 1).join('/'); // ex: /dokumentasi
+            const currentId = pathParts.length > baseIndex + 1 ? pathParts[baseIndex + 1] : null;
+
+            const params = new URLSearchParams(window.location.search);
+            const trail = (params.get('trail') || '').split(',').filter(Boolean);
+
+            // --- Perbaiki tombol "Kembali" ---
+            const backLink = document.getElementById('heroBackLink');
+            if (backLink) {
+                const newTrail = trail.slice();
+                const parentId = newTrail.length ? newTrail.pop() : null;
+                let url = parentId ? `${basePath}/${parentId}` : basePath;
+                if (newTrail.length) url += '?trail=' + encodeURIComponent(newTrail.join(','));
+                backLink.setAttribute('href', url);
+            }
+
+            // --- Tambahkan jejak (trail) ke setiap link folder anak ---
+            const nextTrail = currentId ? trail.concat([currentId]) : trail;
+            if (nextTrail.length) {
+                document.querySelectorAll('.dok-card--folder').forEach(card => {
+                    const href = card.getAttribute('href');
+                    if (!href) return;
+                    const sep = href.includes('?') ? '&' : '?';
+                    card.setAttribute('href', href + sep + 'trail=' + encodeURIComponent(nextTrail.join(',')));
+                });
+            }
+        })();
+
+        // ===== PREVIEW GAMBAR (MODAL) DENGAN NAVIGASI SEBELUM/SESUDAH =====
+        (function() {
+            const modal = document.getElementById('dokModal');
+            const modalImg = document.getElementById('dokModalImg');
+            const modalName = document.getElementById('dokModalName');
+            const modalPos = document.getElementById('dokModalPos');
+            const modalDownload = document.getElementById('dokModalDownload');
+            const closeBtn = document.getElementById('dokModalClose');
+            const backdrop = document.getElementById('dokModalBackdrop');
+            const prevBtn = document.getElementById('dokModalPrev');
+            const nextBtn = document.getElementById('dokModalNext');
+            if (!modal) return;
+
+            const thumbs = Array.from(document.querySelectorAll('.dok-thumb[data-preview]'));
+            let currentIndex = -1;
+
+            function toLarge(url) {
+                return url.replace(/=s\d+(-c)?$/, '=s1600');
+            }
+
+            function renderAt(index) {
+                if (index < 0 || index >= thumbs.length) return;
+                currentIndex = index;
+                const thumb = thumbs[currentIndex];
+                modalImg.src = toLarge(thumb.dataset.full);
+                modalName.textContent = thumb.dataset.name;
+                modalDownload.href = thumb.dataset.download;
+                modalPos.textContent = `${currentIndex + 1} / ${thumbs.length}`;
+
+                prevBtn.style.display = thumbs.length > 1 ? '' : 'none';
+                nextBtn.style.display = thumbs.length > 1 ? '' : 'none';
+            }
+
+            function openModal(index) {
+                renderAt(index);
+                modal.classList.add('active');
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+                modalImg.src = '';
+                currentIndex = -1;
+            }
+
+            function showPrev() {
+                if (thumbs.length === 0) return;
+                const next = (currentIndex - 1 + thumbs.length) % thumbs.length;
+                renderAt(next);
+            }
+
+            function showNext() {
+                if (thumbs.length === 0) return;
+                const next = (currentIndex + 1) % thumbs.length;
+                renderAt(next);
+            }
+
+            thumbs.forEach((thumb, index) => {
+                thumb.addEventListener('click', () => openModal(index));
+            });
+
+            closeBtn.addEventListener('click', closeModal);
+            backdrop.addEventListener('click', closeModal);
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
+
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('active')) return;
+                if (e.key === 'Escape') closeModal();
+                if (e.key === 'ArrowLeft') showPrev();
+                if (e.key === 'ArrowRight') showNext();
+            });
+        })();
     </script>
 @endpush
