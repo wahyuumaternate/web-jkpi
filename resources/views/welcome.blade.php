@@ -1,12 +1,14 @@
 @extends('layouts.main')
 
 @section('title', 'Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia | Jaringan Kota Pusaka Indonesia')
-@section('meta_description', 'Website Resmi Rakernas XII JKPI 2026 di Ternate. Rapat Kerja Nasional Jaringan Kota Pusaka
+@section('meta_description',
+    'Website Resmi Rakernas XII JKPI 2026 di Ternate. Rapat Kerja Nasional Jaringan Kota Pusaka
     Indonesia membahas pelestarian warisan budaya dengan tema Pusaka Ternate, Pusaka Dunia. Daftar sekarang!')
 @section('og_title', 'Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia')
-@section('og_description', 'Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Bergabunglah dalam
+@section('og_description',
+    'Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Bergabunglah dalam
     diskusi pelestarian warisan budaya dan pusaka Indonesia. Pusaka Ternate, Pusaka Dunia.')
-@section('og_image', asset('assets/img/JKPI-2025/4.JPG'))
+@section('og_image', asset('opening.jpg'))
 @section('og_image_alt', 'Rakernas XII JKPI 2026 Ternate - Pusaka Ternate Pusaka Dunia')
 @section('body-class', 'index-page')
 
@@ -18,7 +20,7 @@
             'name' => 'Rakernas XII JKPI 2026',
             'description' =>
                 'Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia dengan tema Pusaka Ternate, Pusaka Dunia',
-            'image' => [asset('assets/img/JKPI-2025/4.JPG')],
+            'image' => [asset('opening.jpg')],
             'startDate' => '2026-08-26',
             'endDate' => '2026-08-30',
             'eventStatus' => 'https://schema.org/EventScheduled',
@@ -53,7 +55,7 @@
             '@type' => 'Organization',
             'name' => 'Jaringan Kota Pusaka Indonesia (JKPI)',
             'url' => url('/'),
-            'logo' => asset('assets/img/JKPI-2025/4.JPG'),
+            'logo' => asset('opening.jpg'),
             'description' =>
                 'Jaringan Kota Pusaka Indonesia adalah organisasi yang fokus pada pelestarian dan pengembangan kota-kota pusaka di Indonesia',
             'contactPoint' => [
@@ -756,9 +758,9 @@
                 </div>
 
                 <!-- =============================================
-                 TAB NAVIGATION — sesuai PDF PIC resmi
-                 Tanggal resmi: 25 - 30 Agustus 2026
-            ============================================== -->
+                     TAB NAVIGATION — sesuai PDF PIC resmi
+                     Tanggal resmi: 25 - 30 Agustus 2026
+                ============================================== -->
                 <div class="event-tabs-container" data-aos="fade-up" data-aos-delay="300">
                     <div class="d-flex justify-content-center">
                         <ul class="nav nav-pills event-tabs mb-5" id="eventTabs" role="tablist">
