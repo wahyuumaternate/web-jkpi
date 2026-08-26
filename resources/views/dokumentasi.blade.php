@@ -1,6 +1,35 @@
 @extends('layouts.main')
 
-@section('title', 'Dokumentasi - Rakernas XII JKPI 2026 Kota Ternate')
+@section('title', ($folderName ?? 'Dokumentasi') . ' - Rakernas XII JKPI 2026 Kota Ternate')
+@section('meta_description', 'Dokumentasi foto dan berkas kegiatan Rakernas XII JKPI 2026 di Kota Ternate. Galeri
+    lengkap Jaringan Kota Pusaka Indonesia.')
+@section('meta_robots', 'noindex, follow')
+@section('og_title', ($folderName ?? 'Dokumentasi') . ' - Rakernas XII JKPI 2026')
+@section('og_description', 'Galeri dokumentasi foto dan berkas kegiatan Rakernas XII JKPI 2026 di Kota Ternate.')
+
+@push('schema')
+    @php
+        $breadcrumbSchema = [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => [
+                [
+                    '@type' => 'ListItem',
+                    'position' => 1,
+                    'name' => 'Beranda',
+                    'item' => url('/'),
+                ],
+                [
+                    '@type' => 'ListItem',
+                    'position' => 2,
+                    'name' => 'Dokumentasi',
+                    'item' => url()->current(),
+                ],
+            ],
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($breadcrumbSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@endpush
 
 @push('styles')
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"

@@ -10,40 +10,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <meta name="description"
-        content="Website Resmi Rakernas XII JKPI 2026 di Ternate. Rapat Kerja Nasional Jaringan Kota Pusaka Indonesia membahas pelestarian warisan budaya dengan tema Pusaka Ternate, Pusaka Dunia. Daftar sekarang!">
+        content="@yield('meta_description', 'Website Resmi Rakernas XII JKPI 2026 di Ternate. Rapat Kerja Nasional Jaringan Kota Pusaka Indonesia membahas pelestarian warisan budaya dengan tema Pusaka Ternate, Pusaka Dunia. Daftar sekarang!')">
 
     <meta name="keywords"
-        content="JKPI 2026, Rakernas JKPI, Rakernas XII JKPI, Jaringan Kota Pusaka Indonesia, Kota Ternate, Warisan Budaya, Pelestarian Pusaka, Pusaka Indonesia, Konservasi Budaya, Heritage Indonesia, Maluku Utara, Ternate 2026, Event JKPI, Kongres Pusaka">
+        content="@yield('meta_keywords', 'JKPI 2026, Rakernas JKPI, Rakernas XII JKPI, Jaringan Kota Pusaka Indonesia, Kota Ternate, Warisan Budaya, Pelestarian Pusaka, Pusaka Indonesia, Konservasi Budaya, Heritage Indonesia, Maluku Utara, Ternate 2026, Event JKPI, Kongres Pusaka')">
 
     <meta name="author" content="JKPI - Jaringan Kota Pusaka Indonesia">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="robots" content="@yield('meta_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')">
     <meta name="googlebot" content="index, follow">
 
     {{-- Canonical URL --}}
-    <link rel="canonical" href="{{ url()->current() }}">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
 
     {{-- Open Graph / Facebook Meta Tags --}}
     <meta property="og:locale" content="id_ID">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="@yield('og_type', 'website')">
     <meta property="og:site_name" content="Rakernas XII JKPI 2026">
-    <meta property="og:title" content="Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia">
+    <meta property="og:title" content="@yield('og_title', 'Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia')">
     <meta property="og:description"
-        content="Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Bergabunglah dalam diskusi pelestarian warisan budaya dan pusaka Indonesia. Pusaka Ternate, Pusaka Dunia.">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('opening.jpg') }}">
-    <meta property="og:image:secure_url" content="{{ asset('opening.jpg') }}">
+        content="@yield('og_description', 'Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Bergabunglah dalam diskusi pelestarian warisan budaya dan pusaka Indonesia. Pusaka Ternate, Pusaka Dunia.')">
+    <meta property="og:url" content="@yield('canonical', url()->current())">
+    <meta property="og:image" content="@yield('og_image', asset('opening.jpg'))">
+    <meta property="og:image:secure_url" content="@yield('og_image', asset('opening.jpg'))">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Rakernas XII JKPI 2026 Ternate - Pusaka Ternate Pusaka Dunia">
+    <meta property="og:image:alt" content="@yield('og_image_alt', 'Rakernas XII JKPI 2026 Ternate - Pusaka Ternate Pusaka Dunia')">
     <meta property="og:image:type" content="image/jpeg">
 
     {{-- Twitter Card Meta Tags --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia">
+    <meta name="twitter:title" content="@yield('og_title', 'Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia')">
     <meta name="twitter:description"
-        content="Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Diskusi pelestarian warisan budaya dan pusaka Indonesia.">
-    <meta name="twitter:image" content="{{ asset('opening.jpg') }}">
-    <meta name="twitter:image:alt" content="Rakernas XII JKPI 2026 Ternate">
+        content="@yield('og_description', 'Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Diskusi pelestarian warisan budaya dan pusaka Indonesia.')">
+    <meta name="twitter:image" content="@yield('og_image', asset('opening.jpg'))">
+    <meta name="twitter:image:alt" content="@yield('og_image_alt', 'Rakernas XII JKPI 2026 Ternate')">
     <meta name="twitter:site" content="@jkpi_indonesia">
     <meta name="twitter:creator" content="@jkpi_indonesia">
 
@@ -57,6 +57,8 @@
     <meta name="geo.position" content="0.7893;127.3614">
     <meta name="ICBM" content="0.7893, 127.3614">
 
+    {{-- Schema.org JSON-LD — diisi per halaman lewat @push('schema') --}}
+    @stack('schema')
 
     {{-- Favicon --}}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
