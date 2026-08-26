@@ -30,8 +30,8 @@
     <meta property="og:description"
         content="Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Bergabunglah dalam diskusi pelestarian warisan budaya dan pusaka Indonesia. Pusaka Ternate, Pusaka Dunia.">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="{{ asset('assets/img/JKPI-2025/4.JPG') }}">
-    <meta property="og:image:secure_url" content="{{ asset('assets/img/JKPI-2025/4.JPG') }}">
+    <meta property="og:image" content="{{ asset('opening.jpg') }}">
+    <meta property="og:image:secure_url" content="{{ asset('opening.jpg') }}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Rakernas XII JKPI 2026 Ternate - Pusaka Ternate Pusaka Dunia">
@@ -42,7 +42,7 @@
     <meta name="twitter:title" content="Rakernas XII JKPI 2026 - Pusaka Ternate, Pusaka Dunia">
     <meta name="twitter:description"
         content="Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia di Ternate. Diskusi pelestarian warisan budaya dan pusaka Indonesia.">
-    <meta name="twitter:image" content="{{ asset('assets/img/JKPI-2025/4.JPG') }}">
+    <meta name="twitter:image" content="{{ asset('opening.jpg') }}">
     <meta name="twitter:image:alt" content="Rakernas XII JKPI 2026 Ternate">
     <meta name="twitter:site" content="@jkpi_indonesia">
     <meta name="twitter:creator" content="@jkpi_indonesia">
@@ -57,81 +57,6 @@
     <meta name="geo.position" content="0.7893;127.3614">
     <meta name="ICBM" content="0.7893, 127.3614">
 
-    {{-- Schema.org Structured Data (JSON-LD) --}}
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Event",
-  "name": "Rakernas XII JKPI 2026",
-  "description": "Rapat Kerja Nasional ke-12 Jaringan Kota Pusaka Indonesia dengan tema Pusaka Ternate, Pusaka Dunia",
-  "image": "{{ asset('assets/img/JKPI-2025/4.JPG') }}",
-  "startDate": "2026-03-15",
-  "endDate": "2026-03-18",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "location": {
-    "@type": "Place",
-    "name": "Kota Ternate",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Ternate",
-      "addressLocality": "Ternate",
-      "addressRegion": "Maluku Utara",
-      "postalCode": "97700",
-      "addressCountry": "ID"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "0.7893",
-      "longitude": "127.3614"
-    }
-  },
-  "organizer": {
-    "@type": "Organization",
-    "name": "Jaringan Kota Pusaka Indonesia (JKPI)",
-    "url": "{{ url('/') }}"
-  },
-  "performer": {
-    "@type": "Organization",
-    "name": "JKPI"
-  }
-}
-</script>
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Jaringan Kota Pusaka Indonesia (JKPI)",
-  "url": "{{ url('/') }}",
-  "logo": "{{ asset('assets/img/JKPI-2025/4.JPG') }}",
-  "description": "Jaringan Kota Pusaka Indonesia adalah organisasi yang fokus pada pelestarian dan pengembangan kota-kota pusaka di Indonesia",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "Customer Service",
-    "availableLanguage": ["Indonesian", "English"]
-  },
-  "sameAs": [
-    "https://www.facebook.com/jkpi.indonesia",
-    "https://twitter.com/jkpi_indonesia",
-    "https://www.instagram.com/jkpi.indonesia"
-  ]
-}
-</script>
-
-    <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Rakernas XII JKPI 2026",
-  "url": "{{ url('/') }}",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "{{ url('/') }}/search?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}
-</script>
 
     {{-- Favicon --}}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
