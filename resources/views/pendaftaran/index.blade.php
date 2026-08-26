@@ -548,43 +548,18 @@
                         Terima kasih atas antusiasme Bapak/Ibu.
                     </p>
 
-                    <p class="closed-contact-label">Untuk pertanyaan lebih lanjut, silakan hubungi:</p>
+                    {{-- <p class="closed-contact-label">Untuk pertanyaan lebih lanjut, silakan hubungi:</p> --}}
 
-                    <a class="closed-contact-card" href="https://wa.me/6282290056150" target="_blank" rel="noopener">
+                    {{-- <a class="closed-contact-card" href="https://wa.me/6282290056150" target="_blank" rel="noopener">
                         <span class="closed-contact-avatar"><i class="bi bi-person-fill"></i></span>
                         <span class="closed-contact-info">
                             <span class="closed-contact-role">Sekretaris</span>
                             <span class="closed-contact-name">Ronny Aries</span>
                         </span>
                         <span class="closed-contact-wa"><i class="bi bi-whatsapp"></i> 082290056150</span>
-                    </a>
+                    </a> --}}
 
-                    <div class="closed-divider"><span>Masih dibuka</span></div>
 
-                    <div class="closed-events">
-                        <a class="closed-event-card"
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSeqhlkZeeFmfHzcURAkbeDaXBC70Mhp5S9JRPIG3ZTlElLEFg/viewform"
-                            target="_blank" rel="noopener">
-                            <span class="closed-event-chip">26 Agustus</span>
-                            <div class="closed-event-title">Master Class</div>
-                            <div class="closed-event-meta"><i class="bi bi-geo-alt-fill"></i> Berbagai Titik Cagar
-                                Budaya</div>
-                            <span class="closed-event-cta">Isi Formulir <i class="bi bi-arrow-up-right"></i></span>
-                        </a>
-                        <a class="closed-event-card"
-                            href="https://docs.google.com/forms/d/e/1FAIpQLSf-cQrDYIoF8JoOY0oOwSoNwFrhvKg4bH4Pq1rYWB9iiQy5-g/viewform"
-                            target="_blank" rel="noopener">
-                            <span class="closed-event-chip">26–29 Agustus</span>
-                            <div class="closed-event-title">Pentas Budaya (4 Hari)</div>
-                            <div class="closed-event-meta"><i class="bi bi-geo-alt-fill"></i> Benteng Oranje</div>
-                            <span class="closed-event-cta">Isi Formulir <i class="bi bi-arrow-up-right"></i></span>
-                        </a>
-                    </div>
-
-                    <div class="closed-footer-note">
-                        <i class="bi bi-info-circle-fill"></i>
-                        <span>Formulir di atas terpisah dari pendaftaran utama dan masih dapat diisi.</span>
-                    </div>
                 </div>
 
             </div>

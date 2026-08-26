@@ -44,14 +44,26 @@
                         Buku Panduan
                     </a>
                 </li>
-                <li class="dropdown ">
+                <li>
+                    <a href="{{ url('/dokumentasi') }}" class="{{ Request::is('dokumentasi') ? 'active' : '' }}"
+                        target="_blank">
+                        Dokumentasi
+                    </a>
+                </li>
+                {{-- <li>
+                    <a href="https://drive.google.com/drive/u/0/mobile/folders/15DnoyY-kjM-46OAxZxLvPb3t6Aj11hLc?hl=ID"
+                        target="_blank">
+                        Dokumentasi
+                    </a>
+                </li> --}}
+                {{-- <li class="dropdown ">
                     <a href="#">
                         <span>Pendaftaran</span>
                         <i class="bi bi-chevron-down toggle-dropdown"></i>
                     </a>
 
                     <ul>
-                        {{-- <li>
+                        <li>
                             <a href="{{ url('/registrasi') }}" target="_blank">
                                 Rekernas XII JKPI 2026
                             </a>
@@ -60,7 +72,7 @@
                             <a href="#nusantara-run">
                                 Nusantara Raya Run
                             </a>
-                        </li> --}}
+                        </li>
 
                         <li>
                             <a href="https://forms.gle/umG33qVW5MLA5Zvh7" target="_blank">
@@ -79,7 +91,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 <li
                     class="dropdown {{ Request::is('hotel') || Request::is('cafe-resto') || Request::is('toko-oleh-oleh') ? 'active' : '' }}">
                     <a href="#">

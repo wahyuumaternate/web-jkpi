@@ -8,10 +8,23 @@
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
-        "laravel/framework": "^11.31",
+        "dompdf/dompdf": "^3.1.6",
+        "google/apiclient": "^2.19",
+        "guzzlehttp/guzzle": "^7.15.2",
+        "guzzlehttp/psr7": "^2.12.3",
+        "laravel/framework": "^12.61",
         "laravel/tinker": "^2.9",
-        "maatwebsite/excel": "^3.1",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "league/commonmark": "^2.9",
+        "maatwebsite/excel": "^3.1.70",
+        "phpoffice/phpspreadsheet": "^1.30.6",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "symfony/http-foundation": "^7.4.13",
+        "symfony/http-kernel": "^7.4.12",
+        "symfony/mailer": "^7.4.12",
+        "symfony/mime": "^7.4.12",
+        "symfony/polyfill-intl-idn": "^1.38.1",
+        "symfony/routing": "^7.4.13",
+        "symfony/yaml": "^7.4.12"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

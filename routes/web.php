@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -37,6 +38,14 @@ Route::get('/logo-download', function () {
     return view('logo');
 });
 
+Route::get('/dokumentasi/{folderId?}', [DokumentasiController::class, 'index'])
+    ->name('dokumentasi');
+ 
+Route::get('/dokumentasi/download/{fileId}', [DokumentasiController::class, 'download'])
+    ->name('dokumentasi.download');
+ 
+
+ 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

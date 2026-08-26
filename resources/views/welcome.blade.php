@@ -616,16 +616,15 @@
                box-shadow: 0 8px 25px rgba(0,0,0,0.25);">
                                     <i class="bi bi-info-circle-fill me-2"></i>
                                     <strong>Pemberitahuan:</strong> Pendaftaran peserta Rakernas telah
-                                    <strong>ditutup</strong>. Pendaftaran <strong>Master Class</strong> dan
-                                    <strong>Pentas Budaya</strong> masih dibuka melalui formulir terpisah.
+                                    <strong>ditutup</strong>.
                                 </div>
                             </div>
-                            <div data-aos="fade-up" d style="margin-bottom: 40px;">
+                            {{-- <div data-aos="fade-up" d style="margin-bottom: 40px;">
                                 <a href="{{ url('/registrasi') }}"
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 18px 50px; border-radius: 50px; font-weight: 700; font-size: 1.2rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4), 0 5px 15px rgba(0,0,0,0.3); transition: all 0.3s; border: none;">
                                     <i class="bi bi-info-circle me-2"></i>INFO PENDAFTARAN RAKERNAS JKPI XII 2026
                                 </a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -1874,9 +1873,10 @@
                                 Rempah Ternate.
                             </p>
                             <div class="action-buttons">
-                                <a href="{{ url('/registrasi') }}"
+                                <a href="https://drive.google.com/drive/u/0/mobile/folders/15DnoyY-kjM-46OAxZxLvPb3t6Aj11hLc?hl=ID"
+                                    target="_blank"
                                     style="background: linear-gradient(135deg, #FFFFFF 0%, #E0E0E0 100%); color: #099aa7; padding: 20px 60px; border-radius: 50px; font-weight: 700; font-size: 1.3rem; text-decoration: none; display: inline-block; margin: 10px; box-shadow: 0 12px 45px rgba(255, 255, 255, 0.4); transition: all 0.3s; border: none;">
-                                    <i class="bi bi-pencil-square me-2"></i>DAFTAR SEKARANG
+                                    <i class="bi bi-camera me-2"></i>DOKUMENTASI
                                 </a>
 
                                 <a href="{{ url('/buku-panduan') }}"
