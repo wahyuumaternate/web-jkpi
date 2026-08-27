@@ -664,6 +664,49 @@
             cursor: pointer;
             accent-color: var(--primary);
         }
+
+        .video-preview {
+            position: relative;
+        }
+
+        .video-play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .video-play-overlay i {
+            font-size: 3.5rem;
+            color: #fff;
+            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, .4));
+        }
+        .dok-video-modal-content {
+    position: relative;
+    z-index: 1;
+    width: 90vw;
+    max-width: 1000px;
+}
+
+.dok-video-modal-content iframe {
+    width: 100%;
+    height: 70vh;
+    border: 0;
+    border-radius: 12px;
+    background: #000;
+}
+
+@media (max-width: 768px) {
+    .dok-video-modal-content {
+        width: 95vw;
+    }
+
+    .dok-video-modal-content iframe {
+        height: 55vh;
+    }
+}
     </style>
 @endpush
 
@@ -742,6 +785,7 @@
                     @php
                         $isFolder = $file->getMimeType() === 'application/vnd.google-apps.folder';
                         $isImage = str_starts_with($file->getMimeType(), 'image/');
+                        $isVideo = str_starts_with($file->getMimeType(), 'video/');
                         $ext = strtoupper(pathinfo($file->getName(), PATHINFO_EXTENSION)) ?: 'FILE';
                     @endphp
 
@@ -776,6 +820,18 @@
                                     </label>
                                     <img src="{{ $file->getThumbnailLink() }}" alt="{{ $file->getName() }}"
                                         loading="lazy">
+                                @elseif ($isVideo)
+                                    <div class="video-preview" data-video-id="{{ $file->getId() }}"
+                                        data-name="{{ $file->getName() }}"
+                                        style="cursor:pointer; width:100%; height:100%; position:relative;">
+
+                                        <img src="{{ $file->getThumbnailLink() }}" alt="{{ $file->getName() }}"
+                                            style="width:100%; height:100%; object-fit:cover;">
+
+                                        <div class="video-play-overlay">
+                                            <i class="bi bi-play-circle-fill"></i>
+                                        </div>
+                                    </div>
                                 @else
                                     <i class="bi bi-file-earmark-text"></i>
                                 @endif
@@ -830,6 +886,22 @@
                 <button type="button" class="dok-modal-nav dok-modal-next" id="dokModalNext" aria-label="Berikutnya">
                     <i class="bi bi-chevron-right"></i>
                 </button>
+            </div>
+            <div class="dok-modal" id="dokVideoModal">
+                <div class="dok-modal-backdrop" id="dokVideoBackdrop"></div>
+
+                <div class="dok-video-modal-content">
+                    <button type="button" class="dok-modal-close" id="dokVideoClose" aria-label="Tutup">
+                        &times;
+                    </button>
+
+                    <iframe id="dokVideoFrame" src="" allow="autoplay; fullscreen" allowfullscreen>
+                    </iframe>
+
+                    <div class="dok-modal-footer">
+                        <span id="dokVideoName"></span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -1091,5 +1163,42 @@
                 );
             });
         })();
+        (function () {
+    const videoModal = document.getElementById('dokVideoModal');
+    const videoFrame = document.getElementById('dokVideoFrame');
+    const videoName = document.getElementById('dokVideoName');
+    const videoClose = document.getElementById('dokVideoClose');
+    const videoBackdrop = document.getElementById('dokVideoBackdrop');
+
+    if (!videoModal) return;
+
+    document.querySelectorAll('.video-preview').forEach(video => {
+        video.addEventListener('click', function () {
+            const id = this.dataset.videoId;
+
+            videoFrame.src = `https://drive.google.com/file/d/${id}/preview`;
+            videoName.textContent = this.dataset.name;
+
+            videoModal.classList.add('active');
+        });
+    });
+
+    function closeVideo() {
+        videoModal.classList.remove('active');
+
+        // Hentikan video ketika modal ditutup
+        videoFrame.src = '';
+    }
+
+    videoClose.addEventListener('click', closeVideo);
+    videoBackdrop.addEventListener('click', closeVideo);
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' &&
+            videoModal.classList.contains('active')) {
+            closeVideo();
+        }
+    });
+})();
     </script>
 @endpush
