@@ -557,25 +557,18 @@
             <div class="row align-items-center mb-5 pb-2">
                 <div class="col-lg-6" data-aos="fade-right" data-aos-delay="200">
                     <p class="lead-description mb-4">
-                        Jaringan Kota Pusaka Indonesia (JKPI) adalah organisasi jejaring nasional yang menghimpun
-                        kabupaten dan kota di Indonesia yang berkomitmen terhadap pelestarian pusaka, baik berwujud
-                        <em>(tangible heritage)</em> maupun tidak berwujud <em>(intangible heritage)</em>, sebagai
-                        bagian dari
-                        pembangunan daerah yang berkelanjutan. JKPI didirikan pada 25 Oktober 2008 di Surakarta,
-                        bertepatan dengan penyelenggaraan Konferensi dan Pameran Organisasi Kota Pusaka Eropa–Asia
-                        (OWHC Euro-Asia) Tahun
-                        2008, yang melahirkan Deklarasi Surakarta sebagai tonggak awal pembentukannya. Sejak
-                        berdiri, JKPI
-                        berperan sebagai organisasi induk dan wadah kolaborasi antar pemerintah daerah dalam
-                        pengelolaan dan pelestarian pusaka alam dan budaya. Hingga tahun 2025, JKPI telah
-                        beranggotakan 79 kabupaten/kota dari seluruh Indonesia, mencerminkan semakin kuatnya
-                        komitmen daerah dalam menjaga warisan pusaka sebagai identitas, sumber nilai, dan penggerak
-                        pembangunan berkelanjutan.
+                        Jaringan Kota Pusaka Indonesia (JKPI) merupakan organisasi jejaring nasional yang menghimpun
+                        kabupaten dan kota di Indonesia dalam upaya pelestarian pusaka alam dan budaya, baik
+                        berwujud <em>(tangible heritage)</em> maupun tidak berwujud <em>(intangible heritage)</em>.
+                        JKPI didirikan pada 25 Oktober 2008 di Surakarta melalui Deklarasi Surakarta.
+                        Sebagai wadah kolaborasi pemerintah daerah, JKPI berkomitmen menjaga pusaka sebagai
+                        identitas dan penggerak pembangunan berkelanjutan. Hingga 2025, JKPI telah memiliki
+                        79 anggota kabupaten/kota di seluruh Indonesia.
                     </p>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="250">
                     <div class="image-hover-wrapper">
-                        <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Tentang JKPI"
+                        <img src="{{ asset('foto_terbaru/opening.jpg') }}" alt="Tentang JKPI"
                             class="img-fluid rounded shadow">
                     </div>
                 </div>
@@ -749,7 +742,7 @@
                         <div class="col-lg-6 order-lg-2">
                             <div class="department-visual">
                                 <div class="image-wrapper">
-                                    <img src="{{ asset('assets/img/JKPI-2025/12.JPG') }}" alt="Simposium Rempah"
+                                    <img src="{{ asset('foto_terbaru/2.jpg') }}" alt="Simposium Rempah"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -758,9 +751,9 @@
                 </div>
 
                 <!-- =============================================
-                     TAB NAVIGATION — sesuai PDF PIC resmi
-                     Tanggal resmi: 25 - 30 Agustus 2026
-                ============================================== -->
+                                     TAB NAVIGATION — sesuai PDF PIC resmi
+                                     Tanggal resmi: 25 - 30 Agustus 2026
+                                ============================================== -->
                 <div class="event-tabs-container" data-aos="fade-up" data-aos-delay="300">
                     <div class="d-flex justify-content-center">
                         <ul class="nav nav-pills event-tabs mb-5" id="eventTabs" role="tablist">
@@ -1466,96 +1459,244 @@
 
     <!-- Galeri Section -->
     <section id="galeri" class="home-about section light-background">
+
         <div class="container section-title" data-aos="fade-up">
+
             <h2>Galeri</h2>
+
             <p>Dokumentasi visual dari persiapan dan kegiatan Rakernas XII JKPI 2026</p>
+
         </div>
+
         <div class="container" data-aos="fade-up" data-aos-delay="100">
+
             <div class="row gy-4">
+
+                <!-- Foto 1 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/1.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/1.JPG') }}" alt="Galeri 1" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/1.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/1.jpg') }}" alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 1"
+                                class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 2 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/2.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/2.JPG') }}" alt="Galeri 2" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/2.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/2.jpg') }}" alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 2"
+                                class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 3 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/10.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/10.JPG') }}" alt="Galeri 3" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/3.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/3.jpg') }}" alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 3"
+                                class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 4 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/3.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/3.JPG') }}" alt="Galeri 4" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/4.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/4.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 4" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 5 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/4.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/4.JPG') }}" alt="Galeri 5" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/5.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/5.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 5" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 6 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/5.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/5.JPG') }}" alt="Galeri 6" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/6.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/6.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 6" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 7 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/6.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/6.JPG') }}" alt="Galeri 7" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/7.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/7.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 7" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 8 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/7.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/7.JPG') }}" alt="Galeri 8" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/8.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/8.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 8" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 9 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="gallery-item">
-                        <a href="{{ asset('assets/img/JKPI-2025/9.JPG') }}" class="glightbox">
-                            <img src="{{ asset('assets/img/JKPI-2025/9.JPG') }}" alt="Galeri 9" class="img-fluid">
-                            <div class="gallery-overlay"><i class="bi bi-zoom-in"></i><span>Lihat Foto</span>
+                        <a href="{{ asset('foto_terbaru/9.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/9.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 9" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
                             </div>
                         </a>
                     </div>
                 </div>
+
+                <!-- Foto 10 -->
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="gallery-item">
+                        <a href="{{ asset('foto_terbaru/10.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/10.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 10" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Foto 11 -->
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="gallery-item">
+                        <a href="{{ asset('foto_terbaru/11.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/11.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 11" class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Foto 12 -->
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="gallery-item">
+                        <a href="{{ asset('foto_terbaru/12.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/12.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 12" class="img-fluid">
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Foto 13 -->
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="gallery-item">
+                        <a href="{{ asset('foto_terbaru/13.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/13.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 13" class="img-fluid">
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Foto 14 -->
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="350">
+                    <div class="gallery-item">
+                        <a href="{{ asset('foto_terbaru/14.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/14.jpg') }}"
+                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 14" class="img-fluid">
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Opening -->
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="gallery-item">
+                        <a href="{{ asset('foto_terbaru/opening.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/opening.jpg') }}" alt="Pembukaan Rakernas XII JKPI 2026"
+                                class="img-fluid">
+
+                            <div class="gallery-overlay">
+                                <i class="bi bi-zoom-in"></i>
+                                <span>Lihat Foto</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
             </div>
+
         </div>
-    </section><!-- /Galeri Section -->
+
+    </section>
+    <!-- /Galeri Section -->
 
     <style>
         .gallery-item {
