@@ -40,10 +40,10 @@ Route::get('/logo-download', function () {
 
 Route::get('/dokumentasi/{folderId?}', [DokumentasiController::class, 'index'])
     ->name('dokumentasi');
- 
 Route::get('/dokumentasi/download/{fileId}', [DokumentasiController::class, 'download'])
     ->name('dokumentasi.download');
- 
+// Route::get('dokumentasi/file/{fileId}/unduh', [DokumentasiController::class, 'download'])->name('dokumentasi.download');
+Route::post('dokumentasi/unduh-zip', [DokumentasiController::class, 'downloadZip'])->name('dokumentasi.download-zip');
 
  
 Route::middleware('auth')->group(function () {

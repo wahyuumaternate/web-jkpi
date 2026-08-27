@@ -1,7 +1,8 @@
 @extends('layouts.main')
 
 @section('title', ($folderName ?? 'Dokumentasi') . ' - Rakernas XII JKPI 2026 Kota Ternate')
-@section('meta_description', 'Dokumentasi foto dan berkas kegiatan Rakernas XII JKPI 2026 di Kota Ternate. Galeri
+@section('meta_description',
+    'Dokumentasi foto dan berkas kegiatan Rakernas XII JKPI 2026 di Kota Ternate. Galeri
     lengkap Jaringan Kota Pusaka Indonesia.')
 @section('meta_robots', 'noindex, follow')
 @section('og_title', ($folderName ?? 'Dokumentasi') . ' - Rakernas XII JKPI 2026')
@@ -375,6 +376,8 @@
             transition: background 0.2s, transform 0.15s;
             background: var(--primary);
             color: #fff;
+            border: none;
+            cursor: pointer;
         }
 
         .dok-action:hover {
@@ -397,6 +400,7 @@
             text-align: center;
             padding: 60px 20px;
             color: #bbb;
+            grid-column: 1 / -1;
         }
 
         .no-results i {
@@ -633,6 +637,33 @@
                 text-align: center;
             }
         }
+
+        /* ===== SELECT (hanya untuk gambar) ===== */
+        .dok-select {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 3;
+            width: 24px;
+            height: 24px;
+            display: none;
+        }
+
+        .dok-grid.select-mode .dok-card--image .dok-select {
+            display: block;
+        }
+
+        .dok-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(9, 154, 167, 0.18);
+        }
+
+        .dok-select-checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
     </style>
 @endpush
 
@@ -669,6 +700,10 @@
     <section class="dok-content">
         <div class="container">
 
+            @php
+                $hasImages = collect($files)->contains(fn($f) => str_starts_with($f->getMimeType(), 'image/'));
+            @endphp
+
             <!-- TOOLBAR -->
             <div class="toolbar-card">
                 <div class="toolbar-row">
@@ -677,11 +712,32 @@
                         <input type="text" id="dokSearch" placeholder="Cari nama folder atau berkas...">
                     </div>
                     <div class="result-count">Menampilkan <strong id="dokCount">{{ count($files) }}</strong> item</div>
+
+                    @if ($hasImages)
+                        <button type="button" id="dokSelectModeBtn" class="dok-action" style="background:#6c757d;">
+                            <i class="bi bi-check2-square"></i> Pilih Gambar
+                        </button>
+                    @endif
                 </div>
+
+                @if ($hasImages)
+                    <div class="toolbar-row" id="dokSelectionBar" style="display:none; margin-top:12px;">
+                        <label style="display:flex; align-items:center; gap:6px; font-weight:600; font-size:0.9rem;">
+                            <input type="checkbox" id="dokSelectAll"> Pilih Semua
+                        </label>
+                        <span class="result-count"><strong id="dokSelectedCount">0</strong> dipilih</span>
+                        <button type="button" id="dokDownloadSelectedBtn" class="dok-action" disabled>
+                            <i class="bi bi-download"></i> Unduh Terpilih (ZIP)
+                        </button>
+                        <button type="button" id="dokCancelSelectBtn" class="dok-action" style="background:#adb5bd;">
+                            Batal
+                        </button>
+                    </div>
+                @endif
             </div>
 
-            <!-- GRID -->
-            <div class="dok-grid" id="dokGrid">
+            <!-- GRID (satu level saja) -->
+            <div class="dok-grid" id="dokGrid" data-folder-id="{{ $currentFolderId }}">
                 @foreach ($files as $i => $file)
                     @php
                         $isFolder = $file->getMimeType() === 'application/vnd.google-apps.folder';
@@ -705,15 +761,19 @@
                             </div>
                         </a>
                     @else
-                        <div class="dok-card" data-name="{{ strtolower($file->getName()) }}"
+                        <div class="dok-card {{ $isImage ? 'dok-card--image' : '' }}"
+                            data-name="{{ strtolower($file->getName()) }}" data-file-id="{{ $file->getId() }}"
                             style="animation-delay: {{ min($i * 0.05, 0.6) }}s">
                             <div class="dok-thumb {{ $isImage ? '' : 'dok-thumb--icon' }}"
                                 @if ($isImage) data-preview
-         data-full="{{ $file->getThumbnailLink() }}"
-         data-name="{{ $file->getName() }}"
-         data-download="{{ route('dokumentasi.download', $file->getId()) }}"
-         style="cursor:pointer" @endif>
+     data-full="{{ $file->getThumbnailLink() }}"
+     data-name="{{ $file->getName() }}"
+     data-download="{{ route('dokumentasi.download', $file->getId()) }}"
+     style="cursor:pointer" @endif>
                                 @if ($isImage)
+                                    <label class="dok-select" onclick="event.stopPropagation()">
+                                        <input type="checkbox" class="dok-select-checkbox" value="{{ $file->getId() }}">
+                                    </label>
                                     <img src="{{ $file->getThumbnailLink() }}" alt="{{ $file->getName() }}"
                                         loading="lazy">
                                 @else
@@ -730,51 +790,54 @@
                         </div>
                     @endif
                 @endforeach
-            </div>
 
-            <!-- NO RESULTS -->
-            <div class="no-results" id="noResults" style="display:none;">
-                <i class="bi bi-folder2-open"></i>
-                <p>Tidak ada folder atau berkas yang sesuai pencarian Anda.</p>
-            </div>
-
-            {{-- Empty folder (no items at all) --}}
-            @if (count($files) === 0)
-                <div class="no-results">
+                <!-- NO RESULTS (pencarian) -->
+                <div class="no-results" id="noResults" style="display:none;">
                     <i class="bi bi-folder2-open"></i>
-                    <p>Folder ini masih kosong.</p>
+                    <p>Tidak ada folder atau berkas yang sesuai pencarian Anda.</p>
                 </div>
-            @endif
 
-        </div>
-        <div class="dok-modal" id="dokModal">
-            <div class="dok-modal-backdrop" id="dokModalBackdrop"></div>
-
-            <button type="button" class="dok-modal-nav dok-modal-prev" id="dokModalPrev" aria-label="Sebelumnya">
-                <i class="bi bi-chevron-left"></i>
-            </button>
-
-            <div class="dok-modal-content">
-                <button type="button" class="dok-modal-close" id="dokModalClose" aria-label="Tutup">&times;</button>
-                <img id="dokModalImg" src="" alt="">
-                <div class="dok-modal-footer">
-                    <span id="dokModalName"></span>
-                    <span id="dokModalPos" class="dok-modal-pos"></span>
-                    <a id="dokModalDownload" href="#" class="dok-action">
-                        <i class="bi bi-download"></i> Unduh File
-                    </a>
-                </div>
+                {{-- Folder kosong (tidak ada item sama sekali) --}}
+                @if (count($files) === 0)
+                    <div class="no-results">
+                        <i class="bi bi-folder2-open"></i>
+                        <p>Folder ini masih kosong.</p>
+                    </div>
+                @endif
             </div>
 
-            <button type="button" class="dok-modal-nav dok-modal-next" id="dokModalNext" aria-label="Berikutnya">
-                <i class="bi bi-chevron-right"></i>
-            </button>
+            <!-- MODAL PREVIEW GAMBAR -->
+            <div class="dok-modal" id="dokModal">
+                <div class="dok-modal-backdrop" id="dokModalBackdrop"></div>
+
+                <button type="button" class="dok-modal-nav dok-modal-prev" id="dokModalPrev" aria-label="Sebelumnya">
+                    <i class="bi bi-chevron-left"></i>
+                </button>
+
+                <div class="dok-modal-content">
+                    <button type="button" class="dok-modal-close" id="dokModalClose"
+                        aria-label="Tutup">&times;</button>
+                    <img id="dokModalImg" src="" alt="">
+                    <div class="dok-modal-footer">
+                        <span id="dokModalName"></span>
+                        <span id="dokModalPos" class="dok-modal-pos"></span>
+                        <a id="dokModalDownload" href="#" class="dok-action">
+                            <i class="bi bi-download"></i> Unduh File
+                        </a>
+                    </div>
+                </div>
+
+                <button type="button" class="dok-modal-nav dok-modal-next" id="dokModalNext" aria-label="Berikutnya">
+                    <i class="bi bi-chevron-right"></i>
+                </button>
+            </div>
+
         </div>
     </section>
 @endsection
 @push('scripts')
     <script>
-        // ===== SEARCH (tetap sama) =====
+        // ===== SEARCH =====
         const dokSearch = document.getElementById('dokSearch');
         const dokGrid = document.getElementById('dokGrid');
         const dokCount = document.getElementById('dokCount');
@@ -885,7 +948,14 @@
             }
 
             thumbs.forEach((thumb, index) => {
-                thumb.addEventListener('click', () => openModal(index));
+                thumb.addEventListener('click', (e) => {
+                    if (dokGrid.classList.contains('select-mode')) {
+                        e.stopImmediatePropagation();
+                        e.preventDefault();
+                        return;
+                    }
+                    openModal(index);
+                });
             });
 
             closeBtn.addEventListener('click', closeModal);
@@ -898,6 +968,127 @@
                 if (e.key === 'Escape') closeModal();
                 if (e.key === 'ArrowLeft') showPrev();
                 if (e.key === 'ArrowRight') showNext();
+            });
+        })();
+
+        // ===== MULTI-SELECT (HANYA GAMBAR) & DOWNLOAD ZIP TERPILIH =====
+        (function() {
+            const grid = document.getElementById('dokGrid');
+            const selectModeBtn = document.getElementById('dokSelectModeBtn');
+            if (!grid || !selectModeBtn) return;
+
+            const cancelBtn = document.getElementById('dokCancelSelectBtn');
+            const selectionBar = document.getElementById('dokSelectionBar');
+            const selectAllCb = document.getElementById('dokSelectAll');
+            const selectedCountEl = document.getElementById('dokSelectedCount');
+            const downloadSelectedBtn = document.getElementById('dokDownloadSelectedBtn');
+
+            function checkboxes() {
+                // Hanya checkbox pada kartu gambar yang ikut terhitung.
+                return Array.from(grid.querySelectorAll('.dok-card--image .dok-select-checkbox'));
+            }
+
+            function updateSelectedUI() {
+                const boxes = checkboxes();
+                const selected = boxes.filter(cb => cb.checked);
+                selectedCountEl.textContent = selected.length;
+                downloadSelectedBtn.disabled = selected.length === 0;
+                selectAllCb.checked = boxes.length > 0 && selected.length === boxes.length;
+
+                boxes.forEach(cb => {
+                    cb.closest('.dok-card').classList.toggle('selected', cb.checked);
+                });
+            }
+
+            function setSelectMode(on) {
+                grid.classList.toggle('select-mode', on);
+                selectionBar.style.display = on ? 'flex' : 'none';
+                selectModeBtn.style.display = on ? 'none' : '';
+                if (!on) {
+                    checkboxes().forEach(cb => (cb.checked = false));
+                    updateSelectedUI();
+                }
+            }
+
+            selectModeBtn.addEventListener('click', () => setSelectMode(true));
+            cancelBtn.addEventListener('click', () => setSelectMode(false));
+
+            grid.addEventListener('change', (e) => {
+                if (e.target.classList.contains('dok-select-checkbox')) {
+                    updateSelectedUI();
+                }
+            });
+
+            selectAllCb.addEventListener('change', () => {
+                checkboxes().forEach(cb => (cb.checked = selectAllCb.checked));
+                updateSelectedUI();
+            });
+
+            function getCsrfToken() {
+                const meta = document.querySelector('meta[name="csrf-token"]');
+                return meta ? meta.getAttribute('content') : '';
+            }
+
+            async function triggerZipDownload(url, options, fallbackName) {
+                const originalLabel = options.buttonEl ? options.buttonEl.innerHTML : null;
+                if (options.buttonEl) {
+                    options.buttonEl.disabled = true;
+                    options.buttonEl.innerHTML = '<i class="bi bi-hourglass-split"></i> Menyiapkan ZIP...';
+                }
+
+                try {
+                    const res = await fetch(url, options.fetchInit);
+                    if (!res.ok) {
+                        throw new Error('Gagal mengunduh ZIP (' + res.status + ')');
+                    }
+                    const blob = await res.blob();
+
+                    let filename = fallbackName;
+                    const disposition = res.headers.get('Content-Disposition');
+                    if (disposition) {
+                        const match = disposition.match(/filename="?([^"]+)"?/);
+                        if (match) filename = match[1];
+                    }
+
+                    const link = document.createElement('a');
+                    const objectUrl = URL.createObjectURL(blob);
+                    link.href = objectUrl;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+                    URL.revokeObjectURL(objectUrl);
+                } catch (err) {
+                    alert('Gagal mengunduh ZIP: ' + err.message);
+                } finally {
+                    if (options.buttonEl) {
+                        options.buttonEl.disabled = false;
+                        options.buttonEl.innerHTML = originalLabel;
+                    }
+                }
+            }
+
+            downloadSelectedBtn.addEventListener('click', () => {
+                const ids = checkboxes().filter(cb => cb.checked).map(cb => cb.value);
+                if (ids.length === 0) return;
+
+                triggerZipDownload(
+                    '{{ route('dokumentasi.download-zip') }}', {
+                        buttonEl: downloadSelectedBtn,
+                        fetchInit: {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': getCsrfToken(),
+                                'Accept': 'application/zip',
+                            },
+                            body: JSON.stringify({
+                                ids
+                            }),
+                        },
+                    },
+                    'dokumentasi-terpilih.zip'
+                );
             });
         })();
     </script>

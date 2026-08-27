@@ -64,7 +64,7 @@
 
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="{{ asset('favicomatic/favicon.ico') }}">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Apple Touch Icons -->
     <link rel="apple-touch-icon-precomposed" sizes="57x57"
         href="{{ asset('favicomatic/apple-touch-icon-57x57.png') }}">
@@ -116,7 +116,8 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
     @stack('styles')
 </head>
 
