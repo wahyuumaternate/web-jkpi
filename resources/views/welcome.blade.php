@@ -568,8 +568,7 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-left" data-aos-delay="250">
                     <div class="image-hover-wrapper">
-                        <img src="{{ asset('foto_terbaru/opening.jpg') }}" alt="Tentang JKPI"
-                            class="img-fluid rounded shadow">
+                        <img src="{{ asset('foto_terbaru/15.jpg') }}" alt="Tentang JKPI" class="img-fluid rounded shadow">
                     </div>
                 </div>
             </div>
@@ -742,7 +741,7 @@
                         <div class="col-lg-6 order-lg-2">
                             <div class="department-visual">
                                 <div class="image-wrapper">
-                                    <img src="{{ asset('foto_terbaru/2.jpg') }}" alt="Simposium Rempah"
+                                    <img src="{{ asset('foto_terbaru/11.jpg') }}" alt="Simposium Rempah"
                                         class="img-fluid">
                                 </div>
                             </div>
@@ -751,9 +750,9 @@
                 </div>
 
                 <!-- =============================================
-                                     TAB NAVIGATION — sesuai PDF PIC resmi
-                                     Tanggal resmi: 25 - 30 Agustus 2026
-                                ============================================== -->
+                                                         TAB NAVIGATION — sesuai PDF PIC resmi
+                                                         Tanggal resmi: 25 - 30 Agustus 2026
+                                                    ============================================== -->
                 <div class="event-tabs-container" data-aos="fade-up" data-aos-delay="300">
                     <div class="d-flex justify-content-center">
                         <ul class="nav nav-pills event-tabs mb-5" id="eventTabs" role="tablist">
@@ -1502,7 +1501,7 @@
                     </div>
                 </div>
 
-                <!-- Foto 3 -->
+                {{-- <!-- Foto 3 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="gallery-item">
                         <a href="{{ asset('foto_terbaru/3.jpg') }}" class="glightbox">
@@ -1515,9 +1514,9 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
-                <!-- Foto 4 -->
+                {{-- <!-- Foto 4 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
                     <div class="gallery-item">
                         <a href="{{ asset('foto_terbaru/4.jpg') }}" class="glightbox">
@@ -1530,14 +1529,14 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Foto 5 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
                     <div class="gallery-item">
                         <a href="{{ asset('foto_terbaru/5.jpg') }}" class="glightbox">
-                            <img src="{{ asset('foto_terbaru/5.jpg') }}"
-                                alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 5" class="img-fluid">
+                            <img src="{{ asset('foto_terbaru/5.jpg') }}" alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 5"
+                                class="img-fluid">
 
                             <div class="gallery-overlay">
                                 <i class="bi bi-zoom-in"></i>
@@ -1550,8 +1549,8 @@
                 <!-- Foto 6 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="gallery-item">
-                        <a href="{{ asset('foto_terbaru/6.jpg') }}" class="glightbox">
-                            <img src="{{ asset('foto_terbaru/6.jpg') }}"
+                        <a href="{{ asset('foto_terbaru/16.jpg') }}" class="glightbox">
+                            <img src="{{ asset('foto_terbaru/16.jpg') }}"
                                 alt="Dokumentasi Rakernas XII JKPI 2026 - Foto 6" class="img-fluid">
 
                             <div class="gallery-overlay">
@@ -1592,7 +1591,7 @@
                     </div>
                 </div>
 
-                <!-- Foto 9 -->
+                {{-- <!-- Foto 9 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
                     <div class="gallery-item">
                         <a href="{{ asset('foto_terbaru/9.jpg') }}" class="glightbox">
@@ -1605,7 +1604,7 @@
                             </div>
                         </a>
                     </div>
-                </div>
+                </div> --}}
 
                 <!-- Foto 10 -->
                 <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
